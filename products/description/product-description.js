@@ -7,7 +7,7 @@ module.exports = (function () {
     ret.dir = function () {
       return {
         restrict: 'E',
-        templateUrl: '..//description/product-description.html'
+        templateUrl: 'product-description.html'
       };
     }
     

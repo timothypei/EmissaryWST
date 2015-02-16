@@ -2,5 +2,5 @@ node_modules/
 dist/
 npm-debug.log
 app/bundled.js
-app/bower_components
+bower_components
 .idea
