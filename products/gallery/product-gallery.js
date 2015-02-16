@@ -7,7 +7,7 @@ module.exports = (function () {
     ret.dir = function () {
     return {
         restrict: 'E',
-        templateUrl: 'components/products/gallery/product-gallery.html',
+        templateUrl: '..//gallery/product-gallery.html',
         controller: function() {
           this.current = 0;
           this.setCurrent = function(imageNumber){

@@ -5,7 +5,7 @@ module.exports = (function () {
     ret.dir = function () {
     return {
         restrict: 'E',
-        templateUrl: 'components/products/reviews/product-reviews.html',
+        templateUrl: '..//reviews/product-reviews.html',
         controller: function() {
           this.review = {};
           this.addReview = function addReview(product) {

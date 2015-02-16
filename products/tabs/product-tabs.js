@@ -7,7 +7,7 @@ module.exports = (function () {
     ret.dir = function () {
       return {
         restrict: 'E',
-        templateUrl: 'components/products/tabs/product-tabs.html',
+        templateUrl: '..//tabs/product-tabs.html',
         controller: function() {
           this.tab = 1;
 

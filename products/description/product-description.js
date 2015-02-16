@@ -5,10 +5,10 @@ module.exports = (function () {
     var ret = {};
     
     ret.dir = function () {
-          return {
-            restrict: 'E',
-            templateUrl: 'components/products/specs/product-specs.html'
-          };
+      return {
+        restrict: 'E',
+        templateUrl: 'product-description.html'
+      };
     }
     
     return ret;
