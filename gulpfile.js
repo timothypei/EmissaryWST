@@ -15,35 +15,33 @@ var exit = require('gulp-exit');
 
 // tasks
 gulp.task('lint', function() {
-  gulp.src(['./app/**/*.js', '!./app/assets/bower_components/**'])
+  gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('clean', function() {
-  gulp.src('dist/*')
-    .pipe(clean({force: true}));
-  gulp.src('app/bundled.js')
+  gulp.src('dist/')
     .pipe(clean({force: true}));
 });
 
 gulp.task('minify-css', function() {
   var opts = {comments:true,spare:true};
-  gulp.src(['app/**/*.css', '!app/assets/bower_components/**'])
+  gulp.src(['app/**/*.css', '!app/bower_components/**'])
     .pipe(minifyCSS(opts))
     .pipe(gulp.dest('dist/assets/'))
 });
 
 gulp.task('minify-js', function() {
-  gulp.src(['app/**/*.js', '!app/assets/bower_components/**', '!app/bundled.js'])
+  gulp.src(['app/**/*.js', '!app/bower_components/**', '!app/bundled.js'])
     .pipe(uglify())
     .pipe(gulp.dest('dist/'))
 });
 
 gulp.task('copy-bower-components', function () {
-  gulp.src('app/assets/bower_components/**')
-    .pipe(gulp.dest('dist/assets/bower_components/'));
+  gulp.src('./app/bower_components/**')
+    .pipe(gulp.dest('dist/bower_components/'));
 });
 
 gulp.task('copy-bootstrap', function () {
@@ -58,15 +56,17 @@ gulp.task('copy-html-files', function () {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('browserify', function() {
-  gulp.src(['./app/app.module.js'])
-    .pipe(browserify({
-      insertGlobals: true,
-      debug: true
+
+var wiredep = require('wiredep').stream;
+
+gulp.task('bower', function () {
+  gulp.src('./app/index.html')
+    .pipe(wiredep({
+      directory: './app/bower_components'
     }))
-    .pipe(concat('bundled.js'))
-    .pipe(gulp.dest('./app/'))
+    .pipe(gulp.dest('./dist'));
 });
+
 
 gulp.task('mocha', function () {
   gulp.src('app/**/*.test.js')
@@ -77,29 +77,23 @@ gulp.task('mocha', function () {
 gulp.task('concat', function() {
   var modules = filter('**/*.module.js');
   var src = filter(['**/*.js', '!**/*.module.js']);
-  gulp.src(['./app/**/*.js', '!./app/assets/**'])
-    .pipe(src)
-    .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('./app/'));
+
+  gulp.src(['./app/app.module.js', './app/**/*.js', '!./app/assets/**', '!./app/bower_components/**'])
+    .pipe(concat('bundle.js')).pipe(gulp.dest('./dist/'))
+  ;
+
 });
 
 gulp.task('connect', function () {
   connect.server({
-    root: 'app/',
-    port: 8080
-  });
-});
-
-gulp.task('connectDist', function () {
-  connect.server({
     root: 'dist/',
-    port: 9999
+    port: 8080
   });
 });
 
 // default task
 gulp.task('default',
-  ['clean', 'browserify', 'connect']
+  ['concat', 'copy-bower-components', 'bower', 'connect']
 );
 
 // build task
