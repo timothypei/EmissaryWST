@@ -23,5 +23,7 @@ module.exports = (function () {
       };
     }
     
+    ret.prop = 99;
+    
     return ret;
 })();
