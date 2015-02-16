@@ -3,22 +3,20 @@
  */
 
 require('angular');
+angular.module('robobetty', []);
 
-angular.module('products', []);
-var prodSpecs = require('./specs/product-specs');
-var prodDesc = require('./description/product-description');
-var prodGal = require('./gallery/product-gallery');
-var prodRev = require('./reviews/product-reviews');
-var prodTabs = require('./tabs/product-tabs');
+(function(module) {
+var dashboardCtrl = require('./main/dashboard');
+var dashboardHeaderCtrl = require('./main/header');
+var dashboardSidebarCtrl = require('./main/sidebar');
 
-angular.module('products').directive('productSpecs', prodSpecs.dir);
+var doctors = require('./doctors/doctors');
 
-angular.module('products').directive('productReviews', prodRev.dir);
+var formBuilder = require('./formBuilder/formBuilder');
 
-angular.module('products').directive('productGallery', prodGal.dir);
+angular.module('robobetty').controller('dashboardCtrl', dashboardCtrl.dir);
+angular.module('robobetty').controller('dashboardHeaderCtrl', dashboardHeaderCtrl.dir);
+angular.module('robobetty').controller('dashboardSidebarCtrl', dashboardSidebarCtrl.dir);
 
-angular.module('products').directive('productDescription', prodDesc.dir);
-
-angular.module('products').directive('productTabs', prodTabs.dir);
-
-module.exports = angular.module('products');
+module.exports = angular.module('robobetty');
+})(module);

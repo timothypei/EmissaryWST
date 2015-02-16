@@ -1,14 +1,43 @@
 'use strict';
 
 require('angular');
+require('angular-ui-router');
+require('angular-cookies');
 
-require('./components/products');
+// require('./components/products');
 
-angular.module('RoboBetty', ['products']);
+// angular.module('RoboBetty', ['products']);
 
-angular.module('RoboBetty').controller('StoreController', function() {
-  this.products = gems;
-});
+
+// //Piece of junk controller
+// angular.module('RoboBetty').controller('StoreController', function() {
+//   this.products = gems;
+// });
+
+
+require('./components/dashboard');
+angular.module('robobetty', ['ui.router', 'ngCookies']);
+
+
+angular.module('robobetty').config(['$stateProvider', '$urlRouterProvider',
+    function($stateProvider, $urlRouterProvider) {
+
+        // For unmatched routes
+        $urlRouterProvider.otherwise('/');
+
+        // Application routes
+        $stateProvider
+            .state('index', {
+                url: '/',
+                templateUrl: 'components/dashboard/main/dashboardIndex.html'
+            })
+            .state('tables', {
+                url: '/tables',
+                templateUrl: 'templates/tables.html'
+            });
+    }
+]);
+
 
 var gems = [
   {
