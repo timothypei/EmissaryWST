@@ -91,7 +91,7 @@ gulp.task('connectDist', function () {
 
 // default task
 gulp.task('default',
-  ['lint', 'browserify', 'connect']
+  ['clean', 'browserify', 'connect']
 );
 
 // build task
