@@ -10,6 +10,8 @@ var clean = require('gulp-clean');
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var filter = require('gulp-filter');
+var mocha = require('gulp-mocha');
+var exit = require('gulp-exit');
 
 // tasks
 gulp.task('lint', function() {
@@ -64,6 +66,12 @@ gulp.task('browserify', function() {
     }))
     .pipe(concat('bundled.js'))
     .pipe(gulp.dest('./app/'))
+});
+
+gulp.task('mocha', function () {
+  gulp.src('app/**/*.test.js')
+    .pipe(mocha())
+    .pipe(exit());
 });
 
 gulp.task('concat', function() {
