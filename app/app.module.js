@@ -13,10 +13,6 @@ angular.module('robobetty', ['ui.router', 'products'])
       .state('products', {
         url: '/product',
         templateUrl: 'views/product.html'
-      })
-      .state('about', {
-        url: '/about',
-        templateUrl: 'NEED TO DO THIS'
       });
 
   });
