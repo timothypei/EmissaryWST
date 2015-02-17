@@ -47,15 +47,14 @@ gulp.task('copy-bower-components', function () {
 });
 
 
-gulp.task('copy-partials', function () {
+gulp.task('copy-views', function () {
   gulp.src('./app/**/*.html')
     .pipe(flatten())
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest('dist/views'));
 });
 
 gulp.task('copy-assets', function () {
   gulp.src('./assets/**')
-    .pipe(flatten())
     .pipe(gulp.dest('dist/'));
 });
 
@@ -64,9 +63,8 @@ gulp.task('bower', function () {
     .pipe(wiredep({
       directory: './bower_components'
     }))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist/'));
 });
-
 
 gulp.task('mocha', function () {
   gulp.src('app/**/*.test.js')
@@ -75,15 +73,19 @@ gulp.task('mocha', function () {
 });
 
 gulp.task('concat', function() {
-  gulp.src(['./app/app.js', './app/components/**/*.js'])
-    .pipe(concat('bundle.js')).pipe(gulp.dest('./dist/'))
+  var modules = filter('**/*.module.js');
+  var scripts = filter(['**/*.js', '!**/*.module.js']);
+  gulp.src(['./app/app.module.js', './app/**/*.module.js', './app/**/*.js'])
+    .pipe(concat('bundle.js'))
+    .pipe(gulp.dest('./dist/'));
   ;
 });
 
 // Watch Files For Changes
 gulp.task('watch', function() {
   gulp.watch('./bower_components', ['copy-bower-components', 'bower']);
-  gulp.watch('./app/**/*', ['concat', 'copy-partials']);
+  gulp.watch(['./index.html', './app/**/*'], ['concat', 'copy-views', 'bower']);
+  gulp.watch('./assets/**', ['copy-assets']);
 });
 
 
@@ -95,9 +97,15 @@ gulp.task('connect', function () {
 });
 
 // default task
-gulp.task('default',
-  ['concat', 'copy-bower-components', 'bower', 'copy-partials', 'connect', 'watch']
-);
+gulp.task('default', [
+    'concat',
+    'copy-bower-components',
+    'bower',
+    'copy-views',
+    'copy-assets',
+    'connect',
+    'watch'
+]);
 
 // build task
 gulp.task('build',

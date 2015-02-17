@@ -1,0 +1,68 @@
+[ { "color" : "#CCC",
+  "description" : "Some gems have hidden qualities beyond their luster, beyond their shine... Azurite is one of those gems.",
+  "faces" : 14,
+  "images" : [ "images/gem-02.gif",
+    "images/gem-05.gif",
+    "images/gem-09.gif"
+  ],
+  "name" : "Azurite",
+  "price" : 110.5,
+  "rarity" : 7,
+  "reviews" : [ { "author" : "joe@example.org",
+    "body" : "I love this gem!",
+    "stars" : 5
+  },
+    { "author" : "tim@example.org",
+      "body" : "This gem sucks.",
+      "stars" : 1
+    }
+  ],
+  "shine" : 8
+},
+  { "color" : "#EEE",
+    "description" : "Origin of the Bloodstone is unknown, hence its low value. It has a very high shine and 12 sides, however.",
+    "faces" : 12,
+    "images" : [ "images/gem-01.gif",
+      "images/gem-03.gif",
+      "images/gem-04.gif"
+    ],
+    "name" : "Bloodstone",
+    "price" : 22.899999999999999,
+    "rarity" : 6,
+    "reviews" : [ { "author" : "JimmyDean@example.org",
+      "body" : "I think this gem was just OK, could honestly use more shine, IMO.",
+      "stars" : 3
+    },
+      { "author" : "gemsRock@example.org",
+        "body" : "Any gem with 12 faces is for me!",
+        "stars" : 4
+      }
+    ],
+    "shine" : 9
+  },
+  { "color" : "#000",
+    "description" : "Zircon is our most coveted and sought after gem. You will pay much to be the proud owner of this gorgeous and high shine gem.",
+    "faces" : 6,
+    "images" : [ "images/gem-06.gif",
+      "images/gem-07.gif",
+      "images/gem-08.gif"
+    ],
+    "name" : "Zircon",
+    "price" : 1100,
+    "rarity" : 2,
+    "reviews" : [ { "author" : "turtleguyy@example.org",
+      "body" : "This gem is WAY too expensive for its rarity value.",
+      "stars" : 1
+    },
+      { "author" : "LouisW407@example.org",
+        "body" : "BBW: High Shine != High Quality.",
+        "stars" : 1
+      },
+      { "author" : "nat@example.org",
+        "body" : "Don't waste your rubles!",
+        "stars" : 1
+      }
+    ],
+    "shine" : 70
+  }
+]
