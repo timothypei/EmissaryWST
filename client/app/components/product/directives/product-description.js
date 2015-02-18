@@ -6,4 +6,4 @@ angular.module('products')
       restrict: 'E',
       templateUrl: 'views/product-description.html'
     };
-})
+});
