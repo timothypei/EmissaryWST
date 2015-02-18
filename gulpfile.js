@@ -4,7 +4,7 @@ var connect = require('gulp-connect'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
     minifyCSS = require('gulp-minify-css'),
-    clean = require('gulp-clean'),
+    del = require('del'),
     concat = require('gulp-concat'),
     filter = require('gulp-filter'),
     mocha = require('gulp-mocha'),
@@ -18,11 +18,6 @@ gulp.task('lint', function() {
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
-});
-
-gulp.task('clean', function() {
-  gulp.src('dist/')
-    .pipe(clean({force: true}));
 });
 
 gulp.task('minify-css', function() {
@@ -44,40 +39,46 @@ gulp.task('mocha', function () {
     .pipe(exit());
 });
 
+/* Remove the generated dist folder from backend folder */
+gulp.task('clean', function() {
+  del('./server/dist');
+  del('./client/dist');
+});
+
 /* This will add our bower dependencies to our index.html
  * so that we don't have to manually do it.
  */
 gulp.task('bower', function () {
-  gulp.src('./index.html')
+  gulp.src('./client/index.html')
     .pipe(wiredep({
-      directory: './bower_components'
+      directory: './client/bower_components'
     }))
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('./client/dist/'));
 });
 
 /* This will copy all our bower dependencies
  * to the dist folder
  */
 gulp.task('copy-bower-components', function () {
-  gulp.src('./bower_components/**')
-    .pipe(gulp.dest('./dist/bower_components/'));
+  gulp.src('./client/bower_components/**')
+    .pipe(gulp.dest('./client/dist/bower_components/'));
 });
 
 /* This will copy all our views
  * to the dist folder
  */
 gulp.task('copy-views', function () {
-  gulp.src('./app/**/*.html')
+  gulp.src('./client/app/**/*.html')
     .pipe(flatten())
-    .pipe(gulp.dest('./dist/views'));
+    .pipe(gulp.dest('./client/dist/views'));
 });
 
 /* This will copy all our assets i.e. assets folder
  * to the dist folder.
  */
 gulp.task('copy-assets', function () {
-  gulp.src('./assets/**')
-    .pipe(gulp.dest('./dist/'));
+  gulp.src('./client/assets/**')
+    .pipe(gulp.dest('./client/dist/'));
 });
 
 /* This will create concatenate all our angular
@@ -85,9 +86,9 @@ gulp.task('copy-assets', function () {
  * in the dist folder
  */
 gulp.task('concat', function() {
-  gulp.src(['./app/app.module.js', './app/**/*.module.js', './app/**/*.js'])
+  gulp.src(['./client/app/app.module.js', './client/app/**/*.module.js', './client/app/**/*.js'])
     .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('./client/dist/'));
 });
 
 /* Watch Files For Changes */
@@ -103,7 +104,7 @@ gulp.task('watch', function() {
  */
 gulp.task('serve', function () {
   connect.server({
-    root: 'dist/',
+    root: './client/dist/',
     port: 8080
   });
 });
@@ -112,7 +113,8 @@ gulp.task('serve', function () {
  * To the server so that it can serve it.
  */
 gulp.task('export-dist', ['package'], function(){
-  gulp.src('./dist/**').pipe(gulp.dest('../server/dist'))
+  gulp.src('./client/dist/**')
+    .pipe(gulp.dest('./server/dist'));
 });
 
 /* This will create the dist folder

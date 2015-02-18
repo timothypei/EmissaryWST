@@ -15,7 +15,7 @@ var cors = require('cors');
 
 var Product = require('../models/Product');
 
-router.get('/product', cors(), function(req, res) {
+router.get('/products', cors(), function(req, res) {
   Product.find({}, function(err, result) {
     if(err){
       res.status(400).send('There was a problem fetching all of the users');

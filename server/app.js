@@ -54,8 +54,8 @@ var user = require('./routes/user');
 var product = require('./routes/product');
 
 app.use(home);
-app.use(user);
-app.use(product);
+app.use('/api', user);
+app.use('/api', product);
 
 /*
  * Error Handler.
