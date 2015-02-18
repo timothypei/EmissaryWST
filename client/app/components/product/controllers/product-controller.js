@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('products')
   .controller('productCtrl', ['productService', function(productService){
     var store = this;

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('products')
   .service('productService', ['$http', function($http) {
       this.getProducts = function() {

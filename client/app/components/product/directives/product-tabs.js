@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('products')
   .directive('productTabs', function() {
     return {
