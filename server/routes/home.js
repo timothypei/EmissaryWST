@@ -1,17 +1,18 @@
 'use strict';
 
-/* This module is meant to house all of the API 
- * routes that pertain to users
+/* This module is strictly meant for one route. This route
+ * is responsible for rendering our angular app home page.
  */
 var express = require('express');
+var path = require('path');
 var router = express.Router();
 
 /**
  * GET /
- * Home page.
+ * Render out angular app.
  */
 router.get('/', function(req, res) {
-  res.send('This is the default route');
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 module.exports = router;

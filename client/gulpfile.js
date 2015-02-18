@@ -1,7 +1,5 @@
-// gulp
 var gulp = require('gulp');
 
-// plugins
 var connect = require('gulp-connect'),
     jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
@@ -15,7 +13,6 @@ var connect = require('gulp-connect'),
     wiredep = require('wiredep').stream;
 
 
-// tasks
 gulp.task('lint', function() {
   gulp.src('./app/**/*.js')
     .pipe(jshint())
@@ -41,23 +38,15 @@ gulp.task('minify-js', function() {
     .pipe(gulp.dest('dist/'))
 });
 
-gulp.task('copy-bower-components', function () {
-  gulp.src('./bower_components/**')
-    .pipe(gulp.dest('dist/bower_components/'));
+gulp.task('mocha', function () {
+  gulp.src('app/**/*.test.js')
+    .pipe(mocha())
+    .pipe(exit());
 });
 
-
-gulp.task('copy-views', function () {
-  gulp.src('./app/**/*.html')
-    .pipe(flatten())
-    .pipe(gulp.dest('dist/views'));
-});
-
-gulp.task('copy-assets', function () {
-  gulp.src('./assets/**')
-    .pipe(gulp.dest('dist/'));
-});
-
+/* This will add our bower dependencies to our index.html
+ * so that we don't have to manually do it.
+ */
 gulp.task('bower', function () {
   gulp.src('./index.html')
     .pipe(wiredep({
@@ -66,49 +55,80 @@ gulp.task('bower', function () {
     .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('mocha', function () {
-  gulp.src('app/**/*.test.js')
-    .pipe(mocha())
-    .pipe(exit());
+/* This will copy all our bower dependencies
+ * to the dist folder
+ */
+gulp.task('copy-bower-components', function () {
+  gulp.src('./bower_components/**')
+    .pipe(gulp.dest('./dist/bower_components/'));
 });
 
+/* This will copy all our views
+ * to the dist folder
+ */
+gulp.task('copy-views', function () {
+  gulp.src('./app/**/*.html')
+    .pipe(flatten())
+    .pipe(gulp.dest('./dist/views'));
+});
+
+/* This will copy all our assets i.e. assets folder
+ * to the dist folder.
+ */
+gulp.task('copy-assets', function () {
+  gulp.src('./assets/**')
+    .pipe(gulp.dest('./dist/'));
+});
+
+/* This will create concatenate all our angular
+ * code into one file the bundle.js and palce it
+ * in the dist folder
+ */
 gulp.task('concat', function() {
-  var modules = filter('**/*.module.js');
-  var scripts = filter(['**/*.js', '!**/*.module.js']);
   gulp.src(['./app/app.module.js', './app/**/*.module.js', './app/**/*.js'])
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest('./dist/'));
-  ;
 });
 
-// Watch Files For Changes
+/* Watch Files For Changes */
 gulp.task('watch', function() {
   gulp.watch('./bower_components', ['copy-bower-components', 'bower']);
   gulp.watch(['./index.html', './app/**/*'], ['concat', 'copy-views', 'bower']);
   gulp.watch('./assets/**', ['copy-assets']);
 });
 
-
-gulp.task('connect', function () {
+/* Serve our angular code. This will not use
+ * Our actual backend. The serve will purely serve
+ * the angular files.
+ */
+gulp.task('serve', function () {
   connect.server({
     root: 'dist/',
     port: 8080
   });
 });
 
-// default task
-gulp.task('default', [
+/* This moves our packaged angular app (i.e. dist folder)
+ * To the server so that it can serve it.
+ */
+gulp.task('export-dist', ['package'], function(){
+  gulp.src('./dist/**').pipe(gulp.dest('../server/dist'))
+});
+
+/* This will create the dist folder
+ * That is ready to serve by our backend
+ */
+gulp.task('package', [
     'concat',
     'copy-bower-components',
     'bower',
     'copy-views',
-    'copy-assets',
-    'connect',
-    'watch'
+    'copy-assets'
 ]);
 
-// build task
-gulp.task('build',
-  ['lint', 'minify-css', 'minify-js',  'minify-img', 'copy-html-files', 'copy-bower-components', 'copy-bootstrap', 'connectDist']
-);
-
+/* The default task */
+gulp.task('default', [
+  'package',
+  'serve',
+  'watch'
+]);

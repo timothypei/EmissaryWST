@@ -14,7 +14,7 @@ var path = require('path');
 var mongoose = require('mongoose');
 
 /*
- * API keys and Passport configuration.
+ * MongoDb configuration.
  */
 var config = require('./config/config');
 
@@ -26,14 +26,13 @@ var app = express();
 /*
  * Connect to MongoDB.
  */
-mongoose.connect(config.mongoUrl);
+mongoose.connect(config.mongoDBUrl);
 mongoose.connection.on('connected', function() {
-  console.log('MongoDB connected succesfully at: ' + config.mongoUrl);
+  console.log('MongoDB connected succesfully at: ' + config.mongoDBUrl);
 });
 
 mongoose.connection.on('error', function() {
-  console.error('MongoDB Connection Error. Please ' +
-  'make sure that MongoDB is running.');
+  console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
 });
 
 /*
@@ -44,9 +43,8 @@ app.set('port', config.port);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use(express.static(path.join(__dirname, 'public'), 
-  { maxAge: 31557600000 }));
 
 /*
  * Add in our routes
@@ -55,14 +53,9 @@ var home = require('./routes/home');
 var user = require('./routes/user');
 var product = require('./routes/product');
 
-
-/*
- * Primary app routes.
- */
 app.use(home);
 app.use(user);
 app.use(product);
-
 
 /*
  * Error Handler.
