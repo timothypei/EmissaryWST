@@ -53,7 +53,7 @@ gulp.task('bower', function () {
     .pipe(wiredep({
       directory: './client/bower_components'
     }))
-    .pipe(gulp.dest('./server/dist/'));
+    .pipe(gulp.dest('./client/dist/'));
 });
 
 /* This will copy all our bower dependencies
@@ -61,7 +61,7 @@ gulp.task('bower', function () {
  */
 gulp.task('copy-bower-components', function () {
   gulp.src('./client/bower_components/**')
-    .pipe(gulp.dest('./server/dist/bower_components/'));
+    .pipe(gulp.dest('./client/dist/bower_components/'));
 });
 
 /* This will copy all our views
@@ -70,7 +70,7 @@ gulp.task('copy-bower-components', function () {
 gulp.task('copy-views', function () {
   gulp.src('./client/app/**/*.html')
     .pipe(flatten())
-    .pipe(gulp.dest('./server/dist/views'));
+    .pipe(gulp.dest('./client/dist/views'));
 });
 
 /* This will copy all our assets i.e. assets folder
@@ -78,7 +78,7 @@ gulp.task('copy-views', function () {
  */
 gulp.task('copy-assets', function () {
   gulp.src('./client/assets/**')
-    .pipe(gulp.dest('./server/dist/'));
+    .pipe(gulp.dest('./client/dist/'));
 });
 
 /* This will create concatenate all our angular
@@ -88,25 +88,29 @@ gulp.task('copy-assets', function () {
 gulp.task('concat', function() {
   gulp.src(['./client/app/app.module.js', './client/app/**/*.module.js', './client/app/**/*.js'])
     .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('./server/dist/'));
+    .pipe(gulp.dest('./client/dist/'));
 });
 
 /* Watch Files For Changes */
-gulp.task('watch', function() {
-  gulp.watch('./bower_components', ['copy-bower-components', 'bower']);
-  gulp.watch(['./index.html', './app/**/*'], ['concat', 'copy-views', 'bower']);
-  gulp.watch('./assets/**', ['copy-assets']);
+gulp.task('watch:frontend',['serve'], function() {
+  gulp.watch('./client/bower_components', ['copy-bower-components', 'bower']);
+  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat', 'copy-views', 'bower']);
+  gulp.watch('./client/assets/**', ['copy-assets']);
 });
 
 /* Serve our angular code. This will not use
  * Our actual backend. The serve will purely serve
  * the angular files.
  */
-gulp.task('serve', function () {
+gulp.task('serve:frontend', function () {
   connect.server({
     root: './client/dist/',
     port: 8080
   });
+});
+
+gulp.task('prepserver', function(){
+  gulp.src('./client/dist/**').pipe(gulp.dest('./server/dist'));
 });
 
 /* This will create the dist folder
@@ -119,7 +123,6 @@ gulp.task('build', [
     'copy-views',
     'copy-assets'
 ]);
-
 
 /* The default task */
 gulp.task('default', [
