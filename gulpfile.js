@@ -105,7 +105,6 @@ gulp.task('frontend',['serve:frontend'], function() {
  * the angular files.
  */
 gulp.task('serve:frontend', ['build'], function () {
-  
   connect.server({
     root: './dist/',
     port: 8080
@@ -128,8 +127,4 @@ gulp.task('build', [
 ]);
 
 /* The default task */
-gulp.task('default', [
-  'package',
-  'serve',
-  'watch'
-]);
+gulp.task('default', ['build']);
