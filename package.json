@@ -9,8 +9,7 @@
   "author": "Eduardo Aguilar",
   "scripts": {
     "start": "node server/app.js",
-    "test": "gulp test",
-    "postinstall": "gulp "
+    "test": "gulp test"
   },
   "dependencies": {
     "body-parser": "^1.10.1",

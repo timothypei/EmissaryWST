@@ -11,8 +11,6 @@ var connect = require('gulp-connect'),
     exit = require('gulp-exit'),
     flatten = require('gulp-flatten'),
     wiredep = require('wiredep').stream;
-    runSequence = require('run-sequence');
-
 
 
 gulp.task('lint', function() {
@@ -55,7 +53,7 @@ gulp.task('bower', function () {
     .pipe(wiredep({
       directory: './client/bower_components'
     }))
-    .pipe(gulp.dest('./client/dist/'));
+    .pipe(gulp.dest('./server/dist/'));
 });
 
 /* This will copy all our bower dependencies
@@ -63,7 +61,7 @@ gulp.task('bower', function () {
  */
 gulp.task('copy-bower-components', function () {
   gulp.src('./client/bower_components/**')
-    .pipe(gulp.dest('./client/dist/bower_components/'));
+    .pipe(gulp.dest('./server/dist/bower_components/'));
 });
 
 /* This will copy all our views
@@ -72,7 +70,7 @@ gulp.task('copy-bower-components', function () {
 gulp.task('copy-views', function () {
   gulp.src('./client/app/**/*.html')
     .pipe(flatten())
-    .pipe(gulp.dest('./client/dist/views'));
+    .pipe(gulp.dest('./server/dist/views'));
 });
 
 /* This will copy all our assets i.e. assets folder
@@ -80,7 +78,7 @@ gulp.task('copy-views', function () {
  */
 gulp.task('copy-assets', function () {
   gulp.src('./client/assets/**')
-    .pipe(gulp.dest('./client/dist/'));
+    .pipe(gulp.dest('./server/dist/'));
 });
 
 /* This will create concatenate all our angular
@@ -90,7 +88,7 @@ gulp.task('copy-assets', function () {
 gulp.task('concat', function() {
   gulp.src(['./client/app/app.module.js', './client/app/**/*.module.js', './client/app/**/*.js'])
     .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('./client/dist/'));
+    .pipe(gulp.dest('./server/dist/'));
 });
 
 /* Watch Files For Changes */
@@ -111,20 +109,10 @@ gulp.task('serve', function () {
   });
 });
 
-/* This moves our packaged angular app (i.e. dist folder)
- * To the server so that it can serve it.
- */
-gulp.task('export-dist', function(){
-  console.log("in export");
-  gulp.src('./client/dist/**')
-    .pipe(gulp.dest('./server/dist/'));
-
-});
-
 /* This will create the dist folder
  * That is ready to serve by our backend
  */
-gulp.task('package', [
+gulp.task('build', [
     'concat',
     'copy-bower-components',
     'bower',
@@ -132,10 +120,6 @@ gulp.task('package', [
     'copy-assets'
 ]);
 
-gulp.task('heroku:production', function(){
-  runSequence('package', 'export-dist', function(){
-  });
-});
 
 /* The default task */
 gulp.task('default', [
