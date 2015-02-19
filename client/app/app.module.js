@@ -11,11 +11,11 @@ angular.module('robobetty', ['ui.router',
     $stateProvider
       .state('home', {
         url: '/home',
-        templateUrl: 'views/home.html'
+        templateUrl: 'views/components/home/views/home.html'
       })
       .state('product', {
         url: '/product',
-        templateUrl: 'views/product.html'
+        templateUrl: 'views/components/product/views/product.html'
       });
 
   });

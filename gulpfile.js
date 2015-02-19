@@ -69,9 +69,10 @@ gulp.task('copy-bower-components', function () {
  * to the dist folder
  */
 gulp.task('copy-views', function () {
-  gulp.src('./client/app/**/*.html')
-    .pipe(flatten())
-    .pipe(gulp.dest('./dist/views'));
+  gulp.src('./client/app/components/**/*.html')
+    .pipe(gulp.dest('./dist/views/components/'));
+  gulp.src('./client/app/shared/**/*.html')
+    .pipe(gulp.dest('./dist/views/shared/'));
 });
 
 /* This will copy all our assets i.e. assets folder
