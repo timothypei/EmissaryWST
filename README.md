@@ -7,3 +7,6 @@ frontend base code.
 3. `npm install`
 4. `bower install`
 5.  use `gulp` to run the app. You can see the running app at localhost:8080
+
+
+###############
