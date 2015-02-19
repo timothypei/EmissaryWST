@@ -11,6 +11,8 @@ var connect = require('gulp-connect'),
     exit = require('gulp-exit'),
     flatten = require('gulp-flatten'),
     wiredep = require('wiredep').stream;
+    runSequence = require('run-sequence');
+
 
 
 gulp.task('lint', function() {
@@ -112,9 +114,11 @@ gulp.task('serve', function () {
 /* This moves our packaged angular app (i.e. dist folder)
  * To the server so that it can serve it.
  */
-gulp.task('export-dist', ['package'], function(){
+gulp.task('export-dist', function(){
+  console.log("in export");
   gulp.src('./client/dist/**')
-    .pipe(gulp.dest('./server/dist'));
+    .pipe(gulp.dest('./server/dist/'));
+
 });
 
 /* This will create the dist folder
@@ -127,6 +131,11 @@ gulp.task('package', [
     'copy-views',
     'copy-assets'
 ]);
+
+gulp.task('heroku:production', function(){
+  runSequence('package', 'export-dist', function(){
+  });
+});
 
 /* The default task */
 gulp.task('default', [

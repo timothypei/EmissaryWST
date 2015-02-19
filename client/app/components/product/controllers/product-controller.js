@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('products')
-  .controller('productCtrl', ['productService', function(productService){
+angular.module('product')
+  .controller('ProductController', ['ProductService', function(productService){
     var store = this;
     store.products = [];
     productService.getProducts()
@@ -11,6 +11,5 @@ angular.module('products')
       .error(function(err){
         console.log("There was an error: " + err);
       });
-
   }]);
 

@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('products')
+angular.module('product')
   .directive('productReviews', function() {
     return {
       restrict: 'E',
       templateUrl: 'views/product-reviews.html',
-      controller: 'ReviewCtrl',
+      controller: 'ReviewController',
       controllerAs: 'reviewCtrl'
     };
   })
-  .controller('ReviewCtrl', function() {
+  .controller('ReviewController', function() {
     this.review = {};
     this.review.createdOn = Date.now();
     this.addReview = function addReview(product) {

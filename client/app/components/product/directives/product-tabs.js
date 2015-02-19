@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('products')
+angular.module('product')
   .directive('productTabs', function() {
     return {
       restrict: 'E',
       templateUrl: 'views/product-tabs.html',
-      controller: 'TabCtrl',
-      controllerAs: 'tab'
+      controller: 'TabController',
+      controllerAs: 'tabCtrl'
     };
   })
-  .controller('TabCtrl', function(){
+  .controller('TabController', function(){
     this.tab = 1;
 
     this.setTab = function(newValue){

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('products')
+angular.module('product')
   .directive('productDescription', function() {
     return {
       restrict: 'E',

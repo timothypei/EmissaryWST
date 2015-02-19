@@ -2,7 +2,7 @@
 
 angular.module('robobetty', ['ui.router',
   'widget',
-  'products'])
+  'product'])
 
   .config(function($stateProvider, $urlRouterProvider) {
 
@@ -13,7 +13,7 @@ angular.module('robobetty', ['ui.router',
         url: '/home',
         templateUrl: 'views/home.html'
       })
-      .state('products', {
+      .state('product', {
         url: '/product',
         templateUrl: 'views/product.html'
       });
