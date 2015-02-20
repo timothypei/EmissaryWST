@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('robobetty', ['ui.router',
+angular.module('robobetty', ['ui.router', 'ui.bootstrap',
   'widget',
   'product'])
 
@@ -13,10 +13,14 @@ angular.module('robobetty', ['ui.router',
         url: '/home',
         templateUrl: 'views/home.html'
       })
+      .state('createForm', {
+        url: '/createform',
+        controller: 'CreateCtrl',
+        templateUrl: 'views/create.html'
+      })
       .state('product', {
         url: '/product',
         templateUrl: 'views/product.html'
       });
-
   });
 
