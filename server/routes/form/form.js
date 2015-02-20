@@ -8,13 +8,14 @@ var router = express.Router();
 var bodyparser = require('body-parser');
 var urlparser = bodyparser.urlencoded({extended: false});
 
-var User = require('../models/User');
+
 
 /********** FORM TEMPLATE ROUTES **********/
 
 router.get('/form/template/:id', function(req, res) {
-  
+
 });
+
 
 
 
@@ -22,9 +23,8 @@ router.get('/form/template/:id', function(req, res) {
 /********** PATIENT FORM ROUTES **********/
 
 router.get('/form/patient/:form_id', function(req, res) {
-  
-});
 
+});
 
 
 

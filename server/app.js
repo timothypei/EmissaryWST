@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname, '../dist')));
 var home = require('./routes/home');
 var user = require('./routes/user');
 var product = require('./routes/product');
-var form = require('./routes/form');
+var form = require('./routes/form/form');
 
 app.use(home);
 app.use('/api', user);
