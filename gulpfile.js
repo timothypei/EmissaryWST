@@ -110,12 +110,14 @@ gulp.task('serve:frontend', ['build'], function () {
   });
 });
 
-gulp.task('test', function(){
-  gulp.src('./server/test/*.js', {read: false})
-    .pipe(mocha({reporter: 'nyan'}))
-    .once('end', function () {
+/* This will run our mocha tests */
+gulp.task('test', function(cb){
+   gulp.src('./server/test/*.js', {read: false})
+    .pipe(mocha({reporter: 'spec'}))
+    .on('end', function(){
       process.exit();
-  });
+    });
+  cb();
 });
 
 /* This will create the dist folder
