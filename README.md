@@ -1,4 +1,5 @@
-# robo_betty_alpha
+# robo_betty_alpha [![Build Status](https://travis-ci.org/bluejay112/robo_betty_alpha.svg?branch=master)](https://travis-ci.org/bluejay112/robo_betty_alpha)
+
 
 # How to install
 1. `npm install -g gulp bower foreman`
