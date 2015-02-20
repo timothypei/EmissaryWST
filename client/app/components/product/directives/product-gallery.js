@@ -4,7 +4,7 @@ angular.module('product')
   .directive('productGallery', function(){
     return {
       restrict: 'E',
-      templateUrl: 'views/product-gallery.html ',
+      templateUrl: 'views/components/product/views/product-gallery.html ',
       controller: 'GalleryController',
       controllerAs: 'galleryCtrl'
     };
