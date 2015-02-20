@@ -112,7 +112,7 @@ gulp.task('serve:frontend', ['build'], function () {
 
 /* This will run our mocha tests */
 gulp.task('test', function(){
-  gulp.src('./server/test/*.js', {read: false})
+  return gulp.src('./server/test/*.js', {read: false})
     .pipe(mocha({reporter: 'nyan'}))
     .once('end', function () {
       process.exit();
