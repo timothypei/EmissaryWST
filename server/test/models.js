@@ -1,6 +1,5 @@
 var chai = require('chai');
 var should = chai.should();
-var mongoose = require('mongoose');
 var User = require('../models/User');
 
 describe('User Model', function() {
@@ -21,4 +20,5 @@ describe('User Model', function() {
         done();
       });
   });
+
 });
