@@ -2,7 +2,7 @@
 
 angular.module('robobetty', ['ui.router',
   'widget',
-  'product'])
+  'product', 'dashboard','ngCookies','ui.bootstrap'])
 
   .config(function($stateProvider, $urlRouterProvider) {
 
@@ -16,6 +16,10 @@ angular.module('robobetty', ['ui.router',
       .state('product', {
         url: '/product',
         templateUrl: 'views/product.html'
+      })
+      .state('dashboard',{
+        url:'/dashboard',
+        templateUrl: 'views/dashboard.html'
       });
 
   });
