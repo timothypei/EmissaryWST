@@ -1,10 +1,8 @@
-'use strict';
-
-angular.module('doctors')
+angular.module('dashboard')
   .directive('doctorsTable', function() {
     return {
       restrict: 'E',
-      templateUrl: 'views/components/dashboard/doctors/doctors.html',
+      templateUrl: 'views/components/dashboard/doctors/views/doctors.html',
       controller: 'SafeController',
       controllerAs: 'safeCtrl'
     };
@@ -17,7 +15,6 @@ angular.module('doctors')
     var id = 1;
 
     function generateRandomItem(id) {
-
         var docName = Names[Math.floor(Math.random() * 3)];
         var phoneNum = Doc_Number[Math.floor(Math.random() * 3)];
         var docEmail = Email[Math.floor(Math.random() * 3)];

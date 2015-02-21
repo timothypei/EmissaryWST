@@ -1,1 +1,1 @@
-angular.module('dashboard', []);
+angular.module('dashboard', ['ngCookies', 'smart-table']);
