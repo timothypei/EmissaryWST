@@ -4,7 +4,7 @@ angular.module('product')
   .directive('productTabs', function() {
     return {
       restrict: 'E',
-      templateUrl: 'views/product-tabs.html',
+      templateUrl: 'views/components/product/views/product-tabs.html',
       controller: 'TabController',
       controllerAs: 'tabCtrl'
     };

@@ -11,15 +11,18 @@ angular.module('robobetty', ['ui.router',
     $stateProvider
       .state('home', {
         url: '/home',
-        templateUrl: 'views/home.html'
+        templateUrl: 'views/components/home/views/home.html'
       })
       .state('product', {
         url: '/product',
-        templateUrl: 'views/product.html'
+<<<<<<< HEAD
+        templateUrl: 'views/components/product/views/product.html'
       })
       .state('dashboard',{
         url:'/dashboard',
         templateUrl: 'views/dashboard.html'
+=======
+>>>>>>> 71d15337b05dc21132f02f80536af5157e526b85
       });
 
   });
