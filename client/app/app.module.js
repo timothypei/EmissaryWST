@@ -17,6 +17,9 @@ angular.module('robobetty', ['ui.router',
         url: '/product',
         templateUrl: 'views/components/product/views/product.html'
       });
-
+      .state('doctors', {
+        url: '/doctors',
+        templateUrl: 'views/components/dashboard/doctors/doctors.html'
+      });
   });
 
