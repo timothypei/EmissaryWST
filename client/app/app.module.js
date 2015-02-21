@@ -15,14 +15,11 @@ angular.module('robobetty', ['ui.router',
       })
       .state('product', {
         url: '/product',
-<<<<<<< HEAD
         templateUrl: 'views/components/product/views/product.html'
       })
       .state('dashboard',{
         url:'/dashboard',
         templateUrl: 'views/dashboard.html'
-=======
->>>>>>> 71d15337b05dc21132f02f80536af5157e526b85
       });
 
   });
