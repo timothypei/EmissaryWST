@@ -2,7 +2,6 @@ var gulp = require('gulp');
 
 var connect = require('gulp-connect'),
     jshint = require('gulp-jshint'),
-    jslint = require('gulp-jslint'),
     uglify = require('gulp-uglify'),
     minifyCSS = require('gulp-minify-css'),
     del = require('del'),
