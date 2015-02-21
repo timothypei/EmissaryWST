@@ -1,0 +1,34 @@
+<div ng-controller="safeCtrl">
+
+		<button type="button" ng-click="addRandomItem(row)" class="btn btn-sm btn-success">
+			<i class="glyphicon glyphicon-plus">
+			</i> Add random item
+		</button>
+
+		<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+			<thead>
+			<tr>
+				<th st-sort="firstName">first name</th>
+				<th st-sort="birthDate">phone number</th>
+				<th st-sort="balance">email</th>
+			</tr>
+			<tr>
+				<th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="row in displayedCollection">
+				<td>{{row.docName}}</td>
+				<td>{{row.phoneNum}}</td>
+				<td>{{row.docEmail}}</td>
+				<td>
+				<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+					<i class="glyphicon glyphicon-remove-circle">
+					</i>
+				</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+	</div>
