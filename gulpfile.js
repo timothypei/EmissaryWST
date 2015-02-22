@@ -13,11 +13,9 @@ var connect = require('gulp-connect'),
 
 
 gulp.task('lint', function() {
-  gulp.src(['./server/**/*.js','./client/**/*.js'])
+  gulp.src(['./server/**/*.js','./client/app/**/*.js'])
     .pipe(jshint())
-    .pipe(jshint.reporter('gulp-jshint-file-reporter', {
-      filename: './dist/jshint-output.log'
-    }))
+    .pipe(jshint.reporter('default'));
 });
 
 gulp.task('minify-css', function() {
