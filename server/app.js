@@ -52,10 +52,12 @@ app.use(express.static(path.join(__dirname, '../dist')));
 var home = require('./routes/home');
 var user = require('./routes/user');
 var product = require('./routes/product');
+var employee = require ('./routes/employee');
 
 app.use(home);
 app.use('/api', user);
 app.use('/api', product);
+app.use('/api', employee);
 
 /*
  * Error Handler.
