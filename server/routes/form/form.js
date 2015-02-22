@@ -55,7 +55,7 @@ router.delete('/form/template/:template_id', urlparser, function (req, res) {
       return;
     }
 
-    FormTemplate.findOneAndRemove({_id: templateID}, function(err, result) {
+    templateForm.findOneAndRemove({_id: templateID}, function(err, result) {
       if(err) {
         res.status(500).send('There was problem removing the form template');
         return;
