@@ -13,10 +13,11 @@ var connect = require('gulp-connect'),
 
 
 gulp.task('lint', function() {
-  gulp.src('./app/**/*.js')
+  gulp.src(['./server/**/*.js','./client/**/*.js'])
     .pipe(jshint())
-    .pipe(jshint.reporter('default'))
-    .pipe(jshint.reporter('fail'));
+    .pipe(jshint.reporter('gulp-jshint-file-reporter', {
+      filename: './dist/jshint-output.log'
+    }))
 });
 
 gulp.task('minify-css', function() {
@@ -124,6 +125,7 @@ gulp.task('test', function(cb){
  * That is ready to serve by our backend
  */
 gulp.task('build', [
+    'lint',
     'concat',
     'copy-bower-components',
     'bower',
