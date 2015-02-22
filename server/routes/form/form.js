@@ -20,6 +20,7 @@ router.get('/form/template/:id', function(req, res) {
       res.send(template);
   });
 });
+<<<<<<< HEAD
 
 
 router.get('/form/template/company/:id', function(req, res) {
@@ -28,6 +29,30 @@ router.get('/form/template/company/:id', function(req, res) {
       res.json({error: "There was an error finding the template form."});
     else
       res.send(template);
+=======
+
+
+router.get('/form/template/company/:id', function(req, res) {
+  templateForm.findOne({'_admin_id' : req.params.id}, function(err, template) {
+    if(err)
+      res.json({error: "There was an error finding the template form."});
+    else
+      res.send(template);
+  });
+});
+
+
+router.post('/form/template', function(req, res) {
+  var newTemplate = new form();
+  newTemplate._admin_id = req.body._admin_id;
+  newTemplate.template = req.body.template;
+
+  newTemplate.save(function(err, template) {
+    if(err)
+      res.json({error: "There was an error inserting a new template."});
+    else
+      res.json(template);
+>>>>>>> 39c9dc3855a7ab6ace95b7509485e62936ccdc8f
   });
 });
 
