@@ -20,4 +20,5 @@ describe('User Model', function() {
         done();
       });
   });
+
 });

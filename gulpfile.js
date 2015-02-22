@@ -6,7 +6,6 @@ var connect = require('gulp-connect'),
     minifyCSS = require('gulp-minify-css'),
     del = require('del'),
     concat = require('gulp-concat'),
-    filter = require('gulp-filter'),
     mocha = require('gulp-mocha'),
     exit = require('gulp-exit'),
     flatten = require('gulp-flatten'),
@@ -105,15 +104,20 @@ gulp.task('frontend',['serve:frontend'], function() {
  * the angular files.
  */
 gulp.task('serve:frontend', ['build'], function () {
-  
   connect.server({
     root: './dist/',
     port: 8080
   });
 });
 
-gulp.task('prepserver', function(){
-  // gulp.src('./client/dist/**').pipe(gulp.dest('./server/dist'));
+/* This will run our mocha tests */
+gulp.task('test', function(cb){
+   gulp.src('./server/test/*.js', {read: false})
+    .pipe(mocha({reporter: 'spec'}))
+    .on('end', function(){
+      process.exit();
+    });
+  cb();
 });
 
 /* This will create the dist folder
@@ -128,8 +132,4 @@ gulp.task('build', [
 ]);
 
 /* The default task */
-gulp.task('default', [
-  'package',
-  'serve',
-  'watch'
-]);
+gulp.task('default', ['build']);
