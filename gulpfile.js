@@ -19,17 +19,18 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('fail'));
 });
 
+/* Minify all css files */
 gulp.task('minify-css', function() {
-  var opts = {comments:true,spare:true};
-  gulp.src('app/**/*.css')
-    .pipe(minifyCSS(opts))
-    .pipe(gulp.dest('dist/assets/'))
+  return gulp.src('./client/assets/**/*.css')
+      .pipe(minifyCSS())
+      .pipe(gulp.dest('./dist/'))
 });
 
+/* Minify bundle.js */
 gulp.task('minify-js', function() {
-  gulp.src('app/**/*.js')
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/'))
+  return gulp.src('./dist/bundle.js')
+      .pipe(uglify())
+      .pipe(gulp.dest('./dist/'))
 });
 
 gulp.task('mocha', function () {
