@@ -20,19 +20,6 @@ router.get('/form/template/:id', function(req, res) {
       res.send(template);
   });
 });
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-
-router.get('/form/template/company/:id', function(req, res) {
-  templateForm.findOne({'_admin_id' : req.params.id}, function(err, template) {
-    if(err)
-      res.json({error: "There was an error finding the template form."});
-    else
-      res.send(template);
-=======
->>>>>>> 2c01393363310e293af9366c47bc1dc51e8d6651
 
 
 router.get('/form/template/company/:id', function(req, res) {
@@ -55,24 +42,6 @@ router.post('/form/template', function(req, res) {
       res.json({error: "There was an error inserting a new template."});
     else
       res.json(template);
-<<<<<<< HEAD
-=======
->>>>>>> 39c9dc3855a7ab6ace95b7509485e62936ccdc8f
-  });
-});
-
-
-router.post('/form/template', function(req, res) {
-  var newTemplate = new form();
-  newTemplate._admin_id = req.body._admin_id;
-  newTemplate.template = req.body.template;
-
-  newTemplate.save(function(err, template) {
-    if(err)
-      res.json({error: "There was an error inserting a new template."});
-    else
-      res.json(template);
->>>>>>> 2c01393363310e293af9366c47bc1dc51e8d6651
   });
 });
 
@@ -93,8 +62,22 @@ router.delete('/form/template/:template_id', urlparser, function (req, res) {
       }
       res.send('removed form template: ' + JSON.stringify(result));
     });
-})
+});
 
+/* Accept PUT request at /form/template */
+router.post('/form/template', function(req, res) {
+    var query = {"_id": req.body.template_id};
+    var update = {template: req.body.template};
+    var options = {new: true};
+
+    templateForm.findOneAndUpdate(query, update, options,
+      function(err, template) {
+          if(err)
+            res.json({error: "There was an error updating a template."});
+          else
+            res.json(template);
+      });
+});
 
 
 /********** PATIENT FORM ROUTES **********/
