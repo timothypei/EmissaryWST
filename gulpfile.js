@@ -10,6 +10,7 @@ var connect = require('gulp-connect'),
     exit = require('gulp-exit'),
     flatten = require('gulp-flatten'),
     wiredep = require('wiredep').stream;
+    ngAnnotate = require('gulp-ng-annotate');
 
 
 gulp.task('lint', function() {
@@ -17,6 +18,12 @@ gulp.task('lint', function() {
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('ng-annotate', function () {
+  return gulp.src('dist/bundle.js')
+      .pipe(ngAnnotate())
+      .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('minify-css', function() {
