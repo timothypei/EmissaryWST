@@ -9,6 +9,7 @@ var connect = require('gulp-connect'),
     mocha = require('gulp-mocha'),
     exit = require('gulp-exit'),
     wiredep = require('wiredep').stream,
+    htmlify = require('gulp-angular-htmlify'),
     ngAnnotate = require('gulp-ng-annotate');
 
 gulp.task('lint', function() {
@@ -46,10 +47,15 @@ gulp.task('copy:bower-components', function () {
  * to the dist folder
  */
 gulp.task('copy:views', function () {
-  return gulp.src('./client/app/**/*.html')
+  return gulp.src(['./client/index.html', './client/app/**/*.html'])
     .pipe(gulp.dest('./dist/views/'));
 });
 
+gulp.task('htmlify', ['copy:views'],function(){
+  return gulp.src('./dist/**/*.html')
+    .pipe(htmlify())
+    .pipe(gulp.dest('./dist/'));
+});
 
 /* This will copy all our assets i.e. assets folder
  * to the dist folder.
@@ -89,13 +95,6 @@ gulp.task('minify:js', ['ng-annotate'], function() {
     .pipe(gulp.dest('./dist/'))
 });
 
-/* Watch Files For Changes */
-gulp.task('frontend',['serve:frontend'], function() {
-  gulp.watch('./client/bower_components', ['copy-bower-components', 'bower']);
-  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat', 'copy-views', 'bower']);
-  gulp.watch('./client/assets/**', ['copy-assets']);
-});
-
 /* Serve our angular code. This will not use
  * Our actual backend. The serve will purely serve
  * the angular files.
@@ -105,6 +104,13 @@ gulp.task('serve:frontend', ['build:dev'], function () {
     root: './dist/',
     port: 8080
   });
+});
+
+/* Watch Files For Changes */
+gulp.task('frontend',['serve:frontend'], function() {
+  gulp.watch('./client/bower_components', ['copy:bower-components', 'bower']);
+  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat', 'copy:views', 'bower']);
+  gulp.watch('./client/assets/**', ['copy:assets']);
 });
 
 /* This will run our mocha tests */
@@ -125,9 +131,11 @@ gulp.task('dist', [
     'copy:assets'
 ]);
 
+/* Build the app without minification */
 gulp.task('build:dev', ['dist']);
 
-gulp.task('build:prod', ['minify:js', 'minify:css']);
+/* Build the app and minfy */
+gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlify']);
 
 /* The default task */
 gulp.task('default', ['build:dev']);
