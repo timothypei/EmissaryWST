@@ -1,33 +1,39 @@
 <!-- NAVIGATION BAR -->
 <nav class="navbar navbar-inverse" role="navigation" id="navigation">
-  <div class="navbar-header">
+  <div class='container-fluid'>
+    <div class="navbar-header">
+    </div>
+    <!--Brand-->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" src="http://www.phantomshockey.com/wp-content/uploads/2014/07/profile-icon.png" class='navbar-icon'>
+      </a>
+    </div>
+    <!--Nav items-->
+    <ul class="nav navbar-nav navbar-right">
+      <li class='col-md-2'>
+        <!--<img src="images/profile.png" class='navbar-icon'>-->
+        <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/billymeinke/images/75494/icon_calendar_white.png" class='navbar-icon'>
+        <a ui-sref="patients">Patients</a>
+      </li>
+      <li class='col-md-2'>
+        <!--<img src="images/profile.png" class='navbar-icon'>-->
+        <img src="http://www.phantomshockey.com/wp-content/uploads/2014/07/profile-icon.png" class='navbar-icon'>
+        <a ui-sref="doctors" style='margin-left:-.7em;'>Employees</a>
+      </li>
+      <li class='col-md-2'>
+        <!--<img src="images/profile.png" class='navbar-icon'>-->
+        <img src="http://www.phantomshockey.com/wp-content/uploads/2014/07/profile-icon.png" class='navbar-icon'>
+        <a ui-sref="dashboard" style='font-size:.7em;margin-left:-.5em;'>Client Form</a>
+      </li>
+      <li class='col-md-2'>
+        <!--<img src="images/profile.png" class='navbar-icon'>-->
+        <img src="http://www.phantomshockey.com/wp-content/uploads/2014/07/profile-icon.png" class='navbar-icon'>
+        <a ui-sref="Settings">Settings</a>
+      </li>
+      <li class='col-md-2'>
+        <button class='btn btn-lg' id="modebutton"><a ui-sref="PatientMode">Patient Mode</a></button>
+      </li>
+    </ul>
   </div>
-  <ul class="nav navbar-nav">
-    <li class='col-md-2'>
-      <img src="images/profile.png" style="width:90px;height:80px">
-      <a ui-sref="home">BlueJay</a>
-    </li>
-  </ul>
-  <ul class="nav navbar-nav navbar-right">
-    <li class='col-md-2'>
-      <img src="images/profile.png" style="width:90px;height:80px">
-      <a ui-sref="patients">Patients</a>
-    </li>
-    <li class='col-md-2'>
-      <img src="images/profile.png" style="width:90px;height:80px">
-      <a ui-sref="doctors">Employees</a>
-    </li>
-    <li class='col-md-2'>
-      <img src="images/profile.png" style="width:90px;height:80px">
-      <a ui-sref="dashboard" style='font-size:.9em;'>Client Form</a>
-    </li>
-    <li class='col-md-2'>
-      <img src="images/profile.png" style="width:90px;height:80px">
-      <a ui-sref="Settings">Settings</a>
-    </li>
-    <li class='col-md-2'>
-      <button class='btn btn-lg' id="modebutton"><a ui-sref="PatientMode">Patient Mode</a></button>
-    </li>
-    
-  </ul>
 </nav>
