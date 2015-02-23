@@ -27,5 +27,5 @@ This will only start up the backend. You can use this to quickly test API
 routes.
 
 # How To run entire app with our backend
-1. `gulp build`
+1. `gulp build:dev`
 2. `nf start web`
