@@ -65,7 +65,7 @@ router.delete('/form/template/:template_id', urlparser, function (req, res) {
 });
 
 /* Accept PUT request at /form/template */
-router.post('/form/template', function(req, res) {
+router.put('/form/template', function(req, res) {
     var query = {"_id": req.body.template_id};
     var update = {template: req.body.template};
     var options = {new: true};
