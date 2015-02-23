@@ -30,15 +30,10 @@ router.get('/form/template/company/:id', function(req, res) {
   });
 });
 
-//{"__v":0,"template":"{name=blah}","_admin_id":"54cade4a4c355cbb1a6b5404","_id":"54eba721e488a47731ce6005"}
 router.post('/form/template', function(req, res) {
   var newTemplate = new templateForm();
   newTemplate._admin_id = new mongoose.Types.ObjectId(req.body._admin_id);
   newTemplate.template = req.body.template;
-
-  console.log(req.body);
-  console.log(newTemplate._admin_id);
-  console.log(newTemplate.template);
 
   newTemplate.save(function(err, template) {
     if(err)
