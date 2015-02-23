@@ -9,6 +9,7 @@ var connect = require('gulp-connect'),
     mocha = require('gulp-mocha'),
     exit = require('gulp-exit'),
     flatten = require('gulp-flatten'),
+    htmlify = require('gulp-angular-htmlify'),
     wiredep = require('wiredep').stream;
 
 
@@ -50,6 +51,7 @@ gulp.task('clean', function() {
  */
 gulp.task('bower', function () {
   gulp.src('./client/index.html')
+    .pipe(htmlify())
     .pipe(wiredep({
       directory: './client/bower_components'
     }))
@@ -69,8 +71,10 @@ gulp.task('copy-bower-components', function () {
  */
 gulp.task('copy-views', function () {
   gulp.src('./client/app/components/**/*.html')
+    .pipe(htmlify())
     .pipe(gulp.dest('./dist/views/components/'));
   gulp.src('./client/app/shared/**/*.html')
+    .pipe(htmlify())
     .pipe(gulp.dest('./dist/views/shared/'));
 });
 
