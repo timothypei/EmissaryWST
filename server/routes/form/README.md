@@ -60,23 +60,39 @@
 <br>
 <br>
 
-| Title            | Save submitted form completed by patient                                             |
+| Title            | Save submitted form completed by patient              |
 |------------------|----------------------------------------------------------------------------------------------|
 | URL              | /form/patient/                                                                           |
 | Method           | _POST_                                                                                        |
 | URL Params       |                                                              |
 | Data Params      | <pre> { <br> company_id : [integer],<br> form : [object]<br> } </pre>                         |
-| Response         | <pre> { <br> error: [string], <br> form : [object]<br> } </pre> |
+| Response         | <pre> { <br> error: [string], <br> _id : [integer], <br> form : [object], <br> firstName : [String], <br> lastName : [String], <br> email : [String], <br> admin_id : [integer], <br> date : [Date]<br> } </pre> |
 | Notes            | This will be the object returned by the plugin when a patient submits a form, click "show form json object" at the bottom of this page to see an example: http://selmanh.github.io/angularjs-form-builder/#/forms/1/view            |
 
 <br>
 <br>
 
-| Title            | Retrieve form submitted by patient                                                                  |
+| Title            | Retrieve form submitted by patient by its form id                                                    |
 |------------------|----------------------------------------------------------------------------------------------|
 | URL              | /form/patient/:form_id                                                                          |
 | Method           | _GET_                                                                                        |
 | URL Params       | <ul><li> <code>form_id=[integer]<code> </li></ul>                                                             |
 | Data Params      |                                                                                              |
-| Response         | <pre> { <br> error: [string],<br> form_id : [integer],<br> form : [object]<br> } </pre> |
+| Response         | <pre> { <br> error: [string], <br> _id : [integer], <br> form : [object], <br> firstName : [String], <br> lastName : [String], <br> email : [String], <br> admin_id : [integer], <br> date : [Date]<br> } </pre>  |
+| Notes            |                                                                                              |
+
+
+
+
+
+
+
+
+| Title            | Retrieve forms submitted by patient using patient's name and/or email                                  |
+|------------------|----------------------------------------------------------------------------------------------|
+| URL              | /form/patient/:firstName:lastName:email                                     |
+| Method           | _GET_                                                                                        |
+| URL Params       | <ul><li> <code>form_id=[integer]<code> </li></ul>                                                             |
+| Data Params      |                                                                                              |
+| Response         | <pre> <br> [ <br> { <br> error: [string], <br> _id : [integer], <br> form : [object], <br> firstName : [String], <br> lastName : [String], <br> email : [String], <br> admin_id : [integer], <br> date : [Date]<br> }, <br> ... ] </pre> |
 | Notes            |                                                                                              |
