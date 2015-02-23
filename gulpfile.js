@@ -13,10 +13,9 @@ var connect = require('gulp-connect'),
     ngAnnotate = require('gulp-ng-annotate');
 
 gulp.task('lint', function() {
-  return gulp.src('./app/**/*.js')
+  return gulp.src(['./server/**/*.js','./client/app/**/*.js'])
     .pipe(jshint())
-    .pipe(jshint.reporter('default'))
-    .pipe(jshint.reporter('fail'));
+    .pipe(jshint.reporter('default'));
 });
 
 /* Remove the generated dist */
@@ -124,6 +123,7 @@ gulp.task('test', function(){
  * That is ready to serve by our backend
  */
 gulp.task('dist', [
+    'lint',
     'concat',
     'copy:bower-components',
     'bower',
