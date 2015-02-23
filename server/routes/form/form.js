@@ -8,12 +8,12 @@ var router = express.Router();
 var bodyparser = require('body-parser');
 var urlparser = bodyparser.urlencoded({extended: false});
 var mongoose = require('mongoose');
-var form = require('../../models/form/FormTemplate');
+var templateForm = require('../../models/form/FormTemplate');
 
 
 /********** FORM TEMPLATE ROUTES **********/
 router.get('/form/template/:id', function(req, res) {
-  mongoose.model('FormTemplate').findOne({'_id' : req.params.id}, function(err, template) {
+  templateForm.findOne({'_id' : req.params.id}, function(err, template) {
     if(err)
       res.json({error: "There was an error finding the template form."});
     else
@@ -23,7 +23,7 @@ router.get('/form/template/:id', function(req, res) {
 
 
 router.get('/form/template/company/:id', function(req, res) {
-  mongoose.model('FormTemplate').findOne({'_admin_id' : req.params.id}, function(err, template) {
+  templateForm.findOne({'_admin_id' : req.params.id}, function(err, template) {
     if(err)
       res.json({error: "There was an error finding the template form."});
     else
@@ -39,8 +39,7 @@ router.post('/form/template', function(req, res) {
 
   newTemplate.save(function(err, template) {
     if(err)
-      //res.json({error: "There was an error inserting a new template."});
-       res.json(err);
+      res.json({error: "There was an error inserting a new template."});
     else
       res.json(template);
   });
