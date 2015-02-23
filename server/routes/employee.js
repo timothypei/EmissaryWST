@@ -74,7 +74,7 @@ router.delete("/employee/:id", function(req, res) {
       if(err) {
         res.json(err);
       } else {
-        return res.send('deleted ' + req.params.id)
+        return res.send('deleted ' + req.params.id);
       }
     });
   });
