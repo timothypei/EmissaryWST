@@ -53,13 +53,14 @@ var home = require('./routes/home');
 var user = require('./routes/user');
 var product = require('./routes/product');
 var theme = require('./routes/theme');
+var employee = require ('./routes/employee');
 
 
 app.use(home);
 app.use('/api', user);
 app.use('/api', product);
 app.use('/api', theme);
-
+app.use('/api', employee);
 
 /*
  * Error Handler.
