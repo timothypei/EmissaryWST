@@ -1,0 +1,33 @@
+/* Created by: Mandy , Delia
+ * Navigation bar stylesheet
+ */
+#navigation{
+    background:#434343;
+}
+
+.navbar .nav > li > a:link {
+   color: #FFFFFF; /*Change active text color here*/
+   text-decoration: none;
+}
+.navbar .nav > li > a:hover {
+   color: #FFFFFF; /*Change active text color here*/
+   text-decoration: none;
+}
+
+.navbar .nav > li > button > a:hover {
+   color: #FFFFFF; /*Change active text color here*/
+   text-decoration: none;
+}
+
+#modebutton{
+    background:#6c9fd5;
+    margin-top:2em;
+}
+#modebutton > a{
+    color: #FFFFFF;
+}
+
+.navbar-icon{
+	width:90px;
+	height:80px
+}

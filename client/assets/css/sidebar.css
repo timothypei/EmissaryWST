@@ -1,0 +1,24 @@
+#page-wrapper:not(.open) ul.sidebar .sidebar-title.separator, .sidebar-footer, ul.sidebar .sidebar-list a:hover, ul.sidebar .sidebar-main a {
+  background:#434343;
+}
+
+#sidebar-wrapper{
+  background-color: #434343;
+  margin-top:-2em;
+}
+
+ul.sidebar li a{
+  color:#f7f7f7;
+}
+
+ul.sidebar .sidebar-title{
+  color:#8b9dc3;
+}
+
+ul.sidebar .sidebar-list a{
+  color:#f7f7f7;
+}
+
+#themes{
+	margin-left:5em;
+}
