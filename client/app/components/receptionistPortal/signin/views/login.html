@@ -10,19 +10,15 @@
 </head>
 <body ng-controller="SigninController as signin">	
 	<div id="header"></div>
-		<p>{{signin}}</p>
 	<div id="container">
 		
-		<form>		
+		<form ng-submit="signin.login()">		
 
 			<img src="images/logo.png">
 
-			<input type="name" placeholder="Company Name">		
-
-			<input type="password" placeholder="Password">		
-
+			<input ng-model="user.email" type="name" placeholder="Company Name">		
+			<input type="password" ng-model="user.password" placeholder="Password">		
 			<div id="lower">
-
 				<input type="submit" value="Sign In">
 
 				<input type="checkbox"><label class="check" for="checkbox">Remember Me</label>
@@ -33,8 +29,8 @@
 			
 		</form>
 		<div id="signup">
-			<p id="error_message"></p>
-			<a href="#"> Create an Account </a> 
+			<p>{{signin.title}}</p>
+			<a href="#">Create an account</a> 
 		</div>
 	</div>
 </body>
