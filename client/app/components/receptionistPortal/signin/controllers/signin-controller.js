@@ -9,15 +9,13 @@ angular.module('signin')
   		account.dat = {};
   		SigninService.login($scope.user)
       	.success(function(data){
-      		console.log($location);
-      		
+      		console.log($location);	
         	account.dat = data;
         	$location.path(data.successRedirect);
         	return data;
       	})
       	.error(function(err){
       		console.log($location);
-      		$location.path('product');
        		$scope.err = true; 
        		return err;
      	});

@@ -1,12 +1,10 @@
 .ng-invalid.ng-dirty{
     border-color: red;
 }
-
 .ng-valid.ng-dirty {
     border-color: yellowgreen;
 }
-
 body{
     max-width: 100%;
-    margin: 0 auto;
+
 }

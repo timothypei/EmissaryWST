@@ -3,29 +3,28 @@
 	height: 40px;
 	width:100%;
 }
-
 .signup {
 	background-color: #f7f7f7;
 	height: 550px;
-	width: 700px;
+	width: 650px;
 	border-style: solid;
 	border-width: 2px;
 	border-color: #e8e8e8;
 	position: relative;
 	margin: auto;
-	margin-bottom: 200px;
+	margin-top: -70px;
+	margin-bottom: 70px;
 	top: 175px;
 }
 
 .signupform  {
 	text-align: right;
-	padding-right: 150px;
+	padding-right: 170px;
 	font-size: 20px;
 	padding-bottom: 30px;
 	font-weight: strong;
 
 }
-
 .formfield {
 	padding: 15px;
 
