@@ -3,9 +3,7 @@
 angular.module('robobetty', ['ui.router', 'ui.bootstrap',
   'widget',
   'product'])
-
   .config(function($stateProvider, $urlRouterProvider) {
-
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
@@ -16,11 +14,12 @@ angular.module('robobetty', ['ui.router', 'ui.bootstrap',
       .state('createForm', {
         url: '/createform',
         controller: 'CreateCtrl',
-        templateUrl: 'views/create.html'
+        templateUrl: 'views/components/dashboard/formBuilder/views/create.html'
       })
       .state('product', {
         url: '/product',
         templateUrl: 'views/components/product/views/product.html'
       });
-  });
+  }
+);
 
