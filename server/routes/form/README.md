@@ -65,8 +65,8 @@
 | URL              | /form/patient/                                                                           |
 | Method           | _POST_                                                                                        |
 | URL Params       |                                                              |
-| Data Params      | <pre> { <br> company_id : [integer],<br> form : [object]<br> } </pre>                         |
-| Response         | <pre> { <br> error: [string], <br> _id : [integer], <br> form : [object], <br> firstName : [String], <br> lastName : [String], <br> email : [String], <br> admin_id : [integer], <br> date : [Date]<br> } </pre> |
+| Data Params      | <pre> { <br> _admin_id : [integer],<br> form : [object]<br> } </pre>                         |
+| Response         | <pre> { <br> error: [string], <br> _id : [integer], <br> form : [object], <br> firstName : [String], <br> lastName : [String], <br> email : [String], <br> _admin_id : [integer], <br> date : [Date]<br> } </pre> |
 | Notes            | This will be the object returned by the plugin when a patient submits a form, click "show form json object" at the bottom of this page to see an example: http://selmanh.github.io/angularjs-form-builder/#/forms/1/view            |
 
 <br>
@@ -78,7 +78,7 @@
 | Method           | _GET_                                                                                        |
 | URL Params       | <ul><li> <code>form_id=[integer]<code> </li></ul>                                                             |
 | Data Params      |                                                                                              |
-| Response         | <pre> { <br> error: [string], <br> _id : [integer], <br> form : [object], <br> firstName : [String], <br> lastName : [String], <br> email : [String], <br> admin_id : [integer], <br> date : [Date]<br> } </pre>  |
+| Response         | <pre> { <br> error: [string], <br> _id : [integer], <br> form : [object], <br> firstName : [String], <br> lastName : [String], <br> email : [String], <br> _admin_id : [integer], <br> date : [Date]<br> } </pre>  |
 | Notes            |                                                                                              |
 
 
@@ -90,9 +90,9 @@
 
 | Title            | Retrieve forms submitted by patient using patient's name and/or email                                  |
 |------------------|----------------------------------------------------------------------------------------------|
-| URL              | /form/patient/:firstName:lastName:email                                     |
+| URL              | /form/patient                                    |
 | Method           | _GET_                                                                                        |
-| URL Params       | <ul><li> <code>form_id=[integer]<code> </li></ul>                                                             |
+| URL Params       | <ul><li> <code>firstName=[string]<code> </li><li> <code>lastName=[string]<code> </li><li> <code>email=[string]<code> </li><li> <code>mostRecent=[boolean]<code> </li></ul>                                                             |
 | Data Params      |                                                                                              |
-| Response         | <pre> <br> [ <br> { <br> error: [string], <br> _id : [integer], <br> form : [object], <br> firstName : [String], <br> lastName : [String], <br> email : [String], <br> admin_id : [integer], <br> date : [Date]<br> }, <br> ... ] </pre> |
-| Notes            |                                                                                              |
+| Response         | <pre> <br> [ <br> { <br> error: [string], <br> _id : [integer], <br> form : [object], <br> firstName : [String], <br> lastName : [String], <br> email : [String], <br> _admin_id : [integer], <br> date : [Date]<br> }, <br> ... ] </pre> |
+| Notes:  Query requires you either specify BOTH firstName and lastName, OR provide the email. You can also send all three. mostRecent will return only one submitted form, the one that was most recently submitted.          |                                                                                              |
