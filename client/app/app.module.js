@@ -3,7 +3,8 @@
 angular.module('robobetty', ['ui.router',
   'widget',
   'product',
-   'signin'])
+   'signin',
+   'register'])
 
   .config(function($stateProvider, $urlRouterProvider) {
 
@@ -21,6 +22,10 @@ angular.module('robobetty', ['ui.router',
       .state('signin', {
         url: '/signin',
         templateUrl: 'views/components/receptionistPortal/signin/views/login.html'
+      })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'views/components/receptionistPortal/register/views/register.html'
       });
 
   });
