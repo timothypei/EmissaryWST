@@ -1,33 +1,29 @@
-<!-- NAVIGATION BAR -->
+<!-- NAVIGATION BAR --
 <nav class="navbar navbar-inverse" role="navigation" id="navigation">
   <div class='container-fluid'>
     <div class="navbar-header">
     </div>
-    <!--Brand-->
+    <!--Brand--
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="#/home">
         <img alt="Brand" src="http://www.phantomshockey.com/wp-content/uploads/2014/07/profile-icon.png" class='navbar-icon'>
       </a>
     </div>
-    <!--Nav items-->
+    <!--Nav items--
     <ul class="nav navbar-nav navbar-right">
       <li class='col-md-2'>
-        <!--<img src="images/profile.png" class='navbar-icon'>-->
         <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/billymeinke/images/75494/icon_calendar_white.png" class='navbar-icon'>
-        <a ui-sref="patients">Patients</a>
+        <a ui-sref=''>Patients</a>
       </li>
       <li class='col-md-2'>
-        <!--<img src="images/profile.png" class='navbar-icon'>-->
         <img src="http://www.phantomshockey.com/wp-content/uploads/2014/07/profile-icon.png" class='navbar-icon'>
-        <a ui-sref="doctors" style='margin-left:-.7em;'>Employees</a>
+        <a ui-sref="doctors">Employees</a>
       </li>
       <li class='col-md-2'>
-        <!--<img src="images/profile.png" class='navbar-icon'>-->
         <img src="http://www.phantomshockey.com/wp-content/uploads/2014/07/profile-icon.png" class='navbar-icon'>
-        <a ui-sref="dashboard" style='font-size:.7em;margin-left:-.5em;'>Client Form</a>
+        <a ui-sref="dashboard">Client Form</a>
       </li>
       <li class='col-md-2'>
-        <!--<img src="images/profile.png" class='navbar-icon'>-->
         <img src="http://www.phantomshockey.com/wp-content/uploads/2014/07/profile-icon.png" class='navbar-icon'>
         <a ui-sref="Settings">Settings</a>
       </li>
@@ -37,3 +33,37 @@
     </ul>
   </div>
 </nav>
+-->
+
+
+
+<div id="nav-top">
+
+  <!-- Nav Icons -->
+  <ul class='nav-right'>    
+    
+    <li class="nav-icon" id="5">
+        Patient Mode
+    </li>
+    <li class="nav-icon" id="4">
+        <a href='#'>Settings</a>
+    </li>
+    <li class="nav-icon" id="3">
+        <a ui-sref="dashboard">Client Form</a>
+    </li>
+    <li class="nav-icon" id="2">
+        <a ui-sref='doctors'>Doctors</a>
+    </li>
+    <li class="nav-icon active" id="1">
+        <a href="">Patients</a>
+    </li>
+    
+  </ul>
+
+  <div id="triangle-up"></div>
+  <!-- orange bar -->
+  <div class="orange">
+    
+  </div>
+
+</div>
