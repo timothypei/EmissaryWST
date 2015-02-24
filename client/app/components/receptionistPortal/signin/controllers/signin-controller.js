@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('signin')
-  .controller('SigninController', ['$scope', 'SigninService', function($scope, SigninService){
+  .controller('SigninController', ['$scope', '$location', 'SigninService', function($scope, $location, SigninService){
   	$scope.user = {email: '', password: ''};
     $scope.err = false; 
   	$scope.login = function(){
@@ -9,12 +9,15 @@ angular.module('signin')
   		account.dat = {};
   		SigninService.login($scope.user)
       	.success(function(data){
-      		console.log("fjklsdaf");
+      		console.log($location);
+      		$location.path('product');
         	account.dat = data;
         	return data;
       	})
       	.error(function(err){
-       		console.log("There was an error: " + err);
+      		console.log($location);
+      		$location.path('product');
+       		$scope.err = true; 
        		return err;
      	});
   	};
