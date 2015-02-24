@@ -88,11 +88,11 @@
 
 
 
-| Title            | Retrieve forms submitted by patient using patient's name and/or email                                  |
+| Title            | Retrieve forms submitted by patient using patient's name and/or email           |
 |------------------|----------------------------------------------------------------------------------------------|
 | URL              | /form/patient                                    |
 | Method           | _GET_                                                                                        |
 | URL Params       | <ul><li> <code>firstName=[string]<code> </li><li> <code>lastName=[string]<code> </li><li> <code>email=[string]<code> </li><li> <code>mostRecent=[boolean]<code> </li></ul>                                                             |
 | Data Params      |                                                                                              |
 | Response         | <pre> <br> [ <br> { <br> error: [string], <br> _id : [integer], <br> form : [object], <br> firstName : [String], <br> lastName : [String], <br> email : [String], <br> _admin_id : [integer], <br> date : [Date]<br> }, <br> ... ] </pre> |
-| Notes:  Query requires you either specify BOTH firstName and lastName, OR provide the email. You can also send all three. mostRecent will return only one submitted form, the one that was most recently submitted.          |                                                                                              |
+| Notes:  Query requires you either specify BOTH firstName and lastName, OR provide the email. You can also send all three. mostRecent will return only one submitted form, the one that was most recently submitted.          |
