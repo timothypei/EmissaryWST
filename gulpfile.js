@@ -6,51 +6,28 @@ var connect = require('gulp-connect'),
     minifyCSS = require('gulp-minify-css'),
     del = require('del'),
     concat = require('gulp-concat'),
-    filter = require('gulp-filter'),
     mocha = require('gulp-mocha'),
     exit = require('gulp-exit'),
-    flatten = require('gulp-flatten'),
-    wiredep = require('wiredep').stream;
-
+    wiredep = require('wiredep').stream,
+    htmlify = require('gulp-angular-htmlify'),
+    ngAnnotate = require('gulp-ng-annotate');
 
 gulp.task('lint', function() {
-  gulp.src('./app/**/*.js')
+  return gulp.src(['./server/**/*.js','./client/app/**/*.js'])
     .pipe(jshint())
-    .pipe(jshint.reporter('default'))
-    .pipe(jshint.reporter('fail'));
+    .pipe(jshint.reporter('default'));
 });
 
-gulp.task('minify-css', function() {
-  var opts = {comments:true,spare:true};
-  gulp.src('app/**/*.css')
-    .pipe(minifyCSS(opts))
-    .pipe(gulp.dest('dist/assets/'))
-});
-
-gulp.task('minify-js', function() {
-  gulp.src('app/**/*.js')
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/'))
-});
-
-gulp.task('mocha', function () {
-  gulp.src('app/**/*.test.js')
-    .pipe(mocha())
-    .pipe(exit());
-});
-
-/* Remove the generated dist folder from backend folder */
-gulp.task('clean', function() {
-  del('./server/dist');
-  del('./dist');
-  del('./client/dist');
+/* Remove the generated dist */
+gulp.task('clean', function(cb) {
+  del('./dist/', cb);
 });
 
 /* This will add our bower dependencies to our index.html
  * so that we don't have to manually do it.
  */
 gulp.task('bower', function () {
-  gulp.src('./client/index.html')
+  return gulp.src('./client/index.html')
     .pipe(wiredep({
       directory: './client/bower_components'
     }))
@@ -60,25 +37,30 @@ gulp.task('bower', function () {
 /* This will copy all our bower dependencies
  * to the dist folder
  */
-gulp.task('copy-bower-components', function () {
-  gulp.src('./client/bower_components/**')
+gulp.task('copy:bower-components', function () {
+  return gulp.src('./client/bower_components/**')
     .pipe(gulp.dest('./dist/bower_components/'));
 });
 
 /* This will copy all our views
  * to the dist folder
  */
-gulp.task('copy-views', function () {
-  gulp.src('./client/app/**/*.html')
-    .pipe(flatten())
-    .pipe(gulp.dest('./dist/views'));
+gulp.task('copy:views', function () {
+  return gulp.src(['./client/index.html', './client/app/**/*.html'])
+    .pipe(gulp.dest('./dist/views/'));
+});
+
+gulp.task('htmlify', ['copy:views'],function(){
+  return gulp.src('./dist/**/*.html')
+    .pipe(htmlify())
+    .pipe(gulp.dest('./dist/'));
 });
 
 /* This will copy all our assets i.e. assets folder
  * to the dist folder.
  */
-gulp.task('copy-assets', function () {
-  gulp.src('./client/assets/**')
+gulp.task('copy:assets', function () {
+  return gulp.src('./client/assets/**')
     .pipe(gulp.dest('./dist/'));
 });
 
@@ -87,48 +69,73 @@ gulp.task('copy-assets', function () {
  * in the dist folder
  */
 gulp.task('concat', function() {
-  gulp.src(['./client/app/app.module.js', './client/app/**/*.module.js', './client/app/**/*.js'])
+  return gulp.src(['./client/app/app.module.js', './client/app/**/*.module.js', './client/app/**/*.js'])
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest('./dist/'));
 });
 
-/* Watch Files For Changes */
-gulp.task('frontend',['serve:frontend'], function() {
-  gulp.watch('./client/bower_components', ['copy-bower-components', 'bower']);
-  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat', 'copy-views', 'bower']);
-  gulp.watch('./client/assets/**', ['copy-assets']);
+gulp.task('ng-annotate', ['dist'], function () {
+  return gulp.src('dist/bundle.js')
+    .pipe(ngAnnotate())
+    .pipe(gulp.dest('./dist/'));
+});
+
+/* Minify all css files */
+gulp.task('minify:css', ['dist'], function() {
+  return gulp.src('./dist/css/*.css')
+    .pipe(minifyCSS())
+    .pipe(gulp.dest('./dist/css/'))
+});
+
+/* Minify bundle.js */
+gulp.task('minify:js', ['ng-annotate'], function() {
+  return gulp.src('./dist/bundle.js')
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist/'))
 });
 
 /* Serve our angular code. This will not use
  * Our actual backend. The serve will purely serve
  * the angular files.
  */
-gulp.task('serve:frontend', ['build'], function () {
-  
-  connect.server({
+gulp.task('serve:frontend', ['build:dev'], function () {
+  return connect.server({
     root: './dist/',
     port: 8080
   });
 });
 
-gulp.task('prepserver', function(){
-  // gulp.src('./client/dist/**').pipe(gulp.dest('./server/dist'));
+/* Watch Files For Changes */
+gulp.task('frontend',['serve:frontend'], function() {
+  gulp.watch('./client/bower_components', ['copy:bower-components', 'bower']);
+  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat', 'copy:views', 'bower']);
+  gulp.watch('./client/assets/**', ['copy:assets']);
+});
+
+/* This will run our mocha tests */
+gulp.task('test', function(){
+   return gulp.src('./server/test/*.js', {read: false})
+    .pipe(mocha({reporter: 'spec'}))
+    .pipe(exit());
 });
 
 /* This will create the dist folder
  * That is ready to serve by our backend
  */
-gulp.task('build', [
+gulp.task('dist', [
+    'lint',
     'concat',
-    'copy-bower-components',
+    'copy:bower-components',
     'bower',
-    'copy-views',
-    'copy-assets'
+    'copy:views',
+    'copy:assets'
 ]);
 
+/* Build the app without minification */
+gulp.task('build:dev', ['dist']);
+
+/* Build the app and minfy */
+gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlify']);
+
 /* The default task */
-gulp.task('default', [
-  'package',
-  'serve',
-  'watch'
-]);
+gulp.task('default', ['build:dev']);

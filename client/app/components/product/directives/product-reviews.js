@@ -4,7 +4,7 @@ angular.module('product')
   .directive('productReviews', function() {
     return {
       restrict: 'E',
-      templateUrl: 'views/product-reviews.html',
+      templateUrl: 'views/components/product/views/product-reviews.html',
       controller: 'ReviewController',
       controllerAs: 'reviewCtrl'
     };

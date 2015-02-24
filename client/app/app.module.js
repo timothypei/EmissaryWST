@@ -11,7 +11,7 @@ angular.module('robobetty', ['ui.router', 'ui.bootstrap',
     $stateProvider
       .state('home', {
         url: '/home',
-        templateUrl: 'views/home.html'
+        templateUrl: 'views/components/home/views/home.html'
       })
       .state('createForm', {
         url: '/createform',
@@ -20,7 +20,7 @@ angular.module('robobetty', ['ui.router', 'ui.bootstrap',
       })
       .state('product', {
         url: '/product',
-        templateUrl: 'views/product.html'
+        templateUrl: 'views/components/product/views/product.html'
       });
   });
 

@@ -58,7 +58,7 @@ router.post('/user', urlparser, function(req, res) {
   /* make new user persistant */
   newUser.save(function(err) {
     if(err){
-      res.status(400).send('there was a problem saving the user')
+      res.status(400).send('there was a problem saving the user');
       return;
     }
     res.send('created user: ' + JSON.stringify(newUser));
