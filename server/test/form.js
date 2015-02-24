@@ -153,7 +153,7 @@ describe('Submit template form', function(){
   describe('POST /api/form/template', function(){
     it('Template should be saved', function(done){
       request(url)
-        .post('/api/form/patient')
+        .post('/api/form/template')
         .send({
           _admin_id: admin._id,
           template: submittedForm
@@ -176,7 +176,7 @@ describe('Submit template form', function(){
           res.body.should.have.property('_admin_id');
           res.body.should.have.property('template').and.be.instanceof(Object);
 
-          res.body.form.should.deep.equal(submittedForm);
+          res.body.template.should.deep.equal(submittedForm);
           res.body._id.should.equal(submittedFormId);
           done();
         });
@@ -192,7 +192,7 @@ describe('Submit template form', function(){
           res.body.should.have.property('_admin_id');
           res.body.should.have.property('template').and.be.instanceof(Object);
 
-          res.body.form.should.deep.equal(submittedForm);
+          res.body.template.should.deep.equal(submittedForm);
           res.body._id.should.equal(submittedFormId);
           done();
         });
@@ -202,13 +202,13 @@ describe('Submit template form', function(){
   describe('DELETE /api/form/template/:template_id', function(){
     it('Should delete the template data', function(done){
       request(url)
-        .delete('/api/form/template/' + submittedFormID)
+        .delete('/api/form/template/' + submittedFormId)
         .end(function(err, res){
           res.body.should.have.property('_id');
           res.body.should.have.property('_admin_id');
           res.body.should.have.property('template').and.be.instanceof(Object);
 
-          res.body.form.should.deep.equal(submittedForm);
+          res.body.template.should.deep.equal(submittedForm);
           res.body._id.should.equal(submittedFormId);
           done();
         });

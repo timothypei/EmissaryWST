@@ -17,7 +17,7 @@ router.get('/form/template/:id', function(req, res) {
     if(err)
       res.json({error: "There was an error finding the template form."});
     else
-      res.send(template);
+      res.json(template);
   });
 });
 
@@ -27,7 +27,7 @@ router.get('/form/template/company/:id', function(req, res) {
     if(err)
       res.json({error: "There was an error finding the template form."});
     else
-      res.send(template);
+      res.json(template);
   });
 });
 
@@ -51,16 +51,16 @@ router.delete('/form/template/:template_id', urlparser, function (req, res) {
     var templateID = req.params.template_id;
 
     if(!templateID) {
-      res.status(400).send('need a template id');
+      res.status(400).json({error: 'need a template id'});
       return;
     }
 
     templateForm.findOneAndRemove({_id: templateID}, function(err, result) {
       if(err) {
-        res.status(500).send('There was problem removing the form template');
+        res.status(500).json({error: 'There was problem removing the form template'});
         return;
       }
-      res.send('removed form template: ' + JSON.stringify(result));
+      res.json(result);
     });
 });
 
