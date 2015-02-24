@@ -5,13 +5,13 @@ var Theme = require('../models/Theme');
 describe('Theme Settings Model', function() {
                   it('should create(POST) a new setting', function(done) {
                     var theme = new Theme({
-                        theme.user_id = "test";//company or user id
-                        theme.form_color = "default";
-                        theme.background_img = "default";
-                        theme.displayPhone = false;
-                        theme.displayClock = false;
-                        theme.displaySignature = false;
-                        theme.additionalComments = false;
+                        theme.user_id: "test",//company or user id
+                        theme.form_color: "default",
+                        theme.background_img: "default",
+                        theme.displayPhone: false,
+                        theme.displayClock:  false,
+                        theme.displaySignature:  false,
+                        theme.additionalComments: false
                     });
                     theme.save(function(err) {
                           if (err) return done(err);
