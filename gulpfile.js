@@ -20,7 +20,7 @@ gulp.task('lint', function() {
 
 /* Remove the generated dist */
 gulp.task('clean', function(cb) {
-  del('./dist', cb);
+  del('./dist/', cb);
 });
 
 /* This will add our bower dependencies to our index.html
@@ -77,14 +77,14 @@ gulp.task('concat', function() {
 gulp.task('ng-annotate', ['dist'], function () {
   return gulp.src('dist/bundle.js')
     .pipe(ngAnnotate())
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest('./dist/'));
 });
 
 /* Minify all css files */
 gulp.task('minify:css', ['dist'], function() {
-  return gulp.src('./client/assets/**/*.css')
+  return gulp.src('./dist/css/*.css')
     .pipe(minifyCSS())
-    .pipe(gulp.dest('./dist/'))
+    .pipe(gulp.dest('./dist/css/'))
 });
 
 /* Minify bundle.js */
