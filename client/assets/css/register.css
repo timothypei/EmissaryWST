@@ -1,3 +1,11 @@
+#error_message{
+	width: 100%;
+	color: red;
+	font-style: italic;
+	font-size: 14px;
+	text-align: right;
+	padding-right: 35px;
+}
 .navi {
 	background: #2B76A0;
 	height: 40px;
