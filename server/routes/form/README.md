@@ -6,7 +6,7 @@
 | Method           | _GET_                                                                                        |
 | URL Params       | <ul><li> <code>id=[integer]<code> </li></ul>                                                             |
 | Data Params      |                                                                                              |
-| Response         | <pre> { <br> error: [string],<br> template_id : [integer],<br> company_id : [integer],<br> template : [object]<br> } </pre> |
+| Response         | <pre> { <br> error: [string],<br> _id : [integer],<br> _admin_id : [integer],<br> template : [object]<br> } </pre> |
 | Notes            |                                                                                              |
 
 <br>
@@ -18,7 +18,7 @@
 | Method           | _GET_                                                                                        |
 | URL Params       | <pre>  id=[integer]  </pre>                                                                     |
 | Data Params      |                                                                                              |
-| Response         | <pre> { <br> error: [string],<br> template_id : [integer],<br> company_id : [integer],<br> template : [object]<br> } </pre> |
+| Response         | <pre> { <br> error: [string],<br> _id : [integer],<br> _admin_id : [integer],<br> template : [object]<br> } </pre> |
 | Notes            |                                                                                              |
 
 <br>
@@ -29,8 +29,8 @@
 | URL              | /form/template                                                                       |
 | Method           | _POST_                                                                                        |
 | URL Params       |                                     |
-| Data Params      |  <pre> {<br> template : [object],<br> company_id : [integer] <br> } </pre>                  |
-| Response         | <pre> { <br> error: [string],<br> template_id : [integer], <br> company_id : [integer],<br> template : [object]<br> } </pre> |
+| Data Params      |  <pre> {<br> template : [object],<br> _admin_id : [integer] <br> } </pre>                  |
+| Response         | <pre> { <br> error: [string],<br> _id : [integer], <br> _admin_id : [integer],<br> template : [object]<br> } </pre> |
 | Notes            | The template object will be the javascript object returned by the plugin. Click "show form json object" at the bottom of this page to see an example: http://selmanh.github.io/angularjs-form-builder/#/forms/create           |
 
 <br>
@@ -41,8 +41,8 @@
 | URL              | /form/template                                                                           |
 | Method           | _PUT_                                                                                        |
 | URL Params       |                                                              |
-| Data Params      |   <pre> {<br> template : [object], <br> template_id : [integer] <br> } </pre>                          |
-| Response         | <pre> { <br> error: [string],<br> template_id : [integer], <br> company_id : [integer],<br> template : [object]<br> } </pre> |
+| Data Params      |   <pre> {<br> template : [object], <br> _id : [integer] <br> } </pre>                          |
+| Response         | <pre> { <br> error: [string],<br> _id : [integer], <br> _admin_id : [integer],<br> template : [object]<br> } </pre> |
 | Notes            |                                                                                              |
 
 <br>
@@ -54,7 +54,7 @@
 | Method           | _DELETE_                                                                                        |
 | URL Params       | <ul><li> <code>template_id=[integer]<code> </li></ul>                                                             |
 | Data Params      |                                                                                              |
-| Response         | <pre> { <br> error: [string],<br> template_id : [integer],<br> company_id : [integer],<br> template : [object]<br> } </pre> |
+| Response         | <pre> { <br> error: [string],<br> template_id : [integer],<br> _admin_id : [integer],<br> template : [object]<br> } </pre> |
 | Notes            |                                                                                              |
 
 <br>
