@@ -7,9 +7,7 @@ angular.module('robobetty', ['ui.router',
    'register'])
 
   .config(function($stateProvider, $urlRouterProvider) {
-
     $urlRouterProvider.otherwise('/home');
-
     $stateProvider
       .state('home', {
         url: '/home',
@@ -27,6 +25,4 @@ angular.module('robobetty', ['ui.router',
         url: '/register',
         templateUrl: 'views/components/receptionistPortal/register/views/register.html'
       });
-
   });
-
