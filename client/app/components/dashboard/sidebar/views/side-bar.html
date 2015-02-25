@@ -3,16 +3,13 @@
     <ul class="sidebar">
       <li class="sidebar-main">
         <a ng-click="toggleSidebar()">
-          Sign In Settings
+          {{sidebarHeader}}
           <span class="menu-icon glyphicon glyphicon-transfer"></span>
         </a>
       </li>
       <!--<li class="sidebar-title"><span>NAVIGATION</span></li>-->
-      <li class="sidebar-list">
-        <a href="#">Change Background <span class="menu-icon fa fa-users"></span></a>
-      </li>
-      <li class="sidebar-list">
-        <a href="#">Preview <span class="menu-icon fa fa-check-square-o"></span></a>
+      <li ng-repeat="option in options" class="sidebar-list">
+        <a href="#">{{option.option}}<span class={{option.icon}}></span></a>
       </li>
       <!--<li class="sidebar-list"> 
         <a href="#">Employee <span class="menu-icon fa fa-user"></span></a> 
