@@ -69,7 +69,7 @@ describe('Theme Settings Model', function() {
 
   describe('GET /api/:user_id/theme', function(){
     it('should respond with theme info for respective user_id', function(done){
-	  var url = "localhost:4941";
+	  var url = "localhost:" + config.port;
 	  var user_id = 1;
       request(url)
         .get('/api/' + user_id + '/theme')
@@ -177,7 +177,7 @@ describe('Theme Settings Model', function() {
 describe('DELETE /api/:user_id/theme', function(){
     it('should respond with successful delete', function(done){
 	  var url = "localhost:" + config.port;
-	  var user_id = 2;
+	  var user_id = '2';
       request(url)
         .delete('/api/' + user_id + '/theme')
         .end(function(err, res){
