@@ -8,31 +8,31 @@ angular.module('robobetty').directive('fieldDirective', function ($http, $compil
 
             switch(type) {
                 case 'textfield':
-                    templateUrl = 'views/textfield.html';
+                    templateUrl = 'views/components/dashboard/formBuilder/views/directive-templates/field/textfield.html';
                     break;
                 case 'email':
-                    templateUrl = 'views/email.html';
+                    templateUrl = 'views/components/dashboard/formBuilder/views/directive-templates/field/email.html';
                     break;
                 case 'textarea':
-                    templateUrl = 'views/textarea.html';
+                    templateUrl = 'views/components/dashboard/formBuilder/views/directive-templates/field/textarea.html';
                     break;
                 case 'checkbox':
-                    templateUrl = 'views/checkbox.html';
+                    templateUrl = 'views/components/dashboard/formBuilder/views/directive-templates/field/checkbox.html';
                     break;
                 case 'date':
-                    templateUrl = 'views/date.html';
+                    templateUrl = 'views/components/dashboard/formBuilder/views/directive-templates/field/date.html';
                     break;
                 case 'dropdown':
-                    templateUrl = 'views/dropdown.html';
+                    templateUrl = 'views/components/dashboard/formBuilder/views/directive-templates/field/dropdown.html';
                     break;
                 case 'hidden':
-                    templateUrl = 'views/hidden.html';
+                    templateUrl = 'views/components/dashboard/formBuilder/views/directive-templates/field/hidden.html';
                     break;
                 case 'password':
-                    templateUrl = 'views/password.html';
+                    templateUrl = 'views/components/dashboard/formBuilder/views/directive-templates/field/password.html';
                     break;
                 case 'radio':
-                    templateUrl = 'views/radio.html';
+                    templateUrl = 'views/components/dashboard/formBuilder/views/directive-templates/field/radio.html';
                     break;
             }
             return templateUrl;
