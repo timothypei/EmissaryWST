@@ -1,17 +1,23 @@
 'use strict';
 
-angular.module('robobetty', ['ui.router',
+angular.module('robobetty', ['ui.router', 'ui.bootstrap',
   'widget',
-  'product', 'dashboard','ui.bootstrap'])
-
+  'dashboard',
+  'product',
+  'DashboardFormBuilderModule'
+  ])
   .config(function($stateProvider, $urlRouterProvider) {
-
     $urlRouterProvider.otherwise('/home');
 
     $stateProvider
       .state('home', {
         url: '/home',
         templateUrl: 'views/components/home/views/home.html'
+      })
+      .state('createForm', {
+        url: '/createform',
+        controller: 'FormCreateController',
+        templateUrl: 'views/components/dashboard/formBuilder/views/create.html'
       })
       .state('product', {
         url: '/product',
@@ -24,5 +30,6 @@ angular.module('robobetty', ['ui.router',
       .state('doctors', {
         url: '/doctors',
         templateUrl: 'views/components/dashboard/doctors/views/doctors.html'
-      })
-  });
+      });
+  }
+);
