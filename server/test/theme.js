@@ -76,12 +76,12 @@ describe('Theme Settings Model', function() {
         .end(function(err, res){
 		  res.body.should.have.property('_id');
 		  res.body.should.have.property('additionalComments');
-          res.body.should.have.property('user_id');
-          res.body.should.have.property('form_color');
-          res.body.should.have.property('background_img');
-          res.body.should.have.property('displayPhone');
-          res.body.should.have.property('displayClock');
-          res.body.should.have.property('displaySignature');
+              res.body.should.have.property('user_id');
+              res.body.should.have.property('form_color');
+              res.body.should.have.property('background_img');
+              res.body.should.have.property('displayPhone');
+              res.body.should.have.property('displayClock');
+              res.body.should.have.property('displaySignature');
 		  
           done();
         });
@@ -110,13 +110,13 @@ describe('Theme Settings Model', function() {
 		})
         .end(function(err, res){
 		  console.log(res.body);
-          res.body.should.have.property('user_id');
-          res.body.should.have.property('form_color');
-          res.body.should.have.property('background_img');
-          res.body.should.have.property('displayPhone');
-          res.body.should.have.property('displayClock');
-          res.body.should.have.property('displaySignature');
-		  res.body.should.have.property('additionalComments');
+              res.body.should.have.property('user_id');
+              res.body.should.have.property('form_color');
+              res.body.should.have.property('background_img');
+              res.body.should.have.property('displayPhone');
+              res.body.should.have.property('displayClock');
+              res.body.should.have.property('displaySignature');
+    		  res.body.should.have.property('additionalComments');
 		  
 		  res.body.user_id.should.equal(_user_id);
 		  res.body.form_color.should.equal(_form_color);
@@ -152,13 +152,13 @@ describe('Theme Settings Model', function() {
 			additionalComments: _additionalComments
 		})
         .end(function(err, res){
-          res.body.should.have.property('user_id');
-          res.body.should.have.property('form_color');
-          res.body.should.have.property('background_img');
-          res.body.should.have.property('displayPhone');
-          res.body.should.have.property('displayClock');
-          res.body.should.have.property('displaySignature');
-		  res.body.should.have.property('additionalComments');
+              res.body.should.have.property('user_id');
+              res.body.should.have.property('form_color');
+              res.body.should.have.property('background_img');
+              res.body.should.have.property('displayPhone');
+              res.body.should.have.property('displayClock');
+              res.body.should.have.property('displaySignature');
+    		  res.body.should.have.property('additionalComments');
 		  
 		  res.body.user_id.should.equal(_user_id);
 		  res.body.form_color.should.equal(_form_color);
@@ -173,7 +173,6 @@ describe('Theme Settings Model', function() {
     });
   });
  
-// Note: this test assumes a user_id 2 exists in DB for successful delete
 describe('DELETE /api/:user_id/theme', function(){
     it('should respond with successful delete', function(done){
 	  var url = "localhost:" + config.port;
@@ -182,8 +181,8 @@ describe('DELETE /api/:user_id/theme', function(){
         .delete('/api/' + user_id + '/theme')
         .end(function(err, res){
 		  console.log(res.body);
-          res.body.should.equal(1);
-          done();
+              res.body.should.equal(1);
+              done();
         });
     });
   });
