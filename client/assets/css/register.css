@@ -20,7 +20,7 @@
 	border-color: #e8e8e8;
 	position: relative;
 	margin: auto;
-	margin-top: -70px;
+	margin-top: -10px;
 	margin-bottom: 70px;
 	top: 175px;
 }
@@ -37,6 +37,7 @@
 	padding: 15px;
 
 }
+
 input[type=submit] {
 	float: center;
 	margin-left: 26px;
@@ -75,6 +76,6 @@ input[type=submit] {
 h1{
 	text-align: center;
 }
-.arrowbutton {
-
+.arrowContainer{
+align:left;
 }
