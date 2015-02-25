@@ -55,11 +55,11 @@ router.post('/login', function(req,res){
         if (!user.validPassword(req.body.password))
             return res.status(401).send('loginMessage', 'Oops! Wrong password'); // create the loginMessage and save it to session as flashdata
 
-      var newToken = jwt.encode(req.body.email, admin.generateHash(req.body.password));
+      var newToken = jwt.encode(req.body.email, admin.generateHash('req.body.password' + new Date().getTime()));
       user.update({token: newToken});
       // encode
   
-    return res.send(newToken);
+    return res.json({token:newToken});
   });
 });
 
