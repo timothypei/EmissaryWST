@@ -96,9 +96,9 @@ router.route('/:user_id/theme')
                                         user_id: req.params.user_id
                                     }, function(err, theme) {
                                         if (err)
-                                            res.send(err);
-
-                                        res.json(theme);
+                                            res.send(0);
+                                        else
+                                            res.send(1);
                             });
 
 
