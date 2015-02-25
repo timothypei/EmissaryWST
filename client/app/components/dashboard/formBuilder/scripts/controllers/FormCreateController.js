@@ -23,7 +23,7 @@ angular.module('DashboardFormBuilderModule')
   $scope.addField.lastAddedID = 0;
 
   // accordion settings
-  $scope.accordion = {}
+  $scope.accordion = {};
   $scope.accordion.oneAtATime = true;
 
   // create new field button click
@@ -41,7 +41,7 @@ angular.module('DashboardFormBuilderModule')
 
     // put newField into fields array
     $scope.form.form_fields.push(newField);
-  }
+  };
 
   // deletes particular field on button click
   $scope.deleteField = function (field_id){
@@ -51,30 +51,32 @@ angular.module('DashboardFormBuilderModule')
         break;
       }
     }
-  }
+  };
 
   // add new option to the field
   $scope.addOption = function (field){
-    if(!field.field_options)
-      field.field_options = new Array();
+    if(!field.field_options) {
+      field.field_options = [];
+    }
 
     var lastOptionID = 0;
 
-    if(field.field_options[field.field_options.length-1])
+    if(field.field_options[field.field_options.length-1]) {
       lastOptionID = field.field_options[field.field_options.length-1].option_id;
+    }
 
       // new option's id
-      var option_id = lastOptionID + 1;
+    var option_id = lastOptionID + 1;
 
-      var newOption = {
-        "option_id" : option_id,
-        "option_title" : "Option " + option_id,
-        "option_value" : option_id
-      };
+    var newOption = {
+      "option_id" : option_id,
+      "option_title" : "Option " + option_id,
+      "option_value" : option_id
+    };
 
-      // put new option into field_options array
-      field.field_options.push(newOption);
-    }
+    // put new option into field_options array
+    field.field_options.push(newOption);
+  };
 
   // delete particular option
   $scope.deleteOption = function (field, option){
@@ -84,12 +86,12 @@ angular.module('DashboardFormBuilderModule')
         break;
       }
     }
-  }
+  };
 
 
   // preview form
   $scope.previewOn = function(){
-    if($scope.form.form_fields == null || $scope.form.form_fields.length == 0) {
+    if($scope.form.form_fields === null || $scope.form.form_fields.length === 0) {
       var title = 'Error';
       var msg = 'No fields added yet, please add fields to the form before preview.';
       var btns = [{result:'ok', label: 'OK', cssClass: 'btn-primary'}];
@@ -105,13 +107,13 @@ angular.module('DashboardFormBuilderModule')
       $scope.form.submitted = false;
       angular.copy($scope.form, $scope.previewForm);
     }
-  }
+  };
 
   // hide preview form, go back to create mode
   $scope.previewOff = function(){
     $scope.previewMode = !$scope.previewMode;
     $scope.form.submitted = false;
-  }
+  };
 
   // decides whether field options block will be shown (true for dropdown and radio fields)
   $scope.showAddOptions = function (field){
@@ -119,11 +121,11 @@ angular.module('DashboardFormBuilderModule')
       return true;
     else
       return false;
-  }
+  };
 
   // deletes all the fields
   $scope.reset = function (){
     $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
     $scope.addField.lastAddedID = 0;
-  }
+  };
 });
