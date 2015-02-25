@@ -49,11 +49,11 @@ router.route('/:user_id/theme')
 
 	    //get the theme correspond to the user
 	     .get(function(req, res) {
-		        Theme.find({user_id: req.params.user_id}, function(err, themes) {
+		        Theme.findOne({user_id: req.params.user_id}, function(err, theme) {
 		            if (err)
 		                res.send(err);
 
-		            res.json(themes);
+		            res.json(theme);
 		        });
 	      })
 
