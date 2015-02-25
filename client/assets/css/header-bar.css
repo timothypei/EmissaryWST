@@ -3,6 +3,8 @@
  */
 #navigation{
     background:#434343;
+    border-radius:0%;
+    border:0px;
 }
 
 .navbar .nav > li > a:link {
