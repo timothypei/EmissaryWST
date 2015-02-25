@@ -21,40 +21,50 @@ router.post('/signup', function(req,res){
   var admin = new Authmodel();
   admin.email = req.body.email;
   admin.password = admin.generateHash(req.body.password);
-  admin.token = jwt.encode(req.body.email, admin.generateHash(req.body.password + new Date().getTime()));
+  admin.token = jwt.encode(req.body.email, admin.generateHash(new Date().getTime()));
     // save the user
     admin.save(function(err) {
         if (err)
-            throw err;
-      //  return done(null, admin);
+            return res.status(400).send(err);
+        return res.sendStatus(200);
     });
-    return res.sendStatus(200);
+});
+
+router.get('/signup', function(req,res){
+  Authmodel.find({}, function(err, result) {
+    if(err){
+      res.status(400).send('There was a problem fetching all of the users');
+      return;
+    }
+    return res.json(result);
+  });
 });
 
 
 router.post('/login', function(req,res){
   //Give them a token
-    var admin = new Authmodel();
     // find a user whose email is the same as the forms email
     // we are checking to see if the user trying to login already exists
     Authmodel.findOne({ email :  req.body.email }, function(err, user) {
         // if there are any errors, return the error before anything else
-        if (err || !user)
-            return res.status(400).send(err);
+      if (err || !user)
+          return res.status(400).send(err);
 
 
         // if the user is found but the password is wrong
-        if (!user.validPassword(req.body.password))
-            return res.status(401).send('loginMessage', 'Oops! Wrong password');
+      if (!user.validPassword(req.body.password))
+          return res.status(401).send('loginMessage', 'Oops! Wrong password');
 
-      var newToken = jwt.encode(req.body.email, admin.generateHash('req.body.password' + new Date().getTime()));
-      user.update({token: newToken});
-      // encode
+      var newToken = jwt.encode(req.body.email, user.generateHash(new Date().getTime()));
+      user.token = newToken;
+      user.save(function(err){
+        if(err)
+          return res.status(400);
+        return res.json({token:newToken});
+      });
   
-    return res.json({token:newToken});
   });
 });
-
 
 
 module.exports = router;
