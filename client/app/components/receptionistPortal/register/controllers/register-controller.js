@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('register')
-  .controller('RegisterController', ['$scope', 'RegisterService',function($scope, RegisterService){
+  .controller('RegisterController', ['$scope','$location', 'RegisterService',function($scope,$location, RegisterService){
   		$scope.user = {email: '', password: ''};
       $scope.pass = '';
       $scope.err=false;
@@ -24,9 +24,12 @@ angular.module('register')
           //when the API call was a success
       	  .success(function(data){
         	account.dat = data;
-          	return data;
+          $location.path(data.successRedirect);
+          return data;
       	 })
       	 .error(function(err){
+            $scope.err = true;
+            $scope.errorMessage = err;
        	  	return err;
      	  });
       }

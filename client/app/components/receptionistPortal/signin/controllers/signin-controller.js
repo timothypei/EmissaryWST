@@ -17,11 +17,8 @@ angular.module('signin')
         	return data;
       	})
       	.error(function(err){
-      		console.log($location);
        		$scope.err = true; 
        		return err;
      	});
   	};
-  	
-  
   }]);
