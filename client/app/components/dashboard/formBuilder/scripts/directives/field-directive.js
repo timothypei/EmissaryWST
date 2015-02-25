@@ -36,7 +36,7 @@ angular.module('robobetty').directive('fieldDirective', function ($http, $compil
                     break;
             }
             return templateUrl;
-        }
+        };
 
         var linker = function(scope, element) {
             // GET template content from path
@@ -45,7 +45,7 @@ angular.module('robobetty').directive('fieldDirective', function ($http, $compil
                 element.html(data);
                 $compile(element.contents())(scope);
             });
-        }
+        };
 
         return {
             template: '<div>{{field}}</div>',
