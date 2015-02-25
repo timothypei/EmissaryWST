@@ -11,7 +11,7 @@
 		<div id="container">
 			<form ng-submit="login()">		
 
-				<img src="images/logo.png">
+				<img id="logo" src="images/logo.png">
 
 				<input ng-model="user.email" type="name" placeholder="Company Name">		
 				<input type="password" ng-model="user.password" placeholder="Password">		
@@ -25,7 +25,7 @@
 			
 			</form>
 			<div id="signup">
-				<p ng-show='err' id="error_message">Invalid Email/Password</p>
+				<p  id="error_message">{{errMessage}}</p>
 				<a href="#/register">Create an account</a> 
 			</div>
 		</div>
