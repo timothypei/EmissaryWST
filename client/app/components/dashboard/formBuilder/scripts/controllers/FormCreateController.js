@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('', function ($scope, $modal, FormService) {
+  .controller('FormCreateController', function ($scope, $modal, FormService) {
 
   // preview form mode
   $scope.previewMode = false;
