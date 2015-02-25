@@ -54,9 +54,17 @@ var user = require('./routes/user');
 var product = require('./routes/product');
 var theme = require('./routes/theme');
 var employee = require ('./routes/employee');
-
+var auth = require('./routes/auth');
 
 app.use(home);
+
+app.use('/api/*',function(req,res){
+	//Put this function in config file and check validation
+	next();
+});
+
+
+app.use('/auth', auth);
 app.use('/api', user);
 app.use('/api', product);
 app.use('/api', theme);

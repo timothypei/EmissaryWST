@@ -9,6 +9,7 @@ var adminSchema = mongoose.Schema({
     local            : {
         email        : String,
         password     : String,
+        token        : String
     }
 
 });
@@ -17,11 +18,11 @@ var adminSchema = mongoose.Schema({
 
 
 // checking if password is valid
-userSchema.methods.validPassword = function(password) {
+adminSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 // generating a hash
-userSchema.methods.generateHash = function(password) {
+adminSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
