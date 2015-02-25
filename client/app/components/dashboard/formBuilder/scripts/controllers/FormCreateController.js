@@ -95,7 +95,7 @@ angular.module('DashboardFormBuilderModule')
       var btns = [{result:'ok', label: 'OK', cssClass: 'btn-primary'}];
 
       var modalInstance = $modal.open({
-        templateUrl: 'views/modal.html',
+        templateUrl: 'views/components/dashboard/formBuilder/views/modal.html',
         controller : 'ModalInstanceCtrl',
         controllerAs : 'vm'
       });
