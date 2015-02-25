@@ -17,6 +17,7 @@ var mongoose = require('mongoose');
  * MongoDb configuration.
  */
 var config = require('./config/config');
+var validate = require('./config/validation')
 
 /*
  * Create Express server.
@@ -57,14 +58,8 @@ var employee = require ('./routes/employee');
 var auth = require('./routes/auth');
 
 app.use(home);
-
-app.use('/api/*',function(req,res){
-	//Put this function in config file and check validation
-	next();
-});
-
-
 app.use('/auth', auth);
+app.use('/api/*', validate);
 app.use('/api', user);
 app.use('/api', product);
 app.use('/api', theme);
