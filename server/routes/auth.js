@@ -21,6 +21,7 @@ router.post('/signup', function(req,res){
   var admin = new Authmodel();
   admin.email = req.body.email;
   admin.password = admin.generateHash(req.body.password);
+  admin.token = jwt.encode(req.body.email, admin.generateHash(req.body.password + new Date().getTime()));
     // save the user
     admin.save(function(err) {
         if (err)
@@ -30,15 +31,6 @@ router.post('/signup', function(req,res){
     return res.sendStatus(200);
 });
 
-router.get('/signup', function(req,res){
-  Authmodel.find({}, function(err, result) {
-    if(err){
-      res.status(400).send('There was a problem fetching all of the users');
-      return;
-    }
-    return res.json(result);
-  });
-});
 
 router.post('/login', function(req,res){
   //Give them a token
@@ -53,7 +45,7 @@ router.post('/login', function(req,res){
 
         // if the user is found but the password is wrong
         if (!user.validPassword(req.body.password))
-            return res.status(401).send('loginMessage', 'Oops! Wrong password'); // create the loginMessage and save it to session as flashdata
+            return res.status(401).send('loginMessage', 'Oops! Wrong password');
 
       var newToken = jwt.encode(req.body.email, admin.generateHash('req.body.password' + new Date().getTime()));
       user.update({token: newToken});
