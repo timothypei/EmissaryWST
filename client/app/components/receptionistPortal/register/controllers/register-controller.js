@@ -7,15 +7,16 @@ angular.module('register')
       $scope.err=false;
       $scope.errorMessage='';
   		$scope.reg = function(){
+        if($scope.user.email==''){
+          $scope.errorMessage='Email and Password and mandatory fields';
+        }
         //display the error message if passwords differ
-        if($scope.pass!=$scope.user.password){
-          $scope.err = true;
+        else if($scope.pass!=$scope.user.password){
           $scope.errorMessage='Please make sure your passwords match';
           return;
         }
         //display the error message if passwords differ
         else if($scope.pass.length<4){
-          $scope.err = true;
           $scope.errorMessage='Password must be at least 4 characters';
           return;
         }
@@ -28,7 +29,6 @@ angular.module('register')
           return data;
       	 })
       	 .error(function(err){
-            $scope.err = true;
             $scope.errorMessage = err;
        	  	return err;
      	  });
