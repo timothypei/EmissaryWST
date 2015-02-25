@@ -9,8 +9,8 @@ angular.module('dashboard')
       		case 'product':
       			break;
       		case 'dashboard':
-      			return [{'option':'Change Background', 'icon': 'menu-icon fa fa-users'},
-      			{'option':'Preview', 'icon':'menu-icon fa fa-check-square-o'}];
+      			return [{option:'Change Background', icon: 'menu-icon fa fa-users'},
+      			{option:'Preview', icon:'menu-icon fa fa-check-square-o'}];
       		case 'doctors':
       			break;
       	}
