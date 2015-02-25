@@ -15,12 +15,12 @@ var cors = require('cors');
 
 var Authmodel = require('../models/Authmodel');
 
-router.post('/api/signup', function(req,res){
-
+router.post('/auth/signup', function(req,res){
+  //Put them into the database
 });
 
-router.post('/api/login', function(req,res){
-
+router.post('/auth/login', function(req,res){
+  //Give them a token
 });
 
 
