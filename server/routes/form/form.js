@@ -38,8 +38,7 @@ router.post('/form/template', function(req, res) {
 
   newTemplate.save(function(err, template) {
     if(err)
-        res.json(err)
-      //res.json({error: "There was an error inserting a new template."});
+        res.json(err);
     else
       res.json(template);
   });
@@ -87,7 +86,7 @@ var getSubmittedFormById = function(req, res) {
       res.json({error: "An error occured while finding patient form"});
       return;
     }
-    res.json(submittedForm)
+    res.json(submittedForm);
   });
 };
 
@@ -101,12 +100,11 @@ var postSubmittedForm = function(req, res) {
   form.date = new Date();
   form.save(function(err, savedForm){
     if (err){
-      res.json({error: "An error occured while saving the submitted form"})
-      return;
+      res.json({error: "An error occured while saving the submitted form"});
     }
     res.json(savedForm);
   });
-}
+};
 
 var getSubmittedFormByPatientInfo = function(req, res) {
   var query = {},
@@ -118,9 +116,9 @@ var getSubmittedFormByPatientInfo = function(req, res) {
     res.json({error: "You must specify either both first and last name or email"});
     return;
   }
-  firstName ? query.firstName = firstName : null;
-  lastName ? query.lastName = lastName : null;
-  email ? query.email = email : null;
+  query.firstName = firstName || null;
+  query.lastName = lastName || null;
+  query.email = email || null;
 
   if(req.query.mostRecent == "true") {
     SubmittedForm.findOne(query).sort('-date').exec(function (err, submittedForm) {
@@ -146,7 +144,7 @@ var getSubmittedFormByPatientInfo = function(req, res) {
 };
 
 router.get('/form/patient/:form_id', getSubmittedFormById);
-router.get('/form/patient', getSubmittedFormByPatientInfo)
+router.get('/form/patient', getSubmittedFormByPatientInfo);
 router.post('/form/patient', postSubmittedForm);
 
 

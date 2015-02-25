@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 var config = require('../config/config');
 
-var AdminUser = require('../models/Authmodel')
+var AdminUser = require('../models/Authmodel');
 
 /********** TEMPLATE TESTING **********/
 var templateFormId = null;
@@ -52,7 +52,6 @@ describe('Submit template form', function(){
     newAdmin.save(function(err, savedAdmin){
       if (err){
         throw(err);
-        return;
       }
       admin = savedAdmin;
       done();
@@ -248,7 +247,7 @@ var submittedForm = {
     }
   },
   "submitted": true
-}
+};
 
 describe('Submitted Patient Form', function(){
   var url = "localhost:" + config.port;
@@ -262,7 +261,6 @@ describe('Submitted Patient Form', function(){
     newAdmin.save(function(err, savedAdmin){
       if (err){
         throw(err);
-        return;
       }
       admin = savedAdmin;
       done();
