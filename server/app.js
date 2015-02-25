@@ -17,7 +17,7 @@ var mongoose = require('mongoose');
  * MongoDb configuration.
  */
 var config = require('./config/config');
-var validate = require('./config/validation')
+var validate = require('./config/validation');
 
 /*
  * Create Express server.
