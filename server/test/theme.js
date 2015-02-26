@@ -4,7 +4,7 @@ var Theme = require('../models/Theme');
 var config = require('../config/config');
 var request = require('supertest');
 
-/*describe('Theme Settings Model', function() {
+describe('Theme Settings Model', function() {
     it('should create(POST) a new setting', function(done) {
         var theme = new Theme({
             user_id: "test", //company or user id
@@ -70,8 +70,9 @@ var request = require('supertest');
         });
     });
 
-});*/
+});
 
+/*
 describe('POST /api/:user_id/theme', function() {
     it('should respond with theme info for respective user_id settings that were created for first time user', function(done) {
         var url = "localhost:" + config.port;
@@ -192,4 +193,4 @@ describe('DELETE /api/:user_id/theme', function() {
                 done();
             });
     });
-});
+});*/
