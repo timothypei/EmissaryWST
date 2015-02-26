@@ -96,7 +96,7 @@ var postSubmittedForm = function(req, res) {
   form._admin_id = req.body._admin_id;
   form.firstName = req.body.firstName;
   form.lastName = req.body.lastName;
-  form.email = req.body.email;
+  form.email = req.body.patientEmail;
   form.date = new Date();
   form.save(function(err, savedForm){
     if (err){
@@ -110,7 +110,7 @@ var getSubmittedFormByPatientInfo = function(req, res) {
   var query = {},
     firstName = req.query.firstName,
     lastName = req.query.lastName,
-    email = req.query.email;
+    email = req.query.patientEmail;
 
   if(!((firstName && lastName) || email)) {
     res.json({error: "You must specify either both first and last name or email"});
