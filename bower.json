@@ -1,6 +1,6 @@
 {
   "name": "robo_betty_alpha",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/bluejay112/robo_betty_alpha",
   "authors": [
     "Eduardo Aguilar <e6aguilar@gmail.com>"
@@ -14,14 +14,14 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.3.13",
-    "angular-ui-router": "~0.2.13",
-    "angular-bootstrap": "~0.12.0",
-    "angular-cookies": "~1.3.13",
-    "angular-ui": "~0.4.0",
-    "bootstrap": "~3.3.2"
+    "angular": "1.3.13",
+    "angular-ui-router": "0.2.13",
+    "angular-bootstrap": "0.12.0",
+    "angular-cookies": "1.3.13",
+    "angular-ui": "0.4.0",
+    "bootstrap": "3.3.2"
   },
   "resolutions": {
-    "angular": ">= 1.0.8"
+    "angular": "1.3.13"
   }
 }
