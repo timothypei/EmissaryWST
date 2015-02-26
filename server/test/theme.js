@@ -72,28 +72,6 @@ describe('Theme Settings Model', function() {
 
 });
 
-
-describe('GET /api/:user_id/theme', function() {
-    it('should respond with theme info for respective user_id', function(done) {
-        var url = "localhost:" + config.port;
-        var user_id = '1';
-        request(url)
-            .get('/api/' + user_id + '/theme')
-            .end(function(err, res) {
-                res.body.should.have.property('_id');
-                res.body.should.have.property('additionalComments');
-                res.body.should.have.property('user_id');
-                res.body.should.have.property('form_color');
-                res.body.should.have.property('background_img');
-                res.body.should.have.property('displayPhone');
-                res.body.should.have.property('displayClock');
-                res.body.should.have.property('displaySignature');
-
-                done();
-            });
-    });
-});
-
 describe('POST /api/:user_id/theme', function() {
     it('should respond with theme info for respective user_id settings that were created for first time user', function(done) {
         var url = "localhost:" + config.port;
@@ -136,6 +114,29 @@ describe('POST /api/:user_id/theme', function() {
             });
     });
 });
+
+describe('GET /api/:user_id/theme', function() {
+    it('should respond with theme info for respective user_id', function(done) {
+        var url = "localhost:" + config.port;
+        var user_id = '1';
+        request(url)
+            .get('/api/' + user_id + '/theme')
+            .end(function(err, res) {
+                res.body.should.have.property('_id');
+                res.body.should.have.property('additionalComments');
+                res.body.should.have.property('user_id');
+                res.body.should.have.property('form_color');
+                res.body.should.have.property('background_img');
+                res.body.should.have.property('displayPhone');
+                res.body.should.have.property('displayClock');
+                res.body.should.have.property('displaySignature');
+
+                done();
+            });
+    });
+});
+
+
 
 describe('PUT /api/:user_id/theme', function() {
     it('should respond with theme info for respective user_id settings that were updated', function(done) {
