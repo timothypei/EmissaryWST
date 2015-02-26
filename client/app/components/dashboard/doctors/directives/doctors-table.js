@@ -11,18 +11,18 @@ angular.module('dashboard')
 
     var Names = ['David Fincher', 'Mardy Bum', 'Alex Turner', 'Haruki Murakami'];
     var Email = ['powell@ucsd.edu', 'peter@ucsd.edu', 'robo@ucsd.edu', '112@ucsd.edu'];
-    var Doc_Number = ['234-984-1239', '259-038-9173', '383-484-0274', '383-292-4842'];
+    var Phone = ["(626)342-0347", "(234)343-3489", "(232)342-0193", "(342)347-2938"];
     var id = 1;
 
     function generateRandomItem(id) {
         var docName = Names[Math.floor(Math.random() * 3)];
-        var phoneNum = Doc_Number[Math.floor(Math.random() * 3)];
+        var phoneNumber = Phone[Math.floor(Math.random() * 3)];
         var docEmail = Email[Math.floor(Math.random() * 3)];
 
         return {
             id: id,
             Name: docName,
-            Phone: phoneNum,
+            PhoneNumber: phoneNumber,
             Email: docEmail
         }
     }
