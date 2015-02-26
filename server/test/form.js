@@ -45,20 +45,20 @@ var setupUser = function(url) {
             res.body.should.have.property('token');
             token = res.body.token;
             done();
-          })
+          });
       });
 
       it("should retrieve admin document", function(done) {
         AdminUser.findOne({email: email}, function(err, dbAdmin) {
           if(err)
             throw(err);
-          admin = dbAdmin
+          admin = dbAdmin;
           done();
         });
       });
     });
-  }
-}
+  };
+};
 
 var clear_db = function() {
   describe("Clear Admins", function() {
