@@ -7,6 +7,61 @@ var config = require('../config/config');
 
 var AdminUser = require('../models/Authmodel');
 
+var setupUser = function() {
+
+  describe("Signup User", function() {
+    it("should signup new user" function(done) {
+      request(url)
+        .post('/signup')
+        .send({
+          email: "test@test.com",
+          password: "test_password"
+        })
+        .expect(200);
+        .end(function(){
+          done();
+        });
+    });
+
+    it("should login the user" function(done) {
+      request(url)
+        .post('login')
+        .send({
+          email: "test@test.com",
+          password: "test_password"
+        })
+        .expect(200)
+        .end(function(err,res){
+          res.body.should.have.property('token');
+          token = res.body.token;
+          done();
+        })
+    });
+
+    it("should retrieve admin document" function(done) {
+      AdminUser.find({email: "test@test.com"}, function(err, dbAdmin) {
+        if(err)
+          throw(err);
+        admin = dbAdmin
+        done();
+      });
+    });
+  });
+}
+
+var clear_db = function() {
+  describe("Clear Admins", function() {
+    it("should clear the admin table", function(done) {
+      AdminUser.remove({}, function(err) {
+        if(err)
+          throw(err);
+
+        done();
+      });
+    });
+  });
+};
+
 /********** TEMPLATE TESTING **********/
 var templateFormId = null;
 var templateForm = {
@@ -40,10 +95,14 @@ var templateForm = {
   ]
 };
 
+
 describe('Submit template form', function(){
   var url = "localhost:" + config.port;
 
+  var token;
   var admin = null;
+  describe('Create User', setupUser);
+
   before(function(done){
     mongoose.connect(config.mongoDBUrl);
     var newAdmin = new AdminUser();
@@ -123,6 +182,7 @@ describe('Submit template form', function(){
     });
   });
 
+  clear_db();
 
 });
 /********** PATIENT FORM TESTING **********/
@@ -250,9 +310,13 @@ var submittedForm = {
 };
 
 describe('Submitted Patient Form', function(){
+
   var url = "localhost:" + config.port;
 
+  var token;
   var admin = null;
+  describe('Create User', setupUser);
+
   before(function(done){
     mongoose.connect(config.mongoDBUrl);
     var newAdmin = new AdminUser();
@@ -309,6 +373,7 @@ describe('Submitted Patient Form', function(){
     });
   });
 
+  clear_db();
 
 
 });
