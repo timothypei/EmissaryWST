@@ -17,6 +17,7 @@ var mongoose = require('mongoose');
  * MongoDb configuration.
  */
 var config = require('./config/config');
+var validate = require('./config/validation');
 
 /*
  * Create Express server.
@@ -52,10 +53,19 @@ app.use(express.static(path.join(__dirname, '../dist')));
 var home = require('./routes/home');
 var user = require('./routes/user');
 var product = require('./routes/product');
+var form = require('./routes/form/form');
+var theme = require('./routes/theme');
+var employee = require ('./routes/employee');
+var auth = require('./routes/auth');
 
 app.use(home);
+app.use('/auth', auth);
+app.use('/api/*', validate);
 app.use('/api', user);
 app.use('/api', product);
+app.use('/api', form);
+app.use('/api', theme);
+app.use('/api', employee);
 
 /*
  * Error Handler.
@@ -66,8 +76,8 @@ app.use(errorHandler());
  * Start Express server.
  */
 app.listen(app.get('port'), function() {
-  console.log('Express server listening on port %d in %s mode', 
-    app.get('port'), 
+  console.log('Express server listening on port %d in %s mode',
+    app.get('port'),
     app.get('env'));
 });
 
