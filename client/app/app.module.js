@@ -2,11 +2,13 @@
 
 angular.module('robobetty', ['ui.router',
   'widget',
-  'product', 'dashboard','ui.bootstrap'])
+  'product', 'dashboard','ui.bootstrap',
+   'signin',
+   'register'])
 
   .config(function($stateProvider, $urlRouterProvider) {
-
     $urlRouterProvider.otherwise('/dashboard');
+
 
     $stateProvider
       .state('common',{
@@ -31,4 +33,12 @@ angular.module('robobetty', ['ui.router',
         templateUrl: 'views/components/dashboard/doctors/views/doctors.html',
         parent: 'common'
       })
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'views/components/receptionistPortal/signin/views/login.html'
+      })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'views/components/receptionistPortal/register/views/register.html'
+      });
   });

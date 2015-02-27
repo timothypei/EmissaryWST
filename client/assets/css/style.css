@@ -73,12 +73,10 @@ src: local('Myriad Pro Bold'), url('../fonts/MYRIADPRO-BOLD.woff') format('woff'
 .ng-invalid.ng-dirty{
     border-color: red;
 }
-
 .ng-valid.ng-dirty {
     border-color: yellowgreen;
 }
-
 body{
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 100%;
+
 }
