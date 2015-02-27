@@ -1,77 +1,15 @@
+'use strict';
+
 var should = require('chai').should();
-var asser = require('chai').assert;
+var assert = require('chai').assert;
 var request = require('supertest');
 var mongoose = require('mongoose');
 
 var config = require('../config/config');
 
-var AdminUser = require('../models/Authmodel');
+var AdminHandler = require('./AdminHandler')
 
-var email = "test@test.com";
-var password = "test_password";
-
-var admin;
-var token;
-
-var setupUser = function(url) {
-
-  return function() {
-
-    describe("Signup User", function() {
-      it("should signup new user", function(done) {
-        request(url)
-          .post('/auth/signup')
-          .send({
-            email: email,
-            password: password
-          })
-          .expect(200)
-          .end(function(){
-            done();
-          });
-      });
-
-      it("should login the user", function(done) {
-        request(url)
-          .post('/auth/login')
-          .send({
-            email: email,
-            password: password
-          })
-          .expect(200)
-          .end(function(err,res){
-            if(err)
-              throw(err);
-            res.body.should.have.property('token');
-            token = res.body.token;
-            done();
-          });
-      });
-
-      it("should retrieve admin document", function(done) {
-        AdminUser.findOne({email: email}, function(err, dbAdmin) {
-          if(err)
-            throw(err);
-          admin = dbAdmin;
-          done();
-        });
-      });
-    });
-  };
-};
-
-var clear_db = function() {
-  describe("Clear Admins", function() {
-    it("should clear the admin table", function(done) {
-      AdminUser.remove({}, function(err) {
-        if(err)
-          throw(err);
-
-        done();
-      });
-    });
-  });
-};
+var setup = {};
 
 /********** TEMPLATE TESTING **********/
 var templateFormId = null;
@@ -110,21 +48,25 @@ var templateForm = {
 describe('Forms', function(){
   var url = "localhost:" + config.port;
 
-  describe('Create User', setupUser(url));
+  before(function(){
+    AdminHandler.setupUser(url, setup);
+  });
+  //describe('Create User', setupUser(url));
 
   describe("Form Templates", function() {
     describe('POST /api/form/template', function(){
       it('should save the template', function(done){
         request(url)
           .post('/api/form/template')
-          .query({email: email, token: token})
+          .query({email: email, token: setup.token})
           .send({
-            _admin_id: admin._id,
+            _admin_id: setup.admin._id,
             template: templateForm,
           })
           .end(function(err, res){
+            console.log("HELLLLLLLOOOOOOOOOOOO", setup.admin);
             templateFormId = res.body._id;
-            res.body.should.have.property('_admin_id').and.be.equal(''+admin._id);
+            res.body.should.have.property('_admin_id').and.be.equal(''+setup.admin._id);
             res.body.should.have.property('template').and.be.instanceof(Object);
             done();
           });
@@ -151,7 +93,7 @@ describe('Forms', function(){
     describe('GET /api/form/template/company/:id', function(){
       it('Should respond with company template data', function(done){
         request(url)
-          .get('/api/form/template/company/' + admin._id)
+          .get('/api/form/template/company/' + setup.admin._id)
           .query({email: email, token: token})
           .end(function(err, res){
             res.body.should.have.property('_id');
@@ -192,7 +134,7 @@ describe('Forms', function(){
           .post('/api/form/patient')
           .query({email: email, token: token})
           .send({
-            _admin_id: admin._id,
+            _admin_id: setup.admin._id,
             form: submittedForm,
             firstName: "Jimbo",
             lastName: "Cruise",
@@ -202,7 +144,7 @@ describe('Forms', function(){
             //console.log(err);
             //console.log(res);
             res.body.should.have.property('form').and.be.instanceof(Object);
-            res.body.should.have.property('_admin_id').and.be.equal(''+admin._id);
+            res.body.should.have.property('_admin_id').and.be.equal(''+setup.admin._id);
             submittedFormId = res.body._id;
             done();
           });
@@ -232,17 +174,8 @@ describe('Forms', function(){
   });
 
   after(function() {
-    describe("Clear Admins", function() {
-      it("should clear the admin table", function(done) {
-        AdminUser.remove({}, function(err) {
-          if(err)
-            throw(err);
-
-          done();
-        });
-      });
-    });
-  });
+    AdminHandler.clearAdmin(url, setup);
+  })
 
 });
 /********** PATIENT FORM TESTING **********/
@@ -373,8 +306,9 @@ describe('Submitted Patient Form', function(){
 
   var url = "localhost:" + config.port;
 
-  describe('Create User', setupUser);
-
+  before(function() {
+    AdminHandler.setupUser(url, setup);
+  });
   describe('POST /api/form/patient', function(){
     it('should save submitted form', function(done){
       request(url)
@@ -419,16 +353,9 @@ describe('Submitted Patient Form', function(){
     });
   });
 
-  describe("Clear Admins", function() {
-    it("should clear the admin table", function(done) {
-      AdminUser.remove({}, function(err) {
-        if(err)
-          throw(err);
-
-        done();
-      });
-    });
-  });
+  after(function() {
+    AdminHandler.clearAdmin(url, setup);
+  })
 
 
 });
