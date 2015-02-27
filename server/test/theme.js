@@ -4,6 +4,7 @@ var Theme = require('../models/Theme');
 var config = require('../config/config');
 var request = require('supertest');
 
+//Schema Test
 describe('Theme Settings Model', function() {
     it('should create(POST) a new setting', function(done) {
         var theme = new Theme({
@@ -71,6 +72,8 @@ describe('Theme Settings Model', function() {
     });
 
 });
+
+//Route Tests need to be changed to work with auth
 
 /*
 describe('POST /api/:user_id/theme', function() {
