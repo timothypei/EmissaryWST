@@ -114,7 +114,7 @@ gulp.task('frontend',['serve:frontend'], function() {
 
 /* This will run our mocha tests */
 gulp.task('test', function(){
-   return gulp.src('./server/test/*.spec.js', {read: false})
+   return gulp.src('./server/test/*.js', {read: false})
     .pipe(mocha({reporter: 'spec'}))
     .pipe(exit());
 });
