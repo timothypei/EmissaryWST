@@ -7,7 +7,7 @@
 var mongoose = require('mongoose');
 var Schema =  mongoose.Schema;
 
-//Schema for user Patient settings
+//Schema for Patient in the queue
 var PatientSchema   = new Schema({
     user_id: String,//Company/Hospital ID
     name: String,
