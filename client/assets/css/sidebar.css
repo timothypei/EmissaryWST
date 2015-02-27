@@ -6,6 +6,9 @@
 	background-color: #434343;
 }
 
+ul.sidebar {
+	margin-top:-5px;
+}
 
 ul.sidebar li a{
 	color:#f7f7f7;
@@ -13,9 +16,12 @@ ul.sidebar li a{
 
 ul.sidebar .sidebar-title{
 	color:#8b9dc3;
+
 }
 
 ul.sidebar .sidebar-list a{
+	font-family: "Myriad Pro Regular";
+
 	color:#f7f7f7;
 }
 
@@ -34,6 +40,8 @@ ul.sidebar .sidebar-profile .sidebar-profile-img {
 }
 
 ul.sidebar .sidebar-profile {
+	font-family: "Myriad Pro Regular";
+	font-weight: normal;
 	height: 50px;
 	margin-left:20px;
 	position: absolute;
