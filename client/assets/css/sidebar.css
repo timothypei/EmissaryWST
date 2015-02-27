@@ -16,12 +16,10 @@ ul.sidebar li a{
 
 ul.sidebar .sidebar-title{
 	color:#8b9dc3;
-
 }
 
 ul.sidebar .sidebar-list a{
 	font-family: "Myriad Pro Regular";
-
 	color:#f7f7f7;
 }
 
@@ -29,9 +27,8 @@ ul.sidebar .sidebar-list a{
 	margin-left:5em;
 }
 
-ul.sidebar .sidebar-list a:hover .menu-icon {
+ul.sidebar .sidebar-list a:hover .menu-icon.enabled {
 	width: 60px;
-
 }
 
 ul.sidebar .sidebar-list a:hover .arrow-left {
