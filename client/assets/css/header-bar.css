@@ -22,6 +22,11 @@
  text-decoration: none;
 }
 
+.navbar#navigation {
+  border-bottom: 5px solid #e99d1a;
+
+}
+
 
 ul.topbar-right {
   float:right;
