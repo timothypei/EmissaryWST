@@ -29,6 +29,21 @@ ul.sidebar .sidebar-list a{
 	margin-left:5em;
 }
 
+ul.sidebar .sidebar-list a:hover .menu-icon {
+	width: 60px;
+
+}
+
+ul.sidebar .sidebar-list a:hover .arrow-left {
+	float:right;
+	width: 0; 
+	height: 0;
+	margin-top: 10px;
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent; 
+	border-right:10px solid rgb(243, 243, 243); 
+}
+
 
 /* Bottom Profile Page */
 
