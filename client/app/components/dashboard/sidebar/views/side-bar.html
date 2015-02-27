@@ -9,27 +9,27 @@
       </li>
       <!--<li class="sidebar-title"><span>NAVIGATION</span></li>-->
       <li class="sidebar-list">
-        <a href="#">Home 
+        <a href="#/dashboard">Home 
           <span ng-show="toggle" class="arrow-left"></span>
-          <span class="menu-icon fa fa-users" ng-class="{enabled: !$toggle}"></span>
+          <span class="menu-icon fa fa-users" ng-class="{enabled: toggle, disabled: !toggle}"></span>
         </a>
       </li>
       <li class="sidebar-list">
-        <a href="#">Forms 
+        <a href="#/dashboard">Forms 
           <span ng-show="toggle" class="arrow-left"></span>
-          <span class="menu-icon fa fa-check-square-o" ng-class="{enabled: !$toggle}"></span>
+          <span class="menu-icon fa fa-check-square-o" ng-class="{enabled: toggle, disabled: !toggle}"></span>
         </a>
       </li>
       <li class="sidebar-list"> 
-        <a href="#">Employees 
+        <a href="#/doctors">Employees 
           <span ng-show="toggle" class="arrow-left"></span>
-          <span class="menu-icon fa fa-user" ng-class="{enabled: !$toggle}"></span>
+          <span class="menu-icon fa fa-user" ng-class="{enabled: toggle, disabled: !toggle}"></span>
         </a> 
       </li>
       <li class="sidebar-list">
-        <a href="#">Settings 
+        <a href="#/dashboard">Settings 
           <span ng-show="toggle" class="arrow-left"></span>
-          <span class="menu-icon fa fa-cog" ng-class="{enabled: !$toggle}"></span>
+          <span class="menu-icon fa fa-cog" ng-class="{enabled: toggle, disabled: !toggle}"></span>
         </a> 
       </li>
       <li class="sidebar-profile">

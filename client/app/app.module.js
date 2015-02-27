@@ -6,9 +6,13 @@ angular.module('robobetty', ['ui.router',
 
   .config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/dashboard');
 
     $stateProvider
+      .state('common',{
+        templateUrl: 'views/components/dashboard/views/dashboard.html',
+        abstract: true
+      })
       .state('home', {
         url: '/home',
         templateUrl: 'views/components/home/views/home.html'
@@ -17,12 +21,14 @@ angular.module('robobetty', ['ui.router',
         url: '/product',
         templateUrl: 'views/components/product/views/product.html'
       })
-      .state('dashboard',{
-        url:'/dashboard',
-        templateUrl: 'views/components/dashboard/views/dashboard.html'
+      .state('dashboard', {
+        url: '/dashboard',
+        template: '',
+        parent: 'common'
       })
       .state('doctors', {
         url: '/doctors',
-        templateUrl: 'views/components/dashboard/doctors/views/doctors.html'
+        templateUrl: 'views/components/dashboard/doctors/views/doctors.html',
+        parent: 'common'
       })
   });

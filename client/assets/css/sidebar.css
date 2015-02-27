@@ -27,8 +27,14 @@ ul.sidebar .sidebar-list a{
 	margin-left:5em;
 }
 
+
+/*Adding Arrows to the page*/
 ul.sidebar .sidebar-list a:hover .menu-icon.enabled {
 	width: 60px;
+}
+
+ul.sidebar .sidebar-list a:hover .menu-icon.disabled {
+	width: 70px;
 }
 
 ul.sidebar .sidebar-list a:hover .arrow-left {
@@ -41,9 +47,7 @@ ul.sidebar .sidebar-list a:hover .arrow-left {
 	border-right:10px solid rgb(243, 243, 243); 
 }
 
-
 /* Bottom Profile Page */
-
 ul.sidebar .sidebar-profile .sidebar-profile-img {
 	width: 50px;
 	height: 100%;
