@@ -8,7 +8,7 @@ var router = express.Router();
 var bodyparser = require('body-parser');
 var urlparser = bodyparser.urlencoded({extended: false});
 
-router.post("/api/patient/checkin", controller.checkin);
+router.post("/checkin", controller.checkin);
 /*router.get('/template/company/:id', controller.template.findByCompanyId);
 router.post('/template', controller.template.create);
 router.put('/template', controller.template.update)
