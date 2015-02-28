@@ -13,9 +13,9 @@ var router = express.Router();
  */
 var cors = require('cors');
 
-var Employee = require('../models/Employee');
+var Employee = require('../../models/Employee');
 
-router.get('/employee', cors(), function(req, res) {
+exports.getAllEmployees = function(req, res) {
   Employee.find({}, function(err, result) {
     if(err){
       res.status(400).send('There was a problem fetching all of the users');
@@ -23,9 +23,9 @@ router.get('/employee', cors(), function(req, res) {
     }
     return res.json(result);
   });
-});
+};
 
-router.get("/employee/:id", function(req, res) {
+exports.getAllEmployees = function(req, res) {
    Employee.findById(req.params.id, function(err, employee) {
       if(err) {
         return res.json(err);
@@ -33,9 +33,9 @@ router.get("/employee/:id", function(req, res) {
         return res.json(employee);
       }
     });
-});
+};
 
-router.post("/employee", function(req, res) {
+exports.getById = function(req, res) {
   var employee;
   if(!req.body.name || !req.body.email || !req.body.phone_number || !req.body._admin)
     return res.status(400).json({error: "Please specify name, email, phone_number, and _admin_id"})
@@ -52,9 +52,9 @@ router.post("/employee", function(req, res) {
     }
   });
   return res.send(employee);
-});
+};
 
-router.put("/employee/:id", function(req, res) {
+exports.update = function(req, res) {
     Employee.findById(req.params.id, function (err, employee) {
       if(err)
          res.json(err);
@@ -71,9 +71,9 @@ router.put("/employee/:id", function(req, res) {
       });
       return res.send(employee);
    });
-});
+};
 
-router.delete("/employee/:id", function(req, res) {
+exports.delete = function(req, res) {
   return Employee.findById(req.params.id, function(err, employee) {
     return employee.remove(function(err) {
       if(err) {
@@ -83,6 +83,4 @@ router.delete("/employee/:id", function(req, res) {
       }
     });
   });
-});
-
-module.exports = router;
+};

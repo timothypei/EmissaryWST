@@ -3,8 +3,20 @@ var request = require('supertest');
 var config = require('../config/config');
 
 var AdminUser = require('../models/Authmodel');
+var Employee = require('../models/Employee');
+
+function setupEmployee(done) {
+  setupAdmin(done, true);
+}
 
 function setupAdmin(done) {
+  setupUser(done, false);
+}
+
+function setupUser(done, isEmployee) {
+  var path = isEmployee ? '/employee' : '/auth';
+  var UserModel = isEmployee ? Employee : AdminUser;
+
   var token;
   var admin;
 
@@ -13,7 +25,7 @@ function setupAdmin(done) {
 
   var url = "localhost:" + config.port;
   request(url)
-    .post('/auth/signup')
+    .post(path+'/signup')
     .send({
       email: email,
       password: password
@@ -27,7 +39,7 @@ function setupAdmin(done) {
 
   function login() {
     request(url)
-      .post('/auth/login')
+      .post(path+'/login')
       .send({
         email: email,
         password: password
@@ -66,7 +78,15 @@ function cleanupAuth(email, callback) {
   });
 }
 
-function configureAuth(test_suite) {
+function cleanEmployee(email, callback) {
+  Employee.remove({email: email}, function(err) {
+    if(err)
+      throw(err);
+    callback();
+  });
+}
+
+/*function configureAuth(test_suite) {
 	var url = "localhost:" + config.port;
 
 	var email = "test@test.com";
@@ -141,9 +161,10 @@ function configureAuth(test_suite) {
     });
   });
 
-};
+};*/
 
 module.exports.setupAdmin = setupAdmin;
+module.exports.setupEmployee = setupEmployee;
 module.exports.cleanupAuth = cleanupAuth;
 
 //module.exports = configureAuth;

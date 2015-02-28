@@ -12,10 +12,11 @@ module.exports = function(app) {
 //app.use('/api/product'      , r('./routes/product'));
   app.use('/api/form'         , r('./routes/form'));
 //app.use('/api/theme'        , r('./routes/theme'));
-//app.use('/api/employee'     , r('./routes/employee'));
+  app.use('/api/employee'     , r('./routes/employee'));
 
   //app.use('/auth'             , r('./routes/auth'));
   //app.use('/api/*'            , r('./config/validation'));
+  app.use('/employee'           , r('./routes/employee/auth'))
 
   // All other routes should redirect to the index.html
   /*app.route('/*')

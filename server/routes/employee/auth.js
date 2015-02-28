@@ -2,7 +2,7 @@
 
 /*
  * This module is meant to house all of the API
- * routes that pertain to authentication of admins
+ * routes that pertain to authentication of employees
  */
 var express = require('express');
 var router = express.Router();
@@ -13,49 +13,33 @@ var router = express.Router();
  */
 var cors = require('cors');
 
-var Authmodel = require('../models/Authmodel');
+router.post('/signup', signupEmployee);
+router.post('/login', loginEmployee);
+
+var Employee = require('../../models/Employee');
 var jwt = require('jwt-simple');
 
-router.post('/signup', function(req, res) {
+function signupEmployee(req, res) {
   //Put them into the database
-  var admin = new Authmodel();
-  admin.email = req.body.email;
-  admin.password = admin.generateHash(req.body.password);
-  admin.token = jwt.encode(req.body.email, admin.generateHash(new Date().getTime()));
+  var b = req.body;
+  if(!b.name || !b.email || !b.password)
+    return res.status(400).json({error: "Please provide employee's name, email, and password"})
+
+  var employee = new Employee();
+  employee.name = req.body.name;
+  employee.email = req.body.email;
+  employee.phone_number = req.body.phone_number
+  employee.password = employee.generateHash(req.body.password);
+  employee.token = jwt.encode(req.body.email, employee.generateHash(new Date().getTime()));
   // save the user
-  admin.save(function(err) {
+  employee.save(function(err) {
     if(err)
       return res.status(400).send(err);
     return res.sendStatus(200);
   });
-});
+};
 
-router.post('/login', function(req, res) {
-  //Give them a token
-  // find a user whose email is the same as the forms email
-  // we are checking to see if the user trying to login already exists
-  Authmodel.findOne({email: req.body.email}, function(err, user) {
-    // if there are any errors, return the error before anything else
-    if(err || !user)
-      return res.status(400).send(err);
-
-
-    // if the user is found but the password is wrong
-    if(!user.validPassword(req.body.password))
-      return res.status(401).send('loginMessage', 'Oops! Wrong password');
-
-    var newToken = jwt.encode(req.body.email, user.generateHash(new Date().getTime()));
-    user.token = newToken;
-    user.save(function(err) {
-      if(err)
-        return res.status(400);
-      return res.json({token: newToken});
-    });
-
-  });
-});
-
-router.post('/login/employee', function(req, res) {
+function loginEmployee(req, res) {
   //Give them a token
   // find a user whose email is the same as the forms email
   // we are checking to see if the user trying to login already exists
@@ -78,7 +62,6 @@ router.post('/login/employee', function(req, res) {
     });
 
   });
-});
-
+};
 
 module.exports = router;

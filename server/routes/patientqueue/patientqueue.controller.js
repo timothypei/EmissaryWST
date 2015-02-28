@@ -1,24 +1,36 @@
 /**
- * Created by xxvii27 on 2/27/15.
+ * Created by xxvii27 and DylanMoz(Dylan Mozlowski) on 2/27/15.
  */
 
 //Import Resources and Libs
 var express = require('express');
 var router = express.Router();
-var cors = require('cors');
-var Patient = require('../models/Patient');
 var io = require('socket.io');//Socket IO
 
-//Routes
+var PatientQueue = require('../models/PatientQueue');
 
-//Patient Checked In to the Queue
-router.post("/:user_id/patient", function(req, res) {
-
-    var patient = new Patient({
-        user_id: req.params.user_id,
+// This route will be called when the patient checks in
+exports.checkin = function(req, res) {
+    if(!(req.body._admin_id && req.body.name))
+    var patient = {
+        _admin_id: req.body._admin_id,
         name: req.body.name,
-        doctor: req.body.doctor
-    });
+        _doctor_id: req.body._doctor_id,
+        checkin_time: new Date()
+    };
+
+    PatientQueue.findByIdAndUpdate(req.body._admin_id,
+        {$push: {"patients": patient}},
+        {safe: true, upsert: true}, 
+        function(err, queue) {
+            if(err)
+                res.status(400).json({error: "an error occured while checking in"});
+            
+            // Send emails connect to socket
+
+            res.json({queue: queue});
+        }
+    );
 
     patient.save(function(err){
         if(err)
@@ -27,7 +39,7 @@ router.post("/:user_id/patient", function(req, res) {
 
     return res.send(patient);
 });
-
+/*
 //Get all Patients in the hospital
 router.get('/:user_id/patient', function(req, res){
     Patient.find({}, function(err, result) {
@@ -77,7 +89,7 @@ router.delete("/:user_id/patient/:patient_id", function(req, res) {
 
 
 
-
+*/
 
 
 

@@ -9,11 +9,9 @@ var patient   = new Schema({
     checkin_time: { type : Date, default: Date.now },
 });
 
-
 var patientQueue = new mongoose.Schema({
-  queue : {type: [patient]},
+  patients : {type: [patient]},
   _admin_id: { type: Schema.Types.ObjectId, ref: 'Admin', required: true }
-
 });
 
 module.exports = mongoose.model('PatientQueue', patientQueue);

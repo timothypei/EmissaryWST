@@ -8,10 +8,10 @@ var port = process.env.PORT || 3000;
 /********** Socket IO Module **********/
 exports.createServer = function(app) {
     server = require('http').createServer(app);
-    io = require('socket.io')(server);
+    io = require('socket.io').listen(server)
 
-    /* Initialize the server */
-    server.listen(port, function () {
+    // /* Initialize the server */
+    server.listen(app.get('port'), function () {
       console.log('Server listening at port %d', port);
     });
 
@@ -21,6 +21,10 @@ exports.createServer = function(app) {
 /*
  * A function that allows you to notify all clients that
  * the queue has been updated.
+ *
+ * The client side needs to be listening for the 'queue_updated' event. When
+ * this event is triggered, the client side can retrieve the whole queue of
+ * patients to reflect the changes.
  */
 exports.notifyNewQueue = function(adminID, queue) {
     io.to(adminID).emit('queue_updated', queue);
