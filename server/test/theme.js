@@ -2,7 +2,7 @@ var chai = require('chai');
 var should = chai.should();
 var Theme = require('../models/Theme');
 var config = require('../config/config');
-var ConfigureAuth = require('./server/test/ConfigureAuth.js');
+var ConfigureAuth = require('./ConfigureAuth.js');
 var request = require('supertest');
 
 //Schema Test
