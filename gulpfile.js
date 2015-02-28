@@ -66,7 +66,7 @@ gulp.task('copy:assets', function () {
 });
 
 /* This will create concatenate all our angular
- * code into one file the bundle.js and palce it
+ * code into one file the bundle.js and place it
  * in the dist folder
  */
 gulp.task('concat', function() {
@@ -113,6 +113,29 @@ gulp.task('frontend',['serve:frontend'], function() {
   gulp.watch('./client/assets/**', ['copy:assets']);
 });
 
+
+/**** Testing gulp-nodemon ****/
+var nodemon = require('gulp-nodemon');
+gulp.task('watch', function() {
+  gulp.watch(['./server/**/*.js', '!./server/test/**/*.js']);
+});
+
+gulp.task('demon', function() {
+  nodemon({
+    script: './server/app.js',
+    ext: 'js',
+    ignore: ['./server/test/**/*.js']
+  })
+    .on('start', ['watch'])
+    .on('change', ['watch'])
+    .on('restart', function() {
+      consol.log('Restarted.');
+    });
+});
+/**** end gulp-nodemon test ****/
+
+
+
 /* Serve the server using node foreman */
 gulp.task('serve:backend', function () {
   run('nf start web').exec()
@@ -126,7 +149,7 @@ gulp.task('backend', ['serve:backend'], function() {
 });
 
 /* This will run our mocha tests */
-gulp.task('test', function(){
+gulp.task('test', function() {
    return gulp.src('./server/test/*.js', {read: false})
     .pipe(mocha({reporter: 'spec'}))
     .pipe(exit());
@@ -151,4 +174,4 @@ gulp.task('build:dev', ['dist']);
 gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlify']);
 
 /* The default task */
-gulp.task('default', ['build:dev']);
+gulp.task('default', ['demon']);
