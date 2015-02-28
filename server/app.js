@@ -57,6 +57,8 @@ var form = require('./routes/form/form');
 var theme = require('./routes/theme');
 var employee = require ('./routes/employee');
 var auth = require('./routes/auth');
+var patient = require('./routes/patient');
+
 
 app.use(home);
 app.use('/auth', auth);
@@ -66,6 +68,7 @@ app.use('/api', product);
 app.use('/api', form);
 app.use('/api', theme);
 app.use('/api', employee);
+app.use('/api', patient);
 
 /*
  * Error Handler.
