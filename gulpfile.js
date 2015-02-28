@@ -174,4 +174,4 @@ gulp.task('build:dev', ['dist']);
 gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlify']);
 
 /* The default task */
-gulp.task('default', ['demon']);
+gulp.task('default', ['build:dev']);
