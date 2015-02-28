@@ -9,7 +9,8 @@ var mongoose = require('mongoose');
 var employeeSchema = mongoose.Schema({
   name: String,
   email: String,
-  phone_number: String
+  phone_number: String,
+   _admin_id: { type: Schema.Types.ObjectId, ref: 'AdminUser', required: true }
 });
 
 
