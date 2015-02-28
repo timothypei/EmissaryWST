@@ -160,10 +160,18 @@ var submittedForm = {
 };
 
 
-ConfigureAuth(
-  function(credentials, exit) {
-
+describe("Forms", function() {
     var url = "localhost:" + config.port;
+
+    var credentials;
+
+    before(function(done) {
+      ConfigureAuth.setupAdmin(function(cred) {
+        credentials = cred;
+        done();
+      });
+    });
+
 
     /********** TEMPLATE TESTING **********/
 
@@ -291,8 +299,8 @@ ConfigureAuth(
     });
     
 
-    after(function() {
-      exit();
+    after(function(done) {
+      ConfigureAuth.cleanupAuth(credentials.email, done);
     });
 
   }

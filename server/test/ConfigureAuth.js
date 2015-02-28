@@ -4,7 +4,67 @@ var config = require('../config/config');
 
 var AdminUser = require('../models/Authmodel');
 
+function setupAdmin(done) {
+  var token;
+  var admin;
 
+  var email = "test@test.com";
+  var password = "test_password";
+
+  var url = "localhost:" + config.port;
+  request(url)
+    .post('/auth/signup')
+    .send({
+      email: email,
+      password: password
+    })
+    .expect(200)
+    .end(function(err){
+      if(err)
+        throw(err);
+      login();
+    }); 
+
+  function login() {
+    request(url)
+      .post('/auth/login')
+      .send({
+        email: email,
+        password: password
+      })
+      .expect(200)
+      .end(function(err,res){
+        if(err)
+          throw(err);
+        res.body.should.have.property('token');
+        token = res.body.token;
+        retrieveAdmin();
+      });
+  }
+
+  function retrieveAdmin() {
+    AdminUser.findOne({email: email}, function(err, dbAdmin) {
+      if(err)
+        throw(err);
+      admin = dbAdmin;
+      done({
+        admin: admin,
+        email: email,
+        password: password,
+        token: token
+      });
+    });
+  };
+    
+}
+
+function cleanupAuth(email, callback) {
+  AdminUser.remove({email: email}, function(err) {
+    if(err)
+      throw(err);
+    callback();
+  });
+}
 
 function configureAuth(test_suite) {
 	var url = "localhost:" + config.port;
@@ -83,4 +143,7 @@ function configureAuth(test_suite) {
 
 };
 
-module.exports = configureAuth;
+module.exports.setupAdmin = setupAdmin;
+module.exports.cleanupAuth = cleanupAuth;
+
+//module.exports = configureAuth;

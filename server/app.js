@@ -77,7 +77,7 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode',
     app.get('port'),
     app.get('env'));
-	app.use(logger(process.env.MORGAN_LOG_LEVEL || 'dev'));
+	app.use(logger('dev'));
 });
 
 module.exports = app;
