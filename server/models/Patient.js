@@ -9,10 +9,10 @@ var Schema =  mongoose.Schema;
 
 //Schema for Patient in the queue
 var PatientSchema   = new Schema({
-    user_id: String,//Company/Hospital ID
+    _admin_id: { type: Schema.Types.ObjectId, ref: 'Admin', required: true },//Company/Hospital ID
     name: String,
-    doctor: String,//Doctor to see
-    time: { type : Date, default: Date.now }
+    _doctor_id: { type: Schema.Types.ObjectId, ref: 'Employee', required: false },//Doctor to see
+    checkin_time: { type : Date, default: Date.now },
 });
 
 //Export schema
