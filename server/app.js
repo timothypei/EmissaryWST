@@ -12,7 +12,7 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
-var socketIOServer = require('./socket/socket');
+var socketIO = require('./socket/socket');
 
 /*
  * MongoDb configuration.
@@ -24,7 +24,11 @@ var validate = require('./config/validation');
  * Create Express server.
  */
 var app = express();
-var server = socketIOServer.createSocket(app);
+
+/*
+ * Create Socket.io server.
+ */
+var server = socketIO.createServer(app);
 
 /*
  * Connect to MongoDB.

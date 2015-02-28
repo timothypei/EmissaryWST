@@ -1,21 +1,46 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./patientQueue.controller');
 var server;
-var io = controller.createIO(server)
+var io = require('socket.io')();
 var port = process.env.PORT || 3000;
 
-var bodyparser = require('body-parser');
-var urlparser = bodyparser.urlencoded({extended: false});
-
-exports.createSocket = function(app) {
+/********** Socket IO Module **********/
+exports.createServer = function(app) {
     server = require('http').createServer(app);
+    io = require('socket.io')(server);
+
+    /* Initialize the server */
+    server.listen(port, function () {
+      console.log('Server listening at port %d', port);
+    });
+
+    return server;
 }
 
-server.listen(port, function () {
-  console.log('Server listening at port %d', port);
-});
+/*
+ * A function that allows you to notify all clients that
+ * the queue has been updated.
+ */
+exports.notifyNewQueue = function(adminID, queue) {
+    io.to(adminID).emit('queue_updated', queue);
+}
+
+/*
+ * A function that allows you to notify all clients that
+ * a patient has been added to the queue.
+ */
+exports.notifyPatientAdded = function(adminID, patient) {
+    io.to(adminID).emit('patient_added', patient);
+}
+
+/*
+ * A function that allows you to notify all clients that
+ * a patient has been removed from the queue.
+ */
+exports.notifyPatientRemoved = function(adminID, patient) {
+    io.to(adminID).emit('patient_removed', patient);
+}
 
 /*
  * Set up a custom namespace.
@@ -25,48 +50,27 @@ server.listen(port, function () {
  */
 var nsp = io.of('/patientQueue');
 
-/*
- * Registers a middleware, which is a function that gets executed for
- * every incoming Socket and receives as parameter the socket and a
- * function to optionally defer execution to the next registered
- * middleware.
- */
-io.use(function(socket, next){
-  if (socket.request.headers.cookie) return next();
-  next(new Error('Authentication error'));
-});
+// To be used with authorization.
+// io.set('authorization', socketioJwt.authorize({
+//   secret: jwtSecret,
+//   handshake: true
+// }));
 
 /*
  * This handles the 'connection' event, which is send when the user is
  * trying to connect a socket.
+ *
+ * Note that when the connection is established for that client,
+ * the '_admin_id' needs to be set so that the client can be added to the
+ * room and notified when changes are being made.
  */
 io.on('connection', function (socket) {
     // Get the ID of the admin that has connected.
-    var _admin_id = 1;
+    var adminID;
 
-    // when the client emits 'add patient', this listens and executes
-    // Patient is expected to be a JSON object of a Patient model.
-    socket.on('add_patient', function (patient) {
-
-      // We want to add this patient to the queue.
-      // Return the Json object back.
-
-      // echo globally (all clients) that a person has connected
-      socket.broadcast.to(_admin_id).emit('patient_added', patient);
+    socket.get('_admin_id', function (err, _admin_id) {
+        socket.join(_admin_id);
     });
 
-    // when the client emits 'add user', this listens and executes
-    socket.on('remove_patient', function (patient) {
-      patientId = patient._id;
-
-      // Get the user removed from the database.
-
-      // echo globally (all clients) that a person has connected
-      // TODO: Make sure that this emits only to the users on this socket.
-      socket.broadcast.to(_admin_id).emit('patient_removed', removedPatient);
-    });
-
-    socket.join(_admin_id);
+    Console.log(adminID);
 });
-
-module.exports = server;
