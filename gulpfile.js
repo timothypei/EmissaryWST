@@ -10,7 +10,8 @@ var connect = require('gulp-connect'),
     exit = require('gulp-exit'),
     wiredep = require('wiredep').stream,
     htmlify = require('gulp-angular-htmlify'),
-    ngAnnotate = require('gulp-ng-annotate');
+    ngAnnotate = require('gulp-ng-annotate'),
+    run = require('gulp-run');
 
 gulp.task('lint', function() {
   return gulp.src(['./server/**/*.js','./client/app/**/*.js'])
@@ -110,6 +111,18 @@ gulp.task('frontend',['serve:frontend'], function() {
   gulp.watch('./client/bower_components', ['copy:bower-components', 'bower']);
   gulp.watch(['./client/index.html', './client/app/**/*'], ['concat', 'copy:views', 'bower']);
   gulp.watch('./client/assets/**', ['copy:assets']);
+});
+
+/* Serve the server using node foreman */
+gulp.task('serve:backend', function () {
+  run('nf start web').exec()
+    .pipe(gulp.dest('./server/log'));
+});
+
+/* Watch server files for change */
+gulp.task('backend', ['serve:backend'], function() {
+  gulp.watch(['./server/**/*.js',
+              '!./server/test/**/*.js'], ['serve:backend']);
 });
 
 /* This will run our mocha tests */
