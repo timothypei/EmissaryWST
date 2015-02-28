@@ -37,10 +37,13 @@ router.get("/employee/:id", function(req, res) {
 
 router.post("/employee", function(req, res) {
   var employee;
+  if(!req.body.name || !req.body.email || !req.body.phone_number || !req.body._admin)
+    return res.status(400).json({error: "Please specify name, email, phone_number, and _admin_id"})
   employee = new Employee({
     name: req.body.name,
     email: req.body.email,
-    phone_number: req.body.phone_number
+    phone_number: req.body.phone_number,
+    _admin_id: req.body._admin_id
   });
 
   employee.save(function(err) {
@@ -56,8 +59,10 @@ router.put("/employee/:id", function(req, res) {
       if(err)
          res.json(err);
  
-      employee.email = req.body.email;
-      employee.phone_number = req.body.phone_number;
+      employee.name = req.body.name || employee.name;
+      employee.email = req.body.email || employee.email;
+      employee.phone_number = req.body.phone_number || employee.email;
+      employee._admin_id = req.body._admin_id || employee._admin_id;
 
       employee.save(function(err) {
         if(err) {
