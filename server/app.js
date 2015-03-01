@@ -12,6 +12,10 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
+var fs = require('fs');
+
+
+var LogStream = fs.createWriteStream(__dirname + '/logging.log', {flags: 'a'});
 
 /*
  * MongoDb configuration.
@@ -77,6 +81,7 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode',
     app.get('port'),
     app.get('env'));
+    app.use(logger('dev', { stream: LogStream }));
 	app.use(logger('dev'));
 });
 
