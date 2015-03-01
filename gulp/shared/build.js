@@ -1,11 +1,9 @@
-var gulp = require('gulp');
-
-
-var   uglify = require('gulp-uglify'),
+var uglify = require('gulp-uglify'),
     minifyCSS = require('gulp-minify-css'),
     htmlify = require('gulp-angular-htmlify'),
     ngAnnotate = require('gulp-ng-annotate');
-    
+
+var gulp = require('gulp');
 
 gulp.task('htmlify', ['copy:views'],function(){
   return gulp.src('./dist/**/*.html')
@@ -33,6 +31,8 @@ gulp.task('minify:js', ['ng-annotate'], function() {
     .pipe(gulp.dest('./dist/'))
 });
 
+/* Build the app without minification */
+gulp.task('build:dev', ['dist']);
 
 /* Build the app and minfy */
 gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlify']);
