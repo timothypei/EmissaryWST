@@ -11,11 +11,20 @@ var connect = require('gulp-connect'),
     wiredep = require('wiredep').stream,
     htmlify = require('gulp-angular-htmlify'),
     ngAnnotate = require('gulp-ng-annotate');
+    
+gulp.task('lint-server', function() {
+  return gulp.src(['./server/**/*.js'])
+    .pipe(jshint('./server/.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
+});
 
-gulp.task('lint', function() {
-  return gulp.src(['./server/**/*.js','./client/app/**/*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+
+gulp.task('lint-client', function() {
+  return gulp.src(['./client/app/**/*.js'])
+    .pipe(jshint('./client/.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
 });
 
 /* Remove the generated dist */
@@ -123,7 +132,8 @@ gulp.task('test', function(){
  * That is ready to serve by our backend
  */
 gulp.task('dist', [
-    'lint',
+    'lint-server',
+    'lint-client',
     'concat',
     'copy:bower-components',
     'bower',
