@@ -55,5 +55,30 @@ router.post('/login', function(req, res) {
   });
 });
 
+router.post('/login/employee', function(req, res) {
+  //Give them a token
+  // find a user whose email is the same as the forms email
+  // we are checking to see if the user trying to login already exists
+  Employee.findOne({email: req.body.email}, function(err, user) {
+    // if there are any errors, return the error before anything else
+    if(err || !user)
+      return res.status(400).send(err);
+
+
+    // if the user is found but the password is wrong
+    if(!user.validPassword(req.body.password))
+      return res.status(401).send('loginMessage', 'Oops! Wrong password');
+
+    var newToken = jwt.encode(req.body.email, user.generateHash(new Date().getTime()));
+    user.token = newToken;
+    user.save(function(err) {
+      if(err)
+        return res.status(400);
+      return res.json({token: newToken});
+    });
+
+  });
+});
+
 
 module.exports = router;

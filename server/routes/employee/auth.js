@@ -16,7 +16,7 @@ var cors = require('cors');
 router.post('/signup', signupEmployee);
 router.post('/login', loginEmployee);
 
-var Employee = require('../models/Employee');
+var Employee = require('../../models/Employee');
 var jwt = require('jwt-simple');
 
 function signupEmployee(req, res) {
@@ -37,7 +37,7 @@ function signupEmployee(req, res) {
       return res.status(400).send(err);
     return res.sendStatus(200);
   });
-});
+};
 
 function loginEmployee(req, res) {
   //Give them a token
@@ -62,7 +62,6 @@ function loginEmployee(req, res) {
     });
 
   });
-});
-
+};
 
 module.exports = router;
