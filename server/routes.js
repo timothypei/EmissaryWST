@@ -12,6 +12,7 @@ module.exports = function(app) {
 //app.use('/api/product'      , r('./routes/product'));
   app.use('/api/form'         , r('./routes/form'));
   app.use('/api/email'        , r('./routes/email'));
+  app.use('/api/text'         , r('./routes/text'));
 //app.use('/api/theme'        , r('./routes/theme'));
 //app.use('/api/employee'     , r('./routes/employee'));
 

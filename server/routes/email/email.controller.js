@@ -26,7 +26,7 @@ var mailOptions = {
 }
 
 exports.template.sendEmail = function(req, res) {
-  console.log("hello");
+  console.log("sending email");
 
   // send mail with defined transport object
   transporter.sendMail(mailOptions, function(error, info){
@@ -36,13 +36,5 @@ exports.template.sendEmail = function(req, res) {
         console.log('Message sent: ' + info.response);
     }
   });
- /* smtpTransport.sendMail(mailOptions, function(error, response){
-    if(error){
-        console.log(error);
-    }else{
-        console.log("Message sent: " + response.message);
-    }
 
-    smtpTransport.close();
-  }); */
 };

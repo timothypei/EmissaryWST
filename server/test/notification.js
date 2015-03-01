@@ -4,7 +4,7 @@ var config = require('../config/config');
 var ConfigureAuth = require('./ConfigureAuth');
 
 
-describe("Email", function() {
+describe("Notification", function() {
     var url = "localhost:" + config.port;
 
     var credentials;  // variable to hold all the need authentication variables.
@@ -22,10 +22,19 @@ describe("Email", function() {
 
 
     describe('POST /api/email/sendEmail', function(){
-      console.log("bye");
       it('It should send an email', function(done){
         request(url)
         .post('/api/email/sendEmail')
+        .end(function(err, res){
+          done();
+        });
+      });
+    });
+
+   describe('POST /api/text/sendText', function(){
+      it('It should send an email', function(done){
+        request(url)
+        .post('/api/text/sendText')
         .end(function(err, res){
           done();
         });
