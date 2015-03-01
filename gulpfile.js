@@ -11,7 +11,8 @@ var connect = require('gulp-connect'),
     wiredep = require('wiredep').stream,
     htmlify = require('gulp-angular-htmlify'),
     ngAnnotate = require('gulp-ng-annotate'),
-    run = require('gulp-run');
+    nodemon = require('gulp-nodemon'),
+    shell = require('gulp-shell');
 
 gulp.task('lint', function() {
   return gulp.src(['./server/**/*.js','./client/app/**/*.js'])
@@ -114,39 +115,29 @@ gulp.task('frontend',['serve:frontend'], function() {
 });
 
 
-/**** Testing gulp-nodemon ****/
-var nodemon = require('gulp-nodemon');
-gulp.task('watch', function() {
-  gulp.watch(['./server/**/*.js', '!./server/test/**/*.js']);
-});
-
-gulp.task('demon', function() {
+/* Serve the server. gulp-nodemon is used for automatic
+ * restarting upon changes to *.js files, excluding tests.
+ * Note: do not start directories with ./ in watch and ignore
+ */
+gulp.task('backend', function() {
   nodemon({
-    script: './server/app.js',
-    ext: 'js',
-    ignore: ['./server/test/**/*.js']
+    script: 'server/app.js',
+    watch: ['server/**/*.js'],
+    ignore: ['server/test/**/*.js']
   })
-    .on('start', ['watch'])
-    .on('change', ['watch'])
     .on('restart', function() {
-      consol.log('Restarted.');
+      console.log('Server restarting. Please wait.');
     });
 });
-/**** end gulp-nodemon test ****/
 
-
-
-/* Serve the server using node foreman */
-gulp.task('serve:backend', function () {
-  run('nf start web').exec()
-    .pipe(gulp.dest('./server/log'));
+/* Use foreman to serve the server, allowing gulp-nodemon
+ * to automatically access the .env file.
+ */
+gulp.task('serve:backend', function() {
+  return gulp.src('')
+    .pipe(shell('nf run gulp backend'))
 });
 
-/* Watch server files for change */
-gulp.task('backend', ['serve:backend'], function() {
-  gulp.watch(['./server/**/*.js',
-              '!./server/test/**/*.js'], ['serve:backend']);
-});
 
 /* This will run our mocha tests */
 gulp.task('test', function() {
@@ -156,7 +147,7 @@ gulp.task('test', function() {
 });
 
 /* This will create the dist folder
- * That is ready to serve by our backend
+ * that is ready to serve by our backend
  */
 gulp.task('dist', [
     'lint',
