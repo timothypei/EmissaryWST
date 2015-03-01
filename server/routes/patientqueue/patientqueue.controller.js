@@ -8,7 +8,7 @@ var router = express.Router();
 
 var Email = require('../../notification/email');
 var Text = require('../../notification/text');
-var Socket = require('../../socket')
+var Socket = require('../../socket/socket')
 
 var PatientQueue = require('../../models/PatientQueue');
 

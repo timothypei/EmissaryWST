@@ -15,10 +15,10 @@ describe("PatientQueue", function() {
     before(function(done) {
       ConfigureAuth.setupAdmin(function(cred) {
         adminCredentials = cred;
-        done();
+        next();
       });
 
-      /*function next() {
+      function next() {
         ConfigureAuth.setupEmployee(function(cred) {
           employeeCredentials = cred;
           patient = {
@@ -27,7 +27,7 @@ describe("PatientQueue", function() {
             _doctor_id: employeeCredentials._id,
           }
           done();
-        });*/
+        });
       }
       
     });
@@ -52,10 +52,10 @@ describe("PatientQueue", function() {
     
 
     after(function(done) {
-      /*var next = function next() {
+      var next = function next() {
         ConfigureAuth.cleanupEmployee(employeeCredentials.email, done);
-      };*/
-      ConfigureAuth.cleanupAuth(adminCredentials.email, done);
+      };
+      ConfigureAuth.cleanupAuth(adminCredentials.email, next);
     });
 
   }
