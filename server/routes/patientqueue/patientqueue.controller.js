@@ -5,13 +5,13 @@
 //Import Resources and Libs
 var express = require('express');
 var router = express.Router();
-var io = require('socket.io');//Socket IO
 
-var PatientQueue = require('../models/PatientQueue');
+var PatientQueue = require('../../models/PatientQueue');
 
 // This route will be called when the patient checks in
 exports.checkin = function(req, res) {
     if(!(req.body._admin_id && req.body.name))
+        return res.status(400).json({error: "Please send _admin_id and name."})
     var patient = {
         _admin_id: req.body._admin_id,
         name: req.body.name,
@@ -19,8 +19,13 @@ exports.checkin = function(req, res) {
         checkin_time: new Date()
     };
 
-    PatientQueue.findByIdAndUpdate(req.body._admin_id,
-        {$push: {"patients": patient}},
+    var queue = {
+        _admin_id: req.body._admin_id,
+        $push: {"patients": patient}
+    }
+    PatientQueue.findOneAndUpdate(
+        {_admin_id: req.body._admin_id},
+        queue,
         {safe: true, upsert: true}, 
         function(err, queue) {
             if(err)
@@ -31,14 +36,7 @@ exports.checkin = function(req, res) {
             res.json({queue: queue});
         }
     );
-
-    patient.save(function(err){
-        if(err)
-            return res.json(err);
-    });
-
-    return res.send(patient);
-});
+};
 /*
 //Get all Patients in the hospital
 router.get('/:user_id/patient', function(req, res){
@@ -90,9 +88,3 @@ router.delete("/:user_id/patient/:patient_id", function(req, res) {
 
 
 */
-
-
-
-
-
-module.exports = router;

@@ -38,24 +38,24 @@ describe("PatientQueue", function() {
         .post('/api/patient/checkin')
         .query({email: adminCredentials.email, token: adminCredentials.token, isEmployee: false})
         .send({
-          _admin_id: adminCredentials._admin._id,
+          _admin_id: adminCredentials.admin._id,
           name: patient.name,
           _doctor_id: patient._doctor_id,
         })
         .expect(200)
         .end(function(err, res){
-          res.body.should.have.property('queue');
           console.log("QUEUE IN POST:",res.body.queue);
+          res.body.should.have.property('queue');
           done();
         });
     });
     
 
     after(function(done) {
-      ConfigureAuth.cleanupAuth(adminCredentials.email, next);
-      function next() {
+      var next = function next() {
         ConfigureAuth.cleanupEmployee(employeeCredentials.email, done);
-      }
+      };
+      ConfigureAuth.cleanupAuth(adminCredentials.email, next);
     });
 
   }

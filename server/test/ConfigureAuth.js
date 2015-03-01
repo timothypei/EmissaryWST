@@ -30,7 +30,7 @@ function setupUser(done, isEmployee) {
       email: email,
       password: password
     })
-    .expect(200)
+    //.expect(200)
     .end(function(err){
       if(err)
         throw(err);
@@ -78,7 +78,7 @@ function cleanupAuth(email, callback) {
   });
 }
 
-function cleanEmployee(email, callback) {
+function cleanupEmployee(email, callback) {
   Employee.remove({email: email}, function(err) {
     if(err)
       throw(err);
@@ -166,5 +166,6 @@ function cleanEmployee(email, callback) {
 module.exports.setupAdmin = setupAdmin;
 module.exports.setupEmployee = setupEmployee;
 module.exports.cleanupAuth = cleanupAuth;
+module.exports.cleanupEmployee = cleanupEmployee;
 
 //module.exports = configureAuth;

@@ -182,6 +182,7 @@ describe("Forms", function() {
           request(url)
             .post('/api/form/template')
             .query({email: credentials.email, token: credentials.token, isAdmin:true})
+            .expect(200)
             .send({
               _admin_id: credentials.admin._id,
               template: templateForm,
