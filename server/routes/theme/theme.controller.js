@@ -13,7 +13,7 @@ var router = express.Router();
  */
 var cors = require('cors');
 
-var Theme = require('../models/theme');
+var Theme = require('../../models/Theme');
 
 /*********************** THEME TEMPLATE ROUTES ***********************/
 module.exports.template = {};
