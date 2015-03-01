@@ -9,9 +9,5 @@ var bodyparser = require('body-parser');
 var urlparser = bodyparser.urlencoded({extended: false});
 
 router.post("/checkin", controller.checkin);
-/*router.get('/template/company/:id', controller.template.findByCompanyId);
-router.post('/template', controller.template.create);
-router.put('/template', controller.template.update)
-router.delete('/template/:template_id', controller.template.delete);
-*/
+
 module.exports = router;

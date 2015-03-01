@@ -5,6 +5,7 @@ var config = require('../config/config');
 var AdminUser = require('../models/Authmodel');
 var Employee = require('../models/Employee');
 
+// Employee login feature
 function setupEmployee(done) {
   setupAdmin(done, true);
 }
@@ -78,6 +79,7 @@ function cleanupAuth(email, callback) {
   });
 }
 
+// Employee login feature
 function cleanupEmployee(email, callback) {
   Employee.remove({email: email}, function(err) {
     if(err)
@@ -85,83 +87,6 @@ function cleanupEmployee(email, callback) {
     callback();
   });
 }
-
-/*function configureAuth(test_suite) {
-	var url = "localhost:" + config.port;
-
-	var email = "test@test.com";
-	var password = "test_password";
-
-	var admin;
-	var token;
-
-	describe("Signup User", function() {
-      it("should signup new user", function(done) {
-        request(url)
-          .post('/auth/signup')
-          .send({
-            email: email,
-            password: password
-          })
-          .expect(200)
-          .end(function(){
-            done();
-          });
-      });
-
-      it("should login the user", function(done) {
-        request(url)
-          .post('/auth/login')
-          .send({
-            email: email,
-            password: password
-          })
-          .expect(200)
-          .end(function(err,res){
-            if(err)
-              throw(err);
-            res.body.should.have.property('token');
-            token = res.body.token;
-            done();
-          });
-      });
-
-      it("should retrieve admin document", function(done) {
-        AdminUser.findOne({email: email}, function(err, dbAdmin) {
-          if(err)
-            throw(err);
-          admin = dbAdmin;
-          done();
-        });
-      });
-    });
-
-	// Call the actual test suite, pass it the auth credentials.
-	describe("Test Suite", function() {
-		it("should run the test suite", function(done) {
-			// No matter what the timeout is set to it still exceeds it
-			this.timeout(5000);
-			test_suite({
-				email: email,
-				password: password,
-				token: token,
-				admin: admin
-			}, done);
-		});
-	});
-
-	describe("Clear Admins", function() {
-    it("should clear the admin table", function(done) {
-      AdminUser.remove({email: email}, function(err) {
-        if(err)
-          throw(err);
-
-        done();
-      });
-    });
-  });
-
-};*/
 
 module.exports.setupAdmin = setupAdmin;
 module.exports.setupEmployee = setupEmployee;

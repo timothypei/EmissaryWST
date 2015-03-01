@@ -14,6 +14,7 @@ module.exports = function(app) {
 //app.use('/api/theme'        , r('./routes/theme'));
   app.use('/api/employee'     , r('./routes/employee'));
 
+
   app.use('/api/patient'      , r('./routes/patientqueue'))
   //app.use('/auth'             , r('./routes/auth'));
   //app.use('/api/*'            , r('./config/validation'));

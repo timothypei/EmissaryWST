@@ -11,12 +11,13 @@ var bcrypt = require('bcrypt-nodejs');
 var employeeSchema = mongoose.Schema({
   name: String,
   email: {type: String, unique: true, index: true, required: true},
-  password: String,
+  //password: String, // Employee login feature
   phone_number: String,
   _admin_id: { type: Schema.Types.ObjectId, ref: 'Admin', required: true },
   token: String
 });
 
+/* Employee login feature
 // checking if password is valid
 employeeSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
@@ -25,6 +26,7 @@ employeeSchema.methods.validPassword = function(password) {
 employeeSchema.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
+*/
 
 
 

@@ -25,7 +25,7 @@ exports.getAllEmployees = function(req, res) {
   });
 };
 
-exports.getAllEmployees = function(req, res) {
+exports.getById = function(req, res) {
    Employee.findById(req.params.id, function(err, employee) {
       if(err) {
         return res.json(err);
@@ -35,7 +35,7 @@ exports.getAllEmployees = function(req, res) {
     });
 };
 
-exports.getById = function(req, res) {
+exports.insert = function(req, res) {
   var employee;
   if(!req.body.name || !req.body.email || !req.body.phone_number || !req.body._admin)
     return res.status(400).json({error: "Please specify name, email, phone_number, and _admin_id"})

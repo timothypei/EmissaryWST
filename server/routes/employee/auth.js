@@ -13,13 +13,16 @@ var router = express.Router();
  */
 var cors = require('cors');
 
-router.post('/signup', signupEmployee);
-router.post('/login', loginEmployee);
+
+// Employee login feature
+/*router.post('/signup', signupEmployee);
+router.post('/login', loginEmployee);*/
 
 var Employee = require('../../models/Employee');
 var jwt = require('jwt-simple');
 
-function signupEmployee(req, res) {
+// Employee login feature
+/*function signupEmployee(req, res) {
   //Put them into the database
   var b = req.body;
   if(!b.name || !b.email || !b.password)
@@ -62,6 +65,6 @@ function loginEmployee(req, res) {
     });
 
   });
-};
+};*/
 
 module.exports = router;

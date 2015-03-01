@@ -44,7 +44,7 @@ describe("PatientQueue", function() {
         })
         .expect(200)
         .end(function(err, res){
-          console.log("QUEUE IN POST:",res.body.queue);
+          //console.log("QUEUE IN POST:",res.body.queue);
           res.body.should.have.property('queue');
           done();
         });
