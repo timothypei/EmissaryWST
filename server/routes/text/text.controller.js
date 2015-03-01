@@ -16,7 +16,7 @@ var client = require('twilio')(accountSid, authToken);
  
 exports.template = {};
 
-
+/*
 exports.template.sendText = function(req, res) {
   console.log("Sending text.");
   client.messages.create({  
@@ -30,8 +30,28 @@ exports.template.sendText = function(req, res) {
        res.json({message : "Error occurred sending text"});
      } else {
        res.json({message: "Text was sent."});
-       //console.log(message);
      }
   })
-};
+}; */
 
+// sendText: Send text message to employees when patient is checked in.
+function sendText(employees) {
+  // iterate through all employees 
+  for (index = 0; index < employees.length; index++) {
+    // create text message object that will be sent
+    client.messages.create({  
+      to: employees[index].phone_number,
+      from: "+16266711727",    
+      body:'Your patient is ready.'
+    }, function(error, message) { 
+      if(error) {
+        console.log(error);
+        console.log("Error occurred sending text");
+        //res.json({message : "Error occurred sending text"});
+      } else {
+        //res.json({message: "Text was sent."});
+        console.log("Text was sent.");
+      }
+    })
+  }
+}
