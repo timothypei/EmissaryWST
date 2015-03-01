@@ -61,7 +61,6 @@ require('./routes')(app);
 var user = require('./routes/user');
 var product = require('./routes/product');
 var theme = require('./routes/theme');
-var employee = require ('./routes/employee');
 var auth = require('./routes/auth');
 
 

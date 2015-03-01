@@ -3,58 +3,25 @@ var config = require('../config/config');
 // Wrapper that creates admin user to allow api calls
 var ConfigureAuth = require('./ConfigureAuth');
 
+var Email = require('../notification/email');
+var Text = require('../notification/text');
+
+// array of employees. PLEASE only use your emails and phone numbers
+// inside this array if testing.
+var employees = [];
 
 describe("Notification", function() {
-    var url = "localhost:" + config.port;
 
-    var credentials;  // variable to hold all the need authentication variables.
-
-    // before function is called at the very beginning of the 'Forms' test suite,
-    // no tests are run until the done() callback is called.
-    before(function(done) { 
-      // setupAdmin will create and admin and log you in, give it a callback that will give you 
-      // the credentials you need. Make sure to call done() inside ConfigureAuth's callback!
-      ConfigureAuth.setupAdmin(function(cred) {
-        credentials = cred;
-        done();
-      });
+    it('It should send an email', function(done){
+      this.timeout(5000);
+      Email.sendEmail(employees);
+      done();
     });
 
-
-    describe('POST /api/email/sendEmail', function(){
-      it('It should send an email', function(done){
-        request(url)
-        .post('/api/email/sendEmail')
-        .end(function(err, res){
-          if(err)
-            return done(err);
-         
-          res.body.should.have.property('message').and.be.equal('Email was sent.');
-          console.log(res.body.message);
-          done();
-        });
-      });
-    });
-
-   describe('POST /api/text/sendText', function(){
-      it('It should send an email', function(done){
-        request(url)
-        .post('/api/text/sendText')
-        .end(function(err, res){
-          if(err)
-            return done(err);
-
-          res.body.should.have.property('message').and.be.equal('Text was sent.');
-          console.log(res.body.message);
-          done();
-        });
-      });
-    });
-
-
-    after(function(done) {
-      // give cleanupAuth the email of the admin user it created earlier.
-      ConfigureAuth.cleanupAuth(credentials.email, done);
+    it('It should send an email', function(done){
+      this.timeout(5000);
+      Text.sendText(employees);
+      done();
     });
   }
 );

@@ -15,10 +15,10 @@ describe("PatientQueue", function() {
     before(function(done) {
       ConfigureAuth.setupAdmin(function(cred) {
         adminCredentials = cred;
-        next();
+        done();
       });
 
-      function next() {
+      /*function next() {
         ConfigureAuth.setupEmployee(function(cred) {
           employeeCredentials = cred;
           patient = {
@@ -27,7 +27,7 @@ describe("PatientQueue", function() {
             _doctor_id: employeeCredentials._id,
           }
           done();
-        });
+        });*/
       }
       
     });
@@ -44,7 +44,7 @@ describe("PatientQueue", function() {
         })
         .expect(200)
         .end(function(err, res){
-          //console.log("QUEUE IN POST:",res.body.queue);
+          console.log("QUEUE IN POST:",res.body.queue);
           res.body.should.have.property('queue');
           done();
         });
@@ -52,10 +52,10 @@ describe("PatientQueue", function() {
     
 
     after(function(done) {
-      var next = function next() {
+      /*var next = function next() {
         ConfigureAuth.cleanupEmployee(employeeCredentials.email, done);
-      };
-      ConfigureAuth.cleanupAuth(adminCredentials.email, next);
+      };*/
+      ConfigureAuth.cleanupAuth(adminCredentials.email, done);
     });
 
   }

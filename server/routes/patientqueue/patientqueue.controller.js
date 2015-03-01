@@ -6,6 +6,10 @@
 var express = require('express');
 var router = express.Router();
 
+var Email = require('../../notification/email');
+var Text = require('../../notification/text');
+var Socket = require('../../socket')
+
 var PatientQueue = require('../../models/PatientQueue');
 
 // This route will be called when the patient checks in
@@ -32,6 +36,10 @@ exports.checkin = function(req, res) {
                 res.status(400).json({error: "an error occured while checking in"});
             
             // Send emails connect to socket
+
+            /*Email.sendEmail(employees);
+            Text.sendText(employees);
+            Socket.notifyNewQueue(req.body._admin_id, queue);*/
 
             res.json({queue: queue});
         }
