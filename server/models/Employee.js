@@ -2,6 +2,7 @@
 
 /* Require mongoose to interact with mongoDB */
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
 /*
@@ -12,8 +13,8 @@ var employeeSchema = mongoose.Schema({
   email: {type: String, unique: true, index: true, required: true},
   password: String,
   phone_number: String,
-   _admin_id: { type: Schema.Types.ObjectId, ref: 'Admin', required: true }
-   token: String
+  _admin_id: { type: Schema.Types.ObjectId, ref: 'Admin', required: true },
+  token: String
 });
 
 // checking if password is valid
