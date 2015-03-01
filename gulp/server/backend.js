@@ -15,7 +15,7 @@ gulp.task('serve:backend', function() {
  * restarting upon changes to *.js files, excluding tests.
  * Note: do not start directories with ./ in watch and ignore
  */
-gulp.task('backend', function() {
+gulp.task('backend', ['build:dev'], function() {
   nodemon({
     script: 'server/app.js',
     watch: ['server/**/*.js'],
