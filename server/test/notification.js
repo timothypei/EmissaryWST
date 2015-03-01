@@ -26,6 +26,11 @@ describe("Notification", function() {
         request(url)
         .post('/api/email/sendEmail')
         .end(function(err, res){
+          if(err)
+            return done(err);
+         
+          res.body.should.have.property('message').and.be.equal('Email was sent.');
+          console.log(res.body.message);
           done();
         });
       });
@@ -36,6 +41,11 @@ describe("Notification", function() {
         request(url)
         .post('/api/text/sendText')
         .end(function(err, res){
+          if(err)
+            return done(err);
+
+          res.body.should.have.property('message').and.be.equal('Text was sent.');
+          console.log(res.body.message);
           done();
         });
       });

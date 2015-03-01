@@ -18,14 +18,20 @@ exports.template = {};
 
 
 exports.template.sendText = function(req, res) {
-  console.log("sending text");
+  console.log("Sending text.");
   client.messages.create({  
-    to:'+1',
+    to:'(858)-663-5737',
     from: "+16266711727",    
     body:'Testing Twilio and node.js'
 
-  }, function(err, message) { 
-	console.log(message.sid); 
+  }, function(error, message) { 
+     if(error) {
+       console.log(error);
+       res.json({message : "Error occurred sending text"});
+     } else {
+       res.json({message: "Text was sent."});
+       //console.log(message);
+     }
   })
 };
 

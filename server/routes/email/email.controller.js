@@ -18,23 +18,24 @@ var transporter = nodemailer.createTransport({
 });
 
 var mailOptions = {
-    from: "test ✔ <testcse112@gmail.com>", // sender address
+    from: "test <testcse112@gmail.com>", // sender address
     to: "michael.cieplak@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world ✔", // plaintext body
+    subject: "Hello", // Subject line
+    text: "Hello world", // plaintext body
     html: "<b>Hello world ✔</b>" // html body
 }
 
 exports.template.sendEmail = function(req, res) {
-  console.log("sending email");
+  console.log("Sending email.");
 
   // send mail with defined transport object
   transporter.sendMail(mailOptions, function(error, info){
     if(error){
         console.log(error);
+        res.json({message: "Error occurred sending email"});
     }else{
         console.log('Message sent: ' + info.response);
+        res.json({message : "Email was sent." });
     }
   });
-
 };
