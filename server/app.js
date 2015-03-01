@@ -41,32 +41,28 @@ mongoose.connection.on('error', function() {
  */
 app.set('port', config.port);
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 
+require('./routes')(app);
+
 /*
- * Add in our routes
+ * DEPRECATED. Please move these routes to routes.js
+ * and modify the ./routes files accordingly
  */
-var home = require('./routes/home');
 var user = require('./routes/user');
 var product = require('./routes/product');
-var form = require('./routes/form/form');
-var theme = require('./routes/theme');
 var employee = require ('./routes/employee');
 var auth = require('./routes/auth');
 var patient = require('./routes/patient');
 
 
-app.use(home);
 app.use('/auth', auth);
 app.use('/api/*', validate);
 app.use('/api', user);
 app.use('/api', product);
-app.use('/api', form);
-app.use('/api', theme);
 app.use('/api', employee);
 app.use('/api', patient);
 
@@ -82,6 +78,7 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode',
     app.get('port'),
     app.get('env'));
+	app.use(logger('dev'));
 });
 
 module.exports = app;
