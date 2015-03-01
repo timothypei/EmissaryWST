@@ -14,7 +14,7 @@ var controller = require('./theme.controller');
  */
 var cors = require('cors');
 
-var Theme = require('../models/Theme');
+var Theme = require('../../models/Theme');
 
 // middleware to use for all requests
 router.use(function(req, res, next) {
