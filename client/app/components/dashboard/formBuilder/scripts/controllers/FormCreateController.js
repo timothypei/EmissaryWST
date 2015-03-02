@@ -41,16 +41,38 @@ angular.module('DashboardFormBuilderModule')
 
     // put newField into fields array
     $scope.form.form_fields.push(newField);
+    if($scope.previewMode == false) {
+      $scope.previewMode = true;
+    }
+    $scope.form.submitted = false;
+    angular.copy($scope.form, $scope.previewForm);
   };
 
   // deletes particular field on button click
   $scope.deleteField = function (field_id){
-    for(var i = 0; i < $scope.form.form_fields.length; i++){
-      if($scope.form.form_fields[i].field_id == field_id){
-        $scope.form.form_fields.splice(i, 1);
-        break;
+    var modalInstance = $modal.open({
+        templateUrl: 'views/components/dashboard/formBuilder/views/deleteModal.html',
+        controller : 'DeleteModalInstanceCtrl',
+        controllerAs : 'vm'
+      });
+
+    modalInstance.result.then(function() {
+      // confirmed delete
+      for(var i = 0; i < $scope.form.form_fields.length; i++){
+        if($scope.form.form_fields[i].field_id == field_id){
+          $scope.form.form_fields.splice(i, 1);
+          break;
+        }
       }
+      if($scope.form.form_fields === null || $scope.form.form_fields.length === 0) {
+        $scope.previewMode = false;
+        $scope.form.submitted = false;
+      }
+      angular.copy($scope.form, $scope.previewForm);
+    }, function() {
+      // delete canceled
     }
+    );
   };
 
   // add new option to the field
@@ -76,6 +98,7 @@ angular.module('DashboardFormBuilderModule')
 
     // put new option into field_options array
     field.field_options.push(newOption);
+    angular.copy($scope.form, $scope.previewForm);
   };
 
   // delete particular option
@@ -86,33 +109,7 @@ angular.module('DashboardFormBuilderModule')
         break;
       }
     }
-  };
-
-
-  // preview form
-  $scope.previewOn = function(){
-    if($scope.form.form_fields === null || $scope.form.form_fields.length === 0) {
-      var title = 'Error';
-      var msg = 'No fields added yet, please add fields to the form before preview.';
-      var btns = [{result:'ok', label: 'OK', cssClass: 'btn-primary'}];
-
-      var modalInstance = $modal.open({
-        templateUrl: 'views/components/dashboard/formBuilder/views/modal.html',
-        controller : 'ModalInstanceCtrl',
-        controllerAs : 'vm'
-      });
-    }
-    else {
-      $scope.previewMode = !$scope.previewMode;
-      $scope.form.submitted = false;
-      angular.copy($scope.form, $scope.previewForm);
-    }
-  };
-
-  // hide preview form, go back to create mode
-  $scope.previewOff = function(){
-    $scope.previewMode = !$scope.previewMode;
-    $scope.form.submitted = false;
+    angular.copy($scope.form, $scope.previewForm);
   };
 
   // decides whether field options block will be shown (true for dropdown and radio fields)
@@ -121,11 +118,20 @@ angular.module('DashboardFormBuilderModule')
       return true;
     else
       return false;
+    angular.copy($scope.form, $scope.previewForm);
+  };
+
+  // updates preview form when default text changes
+  $scope.updateOptions = function() {
+    angular.copy($scope.form, $scope.previewForm);
   };
 
   // deletes all the fields
   $scope.reset = function (){
     $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
     $scope.addField.lastAddedID = 0;
+    $scope.previewMode = false;
+    $scope.form.submitted = false;
+    angular.copy($scope.form, $scope.previewForm);
   };
 });
