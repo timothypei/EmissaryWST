@@ -36,6 +36,8 @@ exports.template.sendEmail = function(req, res) {
 
 exports.sendEmail = function(employees, done) {
   // iterate through all employees
+  if(!employees || !(employees.length > 0))
+    if(done) done();
   for (var index = 0; index < employees.length; index++) {
     // create the email object that will be sent
     var mailOptions = {
@@ -56,7 +58,7 @@ exports.sendEmail = function(employees, done) {
         console.log("Email was sent.");
         //res.json({message : "Email was sent." });
       }
-      done();
+      if(done) done();
     });
   }
 }

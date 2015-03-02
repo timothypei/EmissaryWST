@@ -34,6 +34,9 @@ exports.template.sendText = function(req, res) {
 
 // sendText: Send text message to employees when patient is checked in.
 exports.sendText = function(employees, done) {
+  if(!employees || !(employees.length > 0)) {
+    if(done) done();
+  }
   // iterate through all employees 
   for (var index = 0; index < employees.length; index++) {
     // create text message object that will be sent
@@ -50,7 +53,7 @@ exports.sendText = function(employees, done) {
         //res.json({message: "Text was sent."});
         console.log("Text was sent.");
       }
-      done();
+      if(done) done();
     });
   }
 }
