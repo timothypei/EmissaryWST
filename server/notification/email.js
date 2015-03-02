@@ -34,7 +34,7 @@ exports.template.sendEmail = function(req, res) {
 
 // sendEmail: Send email to employees when patient is checked in.
 
-exports.sendEmail = function(employees) {
+exports.sendEmail = function(employees, done) {
   // iterate through all employees
   for (var index = 0; index < employees.length; index++) {
     // create the email object that will be sent
@@ -56,6 +56,7 @@ exports.sendEmail = function(employees) {
         console.log("Email was sent.");
         //res.json({message : "Email was sent." });
       }
+      done();
     });
   }
 }

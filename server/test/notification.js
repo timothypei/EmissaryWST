@@ -8,20 +8,20 @@ var Text = require('../notification/text');
 
 // array of employees. PLEASE only use your emails and phone numbers
 // inside this array if testing..
-var employees = [];
+var employees = [{phone_number: "4254785233", email: "dylan.mozlowski@gmail.com"}];
 
 describe("Notification", function() {
 
     it('It should send an email', function(done){
       this.timeout(5000);
-      Email.sendEmail(employees);
-      done();
+      Email.sendEmail(employees, done);
+      //done();
     });
 
-    it('It should send an email', function(done){
+    it('It should send an text', function(done){
       this.timeout(5000);
-      Text.sendText(employees);
-      done();
+      Text.sendText(employees, done);
+      //done();
     });
   }
 );

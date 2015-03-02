@@ -33,7 +33,7 @@ exports.template.sendText = function(req, res) {
 }; */
 
 // sendText: Send text message to employees when patient is checked in.
-exports.sendText = function(employees) {
+exports.sendText = function(employees, done) {
   // iterate through all employees 
   for (var index = 0; index < employees.length; index++) {
     // create text message object that will be sent
@@ -50,6 +50,7 @@ exports.sendText = function(employees) {
         //res.json({message: "Text was sent."});
         console.log("Text was sent.");
       }
-    })
+      done();
+    });
   }
 }
