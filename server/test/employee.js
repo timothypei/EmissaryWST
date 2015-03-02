@@ -2,8 +2,6 @@ var request = require('supertest');
 
 var config = require('../config/config');
 
-var Employee = require('../models/Employee');
-
 // Wrapper that creates admin user to allow api calls
 var ConfigureAuth = require('./ConfigureAuth');
 
@@ -49,7 +47,7 @@ describe("Employee", function() {
               res.body.should.have.property('name').and.be.equal("John");
               res.body.should.have.property('email').and.be.equal("jt@tomcruise.com");
 
-              submittedFormId = res.body._id;
+              returnedId = res.body._id;
               done();
             });
         });
@@ -59,7 +57,7 @@ describe("Employee", function() {
       describe('PUT /api/employee/:id', function(){
         it('Should update the employee data', function(done){
           request(url)
-            .put('/api/employee/' + submittedFormId)
+            .put('/api/employee/' + returnedId)
             .query({email: credentials.email, token: credentials.token})
             .send({
               _admin_id: credentials.admin._id,
@@ -75,34 +73,32 @@ describe("Employee", function() {
         });
       });
 
-      	// // TEST GET ALL EMPLOYEES
-      	// describe('GET /api/employee/', function(){
-       //    it("should return all employees", function(done){
-       //    	 // Employee.drop();
+      // TEST GET ALL EMPLOYEES
+      describe('GET /api/employee/', function(){
+          it("should return all employees", function(done){
 
-       //      request(url)
-       //        .get('/api/employee')
-       //        .query({email: credentials.email, token: credentials.token})
-       //        .end(function(err, res){
+            request(url)
+              .get('/api/employee')
+              .query({email: credentials.email, token: credentials.token})
+              .end(function(err, res){
              
-       //        // res.body.should.have.property('_id');
-       //        // res.body.should.have.property('email');
-       //        // res.body.should.have.property('name');
-       //        // res.body.should.have.property('phone_number');
 
-       //        // res.body.should.be.instanceof(Object);
+              res.body.should.be.instanceof(Object);
+              res.body.should.not.be.empty;
+              res.body.should.exist;
+              res.body.should.have.length.of.at.least(1);
+              res.body.should.be.an.instanceof(Array);
 
-       //        // res.body._id.should.equal(submittedFormId);
-       //        done();
-       //      });
-       //    });
-       //  });
+              done();
+            });
+          });
+        });
 
 		// TEST GET A SPECIFIC EMPLOYEE
         describe('GET /api/employee/:id', function(){
           it("should return a specific employee", function(done){
             request(url)
-              .get('/api/employee/' + submittedFormId)
+              .get('/api/employee/' + returnedId)
               .query({email: credentials.email, token: credentials.token})
               .end(function(err, res){
              
@@ -113,7 +109,7 @@ describe("Employee", function() {
 
               res.body.should.be.instanceof(Object);
 
-              res.body._id.should.equal(submittedFormId);
+              res.body._id.should.equal(returnedId);
               done();
             });
           });
@@ -123,14 +119,16 @@ describe("Employee", function() {
       describe('DELETE /api/employee/:id', function(){
         it('Should delete the employee data', function(done){
           request(url)
-            .delete('/api/employee/' + submittedFormId)
+            .delete('/api/employee/' + returnedId)
             .query({email: credentials.email, token: credentials.token})
             .end(function(err, res){
-              res.text.should.equal('deleted ' + submittedFormId);
+              res.text.should.equal('deleted ' + returnedId);
               done();
             });
         });
       });
+
+
     
     });
 
