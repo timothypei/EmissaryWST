@@ -59,16 +59,16 @@ router.put("/setting/:user", function(req, res) {
    Authmodel.findOne({email: req.params.user}, function (err, admin) {
       if(err || !admin)
          res.json(err);
- 	 var ad = new Authmodel();
+ 	
      
      // if the user is found but the password is wrong
      if(!admin.validPassword(req.body.password))
        return res.status(401).send('loginMessage', 'Oops! Wrong password');
 	 //update password
-	 console.log(req.body.newpassword );
+	
 	 //upadate password
 	 if (req.body.newpassword !== undefined)
-	 	admin.password = ad.generateHash(req.body.newpassword);
+	 	admin.password = admin.generateHash(req.body.newpassword);
 	
 	//update email
 	 if (req.body.newemail !== undefined)
