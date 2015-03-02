@@ -22,7 +22,7 @@ gulp.task('serve:backend', function() {
 /* Use foreman to serve the server, allowing gulp-nodemon
  * to automatically access the .env file.
  */
-gulp.task('backend', ['build:dev'], function() {
+gulp.task('backend', function() {
   return gulp.src('')
     .pipe(shell('nf run gulp serve:backend'))
 });
