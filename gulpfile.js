@@ -10,6 +10,7 @@ var connect = require('gulp-connect'),
     exit = require('gulp-exit'),
     wiredep = require('wiredep').stream,
     htmlify = require('gulp-angular-htmlify'),
+    htmlv = require('gulp-html-validator'),
     ngAnnotate = require('gulp-ng-annotate');
 
 gulp.task('lint', function() {
@@ -53,6 +54,14 @@ gulp.task('copy:views', function () {
 gulp.task('htmlify', ['copy:views'],function(){
   return gulp.src('./dist/**/*.html')
     .pipe(htmlify())
+    .pipe(gulp.dest('./dist/'));
+});
+
+/* This will validate the html files
+ */
+gulp.task('htmlv', ['htmlify'],function(){
+  return gulp.src('./dist/**/*.html')
+    .pipe(htmlv(htmlv()))
     .pipe(gulp.dest('./dist/'));
 });
 
@@ -135,7 +144,7 @@ gulp.task('dist', [
 gulp.task('build:dev', ['dist']);
 
 /* Build the app and minfy */
-gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlify']);
+gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlv']);
 
 /* The default task */
 gulp.task('default', ['build:dev']);
