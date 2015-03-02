@@ -6,8 +6,8 @@ angular.module('signin')
     $scope.errMessage ='';
     //this function is called when we press the login button
   	$scope.login = function(){
-      if($scope.user.email.indexOf('@')==-1||$scope.user.email.indexOf('.')){
-        $scope.errMessage = 'Invaldi Email/Password'
+      if($scope.user.email.indexOf('@')==-1||$scope.user.email.indexOf('.')==-1){
+        $scope.errMessage = 'Invalid Email/Password'
       }
       else{
   		  var account = this;
@@ -15,9 +15,9 @@ angular.module('signin')
         //calls the API to login
   		  SigninService.login($scope.user)
       	 .success(function(data){
-        	 account.dat = data;
+          console.log(data);
             //redirects to the person's home page when a success
-        	 $location.path(data.successRedirect);
+        	 $location.path('../../../dashboard/views/dashboard.html');
         	 return data;
       	 })
       	 .error(function(err){

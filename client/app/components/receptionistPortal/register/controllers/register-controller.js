@@ -24,12 +24,12 @@ angular.module('register')
   		    RegisterService.reg($scope.user)
           //when the API call was a success
       	  .success(function(data){
-        	account.dat = data;
-          $location.path(data.successRedirect);
+          console.log("jflkdsajf");
+          $location.path('/signin');
           return data;
       	 })
       	 .error(function(err){
-            $scope.errorMessage = err;
+            $scope.errorMessage = 'You have already created an account';
        	  	return err;
      	  });
       }
