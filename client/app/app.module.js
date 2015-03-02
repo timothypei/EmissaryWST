@@ -27,6 +27,10 @@ angular.module('robobetty', ['ui.router', 'ui.bootstrap',
         url:'/dashboard',
         templateUrl: 'views/components/dashboard/main/views/dashboard.html'
       })
+       .state('patientQueue', {
+        url: '/patientQueue',
+        templateUrl: 'views/components/dashboard/patientQueue/views/patients.html'
+      })    
       .state('doctors', {
         url: '/doctors',
         templateUrl: 'views/components/dashboard/doctors/views/doctors.html'

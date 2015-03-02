@@ -1,8 +1,8 @@
 angular.module('dashboard')
-  .directive('doctorsTable', function() {
+  .directive('patientQueue', function() {
     return {
       restrict: 'E',
-      templateUrl: 'views/components/dashboard/doctors/views/doctors.html',
+      templateUrl: 'views/components/dashboard/patientQueue/views/patients.html',
       controller: 'SafeController',
       controllerAs: 'safeCtrl'
     };
