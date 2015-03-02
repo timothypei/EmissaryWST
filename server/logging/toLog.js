@@ -5,6 +5,7 @@ var toLog = new winston.Logger({
     transports: [
         new winston.transports.File({
             level: 'info',
+	    name: 'info-file',
             filename: './logs/serverinfo.log',
             handleExceptions: true,
             json: true,
@@ -14,6 +15,7 @@ var toLog = new winston.Logger({
         }),
         new winston.transports.File({
             level: 'debug',
+	    name: 'debug-file',
             filename: './logs/serverdebug.log',
             handleExceptions: true,
             json: true,
@@ -23,6 +25,7 @@ var toLog = new winston.Logger({
         }),
         new winston.transports.File({
             level: 'error',
+	    name: 'error-file',
             filename: './logs/servererror.log',
             handleExceptions: true,
             json: true,
