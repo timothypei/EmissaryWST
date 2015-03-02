@@ -11,14 +11,29 @@
    color: #FFFFFF; 
    text-decoration: none;
 }
-.navbar .nav > li > a:hover {
+
+
+.navbar .nav > li > a:hover .arrow{
    color: #FFFFFF; 
    text-decoration: none;
+   width: 0;
+   height: 0;
+   border-left: 10px solid transparent;
+   border-right: 10px solid transparent;
+   border-bottom: 10px solid #ef8e48;
+   display: block;
+   position: absolute;
+   bottom: 0;
+   left: 45%;
 }
 
 .navbar .nav > li > button > a:hover {
    color: #FFFFFF; 
    text-decoration: none;
+}
+
+.navbar#navigation {
+   border-bottom: 14px solid #ef8e48;
 }
 
 #modebutton{
@@ -30,9 +45,12 @@
 }
 
 .navbar-icon{
-	width:90px;
-	height:80px
-}/*
+	width:100px;
+	height:90px
+}
+
+
+/*
 
 html,body{
 margin:0;
