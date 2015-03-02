@@ -7,7 +7,7 @@ var Email = require('../notification/email');
 var Text = require('../notification/text');
 
 // array of employees. PLEASE only use your emails and phone numbers
-// inside this array if testing.
+// inside this array if testing..
 var employees = [{phone_number: "4254785233", email: "dylan.mozlowski@gmail.com"}];
 
 describe("Notification", function() {
