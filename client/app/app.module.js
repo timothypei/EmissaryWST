@@ -53,17 +53,4 @@ angular.module('robobetty', ['ui.router', 'ui.bootstrap',
       });
   }
 );
-=======
-        templateUrl: 'views/components/dashboard/doctors/views/doctors.html',
-        parent: 'common'
-      })
-      .state('signin', {
-        url: '/signin',
-        templateUrl: 'views/components/receptionistPortal/signin/views/login.html'
-      })
-      .state('register', {
-        url: '/register',
-        templateUrl: 'views/components/receptionistPortal/register/views/register.html'
-      });
-  });
->>>>>>> origin/kevin_dashboard
+
