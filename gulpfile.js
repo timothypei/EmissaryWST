@@ -10,6 +10,7 @@ var connect = require('gulp-connect'),
     exit = require('gulp-exit'),
     wiredep = require('wiredep').stream,
     htmlify = require('gulp-angular-htmlify'),
+    htmlhint = require("gulp-htmlhint"),
     htmlv = require('gulp-html-validator'),
     ngAnnotate = require('gulp-ng-annotate');
 
@@ -21,7 +22,7 @@ gulp.task('lint', function() {
 
 /* Remove the generated dist */
 gulp.task('clean', function(cb) {
-  del(['./dist/','./html-validator/'], cb);
+  del(['./dist/'], cb);
 });
 
 /* This will add our bower dependencies to our index.html
@@ -59,10 +60,10 @@ gulp.task('htmlify', ['copy:views'],function(){
 
 /* This will validate the html files
  */
-gulp.task('htmlv', ['htmlify'],function(){
+gulp.task('htmlhint', ['htmlify'],function(){
   return gulp.src('./dist/**/*.html')
-    .pipe(htmlv(htmlv()))
-    .pipe(gulp.dest('./html-validator'));
+    .pipe(htmlhint())
+    .pipe(htmlhint.reporter())
 });
 
 /* This will copy all our assets i.e. assets folder
@@ -117,7 +118,7 @@ gulp.task('serve:frontend', ['build:dev'], function () {
 /* Watch Files For Changes */
 gulp.task('frontend',['serve:frontend'], function() {
   gulp.watch('./client/bower_components', ['copy:bower-components', 'bower']);
-  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat', 'copy:views', 'bower']);
+  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat', 'htmlhint', 'bower']);
   gulp.watch('./client/assets/**', ['copy:assets']);
 });
 
@@ -136,7 +137,7 @@ gulp.task('dist', [
     'concat',
     'copy:bower-components',
     'bower',
-    'copy:views',
+    'htmlhint',
     'copy:assets'
 ]);
 
@@ -144,7 +145,7 @@ gulp.task('dist', [
 gulp.task('build:dev', ['dist']);
 
 /* Build the app and minfy */
-gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlv']);
+gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlhint']);
 
 /* The default task */
 gulp.task('default', ['build:dev']);
