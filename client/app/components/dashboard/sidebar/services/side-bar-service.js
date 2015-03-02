@@ -1,32 +1,18 @@
 'use strict';
 
 angular.module('dashboard')
-  .service('SidebarService', ['$state', function($state) {
+  .service('SidebarService', [function() {
       this.getSidebarOptions = function() {
-      	switch($state.current.name){
-      		case 'home':
-      			break;
-      		case 'product':
-      			break;
-      		case 'dashboard':
-      			return [{option:'Change Background', icon: 'menu-icon fa fa-users'},
-      			{option:'Preview', icon:'menu-icon fa fa-check-square-o'}];
-      		case 'doctors':
-      			break;
-      	}
+      	return [
+	      	{option:'Home', icon: 'menu-icon fa fa-users', link:'#/dashboard'},
+	      	{option:'Forms', icon:'menu-icon fa fa-check-square-o', link:'#/createform'},
+	      	{option:'Employees', icon:'menu-icon fa fa-user', link:'#/doctors'},
+	      	{option:'Settings', icon:'menu-icon fa fa-cog', link:'#'}
+      	];
       };
 
       this.getSidebarHeader = function(){
-      	switch($state.current.name){
-      		case 'home':
-      			break;
-      		case 'product':
-      			break;
-      		case 'dashboard':
-      			return 'Sign In Settings';
-      		case 'doctors':
-      			break;
-      	}
+      		return "RoboBetty";
       };
 
   }]);

@@ -13,7 +13,7 @@ angular.module('robobetty', ['ui.router', 'ui.bootstrap',
 
     $stateProvider
       .state('common',{
-        templateUrl: 'views/components/dashboard/views/dashboard.html',
+        templateUrl: 'views/components/dashboard/main/views/dashboard.html',
         abstract: true
       })
       .state('home', {
@@ -40,7 +40,7 @@ angular.module('robobetty', ['ui.router', 'ui.bootstrap',
       })    
       .state('doctors', {
         url: '/doctors',
-        templateUrl: 'views/components/dashboard/doctors/views/doctors.html'
+        templateUrl: 'views/components/dashboard/doctors/views/doctors.html',
         parent: 'common'
       })
       .state('signin', {
