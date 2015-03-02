@@ -21,7 +21,7 @@ gulp.task('lint', function() {
 
 /* Remove the generated dist */
 gulp.task('clean', function(cb) {
-  del('./dist/', cb);
+  del(['./dist/','./html-validator/'], cb);
 });
 
 /* This will add our bower dependencies to our index.html
@@ -62,7 +62,7 @@ gulp.task('htmlify', ['copy:views'],function(){
 gulp.task('htmlv', ['htmlify'],function(){
   return gulp.src('./dist/**/*.html')
     .pipe(htmlv(htmlv()))
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('./html-validator'));
 });
 
 /* This will copy all our assets i.e. assets folder
