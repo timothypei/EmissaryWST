@@ -14,7 +14,6 @@ var path = require('path');
 var mongoose = require('mongoose');
 var toLog = require("./logging/toLog");
 
-
 /*
  * MongoDb configuration.
  */
