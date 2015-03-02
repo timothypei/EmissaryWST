@@ -4,12 +4,18 @@ angular.module('robobetty', ['ui.router', 'ui.bootstrap',
   'widget',
   'dashboard',
   'product',
-  'DashboardFormBuilderModule'
+  'DashboardFormBuilderModule',
+  'signin',
+  'register'
   ])
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/dashboard');
 
     $stateProvider
+      .state('common',{
+        templateUrl: 'views/components/dashboard/views/dashboard.html',
+        abstract: true
+      })
       .state('home', {
         url: '/home',
         templateUrl: 'views/components/home/views/home.html'
@@ -25,7 +31,8 @@ angular.module('robobetty', ['ui.router', 'ui.bootstrap',
       })
       .state('dashboard',{
         url:'/dashboard',
-        templateUrl: 'views/components/dashboard/main/views/dashboard.html'
+        template: '',
+        parent: 'common'
       })
        .state('patientQueue', {
         url: '/patientQueue',
@@ -34,6 +41,29 @@ angular.module('robobetty', ['ui.router', 'ui.bootstrap',
       .state('doctors', {
         url: '/doctors',
         templateUrl: 'views/components/dashboard/doctors/views/doctors.html'
+        parent: 'common'
+      })
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'views/components/receptionistPortal/signin/views/login.html'
+      })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'views/components/receptionistPortal/register/views/register.html'
       });
   }
 );
+=======
+        templateUrl: 'views/components/dashboard/doctors/views/doctors.html',
+        parent: 'common'
+      })
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'views/components/receptionistPortal/signin/views/login.html'
+      })
+      .state('register', {
+        url: '/register',
+        templateUrl: 'views/components/receptionistPortal/register/views/register.html'
+      });
+  });
+>>>>>>> origin/kevin_dashboard

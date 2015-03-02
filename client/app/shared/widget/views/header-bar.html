@@ -1,15 +1,15 @@
 <!-- NAVIGATION BAR -->
-<nav class="navbar navbar-inverse" role="navigation" id="navigation">
+<nav class="navbar" role="navigation" id="navigation">
   <div class='container-fluid'>
     <!--Brand-->
     <div class="navbar-header text-center">
-      <a class="navbar-brand" href="#/home">
-        <img alt="Brand" src="../../../../images/logo.png" class="navbar-icon">
+      <a href="#/home">
+        <div  class="navbar-icon"></div>
       </a>
     </div>
     <!--Nav items-->
-    <ul class="nav navbar-nav navbar-right">
-      <li class="col-md-2 text-center"></li>
+    <ul class="topbar-right">
+     <!--  <li class="col-md-2 text-center"></li>
       <li class="col-md-2 text-center">
         <a ui-sref='patientQueue'>
           <img src="https://s3.amazonaws.com/media-p.slid.es/uploads/billymeinke/images/75494/icon_calendar_white.png" class="navbar-icon">
@@ -34,50 +34,14 @@
           Settings
         </a>
       </li>
-      <li class="col-md-2 text-center">
-        <button class='btn btn-lg' id="modebutton"><a ui-sref="PatientMode">Patient Mode</a></button>
+    -->
+      <li class="text-center">
+        <a id="topbar-mode-button" ui-sref="PatientMode">
+          <span class="vertical-align">
+            Patient Mode
+          </span>
+        </a>
       </li>
     </ul>
   </div>
 </nav>
-
-
-
-
-<!--<div id="nav-top">
-
-  <!--Brand--
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#/home">
-        <img alt="Brand" src="../../../../images/logo.png" class='navbar-icon'>
-      </a>
-    </div>
-
-  <!-- Nav Icons --
-  <ul class='nav-right'>    
-    
-    <li class="nav-icon" id="5">
-        Patient Mode
-    </li>
-    <li class="nav-icon" id="4">
-        <a href='#'>Settings</a>
-    </li>
-    <li class="nav-icon" id="3">
-        <a ui-sref="dashboard">Client Form</a>
-    </li>
-    <li class="nav-icon" id="2">
-        <a ui-sref='doctors'>Doctors</a>
-    </li>
-    <li class="nav-icon active" id="1">
-        <a href="">Patients</a>
-    </li>
-    
-  </ul>
-
-  <!--<div id="triangle-up"></div>
-  <!-- orange bar --
-  <div class="orange">
-    
-  </div>
-
-</div>-->
