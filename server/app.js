@@ -12,10 +12,8 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
-var fs = require('fs');
+var toLog = require("./logging/toLog");
 
-
-var LogStream = fs.createWriteStream(__dirname + '/logging.log', {flags: 'a'});
 
 /*
  * MongoDb configuration.
@@ -34,10 +32,12 @@ var app = express();
 mongoose.connect(config.mongoDBUrl);
 mongoose.connection.on('connected', function() {
   console.log('MongoDB connected succesfully at: ' + config.mongoDBUrl);
+  toLog.info('MongoDB connected succesfully at: ' + config.mongoDBUrl);
 });
 
 mongoose.connection.on('error', function() {
   console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
+  toLog.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
 });
 
 /*
@@ -74,15 +74,19 @@ app.use('/api', employee);
  */
 app.use(errorHandler());
 
+
 /*
  * Start Express server.
  */
 app.listen(app.get('port'), function() {
-  console.log('Express server listening on port %d in %s mode',
+  console.info('Express server listening on port %d in %s mode',
     app.get('port'),
     app.get('env'));
-    app.use(logger('dev', { stream: LogStream }));
+  toLog.info('Express server listening on port %d in %s mode',
+    app.get('port'),
+    app.get('env'));
 	app.use(logger('dev'));
+        app.use(require('morgan')({"stream": toLog.stream }));
 });
 
 module.exports = app;
