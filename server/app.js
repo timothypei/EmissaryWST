@@ -12,7 +12,10 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
+var winston = require('winston');
+var expressWinston = require('express-winston');
 var toLog = require("./logging/toLog");
+
 
 /*
  * MongoDb configuration.
@@ -24,6 +27,40 @@ var validate = require('./config/validation');
  * Create Express server.
  */
 var app = express();
+
+app.use(expressWinston.logger({
+      transports: [
+        new winston.transports.File({
+          level: 'info',
+	  name: 'info-file',
+          filename: __dirname + '/logging/logs/serverinfo.log',
+          json: true,
+          maxsize: 5242880,
+          maxFiles: 5,
+          colorize: true
+        }),
+        new winston.transports.File({
+          level: 'error',
+	  name: 'error-file',
+          filename: __dirname + '/logging/logs/servererror.log',
+          json: true,
+          maxsize: 5242880,
+          maxFiles: 5,
+          colorize: true
+        }),
+        new winston.transports.File({
+          level: 'debug',
+	  name: 'debug-file',
+          filename: __dirname + '/logging/logs/serverdebug.log',
+          json: true,
+          maxsize: 5242880,
+          maxFiles: 5,
+          colorize: true
+        })
+       ],
+    }));
+
+
 
 /*
  * Connect to MongoDB.
@@ -73,7 +110,6 @@ app.use('/api', employee);
  */
 app.use(errorHandler());
 
-
 /*
  * Start Express server.
  */
@@ -85,7 +121,8 @@ app.listen(app.get('port'), function() {
     app.get('port'),
     app.get('env'));
 	app.use(logger('dev'));
-        app.use(require('morgan')({"stream": toLog.stream }));
+
+
 });
 
 module.exports = app;
