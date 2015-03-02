@@ -6,6 +6,11 @@
 	background-color: #434343;
 }
 
+/* Removing forced scrollbar by rdash */
+html {
+	overflow-y: auto;
+}
+
 ul.sidebar {
 	margin-top:-5px;
 }

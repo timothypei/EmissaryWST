@@ -1,12 +1,15 @@
 'use strict';
 
-angular.module('robobetty', ['ui.router', 'ui.bootstrap',
+angular.module('robobetty', 
+  [
+  'ui.router',
   'widget',
+  'product', 
   'dashboard',
-  'product',
-  'DashboardFormBuilderModule',
+  'ui.bootstrap',
   'signin',
-  'register'
+  'register',
+  'DashboardFormBuilderModule'
   ])
   .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/dashboard');

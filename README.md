@@ -19,8 +19,7 @@ This server will solely serve your angular files. This will not run our backend.
 This server will also be updated when you changed one of the source files.
 
 # How to run backend portion only
-2. `gulp clean`
-1. `nf start web`
+1. `gulp backend`
 
 This will only start up the backend. You can use this to quickly test API
 routes.
