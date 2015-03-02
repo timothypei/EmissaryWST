@@ -26,7 +26,8 @@ angular.module('robobetty',
       .state('createForm', {
         url: '/createform',
         controller: 'FormCreateController',
-        templateUrl: 'views/components/dashboard/formBuilder/views/create.html'
+        templateUrl: 'views/components/dashboard/formBuilder/views/create.html',
+        parent: 'common'
       })
       .state('product', {
         url: '/product',
@@ -39,7 +40,8 @@ angular.module('robobetty',
       })
        .state('patientQueue', {
         url: '/patientQueue',
-        templateUrl: 'views/components/dashboard/patientQueue/views/patients.html'
+        templateUrl: 'views/components/dashboard/patientQueue/views/patients.html',
+        parent: 'common'
       })    
       .state('doctors', {
         url: '/doctors',
