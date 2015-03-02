@@ -49,6 +49,7 @@ angular.module('dashboard')
     //add employee info
     $scope.addEmployee = function(row){
         $scope.rowCollection.push(row);
+        $scope.row = {};
         id++;
     };
 
