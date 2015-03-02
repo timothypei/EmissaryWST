@@ -5,7 +5,6 @@
  */
 var express = require('express');
 var router = express.Router();
-var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -17,6 +16,7 @@ var mongoose = require('mongoose');
  * MongoDb configuration.
  */
 var config = require('./config/config');
+var validate = require('./config/validation');
 
 /*
  * Create Express server.
@@ -46,16 +46,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../dist')));
 
 
+require('./routes')(app);
+
 /*
- * Add in our routes
+ * DEPRECATED. Please move these routes to routes.js
+ * and modify the ./routes files accordingly
  */
-var home = require('./routes/home');
 var user = require('./routes/user');
 var product = require('./routes/product');
+var theme = require('./routes/theme');
+var employee = require ('./routes/employee');
+var auth = require('./routes/auth');
 
-app.use(home);
+/*
+ * Disable api auth if were are in dev mode
+ */
+if(app.get('env') !== 'development') {
+  app.use('/api/*', validate);
+}
+
+app.use('/auth', auth);
 app.use('/api', user);
 app.use('/api', product);
+app.use('/api', theme);
+app.use('/api', employee);
 
 /*
  * Error Handler.
@@ -66,8 +80,8 @@ app.use(errorHandler());
  * Start Express server.
  */
 app.listen(app.get('port'), function() {
-  console.log('Express server listening on port %d in %s mode', 
-    app.get('port'), 
+  console.log('Express server listening on port %d in %s mode',
+    app.get('port'),
     app.get('env'));
 });
 
