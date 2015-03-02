@@ -24,7 +24,6 @@ angular.module('register')
   		    RegisterService.reg($scope.user)
           //when the API call was a success
       	  .success(function(data){
-          console.log("jflkdsajf");
           $location.path('/signin');
           return data;
       	 })

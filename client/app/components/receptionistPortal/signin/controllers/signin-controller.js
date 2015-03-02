@@ -11,11 +11,10 @@ angular.module('signin')
       }
       else{
   		  var account = this;
-  		  account.dat = {};
         //calls the API to login
   		  SigninService.login($scope.user)
       	 .success(function(data){
-          console.log(data);
+          var cookie=data;
             //redirects to the person's home page when a success
         	 $location.path('../../../dashboard/views/dashboard.html');
         	 return data;
