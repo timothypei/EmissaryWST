@@ -11,7 +11,6 @@ var connect = require('gulp-connect'),
     wiredep = require('wiredep').stream,
     htmlify = require('gulp-angular-htmlify'),
     htmlhint = require("gulp-htmlhint"),
-    htmlv = require('gulp-html-validator'),
     ngAnnotate = require('gulp-ng-annotate');
 
 gulp.task('lint', function() {
@@ -22,7 +21,7 @@ gulp.task('lint', function() {
 
 /* Remove the generated dist */
 gulp.task('clean', function(cb) {
-  del(['./dist/'], cb);
+  del('./dist/', cb);
 });
 
 /* This will add our bower dependencies to our index.html
