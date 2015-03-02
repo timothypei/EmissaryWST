@@ -6,7 +6,7 @@ var toLog = new winston.Logger({
         new winston.transports.File({
             level: 'info',
 	    name: 'info-file',
-            filename: './logs/serverinfo.log',
+            filename: './logging/logs/serverinfo.log',
             handleExceptions: true,
             json: true,
             maxsize: 5242880, //5MB
@@ -16,7 +16,7 @@ var toLog = new winston.Logger({
         new winston.transports.File({
             level: 'debug',
 	    name: 'debug-file',
-            filename: './logs/serverdebug.log',
+            filename: './logging/logs/serverdebug.log',
             handleExceptions: true,
             json: true,
             maxsize: 5242880, //5MB
@@ -26,7 +26,7 @@ var toLog = new winston.Logger({
         new winston.transports.File({
             level: 'error',
 	    name: 'error-file',
-            filename: './logs/servererror.log',
+            filename: './logging/logs/servererror.log',
             handleExceptions: true,
             json: true,
             maxsize: 5242880, //5MB
