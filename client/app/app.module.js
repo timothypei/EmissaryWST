@@ -9,6 +9,7 @@ angular.module('robobetty',
   'ui.bootstrap',
   'signin',
   'register',
+  'thankyou',
   'DashboardFormBuilderModule'
   ])
 
@@ -54,6 +55,10 @@ angular.module('robobetty',
   .state('register', {
     url: '/register',
     templateUrl: 'views/components/receptionistPortal/register/views/register.html'
+  })
+  .state('thankyou', {
+    url: '/thankyou',
+    templateUrl: 'views/components/receptionistPortal/register/views/thankyou.html'
   });
 });
 
