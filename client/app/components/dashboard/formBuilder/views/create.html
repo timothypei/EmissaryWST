@@ -45,11 +45,11 @@
 
                     <div class="row">
                         <div class="span2">Field Title:</div>
-                        <div class="span4"><input type="text" ng-model="field.field_title" value="{{field.field_title}}" ng-change="updateOptions()"></div>
+                        <div class="span4"><input type="text" ng-model="field.field_title" value="{{field.field_title}}" ng-blur="updateOptions()"></div>
                     </div>
                     <div class="row">
                         <div class="span2">Field Default Value:</div>
-                        <div class="span4"><input type="text" ng-model="field.field_value" value="{{field.field_value}}" ng-change="updateOptions()"></div>
+                        <div class="span4"><input type="text" ng-model="field.field_value" value="{{field.field_value}}" ng-blur="updateOptions()"></div>
                     </div>
                     <div class="row" ng-show="showAddOptions(field)">
                         <div class="span2">Field Options:</div>

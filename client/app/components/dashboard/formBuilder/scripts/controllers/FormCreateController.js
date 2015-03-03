@@ -128,10 +128,24 @@ angular.module('DashboardFormBuilderModule')
 
   // deletes all the fields
   $scope.reset = function (){
-    $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
-    $scope.addField.lastAddedID = 0;
-    $scope.previewMode = false;
-    $scope.form.submitted = false;
-    angular.copy($scope.form, $scope.previewForm);
+    if($scope.form.form_fields !== null && $scope.form.form_fields.length !== 0) {
+      var modalInstance = $modal.open({
+          templateUrl: 'views/components/dashboard/formBuilder/views/deleteModal.html',
+          controller : 'DeleteModalInstanceCtrl',
+          controllerAs : 'vm'
+        });
+
+      modalInstance.result.then(function() {
+        // confirmed reset
+        $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
+        $scope.addField.lastAddedID = 0;
+        $scope.previewMode = false;
+        $scope.form.submitted = false;
+        angular.copy($scope.form, $scope.previewForm);
+      }, function() {
+        // reset canceled
+      }
+      );
+    }
   };
 });
