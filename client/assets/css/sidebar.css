@@ -3,7 +3,6 @@
 }
 
 #sidebar-wrapper{
-<<<<<<< HEAD
 	background-color: #434343;
 }
 
@@ -14,10 +13,6 @@ html {
 
 ul.sidebar {
 	margin-top:-5px;
-=======
-  background-color: #434343;
-  margin-top:-1.5em;
->>>>>>> dashboard
 }
 
 ul.sidebar li a{
