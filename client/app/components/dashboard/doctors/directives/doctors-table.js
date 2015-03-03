@@ -41,13 +41,15 @@ angular.module('dashboard')
     }
 
     $scope.rowCollection = [];
+    $scope.newField = {};
+    $scope.editing = false;
 
     for (id; id < 5; id++) {
         $scope.rowCollection.push(generateRandomItem(id));
     }
 
     //add employee info
-    $scope.addEmployee = function(row){
+    $scope.addEmployee = function addEmployee(row){
         $scope.rowCollection.push(row);
         $scope.row = {};
         id++;
@@ -55,6 +57,25 @@ angular.module('dashboard')
 
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
     $scope.displayedCollection = [].concat($scope.rowCollection);
+
+    $scope.editRowCollection = function(field) {
+        $scope.editing = $scope.rowCollection.indexOf(field);
+        $scope.newField = angular.copy(field);
+    }
+    
+    $scope.saveField = function(index) {
+        if ($scope.editing !== false) {
+            $scope.rowCollection[$scope.editing] = $scope.newField;
+            $scope.editing = false;
+        }       
+    };
+    
+    $scope.cancel = function(index) {
+        if ($scope.editing !== false) {
+            $scope.rowCollection[$scope.editing] = $scope.newField;
+            $scope.editing = false;
+        }       
+    };
 
     //add to the real data holder
     /*$scope.addRandomItem = function addRandomItem() {

@@ -13,9 +13,26 @@
  color: #FFFFFF; 
  text-decoration: none;
 }
+<<<<<<< HEAD
 .navbar .nav > li > a:hover {
  color: #FFFFFF; 
  text-decoration: none;
+=======
+
+
+.navbar .nav > li > a:hover .arrow{
+   color: #FFFFFF; 
+   text-decoration: none;
+   width: 0;
+   height: 0;
+   border-left: 10px solid transparent;
+   border-right: 10px solid transparent;
+   border-bottom: 10px solid #ef8e48;
+   display: block;
+   position: absolute;
+   bottom: 0;
+   left: 45%;
+>>>>>>> dashboard
 }
 
 .navbar .nav > li > button > a:hover {
@@ -24,6 +41,7 @@
 }
 
 .navbar#navigation {
+<<<<<<< HEAD
   border-bottom: 5px solid #e99d1a;
 
 }
@@ -43,6 +61,14 @@ ul.topbar-right li {
   list-style-type: none;
   padding-left:20px;
   padding-right:20px;
+=======
+   border-bottom: 14px solid #ef8e48;
+}
+
+#modebutton{
+    background:#6c9fd5;
+    margin-top:2em;
+>>>>>>> dashboard
 }
 
 ul.topbar-right li a{
@@ -67,12 +93,20 @@ ul.topbar-right li:hover {
 }
 
 .navbar-icon{
+<<<<<<< HEAD
   width:56px;
   height:50px;
   background-image: url("../../../../images/logo.png");
   background-size: 100%;
 }
 
+=======
+	width:100px;
+	height:90px
+}
+
+
+>>>>>>> dashboard
 /*
 
 html,body{
