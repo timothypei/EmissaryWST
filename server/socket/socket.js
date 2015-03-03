@@ -6,15 +6,36 @@ var io = require('socket.io')();
 var port = process.env.PORT || 3000;
 
 /********** Socket IO Module **********/
-exports.createServer = function(app) {
-    server = require('http').createServer(app);
-    io = require('socket.io').listen(server)
+exports.createServer = function(io_in) {
+    io = io_in;
 
-    // /* Initialize the server */
-    server.listen(app.get('port'), function () {
-      console.log('Server listening at port %d', port);
+    /*
+     * This handles the 'connection' event, which is send when the user is
+     * trying to connect a socket.
+     *
+     * Note that when the connection is established for that client,
+     * the '_admin_id' needs to be set so that the client can be added to the
+     * room and notified when changes are being made.
+     */
+    io.on('connection', function (socket) {
+        // Get the ID of the admin that has connected.
+        var adminID;
+
+        //get was deprecated so this part was commented out
+        /*socket.get('_admin_id', function (err, _admin_id) {
+            socket.join(_admin_id);
+        });*/
+        socket.emit('request_id');
+        socket.on('_admin_id', function(data) {
+            adminID = data._admin_id;
+            console.log('user connected to ' + adminID);
+            socket.join(adminID);
+        });
+
+        socket.on('disconnect', function() {
+            console.log('user disconnected from ' + adminID);
+        });
     });
-
     return server;
 }
 
@@ -59,22 +80,3 @@ var nsp = io.of('/patientQueue');
 //   secret: jwtSecret,
 //   handshake: true
 // }));
-
-/*
- * This handles the 'connection' event, which is send when the user is
- * trying to connect a socket.
- *
- * Note that when the connection is established for that client,
- * the '_admin_id' needs to be set so that the client can be added to the
- * room and notified when changes are being made.
- */
-io.on('connection', function (socket) {
-    // Get the ID of the admin that has connected.
-    var adminID;
-
-    socket.get('_admin_id', function (err, _admin_id) {
-        socket.join(_admin_id);
-    });
-
-    Console.log(adminID);
-});

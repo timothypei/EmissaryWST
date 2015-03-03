@@ -26,11 +26,6 @@ var validate = require('./config/validation');
 var app = express();
 
 /*
- * Create Socket.io server.
- */
-var server = socketIO.createServer(app);
-
-/*
  * Connect to MongoDB.
  */
 mongoose.connect(config.mongoDBUrl);
@@ -75,14 +70,28 @@ app.use('/api', theme);
  */
 app.use(errorHandler());
 
-/*
- * Start Express server.
- */
-app.listen(app.get('port'), function() {
+var server = require('http').createServer(app);
+var io = require('socket.io')(server)
+server.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode',
     app.get('port'),
     app.get('env'));
 	app.use(logger('dev'));
 });
+
+/*
+ * Start Express server.
+ */
+/*app.listen(app.get('port'), function() {
+  console.log('Express server listening on port %d in %s mode',
+    app.get('port'),
+    app.get('env'));
+	app.use(logger('dev'));
+});*/
+
+/*
+ * Create Socket.io server.
+ */
+var server = socketIO.createServer(io);
 
 module.exports = app;
