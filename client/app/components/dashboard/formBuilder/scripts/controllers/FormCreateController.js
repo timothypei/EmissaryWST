@@ -45,7 +45,6 @@ angular.module('DashboardFormBuilderModule')
       $scope.previewMode = true;
     }
     $scope.form.submitted = false;
-    angular.copy($scope.form, $scope.previewForm);
   };
 
   // deletes particular field on button click
@@ -68,7 +67,6 @@ angular.module('DashboardFormBuilderModule')
         $scope.previewMode = false;
         $scope.form.submitted = false;
       }
-      angular.copy($scope.form, $scope.previewForm);
     }, function() {
       // delete canceled
     }
@@ -98,7 +96,6 @@ angular.module('DashboardFormBuilderModule')
 
     // put new option into field_options array
     field.field_options.push(newOption);
-    angular.copy($scope.form, $scope.previewForm);
   };
 
   // delete particular option
@@ -109,7 +106,6 @@ angular.module('DashboardFormBuilderModule')
         break;
       }
     }
-    angular.copy($scope.form, $scope.previewForm);
   };
 
   // decides whether field options block will be shown (true for dropdown and radio fields)
@@ -118,12 +114,6 @@ angular.module('DashboardFormBuilderModule')
       return true;
     else
       return false;
-    angular.copy($scope.form, $scope.previewForm);
-  };
-
-  // updates preview form when default text changes
-  $scope.updateOptions = function() {
-    angular.copy($scope.form, $scope.previewForm);
   };
 
   // deletes all the fields
@@ -141,7 +131,6 @@ angular.module('DashboardFormBuilderModule')
         $scope.addField.lastAddedID = 0;
         $scope.previewMode = false;
         $scope.form.submitted = false;
-        angular.copy($scope.form, $scope.previewForm);
       }, function() {
         // reset canceled
       }
