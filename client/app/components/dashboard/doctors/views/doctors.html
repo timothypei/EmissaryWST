@@ -1,28 +1,31 @@
 <div ng-controller="SafeController" class="container" style='padding-left:5em;'>
-    <form class="form-inline col-md-offset-1">
-      <div class="form-group">
-        <label for="exampleInputName2">Name</label>
-        <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" ng-model="row.Name">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail2">Number</label>
-        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="(###)###-####" ng-model="row.PhoneNumber">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail2">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" ng-model="row.Email">
-      </div>
-      <div class="form-group">
-        <button type="button" ng-click="addEmployee(row)" class="btn btn-block btn-success" id="add-doctor">
-        <i class="glyphicon glyphicon-plus">
-        </i> Add
-    </button>
-      </div>
-    </form>
+    <h1 align="center">Employees</h1><br>
+    <div class="row">
+        <form class="form-inline col-md-10 col-md-offset-1">
+          <div class="form-group" style="margin-right:.5em;">
+            <label for="exampleInputName2">Name</label>
+            <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" ng-model="row.Name">
+          </div>
+          <div class="form-group" style="margin-right:.5em;">
+            <label for="exampleInputEmail2">Number</label>
+            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="(###)###-####" ng-model="row.PhoneNumber">
+          </div>
+          <div class="form-group" style="margin-right:.5em;">
+            <label for="exampleInputEmail2">Email</label>
+            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" ng-model="row.Email">
+          </div>
+          <div class="form-group">
+            <button type="button" ng-click="addEmployee(row)" class="btn btn-block btn-success" id="add-doctor">
+            <i class="glyphicon glyphicon-plus">
+            </i> Add
+        </button>
+          </div>
+        </form>
+    </div>
     <br>
     
     <br>
-    <div class="pre-scrollable" id="doctors-table">
+    <div id="doctors-table">
         <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
             <thead>
             <tr>
@@ -36,29 +39,35 @@
             </thead>
             <tbody>
             <tr ng-repeat="row in displayedCollection">
-                <td>
-					<!--<input type="checkbox">--> <span data-ng-hide="editMode">{{row.Name}}</span>
-					<input type="text" data-ng-show="editMode" data-ng-model="row.Name" data-ng-required />
+                <td style="padding-left:2em;">
+					<span data-ng-hide="editMode">{{row.Name}}</span>
+					<input type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Name" data-ng-required />
 		        </td>
 		        <td>
-					<input type="checkbox"> <span data-ng-hide="editMode">{{row.PhoneNumber}}</span>
-					<input type="text" data-ng-show="editMode" data-ng-model="row.PhoneNumber" data-ng-required />
+					<input type="checkbox" data-ng-hide="editMode"> <span data-ng-hide="editMode">{{row.PhoneNumber}}</span>
+					<input type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.PhoneNumber" data-ng-required />
 		        </td>
 		        <td>
-					<input type="checkbox"> <span data-ng-hide="editMode">{{row.Email}}</span>
-					<input type="text" data-ng-show="editMode" data-ng-model="row.Email" data-ng-required />
+					<input type="checkbox" data-ng-hide="editMode"> <span data-ng-hide="editMode">{{row.Email}}</span>
+					<input type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Email" data-ng-required/>
 		        </td>
                 <td>
-                <button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editRowCollection(entry)" class="btn btn-sm btn-info btn-edit">
-                    <i class="glyphicon glyphicon-pencil">
-                    </i>
-                </button>
-                <button type="submit" data-ng-show="editMode" data-ng-click="editMode = false" class="btn btn-primary">Save</button>
-            	<button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; cancel()" class="btn btn-default">Cancel</button>
-                <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger cancel">
-                    <i class="glyphicon glyphicon-remove-circle">
-                    </i>
-                </button>
+                    <button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editRowCollection(entry)" class="btn col-md-5 btn-info btn-edit" style="margin-right:.5em;">
+                        <i class="glyphicon glyphicon-pencil">
+                        </i>
+                    </button>
+                    <button type="submit" data-ng-show="editMode" data-ng-click="editMode = false" class="btn col-md-5 btn-primary"  style="margin-right:.5em;">
+                        <i class="glyphicon glyphicon-ok">
+                        </i>
+                    </button>
+                	<button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; cancel()" class="btn col-md-5 btn-default">
+                     <i class="glyphicon glyphicon-minus">
+                        </i>   
+                    </button>
+                    <button type="button" data-ng-hide="editMode" ng-click="editMode = true; removeItem(row)" class="btn col-md-5 btn-danger cancel">
+                        <i class="glyphicon glyphicon-remove">
+                        </i>
+                    </button>
                 </td>
             </tr>
             </tbody>
