@@ -1,13 +1,13 @@
 angular.module('dashboard')
-  .directive('doctorsTable', function() {
+  .directive('employees', function() {
     return {
       restrict: 'E',
-      templateUrl: 'views/components/dashboard/doctors/views/doctors.html',
-      controller: 'SafeController',
-      controllerAs: 'safeCtrl'
+      templateUrl: 'views/components/dashboard/employees/views/employees.html',
+      controller: 'EmployeeController',
+      controllerAs: 'employeeCtrl'
     };
   })
-  .controller('SafeController', ['$scope', '$window', function ($scope, $window) {
+  .controller('EmployeeController', ['$scope', '$window', function ($scope, $window) {
 // include root slecope
     $scope.rowCollection = [
         {
@@ -78,18 +78,10 @@ angular.module('dashboard')
         $scope.newField = angular.copy(field);
     };
     
-    // save edit
-    $scope.saveField = function(index) {
+    // cancel editing
+    $scope.cancel = function() {
         if ($scope.editing !== false) {
             $scope.rowCollection[$scope.editing] = $scope.newField;
-            $scope.editing = false;
-        }       
-    };
-    
-    // cancel editing FIX THIS
-    $scope.cancel = function(index) {
-        if ($scope.editing !== false) {
-            //$scope.rowCollection[$scope.editing] = $scope.newField;
             $scope.editing = false;
         }
     };
