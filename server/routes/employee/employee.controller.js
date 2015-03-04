@@ -16,7 +16,7 @@ var cors = require('cors');
 var Employee = require('../../models/Employee');
 
 exports.getAllEmployees = function(req, res) {
-  Employee.find({}, function(err, result) {
+  Employee.find({_admin_id : req.query._admin_id}, function(err, result) {
     if(err){
       res.status(400).send('There was a problem fetching all of the users');
       return;
