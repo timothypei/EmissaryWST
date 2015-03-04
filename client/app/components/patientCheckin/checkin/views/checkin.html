@@ -6,20 +6,14 @@
   	<link rel="stylesheet" href="css/patient_mode.css">
 </head>
 <body ng-app="checkin">	
-	<div ng-controller="CheckinController as checkin">
-		<div id="container">
-			<div id="form_holder">
-				<form ng-submit="login()">	
-					<h1>Welcome</h1>
-					<h2>Please sign in below</h2>	
-					<input ng-model="user.email" type="name" placeholder="Name">		
-					<input type="email" ng-model="user.email" placeholder="Email">	
-					<input type="submit" value="Check In">
+	<div ng-controller="CheckinController">
+		
+		<div class="form_container">
 			
-				</form>
-				
-			</div>
-
+		</div>
+		<div id = "settings">
+			<a href=""><img id="icon" src="images/settings.png"></a>
+			<h1>{{clock | date:'hh:mm:ss a'}}</h1>
 		</div>
 	</div>
 </body>
