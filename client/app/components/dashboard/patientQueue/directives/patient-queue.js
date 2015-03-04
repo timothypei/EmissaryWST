@@ -132,6 +132,12 @@ angular.module('dashboard')
                 return $scope.selectedPatient; 
             }
           }
+        }).result.then(function(result){
+          $scope.row = result;
+          var index = $scope.rowCollection.indexOf($scope.row);
+          if (index !== -1) {
+              $scope.rowCollection.splice(index, 1);
+          }
         });
     };
 

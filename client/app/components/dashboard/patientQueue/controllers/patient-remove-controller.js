@@ -3,12 +3,12 @@
 angular.module('dashboard')
 	.controller('PatientRemoveController', function ($scope, $modalInstance, item) {
 
-		//$scope.selectedPatient = item;
+		$scope.selectedPatient = item;
 
 		$scope.ok = function (item) {
 			//$scope.selectedPatient.Name = '';
 			//$scope.item.Name = '';
-            $modalInstance.close();
+            $modalInstance.close($scope.selectedPatient);
 		};
 
 		$scope.cancel = function () {
