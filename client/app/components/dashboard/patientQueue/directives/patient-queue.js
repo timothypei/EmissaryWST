@@ -86,38 +86,8 @@ angular.module('dashboard')
       }
     ];
 
-    /*
-    //add patient info
-    $scope.addPatient = function(row){
-      if(row != null){
-        $scope.row.Time = new Date().toLocaleTimeString().replace(/:\d+ /, ' '); 
-        $scope.rowCollection.push(row);
-        $scope.row = {};
-        id++;
-      }
-    };
-    */
-
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
     $scope.displayedCollection = [].concat($scope.rowCollection);
-
-    //edit patient information
-    /*
-    $scope.openPatientModal = function(row){
-        var modalInstance = $modal.open({
-          templateUrl: 'views/components/dashboard/patientQueue/views/patient-modal.html',
-          controller: 'PatientModalController',
-          size: 'md',
-          backdrop: true,
-          resolve: {
-            item: function () {
-              $scope.doctor = 
-              $scope.selectedPatient = row;
-              return $scope.selectedPatient;
-            }
-          }
-        });
-    };*/
 
     //remove to the real data holder modal
     $scope.removeItem = function(row){
@@ -140,12 +110,4 @@ angular.module('dashboard')
           }
         });
     };
-
-    //delete row
-    /*$scope.deleteRow = function(row){
-      var index = $scope.rowCollection.indexOf(row);
-        if (index !== -1) {
-            $scope.rowCollection.splice(index, 1);
-        }
-    }*/
 }]);

@@ -6,8 +6,6 @@ angular.module('dashboard')
 		$scope.selectedPatient = item;
 
 		$scope.ok = function (item) {
-			//$scope.selectedPatient.Name = '';
-			//$scope.item.Name = '';
             $modalInstance.close($scope.selectedPatient);
 		};
 
