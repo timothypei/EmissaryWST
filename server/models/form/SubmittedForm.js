@@ -7,7 +7,7 @@ var submittedForm = new mongoose.Schema({
   form : {type: Object},
   firstName : {type: String},
   lastName : {type: String},
-  email : {type: String},
+  patientEmail : {type: String},
   date : {type: Date, default: Date.now},
   _admin_id: { type: Schema.Types.ObjectId, ref: 'AdminUser', required: true }
 
