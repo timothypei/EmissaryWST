@@ -5,7 +5,6 @@
  */
 var express = require('express');
 var router = express.Router();
-var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -47,6 +46,7 @@ mongoose.connection.on('error', function() {
  */
 app.set('port', config.port);
 
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../dist')));
@@ -63,9 +63,14 @@ var product = require('./routes/product');
 var theme = require('./routes/theme');
 var auth = require('./routes/auth');
 
+/*
+ * Disable api auth if were are in dev mode
+ */
+if(app.get('env') !== 'development') {
+  app.use('/api/*', validate);
+}
 
 app.use('/auth', auth);
-app.use('/api/*', validate);
 app.use('/api', user);
 app.use('/api', product);
 app.use('/api', theme);
@@ -82,7 +87,6 @@ app.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode',
     app.get('port'),
     app.get('env'));
-	app.use(logger('dev'));
 });
 
 module.exports = app;

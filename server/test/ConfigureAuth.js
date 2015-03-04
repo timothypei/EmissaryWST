@@ -21,7 +21,9 @@ function setupUser(done, isEmployee) {
   var token;
   var admin;
 
-  var email = "test@test.com";
+  // Add random number to email to reduce concurrency issue chances on 
+  // duplicate unique key errors.
+  var email = "test" + Math.floor(Math.random() * 100000) + "@test.com";
   var password = "test_password";
 
   var url = "localhost:" + config.port;
@@ -67,7 +69,7 @@ function setupUser(done, isEmployee) {
         token: token
       });
     });
-  };
+  }
     
 }
 

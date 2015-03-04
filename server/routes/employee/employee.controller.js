@@ -16,11 +16,13 @@ var cors = require('cors');
 var Employee = require('../../models/Employee');
 
 exports.getAllEmployees = function(req, res) {
-  Employee.find({_admin_id : req.query._admin_id}, function(err, result) {
+  console.log("FUCK", req.body._admin_id);
+  Employee.find({_admin_id : req.body._admin_id}, function(err, result) {
     if(err){
       res.status(400).send('There was a problem fetching all of the users');
       return;
     }
+    console.log("FUCK", result)
     return res.json(result);
   });
 };
@@ -37,7 +39,7 @@ exports.getById = function(req, res) {
 
 exports.insert = function(req, res) {
   var employee;
-  if(!req.body.name || !req.body.email || !req.body.phone_number || !req.body._admin)
+  if(!req.body.name || !req.body.email || !req.body.phone_number || !req.body._admin_id)
     return res.status(400).json({error: "Please specify name, email, phone_number, and _admin_id"})
   employee = new Employee({
     name: req.body.name,
