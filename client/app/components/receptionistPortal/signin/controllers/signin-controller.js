@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('signin')
-  .controller('SigninController', ['$scope', '$location', 'SigninService', function($scope, $location, SigninService){
+  .controller('SigninController', ['$scope', '$rootScope', '$location', 'SigninService', function($scope, $rootScope, $location, SigninService){
   	$scope.user = {email: '', password: ''};
     $scope.errMessage ='';
     //this function is called when we press the login button
@@ -14,15 +14,13 @@ angular.module('signin')
         //calls the API to login
   		  SigninService.login($scope.user)
       	 .success(function(data){
-          var cookie=data;
-          console.log("success");
-          console.log('fjdakslfjs');
-          console.log(data);
           if(data=='Oops! Wrong password'){
             $scope.errMessage = 'Invalid Email/Password'; 
           }
             //redirects to the person's home page when a success
           else{  
+           $rootScope.token = data.token;
+           $rootScope.email = $scope.user.email;
         	 $location.path('../../../dashboard/views/dashboard.html');
         	 return data;
           }

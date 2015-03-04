@@ -25,6 +25,7 @@ h1{
 }
 
 #settings{
-	margin-top: 33%;
+	bottom: 60px;
 	margin-left: 5%;
+	position: absolute;
 }

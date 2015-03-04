@@ -66,5 +66,16 @@ angular.module('robobetty',
     url: '/thankyou',
     templateUrl: 'views/components/receptionistPortal/register/views/thankyou.html'
   });
-});
+})
+  .run(['$rootScope', '$injector', function($rootScope, $injector){
+    $injector.get("$http").defaults.transformRequest = function(data, headersGetter) 
+    { 
+      if ($rootScope.token) headersGetter()['token'] = $rootScope.token;
+      if ($rootScope.email) headersGetter()['email'] = $rootScope.email; 
+      if (data) 
+        { 
+            return angular.toJson(data); 
+          }
+    } 
+  }]);
 
