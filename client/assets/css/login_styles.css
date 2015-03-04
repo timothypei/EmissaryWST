@@ -53,7 +53,7 @@ html, body {
 #container {
     position: relative;
     width: 357px;
-    background: #F7F7F7 ;
+    background: #F7F7F7;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -61,7 +61,6 @@ html, body {
     margin-top: 10%;
     margin-bottom: 10%;
     box-shadow: 0 1px 2px 3px rgba(0, 0, 0, .1);
-
 }
 #lower {
 	background: #F7F7F7;
