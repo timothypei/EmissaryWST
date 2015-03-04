@@ -14,15 +14,20 @@ describe('Product Service', function() {
 
     beforeEach(function() {
       http
-        .expectGET('https://blue-jay.herokuapp.com/api/products')
-        .respond(200, {name: "fooo"});
-      ProductService.getProducts();
-      http.flush();
+        .when('GET', 'https://blue-jay.herokuapp.com/api/products')
+        .respond(200, {name: 'product one'});
     });
 
-    it('it should call http get', function() {
+    afterEach(function(){
       http.verifyNoOutstandingExpectation();
       http.verifyNoOutstandingRequest();
+    });
+
+
+    it('http get should get called', function() {
+      http.expectGET('https://blue-jay.herokuapp.com/api/products');
+      ProductService.getProducts();
+      http.flush();
     });
 
   });
