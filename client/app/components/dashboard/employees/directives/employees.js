@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('dashboard')
   .directive('employees', function() {
     return {
@@ -61,6 +63,8 @@ angular.module('dashboard')
     ];
     $scope.newField = {};
     $scope.editing = false;
+    //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
+    $scope.displayedCollection = [].concat($scope.rowCollection);
 
     //add employee info
     $scope.addEmployee = function(row){
@@ -69,20 +73,17 @@ angular.module('dashboard')
         id++;
     };
 
-    //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
-    $scope.displayedCollection = [].concat($scope.rowCollection);
-
     //edit a row
-    $scope.editRowCollection = function(field) {
-        $scope.editing = $scope.rowCollection.indexOf(field);
-        $scope.newField = angular.copy(field);
+    $scope.editRowCollection = function(row) {
+        $scope.editing = $scope.rowCollection.indexOf(row);
+        $scope.newField = angular.copy(row);
     };
     
     // cancel editing
-    $scope.cancel = function() {
-        if ($scope.editing !== false) {
+    $scope.cancel = function(row) {
+        if ($scope.row.editing !== false) {
             $scope.rowCollection[$scope.editing] = $scope.newField;
-            $scope.editing = false;
+            $scope.row.editing = false;
         }
     };
 

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('dashboard')
   .directive('patientQueue', function() {
     return {
@@ -118,7 +120,7 @@ angular.module('dashboard')
     };*/
 
     //remove to the real data holder modal
-    $scope.removeItem = function removeItem(row){
+    $scope.removeItem = function(row){
         var modalInstance = $modal.open({
           templateUrl: 'views/components/dashboard/patientQueue/views/patient-remove.html',
           controller: 'PatientRemoveController',
@@ -134,7 +136,7 @@ angular.module('dashboard')
     };
 
     //delete row
-    /*$scope.deleteRow = function deleteRow(row){
+    /*$scope.deleteRow = function(row){
       var index = $scope.rowCollection.indexOf(row);
         if (index !== -1) {
             $scope.rowCollection.splice(index, 1);

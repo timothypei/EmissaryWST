@@ -1,13 +1,13 @@
+'use strict';
+
 angular.module('dashboard')
 	.controller('PatientRemoveController', function ($scope, $modalInstance, item) {
 
-		$scope.selectedPatient = item;
+		//$scope.selectedPatient = item;
 
-		$scope.ok = function (row) {
-			var index = $scope.rowCollection.indexOf(row);
-        	if (index !== -1) {
-            	$scope.rowCollection.splice(index, 1);
-        	}
+		$scope.ok = function (item) {
+			//$scope.selectedPatient.Name = '';
+			//$scope.item.Name = '';
             $modalInstance.close();
 		};
 

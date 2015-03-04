@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('dashboard')
 	.controller('PatientModalController', function ($scope, $modalInstance, item) {
 

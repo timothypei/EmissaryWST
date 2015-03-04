@@ -49,25 +49,25 @@
 		        </td>
 		        <td>
 					<input type="checkbox" data-ng-hide="editMode"> <span data-ng-hide="editMode">{{row.Email}}</span>
-					<input type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Email" data-ng-required/>
+					<input type="email" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Email" data-ng-required/>
 		        </td>
                 <td>
-                    <button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editRowCollection(entry)" class="btn col-md-5 btn-info btn-edit" style="margin-right:.5em;">
+                    <button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editRowCollection(row)" class="btn col-md-5 btn-info btn-edit" style="margin-right:.5em;">
                         <i class="glyphicon glyphicon-pencil">
                         </i>
-                    </button>
-                    <button type="submit" data-ng-show="editMode" data-ng-click="editMode = false" class="btn col-md-5 btn-primary"  style="margin-right:.5em;">
-                        <i class="glyphicon glyphicon-ok">
-                        </i>
-                    </button>
-                	<button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; cancel()" class="btn col-md-5 btn-default">
-                     <i class="glyphicon glyphicon-minus">
-                        </i>   
                     </button>
                     <button type="button" data-ng-hide="editMode" ng-click="editMode = true; removeItem(row)" class="btn col-md-5 btn-danger">
                         <i class="glyphicon glyphicon-remove">
                         </i>
                     </button>
+                    <button type="submit" popover="Press ctrl+z or command+z to undo changes" popover-trigger="mouseenter" data-ng-show="editMode" data-ng-click="editMode = false" class="btn col-md-10 btn-primary"  > <!--style="margin-right:.5em;">-->
+                        <i class="glyphicon glyphicon-ok">
+                        </i>
+                    </button>
+                    <!--<button type="button" data-ng-show="editMode" data-ng-click="editMode = false;" class="btn col-md-5 btn-default">
+                     <i class="glyphicon glyphicon-minus">
+                        </i>   
+                    </button>-->
                 </td>
             </tr>
             </tbody>
