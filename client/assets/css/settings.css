@@ -5,6 +5,8 @@
     width: 700px;*/
     margin: auto;
     position: absolute;
+    margin-left: 275px;
+    margin-top: 68px;
     
 }
 
@@ -54,5 +56,5 @@
 .formfield{
     position: absolute;
     margin-left: 300px;
-    margin-top: 150px;
+    margin-top: 75px;
 }

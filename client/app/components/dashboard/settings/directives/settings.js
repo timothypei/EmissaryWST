@@ -1,4 +1,4 @@
-angular.module('settings', function() { 
+/*angular.module('settings', function() { 
   return { 
     restrict: 'E', 
     scope: { 
@@ -6,4 +6,4 @@ angular.module('settings', function() {
     }, 
     templateUrl: 'js/directives/settings.html' 
   }; 
-});
+});*/

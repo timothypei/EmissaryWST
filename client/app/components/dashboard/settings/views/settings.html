@@ -4,16 +4,17 @@
 </head>
 
 <body ng-app="settings">
-	<div class="main" ng-controller="SettingsController as regCtrl">
+	<div class="main" ng-controller="SettingsController">
 		<div class="options">
 			<h1>Change Password</h1>
 			<form ng-submit="update()">
 				<div class="formfield">
 					<b>Password: </b> <input type="password" placeholder="Enter Password" ng-model="user.password"></br>
-					<b>New Password: </b> <input type="newPassword" placeholder="Enter new Password" ng-model="user.newPassword">
+                <b>New Password: </b> <input type="password" placeholder="Enter new Password" ng-model="user.newpassword">                 </br>
+            <b>Confirm Password: </b> <input type="password" placeholder="Confirm New Password" ng-model="pass"> </br>
+            <p id="error_message">{{ errMessage }} </p></br>
+                <input type="submit" value="Submit"></a>
 				</div>
-					<p id="error_message">{{ errMessage }} </p>
-					<input type="submit" value="Submit"></a>
 			</form>
 		</div>
 	</div>  

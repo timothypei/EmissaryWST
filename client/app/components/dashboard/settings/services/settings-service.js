@@ -1,9 +1,15 @@
 'use strict';
 
 angular.module('settings')
-  .service('SettingsService', ['$http', function($http) {
+  .service('SettingsService', ['$http', '$rootScope', function($http, $rootScope) {
   	  //Works with the settings API to post to server
       this.update = function(user) {
-        return $http.put('/auth/setting/:user', user); // TODO how to pass parameter? needs to be email address
+      	var param = $rootScope.email;
+      	console.log(user);
+      	var url= '/auth/setting/'+param;
+      	console.log('url:'+url);
+
+        return $http.put(url, user); // TODO how to pass parameter? needs to be email address
+
       };
   }]);
