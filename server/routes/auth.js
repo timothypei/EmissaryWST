@@ -46,10 +46,10 @@ router.post('/login', function(req, res) {
 
     var newToken = jwt.encode(req.body.email, user.generateHash(new Date().getTime()));
     user.token = newToken;
-    user.save(function(err) {
+    user.save(function(err, admin) {
       if(err)
         return res.status(400);
-      return res.json({token: newToken});
+      return res.json({token: newToken, admin_id: admin._id});
     });
 
   });

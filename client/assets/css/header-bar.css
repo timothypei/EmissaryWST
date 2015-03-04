@@ -23,9 +23,14 @@
  text-decoration: none;
 }
 
+/*Making it fixed position*/
 .navbar#navigation {
   border-bottom: 5px solid #e99d1a;
-
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 
