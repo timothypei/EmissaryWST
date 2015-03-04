@@ -15,11 +15,20 @@ angular.module('signin')
   		  SigninService.login($scope.user)
       	 .success(function(data){
           var cookie=data;
+          console.log("success");
+          console.log('fjdakslfjs');
+          console.log(data);
+          if(data=='Oops! Wrong password'){
+            $scope.errMessage = 'Invalid Email/Password'; 
+          }
             //redirects to the person's home page when a success
+          else{  
         	 $location.path('../../../dashboard/views/dashboard.html');
         	 return data;
+          }
       	 })
       	 .error(function(err){
+          console.log("failure");
        	  	$scope.errMessage = 'Invalid Email/Password'; 
        	  	return err;
      	  });

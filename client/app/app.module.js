@@ -10,7 +10,9 @@ angular.module('robobetty',
   'signin',
   'register',
   'thankyou',
-  'DashboardFormBuilderModule'
+  'DashboardFormBuilderModule',
+   'settings',
+   'checkin'
   ])
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -55,6 +57,10 @@ angular.module('robobetty',
   .state('register', {
     url: '/register',
     templateUrl: 'views/components/receptionistPortal/register/views/register.html'
+  })
+  .state('checkin', {
+    url: '/checkin',
+    templateUrl: 'views/components/patientCheckin/checkin/views/checkin.html'
   })
   .state('thankyou', {
     url: '/thankyou',
