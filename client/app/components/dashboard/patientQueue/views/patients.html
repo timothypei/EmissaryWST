@@ -22,19 +22,19 @@
         <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
             <thead>
             <tr>
+                <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+            </tr>
+            <tr>
                 <th st-sort="Name">Name</th>
                 <th st-sort="Doctor">Doctor</th>
                 <th st-sort="Time">Check-in Time</th>
             </tr>
-            <tr>
-                <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
-            </tr>
             </thead>
             <tbody>
             <tr ng-repeat="row in displayedCollection" ng-click="openPatientModal(row)">
-                <td><input type="checkbox"> {{row.Name}}</td>
-                <td><input type="checkbox"> {{row.Doctor}}</td>
-                <td><input type="checkbox"> {{row.Time}}</td>
+                <td> {{row.Name}}</td>
+                <td> {{row.Doctor}}</td>
+                <td> {{row.Time}}</td>
                 <td>
                 <button type="button" ng-click="" class="btn btn-sm btn-info btn-edit">
                     <i class="glyphicon glyphicon-pencil">
