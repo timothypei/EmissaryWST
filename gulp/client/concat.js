@@ -10,3 +10,12 @@ gulp.task('concat', function() {
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest('./dist/'));
 });
+
+/* Concatenate all css files into bundle.css and place
+ * in dist/assets folder
+ */
+gulp.task('concat:css', function() {
+  return gulp.src(['./client/assets/**/*.css'])
+    .pipe(concat('bundle.css'))
+    .pipe(gulp.dest('./dist/assets'));
+});
