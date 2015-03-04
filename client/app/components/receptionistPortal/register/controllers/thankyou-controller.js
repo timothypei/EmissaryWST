@@ -2,7 +2,7 @@
 
 angular.module('thankyou')
   .controller('ThankYouController', ['$location', '$timeout', function($location, $timeout) {
-    $timeout(redirectToSignin, 15000);
+    $timeout(redirectToSignin, 3000);
     
     function redirectToSignin() {
       $location.path('/signin')
