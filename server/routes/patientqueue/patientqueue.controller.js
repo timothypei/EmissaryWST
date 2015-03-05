@@ -7,7 +7,7 @@ var express = require('express');
 var router = express.Router();
 
 var Email = require('../../notification/email');
-var Text = require('../../notification/text');
+var TextModel = require('../../notification/text');
 var Socket = require('../../socket/socket');
 
 var PatientQueue = require('../../models/PatientQueue');
@@ -47,7 +47,7 @@ exports.checkin = function(req, res) {
                     };
 
                     Email.sendEmail(employees, function(){respond();});
-                    Text.sendText(employees, function(){respond();});
+                    TextModel.sendText(employees, function(){respond();});
                 }
             );
 

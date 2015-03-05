@@ -38,14 +38,10 @@ exports.sendText = function(employees, done) {
   if(employees === null || (employees.length <= 0)) {
     if(done) done();
   }
-  // iterate through all employees 
-  for (var index = 0; index < employees.length; index++) {
-    // create text message object that will be sent
-    client.messages.create({  
-      to: employees[index].phone_number,
-      from: "+16266711727",    
-      body:'Your patient is ready.'
-    }, function(error, message) { 
+
+  var len = employees.length;
+  var callback = function(i) {
+    return function(error, message) { 
       if(error) {
         console.log(error);
         console.log("Error occurred sending text");
@@ -54,7 +50,16 @@ exports.sendText = function(employees, done) {
         //res.json({message: "Text was sent."});
         console.log("Text was sent.");
       }
-      if(done) done();
-    });
+      if(done && len-1 == i) done();
+    };
+  };
+  // iterate through all employees 
+  for (var index = 0; index < employees.length; index++) {
+    // create text message object that will be sent
+    client.messages.create({  
+      to: employees[index].phone_number,
+      from: "+16266711727",    
+      body:'Your patient is ready.'
+    }, callback(index));
   }
 };
