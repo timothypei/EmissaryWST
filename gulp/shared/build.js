@@ -11,7 +11,7 @@ gulp.task('htmlify', ['copy:views'],function(){
     .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('ng-annotate', ['dist'], function () {
+gulp.task('ng-annotate', ['concat:js'], function () {
   return gulp.src('dist/bundle.js')
     .pipe(ngAnnotate())
     .pipe(gulp.dest('./dist/'));
@@ -21,9 +21,9 @@ gulp.task('ng-annotate', ['dist'], function () {
  * it first using concat:css
  */
 gulp.task('minify:css', ['concat:css'], function() {
-  return gulp.src('./dist/assets/bundle.css')
+  return gulp.src('./dist/bundle.css')
     .pipe(minifyCSS())
-    .pipe(gulp.dest('./dist/assets/'))
+    .pipe(gulp.dest('./dist/'))
 });
 
 /* Minify bundle.js */
@@ -37,4 +37,4 @@ gulp.task('minify:js', ['ng-annotate'], function() {
 gulp.task('build:dev', ['dist']);
 
 /* Build the app and minfy */
-gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlify']);
+gulp.task('build:prod', ['dist', 'minify:js', 'minify:css', 'htmlify']);

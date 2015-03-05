@@ -5,10 +5,14 @@ var concat = require('gulp-concat');
  * code into one file the bundle.js and place it
  * in the dist folder
  */
-gulp.task('concat', function() {
-  return gulp.src(['./client/app/app.module.js', './client/app/**/*.module.js', './client/app/**/*.js'])
-    .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('./dist/'));
+gulp.task('concat:js', function() {
+  return gulp.src([
+    './client/app/app.module.js',
+    './client/app/**/*.module.js',
+    './client/app/**/*.js'
+  ])
+  .pipe(concat('bundle.js'))
+  .pipe(gulp.dest('./dist/'));
 });
 
 /* Concatenate all css files into bundle.css and place it
@@ -17,5 +21,5 @@ gulp.task('concat', function() {
 gulp.task('concat:css', function() {
   return gulp.src(['./client/assets/**/*.css'])
     .pipe(concat('bundle.css'))
-    .pipe(gulp.dest('./dist/assets'));
+    .pipe(gulp.dest('./dist/'));
 });
