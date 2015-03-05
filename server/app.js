@@ -12,10 +12,7 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
-var winston = require('winston');
-var expressWinston = require('express-winston');
 var toLog = require("./logging/toLog");
-
 
 /*
  * MongoDb configuration.
@@ -28,38 +25,6 @@ var validate = require('./config/validation');
  */
 var app = express();
 
-app.use(expressWinston.logger({
-      transports: [
-        new winston.transports.File({
-          level: 'info',
-	  name: 'info-file',
-          filename: __dirname + '/logging/logs/serverinfo.log',
-          json: true,
-          maxsize: 5242880,
-          maxFiles: 5,
-          colorize: true
-        }),
-        new winston.transports.File({
-          level: 'error',
-	  name: 'error-file',
-          filename: __dirname + '/logging/logs/servererror.log',
-          json: true,
-          maxsize: 5242880,
-          maxFiles: 5,
-          colorize: true
-        }),
-        new winston.transports.File({
-          level: 'debug',
-	  name: 'debug-file',
-          filename: __dirname + '/logging/logs/serverdebug.log',
-          json: true,
-          maxsize: 5242880,
-          maxFiles: 5,
-          colorize: true
-        })
-       ],
-    }));
-
 
 
 /*
@@ -68,22 +33,25 @@ app.use(expressWinston.logger({
 mongoose.connect(config.mongoDBUrl);
 mongoose.connection.on('connected', function() {
   console.log('MongoDB connected succesfully at: ' + config.mongoDBUrl);
-  toLog.info('MongoDB connected succesfully at: ' + config.mongoDBUrl);
+
 });
 
 mongoose.connection.on('error', function() {
   console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
-  toLog.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
+
 });
 
 /*
  * Express configuration.
  */
 app.set('port', config.port);
-
+app.use(toLog);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../dist')));
+app.use(logger('dev'));
+
+
 
 
 require('./routes')(app);
@@ -117,10 +85,6 @@ app.listen(app.get('port'), function() {
   console.info('Express server listening on port %d in %s mode',
     app.get('port'),
     app.get('env'));
-  toLog.info('Express server listening on port %d in %s mode',
-    app.get('port'),
-    app.get('env'));
-	app.use(logger('dev'));
 
 
 });
