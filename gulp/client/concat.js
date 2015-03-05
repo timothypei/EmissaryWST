@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 
 /* This will create concatenate all our angular
- * code into one file the bundle.js and palce it
+ * code into one file the bundle.js and place it
  * in the dist folder
  */
 gulp.task('concat', function() {
@@ -11,7 +11,7 @@ gulp.task('concat', function() {
     .pipe(gulp.dest('./dist/'));
 });
 
-/* Concatenate all css files into bundle.css and place
+/* Concatenate all css files into bundle.css and place it
  * in dist/assets folder
  */
 gulp.task('concat:css', function() {

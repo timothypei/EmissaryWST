@@ -17,11 +17,13 @@ gulp.task('ng-annotate', ['dist'], function () {
     .pipe(gulp.dest('./dist/'));
 });
 
-/* Minify all css files */
-gulp.task('minify:css', ['dist'], function() {
-  return gulp.src('./dist/css/*.css')
+/* Minify bundle.css. If it doesn't exist, create 
+ * it first using concat:css
+ */
+gulp.task('minify:css', ['concat:css'], function() {
+  return gulp.src('./dist/assets/bundle.css')
     .pipe(minifyCSS())
-    .pipe(gulp.dest('./dist/css/'))
+    .pipe(gulp.dest('./dist/assets/'))
 });
 
 /* Minify bundle.js */
