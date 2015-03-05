@@ -9,8 +9,8 @@ angular.module('dashboard')
       controllerAs: 'employeeCtrl'
     };
   })
-  .controller('EmployeeController', ['$scope', '$window', function ($scope, $window) {
-// include root slecope
+  .controller('EmployeeController', ['$scope', '$window', '$modal', function ($scope, $window, $modal) {
+    // include root slecope
     $scope.rowCollection = [
         {
             id: 1,
@@ -28,13 +28,13 @@ angular.module('dashboard')
             id: 3,
             Name: "Andrew Du",
             PhoneNumber: "(019)348-8210",
-            Email: "adu@ucsd.edu"
+            Email: "angelique@ucsd.edu"
         },
         {
             id: 4,
-            Name: "Tim Kua",
+            Name: "Timmy Kua",
             PhoneNumber: "(932)231-1133",
-            Email: "tkua@ucsd.edu"
+            Email: "tikua@ucsd.edu"
         },
         {
             id: 5,
@@ -81,10 +81,8 @@ angular.module('dashboard')
     
     // cancel editing
     $scope.cancel = function(row) {
-        if ($scope.row.editing !== false) {
-            $scope.rowCollection[$scope.editing] = $scope.newField;
-            $scope.row.editing = false;
-        }
+    	$scope.rowCollection[$scope.editing] = $scope.newField;
+    	$scope.displayedCollection = $scope.rowCollection;
     };
 
     //remove to the real data holder
@@ -94,4 +92,26 @@ angular.module('dashboard')
             $scope.rowCollection.splice(index, 1);
         }
     };
+
+    $scope.submitForm = function(row){
+    	$scope.rowCollection.push(row);
+      $scope.row = {};
+      $scope.addForm.name.$setPristine();
+      $scope.addForm.number.$setPristine();
+      $scope.addForm.email.$setPristine();
+    }
+
+    $scope.openModal = function(){
+    	var modalInstance = $modal.open({
+    		templateUrl: 'views/components/dashboard/employees/views/employees-modal.html',
+    		controller: 'EmployeeModalController',
+    		size: 'md',
+    		backdrop: true,
+    		resolve: {}
+    	}).
+    	result.then(function(result){
+    		$scope.rowCollection.push(result);
+    	});
+    }
+
 }]);

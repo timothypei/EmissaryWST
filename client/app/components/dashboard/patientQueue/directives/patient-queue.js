@@ -91,23 +91,23 @@ angular.module('dashboard')
 
     //remove to the real data holder modal
     $scope.removeItem = function(row){
-        var modalInstance = $modal.open({
-          templateUrl: 'views/components/dashboard/patientQueue/views/patient-remove.html',
-          controller: 'PatientRemoveController',
-          size: 'md',
-          backdrop: true,
-          resolve: {
-            item: function () {
-                $scope.selectedPatient = row;
-                return $scope.selectedPatient; 
-            }
+      var modalInstance = $modal.open({
+        templateUrl: 'views/components/dashboard/patientQueue/views/patient-remove.html',
+        controller: 'PatientRemoveController',
+        size: 'md',
+        backdrop: true,
+        resolve: {
+          item: function () {
+            $scope.selectedPatient = row;
+            return $scope.selectedPatient; 
           }
-        }).result.then(function(result){
-          $scope.row = result;
-          var index = $scope.rowCollection.indexOf($scope.row);
-          if (index !== -1) {
-              $scope.rowCollection.splice(index, 1);
-          }
-        });
+        }
+      }).result.then(function(result){
+        $scope.row = result;
+        var index = $scope.rowCollection.indexOf($scope.row);
+        if (index !== -1) {
+          $scope.rowCollection.splice(index, 1);
+        }
+      });
     };
 }]);
