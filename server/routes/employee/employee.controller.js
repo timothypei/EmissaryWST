@@ -6,6 +6,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var exports = module.exports;
 
 /* need this to enable cross origin resource sharing.If disabled, we might
  * not need this later. This is just to get the example to work
@@ -22,7 +23,7 @@ exports.getAllEmployees = function(req, res) {
       res.status(400).send('There was a problem fetching all of the users');
       return;
     }
-    console.log("FUCK", result)
+    console.log("FUCK", result);
     return res.json(result);
   });
 };
@@ -40,7 +41,7 @@ exports.getById = function(req, res) {
 exports.insert = function(req, res) {
   var employee;
   if(!req.body.name || !req.body.email || !req.body.phone_number || !req.body._admin_id)
-    return res.status(400).json({error: "Please specify name, email, phone_number, and _admin_id"})
+    return res.status(400).json({error: "Please specify name, email, phone_number, and _admin_id"});
   employee = new Employee({
     name: req.body.name,
     email: req.body.email,

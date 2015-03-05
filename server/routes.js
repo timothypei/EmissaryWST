@@ -15,10 +15,10 @@ module.exports = function(app) {
   app.use('/api/employee'     , r('./routes/employee'));
 
 
-  app.use('/api/patient'      , r('./routes/patientqueue'))
+  app.use('/api/patient'      , r('./routes/patientqueue'));
   //app.use('/auth'             , r('./routes/auth'));
   //app.use('/api/*'            , r('./config/validation'));
-  app.use('/employee'           , r('./routes/employee/auth'))
+  app.use('/employee'           , r('./routes/employee/auth'));
 
   // All other routes should redirect to the index.html
   /*app.route('/*')

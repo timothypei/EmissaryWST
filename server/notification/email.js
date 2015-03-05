@@ -5,6 +5,7 @@ var router = express.Router();
 var bodyparser = require('body-parser');
 var nodemailer = require("nodemailer");
 
+var exports = module.exports;
 exports.template = {};
 
 // create reusable transporter object from company email
@@ -35,8 +36,25 @@ exports.template.sendEmail = function(req, res) {
 // sendEmail: Send email to employees when patient is checked in.
 
 exports.sendEmail = function(employees, done) {
+  if(employees === null || (employees.length <= 0)) {
+    if(done) done();
+  }
+  var len = employees.length;
+  var callback = function(i) {
+    return function(error, info){
+      if(error){
+        console.log(error);
+        console.log("Error occurred sending email");
+        //res.json({message: "Error occurred sending email"});
+      }else{
+        console.log("Email was sent.");
+        //res.json({message : "Email was sent." });
+      }
+      if(done && len-1 === i) done();
+    };
+  };
   // iterate through all employees
-  if(!employees || !(employees.length > 0))
+  if(employees === null || (employees.length <= 0));
     if(done) done();
   for (var index = 0; index < employees.length; index++) {
     // create the email object that will be sent
@@ -46,19 +64,9 @@ exports.sendEmail = function(employees, done) {
       subject: "Patient is ready", // Subject line
       text: "Your patient is here.", // plaintext body
       html: "<b>Your patient is here.</b>" // html body
-    }
+    };
 
     // send mail with defined transport object
-    transporter.sendMail(mailOptions, function(error, info){
-      if(error){
-        console.log(error);
-        console.log("Error occurred sending email");
-        //res.json({message: "Error occurred sending email"});
-      }else{
-        console.log("Email was sent.");
-        //res.json({message : "Email was sent." });
-      }
-      if(done) done();
-    });
+    transporter.sendMail(mailOptions, callback(index));
   }
-}
+};

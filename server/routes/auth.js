@@ -4,6 +4,7 @@
  * This module is meant to house all of the API
  * routes that pertain to authentication of admins
  */
+var Employee = require('../../models/Employee');
 var express = require('express');
 var router = express.Router();
 

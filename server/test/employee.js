@@ -1,6 +1,7 @@
 var request = require('supertest');
 
 var config = require('../config/config');
+var should = require('chai').should();
 
 // Wrapper that creates admin user to allow api calls
 var ConfigureAuth = require('./ConfigureAuth');
@@ -42,7 +43,7 @@ describe("Employee", function() {
             })
             .end(function(err, res){
               if(err)
-                throw(err)
+                throw(err);
               //console.log(err);
               //console.log(res);
               //res.body.should.have.property('_admin_id').and.be.equal(''+credentials.admin._id);
@@ -91,8 +92,10 @@ describe("Employee", function() {
                            
                 //console.log("RESPONSE", res)
                 res.body.should.be.instanceof(Object);
-                res.body.should.not.be.empty;
-                res.body.should.exist;
+                //res.body.should.not.be.empty;
+                should.not.be.empty(res.body);
+                //res.body.should.exist;
+                should.exist(res.body);
                 res.body.should.have.length.of.at.least(1);
                 res.body.should.be.an.instanceof(Array);
 

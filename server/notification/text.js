@@ -13,6 +13,7 @@ var authToken = '452f1f1d86c183097a96db390ca55590';
  
 //require the Twilio module and create a REST client 
 var client = require('twilio')(accountSid, authToken); 
+var exports = module.exports;
 
 /*
 exports.template.sendText = function(req, res) {
@@ -34,7 +35,7 @@ exports.template.sendText = function(req, res) {
 
 // sendText: Send text message to employees when patient is checked in.
 exports.sendText = function(employees, done) {
-  if(!employees || !(employees.length > 0)) {
+  if(employees === null || (employees.length <= 0)) {
     if(done) done();
   }
   // iterate through all employees 
@@ -56,4 +57,4 @@ exports.sendText = function(employees, done) {
       if(done) done();
     });
   }
-}
+};
