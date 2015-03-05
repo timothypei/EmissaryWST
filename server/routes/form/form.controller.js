@@ -112,17 +112,16 @@ module.exports.submitted_form.findByPatientInfo = function(req, res) {
     firstName = req.query.firstName,
     lastName = req.query.lastName,
     patientEmail = req.query.patientEmail;
-    console.log(req.query.firstName);
-    console.log(req.query.lastName);
-    console.log(req.query.patientEmail);
+
 
   if(!((firstName && lastName) || patientEmail)) {
     res.status(400).json({error: "You must specify either both first and last name or email"});
     return;
   }
-  query.firstName = firstName || null;
-  query.lastName = lastName || null;
-  query.patientEmail = patientEmail || null;
+  if(firstName) query.firstName = firstName;
+  if(lastName) query.lastName = lastName;
+  if(patientEmail) query.patientEmail = patientEmail;
+
 
   if(req.query.mostRecent == "true") {
     SubmittedForm.findOne(query).sort('-date').exec(function (err, submittedForm) {
@@ -134,12 +133,10 @@ module.exports.submitted_form.findByPatientInfo = function(req, res) {
     });
   }
   else {
-    SubmittedForm.findOne({'patientEmail': query.patientEmail}, function(err, submittedForms) {
-      //SubmittedForm.findOne(query, function(err, submittedForms) {
+      SubmittedForm.findOne(query, function(err, submittedForms) {
       if (err) {
         res.status(400).json({error: "An error occured while finding patient forms"});
         return;
-        console.log("shit");
       }
       res.json(submittedForms);
     });

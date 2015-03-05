@@ -84,8 +84,8 @@ describe("Employee", function() {
              
 
               res.body.should.be.instanceof(Object);
-              res.body.should.not.be.empty;
-              res.body.should.exist;
+              res.body.should.not.be.empty();
+              res.body.should.exist();
               res.body.should.have.length.of.at.least(1);
               res.body.should.be.an.instanceof(Array);
 
