@@ -26,7 +26,7 @@ router.post('/signup', function(req, res) {
   admin.save(function(err) {
     if(err)
       return res.status(400).send(err);
-    return res.sendStatus(200);
+    return res.json({token: admin.token, admin_id: admin._id});
   });
 });
 
