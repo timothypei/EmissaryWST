@@ -11,7 +11,6 @@ angular.module('robobetty',
   'register',
   'thankyou',
   'DashboardFormBuilderModule',
-   'settings',
    'checkin',
    'thankyouCheckIn'
   ])

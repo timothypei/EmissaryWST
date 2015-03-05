@@ -1,22 +1,25 @@
 'use strict';
 
-angular.module('settings')
-	.controller('SettingsController', ['$scope', '$rootScope','$location', 'SettingsService', function($scope, $rootScope, $location, SettingsService){
-		$rootScope.email= 'test2@test.com';
+angular.module('dashboard')
+	.controller('SettingsController', ['$scope','$rootScope','SettingsService',
+	  function($scope, $rootScope, SettingsService){
+
 		$scope.user = { password: '', newpassword: ''};
-		$scope.pass = '';
+		$scope.validateNewPass = '';
+		$scope.email = $rootScope.email;
 		$scope.err = false;
 		$scope.errMessage = '';
+
 		$scope.update = function(){
-			if($scope.user.password == ''){ 
+			if($scope.user.password == ''){
 				$scope.errMessage = 'You must supply your current password.';
-			} else if($scope.user.newpassword == ''){
-                $scope.errMessage = 'You must supply your new password.';
-            }else if($scope.pass != $scope.user.newpassword){
-				$scope.errMessage = 'Invalid password';
-			} else if ($scope.user.newpassword.length < 4) {
-				$scope.errMessage = 'Password length must be at least 4 characters!';
-			} else {
+			} else if ($scope.user.newpassword == ''){
+				$scope.errMessage = 'Please enter a new password.';
+			} else if($scope.validateNewPass != $scope.user.newpassword){
+				$scope.errMessage = "New password not validated correctly."
+			} else if($scope.user.newpassword.length < 4){
+				$scope.errMessage = 'Password length must be of at least 4 characters.';
+			}else {
 				SettingsService.update($scope.user)
 					.success(function(data){
 						if(data=='Oops! Wrong password')
@@ -29,7 +32,8 @@ angular.module('settings')
 					.error(function(err){
 						$scope.errMessage = 'Password change not successful';
 						return err;
-					});
+				});
 			}
-		};
-}]);
+
+		}
+	}]);
