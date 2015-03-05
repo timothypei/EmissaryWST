@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter) {
+  .controller('FormCreateController', function ($scope, $modal, FormService) {
 
   // preview form mode
   $scope.previewMode = false;
@@ -88,43 +88,18 @@ angular.module('DashboardFormBuilderModule')
     }
   };
 
-
-   // posts form template as Json
-  $scope.postJson = function (){
-    // object of this form template
-    var formJson = $filter('json')($scope.form);
-     var putJson = { 
-                        "template":formJson,
-                        "template_id":"54f796cf637366641df712d9"
-                    };
-     // we should do POST for first time submit
-     // do PUT all other times
-     // Note: Post works to update forms at the moment..
-     $http.put('/api/form/template', putJson).
-     success(function(data, status, headers, config) {
-       // this callback will be called asynchronously
-       // when the response is available
-       console.log("put success");
-       console.log(data);
-     }).
-     error(function(data, status, headers, config) {
-       // called asynchronously if an error occurs
-       // or server returns response with an error status.
-       console.log("no forms posted");
-     });
-  };      
-
   // fetch a template from the server
   $scope.fetchSavedTemplate = function(){
      $http.get('/api/form/template/company/54f795c7212c76982b2662b8').
          success(function(data, status, headers, config) {
-           console.log(data);
+           console.log(data.template);
            $scope.form =JSON.parse(data.template);
          }).
          error(function(data, status, headers, config) {
-           alert("You have no saved templates.");
+           alert("there is an error");
          });
-  }; 
+  };
+
 
   // preview form
   $scope.previewOn = function(){

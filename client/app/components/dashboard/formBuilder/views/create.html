@@ -27,7 +27,7 @@
         <hr>
         <p ng-show="form.form_fields.length == 0">No fields added yet.</p>
         <accordion close-others="accordion.oneAtATime">
-            <accordion-group heading="{{field.field_title}}" ng-repeat="field in form.form_fields">
+            <accordion-group heading="{{field.field_title}}" ng-repeat="field in form.form_fields"> 
 
                 <div class="accordion-edit">
                     <button class="btn btn-danger pull-right" type="button" ng-click="deleteField(field.field_id)"><i class="icon-trash icon-white"></i> Delete</button>
@@ -99,6 +99,8 @@
         </accordion>
 
         <p class="text-center">
+            <button class="btn btn-primary right" type="button" ng-click="postJson()"><i class="icon-eye-open icon-white"></i> Submit Form</button>
+            <button class="btn btn-primary right" type="button" ng-click="fetchSavedTemplate()"><i class="icon-eye-open icon-white"></i> Retrieve Template</button>
             <button class="btn btn-primary right" type="button" ng-click="previewOn()"><i class="icon-eye-open icon-white"></i> Preview Form</button>
             <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Reset</button>
         </p>
