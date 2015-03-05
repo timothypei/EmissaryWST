@@ -19,9 +19,11 @@ angular.module('settings')
 			} else {
 				SettingsService.update($scope.user)
 					.success(function(data){
-						console.log("success!!!");
-						console.log(data);
-						$scope.errMessage = 'You have successfully changed you password';
+						if(data=='Oops! Wrong password')
+							$scope.errMessage = 'Oops! Wrong password';
+						else{
+							$scope.errMessage = 'You have successfully changed your password';
+						}
 						return data;
 					})
 					.error(function(err){
