@@ -15,7 +15,7 @@ router.put('/template', controller.template.update);
 router.delete('/template/:template_id', controller.template.delete);
 
 router.get('/patient/:form_id', controller.submitted_form.findById);
-router.get('/patient', controller.submitted_form.findByCompanyId);
+router.get('/patient', controller.submitted_form.findByPatientInfo);
 router.post('/patient', controller.submitted_form.create);
 
 module.exports = router;
