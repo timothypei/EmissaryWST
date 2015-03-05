@@ -1,17 +1,17 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('FormCreateController', function ($scope, $modal, FormService) {
+  .controller('FormCreateController', function ($scope, $modal, $filter,$q, $http,FormService) {
 
   // preview form mode
   $scope.previewMode = false;
-
   // new form
   $scope.form = {};
   $scope.form.form_id = 1;
   $scope.form.form_name = 'My Form';
   $scope.form.form_fields = [];
 
+  $scope.noSavedTemplate = true;
   // previewForm - for preview purposes, form will be copied into this
   // otherwise, actual form might get manipulated in preview mode
   $scope.previewForm = {};
@@ -108,7 +108,53 @@ angular.module('DashboardFormBuilderModule')
       angular.copy($scope.form, $scope.previewForm);
     }
   };
-
+  $scope.saveTemplate = function(){
+      /*//see if there is not template saved
+      var noTemplate = true;
+      $http.get('/api/form/template/company/54f795c7212c76982b2662b8').
+          success(function(data, status, headers, config) {
+            console.log(data);
+            if(data == null){
+              console.log("data is null");
+              postNewTemplate();
+            }
+            else{
+              console.log("data is not null");
+              var templateID = data._id;
+              updateTemplate(templateID);
+            }
+          }).
+          error(function(data, status, headers, config) {
+            alert("could not get data");
+          });
+      var formJson = $filter('json')($scope.form);
+      var putJson = { 
+                         "template":formJson,
+                         "template_id":"54f796cf637366641df712d9"
+                     };
+      $http.put('/api/form/template', putJson).
+      success(function(data, status, headers, config) {
+        // this callback will be called asynchronously
+        // when the response is available
+        console.log("put success");
+        console.log(data);
+      }).
+      error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        console.log("no forms posted");
+      });*/
+  }
+  $scope.fetchSavedTemplate = function(){
+      $http.get('/api/form/template/company/54f795c7212c76982b2662b8').
+          success(function(data, status, headers, config) {
+            console.log(data.template);
+            $scope.form =JSON.parse(data.template);
+          }).
+          error(function(data, status, headers, config) {
+            alert("there is an error");
+          });
+  };
   // hide preview form, go back to create mode
   $scope.previewOff = function(){
     $scope.previewMode = !$scope.previewMode;
