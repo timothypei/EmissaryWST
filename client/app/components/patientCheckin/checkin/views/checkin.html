@@ -10,14 +10,21 @@
 	<div ng-controller="ModalDemoCtrl">
 		<div ng-controller="CheckinController">
 			<div class="form_container">	
-				</div>
+				<form ng-submit="checkin()">		
+					<h1> Welcome to BlueJay, please check in below</h1>
+					<input type="name" placeholder="Name">		
+					<input type="email" placeholder="Email">		
+					<input type="submit" value="Check In">
+
+				</form>
+			</div>
 				<div id = "settings">
 					<a ng-click="open()"><img id="icon" src="images/settings.png"></a>
 					<h1>{{clock | date: 'hh:mm:ss a'}}</h1>
 				</div>
 		    	<script type="text/ng-template" id="myModalContent.html">
 		    	<div ng-controller="signinCtrl">
-	    			<form ng-submit="login()">		
+	    			<form ng-submit="checkin()">		
 	        			<div class="modal-body">
 							<img id="logo" src="images/logo.png">
 							<input type="password" ng-model="user.password" placeholder="Password">		

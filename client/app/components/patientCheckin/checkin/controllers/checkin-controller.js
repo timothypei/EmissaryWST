@@ -12,6 +12,9 @@ angular.module('checkin')
         $timeout(tick, $scope.tickInterval); // reset the timer
         
     }
+    $scope.checkin = function(){
+        $location.path('/thankyouCheckIn');
+    }
     // Start the timer
 
     $timeout(tick, $scope.tickInterval);
@@ -22,7 +25,8 @@ angular.module('checkin')
     $scope.user = {email: $rootScope.email, password: ''};
     $scope.errMessage ='';
     //this function is called when we press the login button
-    $scope.login = function(){
+    $scope.checkin = function(){
+      console.log("test");
       if($scope.user.email.indexOf('@')==-1||$scope.user.email.indexOf('.')==-1){
         $scope.errMessage = 'Invalid Email/Password'
       }
