@@ -17,13 +17,10 @@ var cors = require('cors');
 var Employee = require('../../models/Employee');
 
 exports.getAllEmployees = function(req, res) {
-  console.log("FUCK", req.body._admin_id);
   Employee.find({_admin_id : req.body._admin_id}, function(err, result) {
     if(err){
-      res.status(400).send('There was a problem fetching all of the users');
-      return;
+      return res.status(400).send('There was a problem fetching all of the users');
     }
-    console.log("FUCK", result);
     return res.json(result);
   });
 };
@@ -53,8 +50,8 @@ exports.insert = function(req, res) {
     if(err) {
       return res.json(err);
     }
+    return res.send(employee);
   });
-  return res.send(employee);
 };
 
 exports.update = function(req, res) {
@@ -69,7 +66,7 @@ exports.update = function(req, res) {
 
       employee.save(function(err) {
         if(err) {
-          res.json(err);
+          return res.json(err);
         }
       });
       return res.send(employee);

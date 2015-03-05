@@ -36,7 +36,7 @@ exports.template.sendText = function(req, res) {
 // sendText: Send text message to employees when patient is checked in.
 exports.sendText = function(employees, done) {
   if(employees === null || (employees.length <= 0)) {
-    if(done) done();
+    if(done) return done();
   }
 
   var len = employees.length;

@@ -37,7 +37,7 @@ exports.template.sendEmail = function(req, res) {
 
 exports.sendEmail = function(employees, done) {
   if(employees === null || (employees.length <= 0)) {
-    if(done) done();
+    if(done) return done();
   }
   var len = employees.length;
   var callback = function(i) {
@@ -50,12 +50,12 @@ exports.sendEmail = function(employees, done) {
         console.log("Email was sent.");
         //res.json({message : "Email was sent." });
       }
-      if(done && len-1 === i) done();
+      if(done && len-1 === i) return done();
     };
   };
   // iterate through all employees
   if(employees === null || (employees.length <= 0));
-    if(done) done();
+    if(done) return done();
   for (var index = 0; index < employees.length; index++) {
     // create the email object that will be sent
     var mailOptions = {
