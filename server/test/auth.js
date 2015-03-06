@@ -16,32 +16,33 @@ describe('Authentication Test', function() {
   var userID = null;
 
   before(function(done) {
-    AdminUser.remove({email: email}, function(err) {
+    request(url)
+    .post('/auth/signup')
+    .send({
+      email: email,
+      password: password
+    })
+    .expect(200)
+    .end(function(err,res){
       if(err)
-      throw(err);
-    });
-    var foobar = "test@test.com";
-    AdminUser.remove({email: foobar}, function(err) {
-      if(err)
-      throw(err);
+        throw(err);
+      res.body.should.have.property('token');
+      AdminUser.findOne({email:email}, function(err, dbAdmin) {
+        if(err)
+          throw(err);
+        dbAdmin.should.have.property('_id');
+        admin = dbAdmin;
+        credentials = {
+          admin: admin,
+          email: email,
+          password: password,
+          token: res.body.token
+        };
+      });
     });
     done();
   });
 
-  it("should signup temp user", function(done) {
-    request(url)
-      .post('/auth/signup')
-      .send({
-        email: email,
-        password: password
-      })
-      .expect(200)
-      .end(function(err){
-        if(err)
-          throw(err);
-        done();
-      });
-  });
 
   it("should login the user", function(done) {
     request(url)
@@ -54,21 +55,7 @@ describe('Authentication Test', function() {
       .end(function(err,res){
         if(err)
           throw(err);
-        res.body.should.have.property('token');
-        token = res.body.token;
-        AdminUser.findOne({email:email}, function(err, dbAdmin) {
-          if(err)
-            throw(err);
-          dbAdmin.should.have.property('_id');
-          admin = dbAdmin;
-          credentials = {
-            admin: admin,
-            email: email,
-            password: password,
-            token: token
-          };
-          done();
-        });
+      done();
       });
   });
 
