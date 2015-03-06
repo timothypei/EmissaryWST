@@ -1,5 +1,5 @@
 <div ng-controller="SafeController" class="container patient-queue-container" style='padding-left:5em;'>
-    <form class="form-inline">
+    <!-- <form class="form-inline">
       <div class="form-group">
         <label for="exampleInputName2">Name</label>
         <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" ng-model="row.Name">
@@ -14,7 +14,7 @@
         </i> Add
     </button>
       </div>
-    </form>
+    </form> -->
     <br>
     
     <br>
@@ -33,7 +33,7 @@
             </thead>
             <tbody>
             <tr ng-repeat="row in displayedCollection" ng-click="openPatientModal(row)">
-                <td>
+                <td style="text-align:center">
                 <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-info btn-edit">
                     <i class="glyphicon glyphicon-pencil">
                     </i>
