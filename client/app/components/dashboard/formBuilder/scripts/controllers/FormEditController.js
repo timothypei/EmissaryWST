@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $location) {
+  .controller('FormEditController', function ($scope, $modal, FormService, $http, $filter, $location) {
 
   $scope.templateId = 0;
   $scope.prevJson = $filter('json')($scope.form);
@@ -106,7 +106,9 @@ angular.module('DashboardFormBuilderModule')
        // when the response is available
        console.log("put success");
        console.log(data);
-       $scope.form = JSON.parse($scope.prevJson);
+       // revert to previous json
+       //$scope.form = JSON.parse($scope.prevJson);
+       
      }).
      error(function(data, status, headers, config) {
        // called asynchronously if an error occurs
@@ -120,7 +122,7 @@ angular.module('DashboardFormBuilderModule')
      $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
          success(function(data, status, headers, config) {
            console.log(data);
-           $scope.prevJson = $filter('json')($scope.form);
+           //$scope.prevJson = $filter('json')($scope.form);
            $scope.templateId = data._id;
            $scope.form = JSON.parse(data.template);
          }).
@@ -128,6 +130,20 @@ angular.module('DashboardFormBuilderModule')
            alert("You have no saved templates.");
          });
   }; 
+
+  // run when app is loaded
+  $scope.$on('$viewContentLoaded', function() {
+        $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
+         success(function(data, status, headers, config) {
+           console.log(data);
+           $scope.prevJson = $filter('json')($scope.form);
+           $scope.templateId = data._id;
+           $scope.form = JSON.parse(data.template);
+         }).
+         error(function(data, status, headers, config) {
+           alert("You have no saved templates.");
+         });
+  });
 
   // preview form
   $scope.previewOn = function(){
@@ -156,18 +172,7 @@ angular.module('DashboardFormBuilderModule')
   };
 
   $scope.editOn = function(){
-    $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
-         success(function(data, status, headers, config) {
-           console.log(data);
-           $scope.prevJson = $filter('json')($scope.form);
-           $scope.templateId = data._id;
-           $scope.form = JSON.parse(data.template);
-           $location.path("/editform");
-         }).
-         error(function(data, status, headers, config) {
-           alert("You have no saved templates.");
-         });
-
+   $location.path('/createform');
   };
 
   // decides whether field options block will be shown (true for dropdown and radio fields)

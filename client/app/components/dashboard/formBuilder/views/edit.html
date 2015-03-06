@@ -1,6 +1,6 @@
-<h1>Create a new form</h1> <br>
+<h1>Edit your template</h1> <br>
 <blockquote>
-    <p>Select field type you want to add to the form below and click on 'Add Field' button. Don't forget to set field properties. After you finish creating the form, you can preview the form by clicking Preview Form button.</p>
+    <p>*edit*Select field type you want to add to the form below and click on 'Add Field' button. Don't forget to set field properties. After you finish creating the form, you can preview the form by clicking Preview Form button.</p>
 </blockquote>
 
 <div class="well">
@@ -99,8 +99,11 @@
         </accordion>
 
         <p class="text-center">
-            <button class="btn btn-primary right" type="button" ng-click="editOn()"><i class="icon-eye-open icon-white"></i> Edit existing template</button>
-
+            <button class="btn btn-primary right" type="button" ng-click="postJson()"><i class="icon-eye-open icon-white"></i> Submit Form</button>
+            <button class="btn btn-primary right" type="button" ng-click="fetchSavedTemplate()"><i class="icon-eye-open icon-white"></i> Retrieve Template</button>
+        </p>
+        <p class="text-center">
+            <button class="btn btn-primary right" type="button" ng-click="editOn()"><i class="icon-eye-open icon-white"></i> Create new template</button>
             <button class="btn btn-primary right" type="button" ng-click="previewOn()"><i class="icon-eye-open icon-white"></i> Preview Form</button>
             <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Reset</button>
         </p>

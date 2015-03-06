@@ -28,6 +28,11 @@ angular.module('robobetty',
     controller: 'FormCreateController',
     templateUrl: 'views/components/dashboard/formBuilder/views/create.html'
   })
+  .state('editform', {
+    url: '/editform',
+    controller: 'FormEditController',
+    templateUrl: 'views/components/dashboard/formBuilder/views/edit.html'
+  })
   .state('product', {
     url: '/product',
     templateUrl: 'views/components/product/views/product.html'
