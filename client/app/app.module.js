@@ -70,7 +70,8 @@ angular.module('robobetty',
         url: '/createform',
         controller: 'FormCreateController',
         templateUrl: 'views/components/dashboard/formBuilder/views/create.html',
-        parent: 'common'
+        parent: 'common',
+        title: 'Create New Form'
       })
       .state('product', {
         url: '/product',
