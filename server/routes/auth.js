@@ -65,7 +65,7 @@ router.put("/setting/:user", function(req, res) {
      if(!admin.validPassword(req.body.password))
        return res.status(401).send('loginMessage', 'Oops! Wrong password');
 	 //update password
-	 console.log(req.body.newpassword );
+	 //console.log(req.body.newpassword );
 	 //upadate password
 	 if (req.body.newpassword !== undefined)
 	 	admin.password = ad.generateHash(req.body.newpassword);
