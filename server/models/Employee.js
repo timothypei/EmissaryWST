@@ -17,17 +17,4 @@ var employeeSchema = mongoose.Schema({
   token: String
 });
 
-/* Employee login feature
-// checking if password is valid
-employeeSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
-};
-// generating a hash
-employeeSchema.methods.generateHash = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
-*/
-
-
-
 module.exports = mongoose.model('employee', employeeSchema);
