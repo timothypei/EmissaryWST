@@ -4,7 +4,7 @@
 
 #sidebar-wrapper{
 	background-color: #434343;
-	margin-top: 25px;
+	margin-top: 45px;
 }
 
 /* Removing forced scrollbar by rdash */
@@ -12,9 +12,6 @@ html {
 	overflow-y: auto;
 }
 
-ul.sidebar {
-	/*margin-top:-5px;*/
-}
 
 ul.sidebar li a{
 	color:#f7f7f7;
@@ -35,7 +32,7 @@ ul.sidebar .sidebar-list a{
 
 /*Adding padding above*/
 .main-content {
-	padding-top: 50px;
+	padding-top: 68px;
 	padding-left: 30px;
 	padding-right: 30px;
 }

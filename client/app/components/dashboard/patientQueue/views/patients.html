@@ -1,4 +1,4 @@
-<div ng-controller="SafeController" class="container patient-queue-container" style='padding-left:5em;'>
+<div ng-controller="SafeController" class="container patient-queue-container">
     <!-- <form class="form-inline">
       <div class="form-group">
         <label for="exampleInputName2">Name</label>
@@ -15,10 +15,7 @@
     </button>
       </div>
     </form> -->
-    <br>
-    
-    <br>
-    <div class="pre-scrollable" id="patient-queue">
+    <div id="patient-queue">
         <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
             <thead>
             <tr>
