@@ -17,24 +17,8 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-/*
-exports.template.sendEmail = function(req, res) {
-  console.log("Sending email.");
-
-  // send mail with defined transport object
-  transporter.sendMail(mailOptions, function(error, info){
-    if(error){
-        console.log(error);
-        res.json({message: "Error occurred sending email"});
-    }else{
-        res.json({message : "Email was sent." });
-    }
-  });
-}; */
-
 
 // sendEmail: Send email to employees when patient is checked in.
-
 exports.sendEmail = function(employees, done) {
   if(employees === null || (employees.length <= 0)) {
     if(done) return done();
