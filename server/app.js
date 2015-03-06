@@ -5,26 +5,26 @@
  */
 var express = require('express');
 var router = express.Router();
-var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var logger = require('morgan');
+var morgan = require('morgan');
 var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
-var toLog = require("./logging/toLog");
 
 /*
- * MongoDb configuration.
+ * App configs
  */
 var config = require('./config/config');
 var validate = require('./config/validation');
+var winstonConfig = require("./config/winston");
 
 /*
  * Create Express server.
  */
 var app = express();
 
+app.use(morgan('dev', {"stream": winstonConfig.stream}));
 
 
 /*
@@ -45,13 +45,9 @@ mongoose.connection.on('error', function() {
  * Express configuration.
  */
 app.set('port', config.port);
-app.use(toLog);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../dist')));
-app.use(logger('dev'));
-
-
 
 
 require('./routes')(app);
