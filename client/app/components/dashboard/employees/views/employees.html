@@ -1,76 +1,55 @@
 <div ng-controller="EmployeeController" class="container" style='padding-left:5em;'>
-    <h1 align="center">Employees</h1><br>
-    <div class="row">
-        <form class="form-inline col-md-10 col-md-offset-1">
-          <div class="form-group" style="margin-right:.5em;">
-            <label for="exampleInputName2">Name</label>
-            <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" ng-model="row.Name">
-          </div>
-          <div class="form-group" style="margin-right:.5em;">
-            <label for="exampleInputEmail2">Number</label>
-            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="(###)###-####" ng-model="row.PhoneNumber">
-          </div>
-          <div class="form-group" style="margin-right:.5em;">
-            <label for="exampleInputEmail2">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com" ng-model="row.Email">
-          </div>
-          <div class="form-group">
-            <button type="button" ng-click="addEmployee(row)" class="btn btn-block btn-success" id="add-doctor">
-            <i class="glyphicon glyphicon-plus">
-            </i> Add
-        </button>
-          </div>
-        </form>
-    </div>
-    <br>
-    
-    <br>
-    <div id="doctors-table">
-        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
-            <thead>
-            <tr>
-                <th st-sort="firstName">Name</th>
-                <th st-sort="birthDate">Phone Number</th>
-                <th st-sort="balance">Email</th>
-            </tr>
-            <tr>
-                <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="row in displayedCollection">
-                <td style="padding-left:2em;">
-					<span data-ng-hide="editMode">{{row.Name}}</span>
-					<input type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Name" data-ng-required />
-		        </td>
-		        <td>
-					<input type="checkbox" data-ng-hide="editMode"> <span data-ng-hide="editMode">{{row.PhoneNumber}}</span>
-					<input type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.PhoneNumber" data-ng-required />
-		        </td>
-		        <td>
-					<input type="checkbox" data-ng-hide="editMode"> <span data-ng-hide="editMode">{{row.Email}}</span>
-					<input type="email" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Email" data-ng-required/>
-		        </td>
-                <td>
-                    <button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editRowCollection(row)" class="btn col-md-5 btn-info btn-edit" style="margin-right:.5em;">
-                        <i class="glyphicon glyphicon-pencil">
-                        </i>
-                    </button>
-                    <button type="button" data-ng-hide="editMode" ng-click=" removeEmployee(row)" class="btn col-md-5 btn-danger">
-                        <i class="glyphicon glyphicon-remove">
-                        </i>
-                    </button>
-                    <button type="submit" popover="Press ctrl+z or command+z to undo changes" popover-trigger="mouseenter" data-ng-show="editMode" data-ng-click="editMode = false" class="btn col-md-10 btn-primary"  > <!--style="margin-right:.5em;">-->
-                        <i class="glyphicon glyphicon-ok">
-                        </i>
-                    </button>
-                    <!--<button type="button" data-ng-show="editMode" data-ng-click="editMode = false;" class="btn col-md-5 btn-default">
-                     <i class="glyphicon glyphicon-minus">
-                        </i>   
-                    </button>-->
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+	<h1 align="center">Employees</h1><br>
+	<button type="button" class="btn btn-block btn-success" ng-click="openModal()">
+		<i class="glyphicon glyphicon-plus">
+		</i> Add
+	</button>
+	<br>
+	<br>
+	<div id="doctors-table">
+		<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+			<thead>
+				<tr>
+					<th st-sort="firstName">Name</th>
+					<th st-sort="birthDate">Phone Number</th>
+					<th st-sort="balance">Email</th>
+				</tr>
+				<tr>
+					<th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="row in displayedCollection">
+					<td style="padding-left:2em;">
+						<span data-ng-hide="editMode">{{row.Name}}</span>
+						<input name="name" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Name" ng-pattern="/^[^0-9]+$/" data-ng-required required />
+						<p ng-show="!row.Name" class="help-block">Name cannot have numbers.</p>
+					</td>
+					<td>
+						<span data-ng-hide="editMode">{{row.PhoneNumber}}</span>
+						<input name="number" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.PhoneNumber" ui-mask="{{'(999) 999-9999'}}" data-ng-required required>
+						<p ng-show="!row.PhoneNumber" class="help-block">Enter a valid phone number.</p>
+					</td>
+					<td>
+						<span data-ng-hide="editMode">{{row.Email}}</span>
+						<input type="email" name="email" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Email" data-ng-required required>
+						<p ng-show="!row.Email" class="help-block">Enter a valid email.</p>
+					</td>
+					<td>
+						<button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editRowCollection(row)" class="btn col-md-5 btn-info btn-edit" style="margin-right:.5em;">
+							<i class="glyphicon glyphicon-pencil">
+							</i>
+						</button>
+						<button type="submit" popover="Press ctrl+z or command+z to undo changes" popover-trigger="mouseenter" data-ng-show="editMode" data-ng-click="editMode=false; editRowCollection(row)" class="btn col-md-5 btn-primary"  style="margin-right:.5em;" ng-disabled="!row.Name || !row.PhoneNumber || !row.Email">
+							<i class="glyphicon glyphicon-ok-circle">
+							</i>
+						</button>
+						<button type="button" ng-click="editMode ? cancel(row) : removeEmployee(row); editMode=false" class="btn col-md-5 btn-danger">
+							<i ng-class="editMode ? 'glyphicon glyphicon-ban-circle':'glyphicon glyphicon-remove'"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>

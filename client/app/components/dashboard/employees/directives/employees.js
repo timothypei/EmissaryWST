@@ -9,8 +9,8 @@ angular.module('dashboard')
       controllerAs: 'employeeCtrl'
     };
   })
-  .controller('EmployeeController', ['$scope', '$modal', function ($scope, $modal) {
-// include root slecope
+  .controller('EmployeeController', ['$scope', '$window', '$modal', function ($scope, $window, $modal) {
+    // include root slecope
     $scope.rowCollection = [
         {
             id: 1,
@@ -28,13 +28,13 @@ angular.module('dashboard')
             id: 3,
             Name: "Andrew Du",
             PhoneNumber: "(019)348-8210",
-            Email: "adu@ucsd.edu"
+            Email: "angelique@ucsd.edu"
         },
         {
             id: 4,
-            Name: "Tim Kua",
+            Name: "Timmy Kua",
             PhoneNumber: "(932)231-1133",
-            Email: "tkua@ucsd.edu"
+            Email: "tikua@ucsd.edu"
         },
         {
             id: 5,
@@ -68,13 +68,6 @@ angular.module('dashboard')
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
     $scope.displayedCollection = [].concat($scope.rowCollection);
 
-    //add employee info
-    $scope.addEmployee = function(row){
-        $scope.rowCollection.unshift(row);
-        $scope.row = {};
-        id++;
-    };
-
     //edit a row
     $scope.editRowCollection = function(row) {
         $scope.editing = $scope.rowCollection.indexOf(row);
@@ -83,19 +76,9 @@ angular.module('dashboard')
     
     // cancel editing
     $scope.cancel = function(row) {
-        if ($scope.row.editing !== false) {
-            $scope.rowCollection[$scope.editing] = $scope.newField;
-            $scope.row.editing = false;
-        }
+    	$scope.rowCollection[$scope.editing] = $scope.newField;
+    	$scope.displayedCollection = $scope.rowCollection;
     };
-
-    //remove to the real data holder
-    /*$scope.removeItem = function(row) {
-        var index = $scope.rowCollection.indexOf(row);
-        if (index !== -1) {
-            $scope.rowCollection.splice(index, 1);
-        }
-    };*/
 
     //remove employee confirmation modal
     $scope.removeEmployee = function(row){
@@ -119,4 +102,28 @@ angular.module('dashboard')
             }
         });
     };
+
+    //add employee info
+    $scope.submitForm = function(row){
+      $scope.rowCollection.unshift(row);
+      $scope.row = {};
+      $scope.addForm.name.$setPristine();
+      $scope.addForm.number.$setPristine();
+      $scope.addForm.email.$setPristine();
+    }
+
+    //open add employee form
+    $scope.openModal = function(){
+    	var modalInstance = $modal.open({
+    		templateUrl: 'views/components/dashboard/employees/views/employees-modal.html',
+    		controller: 'EmployeeModalController',
+    		size: 'md',
+    		backdrop: true,
+    		resolve: {}
+    	}).
+    	result.then(function(result){
+    		$scope.rowCollection.push(result);
+    	});
+    }
+
 }]);
