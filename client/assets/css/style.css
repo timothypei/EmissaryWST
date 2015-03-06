@@ -80,3 +80,13 @@ body{
     max-width: 100%;
 
 }
+
+
+/* Patient queue */
+#patient-queue table tr td.patient-queue-text {
+	vertical-align: middle;
+}
+
+.patient-queue-container {
+	font-family: 'Myriad Pro Regular';
+}
