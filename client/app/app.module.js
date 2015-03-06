@@ -30,7 +30,8 @@ angular.module('robobetty',
   })
   .state('product', {
     url: '/product',
-    templateUrl: 'views/components/product/views/product.html'
+    templateUrl: 'views/components/product/views/product.html',
+    title: 'Product'
   })
   .state('dashboard', {
     url: '/dashboard',
@@ -40,7 +41,8 @@ angular.module('robobetty',
   .state('doctors', {
     url: '/doctors',
     templateUrl: 'views/components/dashboard/doctors/views/doctors.html',
-    parent: 'common'
+    parent: 'common',
+    title: 'Doctors View'
   })
   .state('signin', {
     url: '/signin',
