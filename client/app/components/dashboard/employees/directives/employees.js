@@ -61,6 +61,8 @@ angular.module('dashboard')
             Email: "dmariano@ucsd.edu"
         }
     ];
+
+    var id = 1;
     $scope.newField = {};
     $scope.editing = false;
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
@@ -68,7 +70,7 @@ angular.module('dashboard')
 
     //add employee info
     $scope.addEmployee = function(row){
-        $scope.rowCollection.push(row);
+        $scope.rowCollection.unshift(row);
         $scope.row = {};
         id++;
     };
