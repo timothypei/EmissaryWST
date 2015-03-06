@@ -47,9 +47,9 @@ angular.module('robobetty',
         parent: 'common',
         title: 'Patients Queue'
       })    
-      .state('doctors', {
-        url: '/doctors',
-        templateUrl: 'views/components/dashboard/doctors/views/doctors.html',
+      .state('employees', {
+        url: '/employees',
+        templateUrl: 'views/components/dashboard/employees/views/employees.html',
         parent: 'common'
       })
       .state('signin', {
