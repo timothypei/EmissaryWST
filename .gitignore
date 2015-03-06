@@ -5,3 +5,5 @@ log/
 npm-debug.log
 .env
 .idea
+.DS_Store
+server/log

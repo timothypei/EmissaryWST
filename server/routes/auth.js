@@ -26,7 +26,7 @@ router.post('/signup', function(req, res) {
   admin.save(function(err) {
     if(err)
       return res.status(400).send(err);
-    return res.sendStatus(200);
+    return res.status(200).json({token: admin.token, admin_id: admin._id});
   });
 });
 
@@ -46,13 +46,40 @@ router.post('/login', function(req, res) {
 
     var newToken = jwt.encode(req.body.email, user.generateHash(new Date().getTime()));
     user.token = newToken;
-    user.save(function(err) {
+    user.save(function(err, admin) {
       if(err)
         return res.status(400);
-      return res.json({token: newToken});
+      return res.json({token: newToken, admin_id: admin._id});
     });
 
   });
+});
+
+router.put("/setting/:user", function(req, res) {
+   Authmodel.findOne({email: req.params.user}, function (err, admin) {
+      if(err || !admin)
+         res.json(err);
+ 	
+     
+     // if the user is found but the password is wrong
+     if(!admin.validPassword(req.body.password))
+       return res.status(401).send('loginMessage', 'Oops! Wrong password');
+	 //update password
+	
+	 //upadate password
+	 if (req.body.newpassword !== undefined)
+	 	admin.password = admin.generateHash(req.body.newpassword);
+	
+	//update email
+	 if (req.body.newemail !== undefined)
+		 admin.email = req.body.newemail;
+      admin.save(function(err) {
+        if(err) {
+          res.json(err);
+        }
+      });
+      return res.sendStatus(200);
+   });
 });
 
 

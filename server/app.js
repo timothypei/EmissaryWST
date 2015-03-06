@@ -33,18 +33,17 @@ app.use(morgan('dev', {"stream": winstonConfig.stream}));
 mongoose.connect(config.mongoDBUrl);
 mongoose.connection.on('connected', function() {
   console.log('MongoDB connected succesfully at: ' + config.mongoDBUrl);
-
 });
 
 mongoose.connection.on('error', function() {
   console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
-
 });
 
 /*
  * Express configuration.
  */
 app.set('port', config.port);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../dist')));
@@ -62,8 +61,14 @@ var theme = require('./routes/theme');
 var employee = require ('./routes/employee');
 var auth = require('./routes/auth');
 
+/*
+ * Disable api auth if were are in dev mode
+ */
+if(app.get('env') !== 'development') {
+  app.use('/api/*', validate);
+}
+
 app.use('/auth', auth);
-app.use('/api/*', validate);
 app.use('/api', user);
 app.use('/api', product);
 app.use('/api', theme);
@@ -81,8 +86,6 @@ app.listen(app.get('port'), function() {
   console.info('Express server listening on port %d in %s mode',
     app.get('port'),
     app.get('env'));
-
-
 });
 
 module.exports = app;
