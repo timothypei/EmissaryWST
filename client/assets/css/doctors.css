@@ -1,8 +1,17 @@
-#doctors-table{
-	box-shadow: 3;
-
+.btn-edit{
+    background-color:#6c9fd5;
 }
 
-thead{
+.btn-edit:hover{
+    background-color:#5E82BA;
+}
 
+.btn-edit:visited{
+    background-color:#6c9fd5;
+}
+
+#doctors-table{
+    
+    border-bottom:1px;
+    box-shadow:100%;
 }

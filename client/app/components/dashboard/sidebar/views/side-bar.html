@@ -1,36 +1,14 @@
- <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak> -->
+ <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
   <div id="sidebar-wrapper">
     <ul class="sidebar">
       <li class="sidebar-main">
         <a ng-click="toggleSidebar()">
-          Robobetty
+          {{sidebarHeader}}
           <span class="menu-icon glyphicon glyphicon-transfer"></span>
         </a>
       </li>
-      <!--<li class="sidebar-title"><span>NAVIGATION</span></li>-->
-      <li class="sidebar-list">
-        <a href="#/dashboard">Home 
-          <span ng-show="toggle" class="arrow-left"></span>
-          <span class="menu-icon fa fa-users" ng-class="{enabled: toggle, disabled: !toggle}"></span>
-        </a>
-      </li>
-      <li class="sidebar-list">
-        <a href="#/dashboard">Forms 
-          <span ng-show="toggle" class="arrow-left"></span>
-          <span class="menu-icon fa fa-check-square-o" ng-class="{enabled: toggle, disabled: !toggle}"></span>
-        </a>
-      </li>
-      <li class="sidebar-list"> 
-        <a href="#/doctors">Employees 
-          <span ng-show="toggle" class="arrow-left"></span>
-          <span class="menu-icon fa fa-user" ng-class="{enabled: toggle, disabled: !toggle}"></span>
-        </a> 
-      </li>
-      <li class="sidebar-list">
-        <a href="#/dashboard">Settings 
-          <span ng-show="toggle" class="arrow-left"></span>
-          <span class="menu-icon fa fa-cog" ng-class="{enabled: toggle, disabled: !toggle}"></span>
-        </a> 
+      <li ng-repeat="option in options" class="sidebar-list">
+        <a href="#/{{option.link}}">{{option.option}}<span class="{{option.icon}}"></span></a>
       </li>
       <li class="sidebar-profile">
         <img class="sidebar-profile-img" src="https://lh3.googleusercontent.com/-tgoExjOkcX0/AAAAAAAAAAI/AAAAAAAAAAA/wEyTqkqK-T8/photo.jpg"></img>
@@ -39,6 +17,7 @@
           <div class="sidebar-profile-subtitle">Power User</div>
         </a> 
       </li>
+      
     </ul>
   </div>
 <!-- </div> -->
@@ -91,3 +70,4 @@
   </div>
 </div>
 </div>
+-->

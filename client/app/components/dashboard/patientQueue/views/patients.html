@@ -1,0 +1,62 @@
+<div ng-controller="SafeController" class="container patient-queue-container" style='padding-left:5em;'>
+    <!-- <form class="form-inline">
+      <div class="form-group">
+        <label for="exampleInputName2">Name</label>
+        <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe" ng-model="row.Name">
+      </div>
+      <div class="form-group">
+        <label for="patientDoctor">Doctor</label>
+        <input type="text" class="form-control" id="patientDoctor" placeholder="Dr. BSoe" ng-model="row.Doctor">
+      </div>
+      <div class="form-group">
+        <button type="button" ng-click="addEmployee(row)" class="btn btn-block btn-success" id="add-doctor">
+        <i class="glyphicon glyphicon-plus">
+        </i> Add
+    </button>
+      </div>
+    </form> -->
+    <br>
+    
+    <br>
+    <div class="pre-scrollable" id="patient-queue">
+        <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
+            <thead>
+            <tr>
+                <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+            </tr>
+            <tr>
+                <th></th>
+                <th st-sort="Name">Name</th>
+                <th st-sort="Doctor">Doctor</th>
+                <th st-sort="Time">Check-in Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="row in displayedCollection" ng-click="openPatientModal(row)">
+                <td style="text-align:center">
+                <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-info btn-edit">
+                    <i class="glyphicon glyphicon-pencil">
+                    </i>
+                    Check In
+                </button>
+                <!-- <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+                    <i class="glyphicon glyphicon-remove-circle">
+                    </i>
+                </button> -->
+                </td>
+                <td class="patient-queue-text"> {{row.Name}}</td>
+                <td class="patient-queue-text"> {{row.Doctor}}</td>
+                <td class="patient-queue-text"> {{row.Time}}</td>
+            </tr>
+            </tbody>
+        </table>
+        
+    </div>
+    <!--
+    <div class='pull-left'>
+            <button type="button" ng-click="" class="btn btn-sm btn-danger">
+                <i class="glyphicon glyphicon-remove-circle"></i>
+            </button> Remove selected
+    </div>
+    -->
+</div>
