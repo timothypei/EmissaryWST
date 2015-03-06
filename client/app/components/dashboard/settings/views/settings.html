@@ -1,0 +1,32 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="css/settings.css"/> 
+</head>
+
+<body>
+	<div class="main" ng-controller="SettingsController as regCtrl">
+		<div class="user">
+			{{email}}
+		</div>
+		<div id="container">
+			<h1>Change Password</h1>
+			<form class="changepassform" ng-submit="update()">
+				<div class="formfield">
+					<div class="formfield">
+						<b>Current Password</b><input type="password" placeholder="Enter Password" ng-model="user.password">
+					</div>
+					<div class="formfield">
+						<b>New Password</b><input type="password" placeholder="Enter new Password" ng-model="user.newpassword">
+					</div>
+					<div class="formfield">
+						<b>Validate New Password</b><input type="password" placeholder="Enter new Password again" ng-model="validateNewPass">
+					</div>
+					<div class="settingsError">
+						<div class="output">
+							<input type="submit" value="Submit">
+							<p id="error_message">{{ errMessage }} </p>
+						</div>
+					</div>
+			</form>
+		</div>
+	</div>  
+</body>
