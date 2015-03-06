@@ -70,15 +70,14 @@ function setupUser(done, isEmployee) {
       });
     });
   }
-    
 }
 
 function cleanupAuth(email, callback) {
-  AdminUser.remove({email: email}, function(err) {
-    if(err)
-      throw(err);
-    callback();
-  });
+    AdminUser.remove({email: email}, function(err) {
+        if(err)
+            throw(err);
+        callback();
+    });
 }
 
 // Employee login feature
@@ -94,5 +93,3 @@ module.exports.setupAdmin = setupAdmin;
 module.exports.setupEmployee = setupEmployee;
 module.exports.cleanupAuth = cleanupAuth;
 module.exports.cleanupEmployee = cleanupEmployee;
-
-//module.exports = configureAuth;

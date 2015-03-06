@@ -60,7 +60,6 @@ require('./routes')(app);
  */
 var user = require('./routes/user');
 var product = require('./routes/product');
-var theme = require('./routes/theme');
 var auth = require('./routes/auth');
 
 /*
@@ -73,7 +72,6 @@ if(app.get('env') !== 'development') {
 app.use('/auth', auth);
 app.use('/api', user);
 app.use('/api', product);
-app.use('/api', theme);
 
 /*
  * Error Handler.
