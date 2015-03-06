@@ -32,14 +32,11 @@ angular.module('robobetty',
         parent: 'common',
         title: 'Create New Form'
       })
-      .state('product', {
-        url: '/product',
-        templateUrl: 'views/components/product/views/product.html'
-      })
       .state('dashboard',{
         url:'/dashboard',
         template: '',
-        parent: 'common'
+        parent: 'common',
+        title: ''
       })
        .state('patientQueue', {
         url: '/patientQueue',
@@ -50,7 +47,8 @@ angular.module('robobetty',
       .state('employees', {
         url: '/employees',
         templateUrl: 'views/components/dashboard/employees/views/employees.html',
-        parent: 'common'
+        parent: 'common',
+        title: 'Employees'
       })
       .state('signin', {
         url: '/signin',
