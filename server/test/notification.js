@@ -10,7 +10,8 @@ var TextModel = require('../notification/text');
 
 // array of employees. PLEASE only use your emails and phone numbers
 // inside this array if testing..
-var employees = [];//[{phone_number: "4254785233", email: "dylan.mozlowski@gmail.com"}];
+// SAMPLE : [{phone_number: "XXX-XXX-XXXX", email: "XXXXX@XXXXX.com"}];
+var employees = [];
 
 describe("Notification", function() {
 
