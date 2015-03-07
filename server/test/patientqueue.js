@@ -30,8 +30,8 @@ describe("PatientQueue", function() {
           }
           var em = new Employee();
           em._admin_id = adminCredentials.admin._id;
-          em.email = "dylan.mozlowski@gmail.com";
-          em.phone_number = "4254785233";
+          em.email = "varyox@gmail.com";
+          em.phone_number = "";
           _doctor_id: employeeCredentials._id;
           Employee.remove({},function(err) {
             if(err)
