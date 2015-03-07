@@ -105,10 +105,11 @@ angular.module('DashboardFormBuilderModule')
        // this callback will be called asynchronously
        // when the response is available
        console.log("put success");
+       alert("Data successfully Updated!");
        console.log(data);
        // revert to previous json
        //$scope.form = JSON.parse($scope.prevJson);
-       
+
      }).
      error(function(data, status, headers, config) {
        // called asynchronously if an error occurs
