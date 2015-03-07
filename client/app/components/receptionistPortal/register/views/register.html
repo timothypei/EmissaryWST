@@ -1,0 +1,48 @@
+<head>
+	<link href="css/register.css" rel="stylesheet" />
+</head>	
+
+<body ng-app="register">
+	<div ng-controller="RegisterController as regCTRL">
+
+		<div class="navi">
+			<div class="arrowContainer">
+				<div class="arrowbutton">
+					<a href="#/signin"><img src="images/back.png" /></a>
+				</div>
+			</div>
+		</div>
+
+		<div id="container" >
+			<h1>Sign Up Form</h1>
+			<form ng-submit="reg()" class="signupform">
+
+				<div class="formfield">
+					<b>Name</b> <input type="name" placeholder="Company Name">
+				</div>
+
+				<div class="formfield">
+					<b>Email</b> <input type="Email" placeholder="Email" ng-model="user.email">
+				</div>
+
+				<div class="formfield">
+					<b>Password</b>  <input type="password" placeholder="Password" ng-model="user.password">
+				</div>
+
+				<div class="formfield">
+					<b>Confirm Password</b> <input type="password" placeholder="Confirm Password" ng-model="pass">
+				</div>
+
+				<div class="checkboxfield">
+					<input type="checkbox" ng-model="check">
+					<label class="check" for="checkbox">I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a></label>
+				</div>
+
+				<div id="registerError">
+					<p id="error_message">{{errorMessage}}</p>
+					<input type="submit" Value="Sign Up">
+				</div>
+			</form>
+		</div>
+  	</div>
+</body>

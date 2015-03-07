@@ -6,10 +6,9 @@ var Employee = require('../models/Employee');
 
 
 var Email = require('../notification/email');
-var Text = require('../notification/text');
+var TextModel = require('../notification/text');
 
-// array of employees. PLEASE only use your emails and phone numbers
-// inside this array if testing..
+// SAMPLE : [{phone_number: "XXX-XXX-XXXX", email: "XXXXX@XXXXX.com"}];
 var employees = [];
 
 describe("Notification", function() {
@@ -22,7 +21,7 @@ describe("Notification", function() {
 
     it('It should send an text', function(done){
       this.timeout(9000);
-      Text.sendText(employees, done);
+      TextModel.sendText(employees, done);
       //done();
     });
   }

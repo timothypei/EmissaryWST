@@ -10,7 +10,7 @@ var urlparser = bodyparser.urlencoded({extended: false});
 
 router.get('/', controller.getAllEmployees);
 router.get('/:id', controller.getById);
-router.post('/', controller.insert)
+router.post('/', controller.insert);
 router.put("/:id", controller.update);
 router.delete("/:id", controller.delete);
 

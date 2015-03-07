@@ -5,25 +5,28 @@
  */
 var express = require('express');
 var router = express.Router();
-var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-var logger = require('morgan');
+var morgan = require('morgan');
 var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
 var socketIO = require('./socket/socket');
 
 /*
- * MongoDb configuration.
+ * App configs
  */
 var config = require('./config/config');
 var validate = require('./config/validation');
+var winstonConfig = require("./config/winston");
 
 /*
  * Create Express server.
  */
 var app = express();
+
+app.use(morgan('dev', {"stream": winstonConfig.stream}));
+
 
 /*
  * Connect to MongoDB.
@@ -55,15 +58,18 @@ require('./routes')(app);
  */
 var user = require('./routes/user');
 var product = require('./routes/product');
-var theme = require('./routes/theme');
 var auth = require('./routes/auth');
 
+/*
+ * Disable api auth if were are in dev mode
+ */
+if(app.get('env') !== 'development') {
+  app.use('/api/*', validate);
+}
 
 app.use('/auth', auth);
-app.use('/api/*', validate);
 app.use('/api', user);
 app.use('/api', product);
-app.use('/api', theme);
 
 /*
  * Error Handler.
@@ -76,18 +82,7 @@ server.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode',
     app.get('port'),
     app.get('env'));
-	app.use(logger('dev'));
 });
-
-/*
- * Start Express server.
- */
-/*app.listen(app.get('port'), function() {
-  console.log('Express server listening on port %d in %s mode',
-    app.get('port'),
-    app.get('env'));
-	app.use(logger('dev'));
-});*/
 
 /*
  * Create Socket.io server.

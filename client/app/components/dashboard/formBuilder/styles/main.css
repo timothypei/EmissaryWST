@@ -49,6 +49,11 @@ body {
   margin-bottom: 0px;
 }
 
+.form-fields {
+  width: 45%;
+  border-right: 2px solid #434343;
+}
+
 .form-fields .accordion-group{
   border: 1px solid #AAAAAA;
 }

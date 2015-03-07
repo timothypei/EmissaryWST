@@ -7,8 +7,8 @@ var express = require('express');
 var router = express.Router();
 
 var Email = require('../../notification/email');
-var Text = require('../../notification/text');
-var Socket = require('../../socket/socket')
+var TextModel = require('../../notification/text');
+var Socket = require('../../socket/socket');
 
 var PatientQueue = require('../../models/PatientQueue');
 var Employee = require('../../models/Employee');
@@ -16,7 +16,7 @@ var Employee = require('../../models/Employee');
 // This route will be called when the patient checks in
 exports.checkin = function(req, res) {
     if(!(req.body._admin_id && req.body.name))
-        return res.status(400).json({error: "Please send _admin_id and name."})
+        return res.status(400).json({error: "Please send _admin_id and name."});
     var patient = {
         _admin_id: req.body._admin_id,
         name: req.body.name,
@@ -27,7 +27,7 @@ exports.checkin = function(req, res) {
     var queue = {
         _admin_id: req.body._admin_id,
         $push: {"patients": patient}
-    }
+    };
     PatientQueue.findOneAndUpdate(
         {_admin_id: req.body._admin_id},
         queue,
@@ -44,10 +44,10 @@ exports.checkin = function(req, res) {
                         if(i == 2) {
                             res.json({queue: queue});
                         }
-                    }
+                    };
 
                     Email.sendEmail(employees, function(){respond();});
-                    Text.sendText(employees, function(){respond();});
+                    TextModel.sendText(employees, function(){respond();});
                 }
             );
 

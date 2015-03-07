@@ -27,15 +27,15 @@ describe("PatientQueue", function() {
             _admin_id: adminCredentials.admin._id,
             name: "Tony Montana",
             _doctor_id: employeeCredentials._id,
-          }
+          };
           var em = new Employee();
           em._admin_id = adminCredentials.admin._id;
-          em.email = "varyox@gmail.com";
-          em.phone_number = "";
-          _doctor_id: employeeCredentials._id;
+          em.email = ""; // Add YOUR email to test
+          em.phone_number = ""; // Add YOUR phone number here to test
+          _doctor_id = employeeCredentials._id;
           Employee.remove({},function(err) {
             if(err)
-              throw(err)
+              throw(err);
             em.save(function(err, employ) {
               console.log(err);
               console.log("CREATED EMPLOYEE", employ);

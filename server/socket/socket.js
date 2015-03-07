@@ -4,6 +4,7 @@ var express = require('express');
 var server;
 var io = require('socket.io')();
 var port = process.env.PORT || 3000;
+var exports = module.exports;
 
 /********** Socket IO Module **********/
 exports.createServer = function(io_in) {
@@ -37,7 +38,7 @@ exports.createServer = function(io_in) {
         });
     });
     return server;
-}
+};
 
 /*
  * A function that allows you to notify all clients that
@@ -49,7 +50,7 @@ exports.createServer = function(io_in) {
  */
 exports.notifyNewQueue = function(adminID, queue) {
     io.to(adminID).emit('queue_updated', queue);
-}
+};
 
 /*
  * A function that allows you to notify all clients that
@@ -57,7 +58,7 @@ exports.notifyNewQueue = function(adminID, queue) {
  */
 exports.notifyPatientAdded = function(adminID, patient) {
     io.to(adminID).emit('patient_added', patient);
-}
+};
 
 /*
  * A function that allows you to notify all clients that
@@ -65,7 +66,7 @@ exports.notifyPatientAdded = function(adminID, patient) {
  */
 exports.notifyPatientRemoved = function(adminID, patient) {
     io.to(adminID).emit('patient_removed', patient);
-}
+};
 
 /*
  * Set up a custom namespace.
