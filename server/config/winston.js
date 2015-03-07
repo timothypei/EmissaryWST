@@ -15,9 +15,10 @@ if ( !fs.existsSync( logDir ) ) {
  */
 var logger = new winston.Logger({
     transports: [
-      new winston.transports.File({
+      new winston.transports.DailyRotateFile({
         level: 'info',
-        filename: path.join(logDir, 'logs.log'),
+	datePattern: ('yyyy-MM-dd' + '.log'),
+        filename: path.join(logDir, 'logs'),
         handleExceptions: true,
         json: false,
         maxsize: 5242880,
