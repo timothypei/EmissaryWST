@@ -6,6 +6,7 @@
  */
 var Employee = require('../models/Employee');
 var express = require('express');
+var config = require('../config/config');
 var router = express.Router();
 
 /* need this to enable cross origin resource sharing.If disabled, we might
@@ -22,7 +23,7 @@ router.post('/signup', function(req, res) {
   var admin = new Authmodel();
   admin.email = req.body.email;
   admin.password = admin.generateHash(req.body.password);
-  admin.token = jwt.encode(req.body.email, admin.generateHash(new Date().getTime()));
+  admin.token = jwt.encode(req.body.email, config.secret);
   // save the user
   admin.save(function(err) {
     if(err)
@@ -40,12 +41,11 @@ router.post('/login', function(req, res) {
     if(err || !user)
       return res.status(400).send(err);
 
-
     // if the user is found but the password is wrong
     if(!user.validPassword(req.body.password))
       return res.status(401).send('loginMessage', 'Oops! Wrong password');
 
-    var newToken = jwt.encode(req.body.email, user.generateHash(new Date().getTime()));
+    var newToken = jwt.encode(req.body.email, config.secret);
     user.token = newToken;
     user.save(function(err, admin) {
       if(err)
