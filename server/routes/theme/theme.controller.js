@@ -13,22 +13,18 @@ var router = express.Router();
  */
 var cors = require('cors');
 
-var Theme = require('../models/Theme');
+var Theme = require('../../models/Theme');
 
-// middleware to use for all requests
-router.use(function(req, res, next) {
+/*********************** THEME TEMPLATE ROUTES ***********************/
+module.exports.template = {};
+
+module.exports.template.use = function(req, res, next) {
     // do logging
     console.log('Intializing.....');
     next();
-});
+};
 
-
-//For client access
-router.route('/:user_id/theme')
-
-//post with default values
-.post(function(req, res) {
-
+module.exports.template.create = function(req, res) {
     var theme = new Theme();
     theme.user_id = req.params.user_id; //company or user id
     theme.form_color = "default";
@@ -40,34 +36,32 @@ router.route('/:user_id/theme')
 
     theme.save(function(err) {
         if (err)
-            res.send(err);
+            res.status(400).send(err);
 
-        res.json(theme);
+        res.status(200).json(theme);
     });
 
-})
+};
 
-//get the theme correspond to the user
-.get(function(req, res) {
+module.exports.template.get = function(req, res) {
     Theme.findOne({
         user_id: req.params.user_id
     }, function(err, theme) {
         if (err)
-            res.send(err);
+            res.status(400).send(err);
 
-        res.json(theme);
+        res.status(200).json(theme);
     });
-})
+};
 
-//Edit, when the user save new settings
-.put(function(req, res) {
+module.exports.template.update = function(req, res) {
 
     Theme.findOne({
         user_id: req.params.user_id
     }, function(err, theme) {
 
         if (err)
-            res.send(err);
+            res.status(400).send(err);
 
         theme.user_id = req.params.user_id; //company or user id
         if (req.body.form_color)
@@ -85,27 +79,24 @@ router.route('/:user_id/theme')
 
         theme.save(function(err) {
             if (err)
-                res.send(err);
+                res.status(400).send(err);
 
-            res.json(theme);
+            res.status(200).json(theme);
         });
 
     });
-})
+};
 
-//Delete, when a user unsuscribed from the service
-.delete(function(req, res) {
+module.exports.template.delete = function(req, res) {
 
     Theme.remove({
         user_id: req.params.user_id
     }, function(err, theme) {
         if (err)
-            res.send(err);
+            res.status(400).send(err);
 
-        res.json(theme);
+        res.status(200).json(theme);
     });
 
 
-});
-
-module.exports = router;
+};

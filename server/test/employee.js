@@ -1,6 +1,7 @@
 var request = require('supertest');
 
 var config = require('../config/config');
+var should = require('chai').should();
 
 // Wrapper that creates admin user to allow api calls
 var ConfigureAuth = require('./ConfigureAuth');
@@ -41,6 +42,8 @@ describe("Employee", function() {
               phone_number: "123456789",
             })
             .end(function(err, res){
+              if(err)
+                throw(err);
               //console.log(err);
               //console.log(res);
               //res.body.should.have.property('_admin_id').and.be.equal(''+credentials.admin._id);
@@ -65,9 +68,11 @@ describe("Employee", function() {
               phone_number: "987654321",
             })
             .end(function(err, res){
+              if(err)
+                throw(err);
 
-            res.body.should.have.property('email').and.be.equal("updated_email@tomcruise.com");
-            res.body.should.have.property('phone_number').and.be.equal("987654321");
+              res.body.should.have.property('email').and.be.equal("updated_email@tomcruise.com");
+              res.body.should.have.property('phone_number').and.be.equal("987654321");
               done();
             });
         });
@@ -80,16 +85,21 @@ describe("Employee", function() {
             request(url)
               .get('/api/employee')
               .query({email: credentials.email, token: credentials.token})
+              .send({
+                _admin_id: credentials.admin._id
+              })
               .end(function(err, res){
-             
+                           
+                //console.log("RESPONSE", res)
+                res.body.should.be.instanceof(Object);
+                //res.body.should.not.be.empty;
+                res.body.should.not.be.empty();
+                //res.body.should.exist;
+                should.exist(res.body);
+                res.body.should.have.length.of.at.least(1);
+                res.body.should.be.an.instanceof(Array);
 
-              res.body.should.be.instanceof(Object);
-              res.body.should.not.be.empty;
-              res.body.should.exist;
-              res.body.should.have.length.of.at.least(1);
-              res.body.should.be.an.instanceof(Array);
-
-              done();
+                done();
             });
           });
         });
