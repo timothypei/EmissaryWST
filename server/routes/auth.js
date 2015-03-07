@@ -76,7 +76,7 @@ router.put("/setting/:user", function(req, res) {
   	 admin.email = req.body.newemail;
     admin.save(function(err) {
       if(err) {
-        res.json(err);
+        res.status(400).send(err);
       }
     });
     return res.sendStatus(200);

@@ -36,9 +36,9 @@ module.exports.template.create = function(req, res) {
 
     theme.save(function(err) {
         if (err)
-            res.send(err);
+            res.status(400).send(err);
 
-        res.json(theme);
+        res.status(200).json(theme);
     });
 
 };
@@ -48,9 +48,9 @@ module.exports.template.get = function(req, res) {
         user_id: req.params.user_id
     }, function(err, theme) {
         if (err)
-            res.send(err);
+            res.status(400).send(err);
 
-        res.json(theme);
+        res.status(200).json(theme);
     });
 };
 
@@ -61,7 +61,7 @@ module.exports.template.update = function(req, res) {
     }, function(err, theme) {
 
         if (err)
-            res.send(err);
+            res.status(400).send(err);
 
         theme.user_id = req.params.user_id; //company or user id
         if (req.body.form_color)
@@ -79,9 +79,9 @@ module.exports.template.update = function(req, res) {
 
         theme.save(function(err) {
             if (err)
-                res.send(err);
+                res.status(400).send(err);
 
-            res.json(theme);
+            res.status(200).json(theme);
         });
 
     });
@@ -93,9 +93,9 @@ module.exports.template.delete = function(req, res) {
         user_id: req.params.user_id
     }, function(err, theme) {
         if (err)
-            res.send(err);
+            res.status(400).send(err);
 
-        res.json(theme);
+        res.status(200).json(theme);
     });
 
 

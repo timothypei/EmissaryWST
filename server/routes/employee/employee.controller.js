@@ -21,16 +21,16 @@ exports.getAllEmployees = function(req, res) {
     if(err){
       return res.status(400).send('There was a problem fetching all of the users');
     }
-    return res.json(result);
+    return res.status(200).json(result);
   });
 };
 
 exports.getById = function(req, res) {
    Employee.findById(req.params.id, function(err, employee) {
       if(err) {
-        return res.json(err);
+        return res.status(400).json(err);
       } else {
-        return res.json(employee);
+        return res.status(200).json(employee);
       }
     });
 };
@@ -48,9 +48,9 @@ exports.insert = function(req, res) {
 
   employee.save(function(err) {
     if(err) {
-      return res.json(err);
+      return res.status(400).json(err);
     }
-    return res.send(employee);
+    return res.status(200).send(employee);
   });
 };
 
@@ -66,10 +66,10 @@ exports.update = function(req, res) {
 
       employee.save(function(err) {
         if(err) {
-          return res.json(err);
+          return res.status(400).json(err);
         }
       });
-      return res.send(employee);
+      return res.status(200).send(employee);
    });
 };
 
@@ -77,9 +77,9 @@ exports.delete = function(req, res) {
   return Employee.findById(req.params.id, function(err, employee) {
     return employee.remove(function(err) {
       if(err) {
-        res.json(err);
+        res.status(400).json(err);
       } else {
-        return res.send('deleted ' + req.params.id);
+        return res.status(200).send('deleted ' + req.params.id);
       }
     });
   });
