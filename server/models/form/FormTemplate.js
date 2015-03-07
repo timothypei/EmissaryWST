@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var formTemplate = new mongoose.Schema({
   _admin_id: {
       type: Schema.Types.ObjectId,
-      ref: 'AdminUser',
+      ref: 'Admin',
       required: true
   },
   template: {

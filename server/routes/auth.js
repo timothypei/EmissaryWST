@@ -4,6 +4,7 @@
  * This module is meant to house all of the API
  * routes that pertain to authentication of admins
  */
+var Employee = require('../models/Employee');
 var express = require('express');
 var router = express.Router();
 
@@ -26,7 +27,7 @@ router.post('/signup', function(req, res) {
   admin.save(function(err) {
     if(err)
       return res.status(400).send(err);
-    return res.sendStatus(200);
+    return res.status(200).json({token: admin.token, admin_id: admin._id});
   });
 });
 
@@ -56,30 +57,30 @@ router.post('/login', function(req, res) {
 });
 
 router.put("/setting/:user", function(req, res) {
-   Authmodel.findOne({email: req.params.user}, function (err, admin) {
-      if(err || !admin)
-         res.json(err);
+  Authmodel.findOne({email: req.params.user}, function (err, admin) {
+    if(err || !admin)
+      res.json(err);
  	
      
-     // if the user is found but the password is wrong
-     if(!admin.validPassword(req.body.password))
-       return res.status(401).send('loginMessage', 'Oops! Wrong password');
-	 //update password
+    // if the user is found but the password is wrong
+    if(!admin.validPassword(req.body.password))
+      return res.status(401).send('loginMessage', 'Oops! Wrong password');
+	  //update password
 	
-	 //upadate password
-	 if (req.body.newpassword !== undefined)
-	 	admin.password = admin.generateHash(req.body.newpassword);
+	  //upadate password
+    if (req.body.newpassword !== undefined)
+	 	 admin.password = admin.generateHash(req.body.newpassword);
 	
-	//update email
-	 if (req.body.newemail !== undefined)
-		 admin.email = req.body.newemail;
-      admin.save(function(err) {
-        if(err) {
-          res.json(err);
-        }
-      });
-      return res.sendStatus(200);
-   });
+    //update email
+    if (req.body.newemail !== undefined)
+  	 admin.email = req.body.newemail;
+    admin.save(function(err) {
+      if(err) {
+        res.status(400).send(err);
+      }
+    });
+    return res.sendStatus(200);
+  });
 });
 
 
