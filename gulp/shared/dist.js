@@ -6,9 +6,10 @@ var gulp = require('gulp');
 gulp.task('dist', [
 // 'lint:server',
 // 'lint:client', uncomment this when ready to turn linting on
-  'concat',
-  'copy:bower-components',
   'bower',
-  'copy:views',
-  'copy:assets'
+  'concat:css',
+  'concat:js',
+  'copy:assets',
+  'copy:bower-components',
+  'copy:views'
 ]);
