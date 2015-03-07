@@ -1,11 +1,10 @@
 <head>
-	<link href="http://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/register.css" rel="stylesheet" />
-
 </head>	
 
 <body ng-app="register">
-	<div class="main" ng-controller="RegisterController as regCTRL">
+	<div ng-controller="RegisterController as regCTRL">
+
 		<div class="navi">
 			<div class="arrowContainer">
 				<div class="arrowbutton">
@@ -13,38 +12,37 @@
 				</div>
 			</div>
 		</div>
-		<div class="signup">
+
+		<div id="container" >
 			<h1>Sign Up Form</h1>
-			<div class="signupform">
-				<form ng-submit="reg()">
-					<div class="formfield">
-						<b>Name</b> <input type="name" placeholder="Company Name">
-					</div>
-					<div class="formfield">
-						<b>Email</b> <input type="Email" placeholder="Email" ng-model="user.email">
-					</div>
-					<div class="formfield">
-						<b>Password</b>  <input type="password" placeholder="Password" ng-model="user.password">
-					</div>
+			<form ng-submit="reg()" class="signupform">
 
-					<div class="formfield">
-						<b>Confirm Password</b> <input type="password" placeholder="Confirm Password" ng-model="pass">
-					</div>
+				<div class="formfield">
+					<b>Name</b> <input type="name" placeholder="Company Name">
+				</div>
 
-					<div class="formfield">
-						<b>Business</b> <input type="buisness" placeholder="Business Name">
-					</div>
-					<div class="formfield">
-						<b>Phone</b> <input type="phone" placeholder="Company Name">
-					</div>
-					
-						<p id="error_message">{{errorMessage}}</p>
-						<input type="submit" Value="Submit"></a>
-					
-				</form>
-			</div>
+				<div class="formfield">
+					<b>Email</b> <input type="Email" placeholder="Email" ng-model="user.email">
+				</div>
+
+				<div class="formfield">
+					<b>Password</b>  <input type="password" placeholder="Password" ng-model="user.password">
+				</div>
+
+				<div class="formfield">
+					<b>Confirm Password</b> <input type="password" placeholder="Confirm Password" ng-model="pass">
+				</div>
+
+				<div class="checkboxfield">
+					<input type="checkbox" ng-model="check">
+					<label class="check" for="checkbox">I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a></label>
+				</div>
+
+				<div id="registerError">
+					<p id="error_message">{{errorMessage}}</p>
+					<input type="submit" Value="Sign Up">
+				</div>
+			</form>
 		</div>
-  </div>
-
-  <themeChoice></themeChoice>
+  	</div>
 </body>

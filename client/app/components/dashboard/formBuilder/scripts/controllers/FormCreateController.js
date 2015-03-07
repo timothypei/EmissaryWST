@@ -37,23 +37,43 @@ angular.module('DashboardFormBuilderModule')
       "field_id" : $scope.addField.lastAddedID,
       "field_title" : "New field - " + ($scope.addField.lastAddedID),
       "field_type" : $scope.addField.new,
-      "field_value" : "",
+      "field_placeholder" : "",
       "field_required" : true,
       "field_disabled" : false
     };
 
     // put newField into fields array
     $scope.form.form_fields.push(newField);
+    if($scope.previewMode == false) {
+      $scope.previewMode = true;
+    }
+    $scope.form.submitted = false;
   };
 
   // deletes particular field on button click
   $scope.deleteField = function (field_id){
-    for(var i = 0; i < $scope.form.form_fields.length; i++){
-      if($scope.form.form_fields[i].field_id == field_id){
-        $scope.form.form_fields.splice(i, 1);
-        break;
+    var modalInstance = $modal.open({
+        templateUrl: 'views/components/dashboard/formBuilder/views/deleteModal.html',
+        controller : 'DeleteModalInstanceCtrl',
+        controllerAs : 'vm'
+      });
+
+    modalInstance.result.then(function() {
+      // confirmed delete
+      for(var i = 0; i < $scope.form.form_fields.length; i++){
+        if($scope.form.form_fields[i].field_id == field_id){
+          $scope.form.form_fields.splice(i, 1);
+          break;
+        }
       }
+      if($scope.form.form_fields === null || $scope.form.form_fields.length === 0) {
+        $scope.previewMode = false;
+        $scope.form.submitted = false;
+      }
+    }, function() {
+      // delete canceled
     }
+    );
   };
 
   // add new option to the field
@@ -91,70 +111,6 @@ angular.module('DashboardFormBuilderModule')
     }
   };
 
-
-   // posts form template as Json
-  $scope.postJson = function (){
-    // object of this form template
-    var formJson = $filter('json')($scope.form);
-     var putJson = { 
-                        "template":formJson,
-                        "template_id":$scope.templateId//"54f8f382191b38ec26dd57a6"
-                    };
-     $http.put('/api/form/template', putJson).
-     success(function(data, status, headers, config) {
-       // this callback will be called asynchronously
-       // when the response is available
-       console.log("put success");
-       console.log(data);
-       $scope.form = JSON.parse($scope.prevJson);
-     }).
-     error(function(data, status, headers, config) {
-       // called asynchronously if an error occurs
-       // or server returns response with an error status.
-       console.log("no forms posted");
-     });
-  };      
-
-  // fetch a template from the server
-  $scope.fetchSavedTemplate = function(){
-     $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
-         success(function(data, status, headers, config) {
-           console.log(data);
-           $scope.prevJson = $filter('json')($scope.form);
-           $scope.templateId = data._id;
-           $scope.form = JSON.parse(data.template);
-         }).
-         error(function(data, status, headers, config) {
-           alert("You have no saved templates.");
-         });
-  }; 
-
-  // preview form
-  $scope.previewOn = function(){
-    if($scope.form.form_fields === null || $scope.form.form_fields.length === 0) {
-      var title = 'Error';
-      var msg = 'No fields added yet, please add fields to the form before preview.';
-      var btns = [{result:'ok', label: 'OK', cssClass: 'btn-primary'}];
-
-      var modalInstance = $modal.open({
-        templateUrl: 'views/components/dashboard/formBuilder/views/modal.html',
-        controller : 'ModalInstanceCtrl',
-        controllerAs : 'vm'
-      });
-    }
-    else {
-      $scope.previewMode = !$scope.previewMode;
-      $scope.form.submitted = false;
-      angular.copy($scope.form, $scope.previewForm);
-    }
-  };
-
-  // hide preview form, go back to create mode
-  $scope.previewOff = function(){
-    $scope.previewMode = !$scope.previewMode;
-    $scope.form.submitted = false;
-  };
-
   $scope.editOn = function(){
     $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
          success(function(data, status, headers, config) {
@@ -180,7 +136,23 @@ angular.module('DashboardFormBuilderModule')
 
   // deletes all the fields
   $scope.reset = function (){
-    $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
-    $scope.addField.lastAddedID = 0;
+    if($scope.form.form_fields !== null && $scope.form.form_fields.length !== 0) {
+      var modalInstance = $modal.open({
+          templateUrl: 'views/components/dashboard/formBuilder/views/deleteModal.html',
+          controller : 'DeleteModalInstanceCtrl',
+          controllerAs : 'vm'
+        });
+
+      modalInstance.result.then(function() {
+        // confirmed reset
+        $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
+        $scope.addField.lastAddedID = 0;
+        $scope.previewMode = false;
+        $scope.form.submitted = false;
+      }, function() {
+        // reset canceled
+      }
+      );
+    }
   };
 });

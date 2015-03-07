@@ -11,17 +11,19 @@ gulp.task('htmlify', ['copy:views'],function(){
     .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('ng-annotate', ['dist'], function () {
+gulp.task('ng-annotate', ['concat:js'], function () {
   return gulp.src('dist/bundle.js')
     .pipe(ngAnnotate())
     .pipe(gulp.dest('./dist/'));
 });
 
-/* Minify all css files */
-gulp.task('minify:css', ['dist'], function() {
-  return gulp.src('./dist/css/*.css')
+/* Minify bundle.css. If it doesn't exist, create 
+ * it first using concat:css
+ */
+gulp.task('minify:css', ['concat:css'], function() {
+  return gulp.src('./dist/bundle.css')
     .pipe(minifyCSS())
-    .pipe(gulp.dest('./dist/css/'))
+    .pipe(gulp.dest('./dist/'))
 });
 
 /* Minify bundle.js */
@@ -35,4 +37,4 @@ gulp.task('minify:js', ['ng-annotate'], function() {
 gulp.task('build:dev', ['dist']);
 
 /* Build the app and minfy */
-gulp.task('build:prod', ['minify:js', 'minify:css', 'htmlify']);
+gulp.task('build:prod', ['dist', 'minify:js', 'minify:css', 'htmlify']);
