@@ -27,7 +27,7 @@ router.post('/signup', function(req, res) {
   admin.save(function(err) {
     if(err)
       return res.status(400).send(err);
-    return res.sendStatus(200);
+    return res.status(200).json({token: admin.token, admin_id: admin._id});
   });
 });
 
@@ -47,10 +47,10 @@ router.post('/login', function(req, res) {
 
     var newToken = jwt.encode(req.body.email, user.generateHash(new Date().getTime()));
     user.token = newToken;
-    user.save(function(err) {
+    user.save(function(err, admin) {
       if(err)
         return res.status(400);
-      return res.json({token: newToken});
+      return res.json({token: newToken, admin_id: admin._id});
     });
 
   });

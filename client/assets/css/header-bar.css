@@ -23,9 +23,14 @@
  text-decoration: none;
 }
 
+/*Making it fixed position*/
 .navbar#navigation {
   border-bottom: 5px solid #e99d1a;
-
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
 }
 
 
@@ -43,7 +48,13 @@ ul.topbar-right li {
   list-style-type: none;
   padding-left:20px;
   padding-right:20px;
+   /*border-bottom: 14px solid #ef8e48;*/
 }
+/*
+#modebutton{
+    background:#6c9fd5;
+    margin-top:2em;
+}*/
 
 ul.topbar-right li a{
   padding: 5 0 5 0;
@@ -71,7 +82,12 @@ ul.topbar-right li:hover {
   height:50px;
   background-image: url("../../../../images/logo.png");
   background-size: 100%;
+  margin-top:3px;
+/*
+	width:100px;
+	height:90px*/
 }
+
 
 /*
 

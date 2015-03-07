@@ -8,8 +8,12 @@ angular.module('dashboard')
       controller: 'SidebarController',
       controllerAs: 'sidebarCtrl'
     };
-  }).controller('SidebarController', ['$scope','$cookieStore', function($scope, $cookieStore){
+  }).controller('SidebarController', 
+        ['$scope','$cookieStore', 'SidebarService',
+        function($scope, $cookieStore, SidebarService){
     var mobileView = 992;
+    $scope.options = SidebarService.getSidebarOptions();
+    $scope.sidebarHeader = SidebarService.getSidebarHeader();
     $scope.getWidth = function() {
         return window.innerWidth;
     };

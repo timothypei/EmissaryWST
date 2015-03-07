@@ -107,7 +107,7 @@ module.exports.submitted_form.create = function(req, res) {
   });
 };
 
-module.exports.submitted_form.findByCompanyId = function(req, res) {
+module.exports.submitted_form.findByPatientInfo = function(req, res) {
   var query = {},
     firstName = req.query.firstName,
     lastName = req.query.lastName,
