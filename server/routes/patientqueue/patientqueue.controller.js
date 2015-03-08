@@ -51,13 +51,8 @@ exports.checkin = function(req, res) {
                 }
             );
 
-            // Send emails connect to socket
-
-            /*Email.sendEmail(employees);
-            Text.sendText(employees);
-            Socket.notifyNewQueue(req.body._admin_id, queue);*/
-
-            
+            // New queue is sent to the socket
+            Socket.notifyNewQueue(req.body._admin_id, queue);
         }
     );
 };

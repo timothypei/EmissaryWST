@@ -8,8 +8,6 @@ var Employee = require('../models/Employee');
 var Email = require('../notification/email');
 var TextModel = require('../notification/text');
 
-// array of employees. PLEASE only use your emails and phone numbers
-// inside this array if testing..
 // SAMPLE : [{phone_number: "XXX-XXX-XXXX", email: "XXXXX@XXXXX.com"}];
 var employees = [];
 
