@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('FormEditController', function ($scope, $modal, FormService, $http, $filter, $location) {
+  .controller('FormEditController', function ($scope, $rootScope, $modal, FormService, $http, $filter, $location) {
 
   $scope.templateId = 0;
   $scope.prevJson = $filter('json')($scope.form);
@@ -142,7 +142,7 @@ angular.module('DashboardFormBuilderModule')
 
   // fetch a template from the server
   $scope.fetchSavedTemplate = function(){
-     $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
+     $http.get('/api/form/template/company/'+$rootScope.admin_id).
          success(function(data, status, headers, config) {
            console.log(data);
            //$scope.prevJson = $filter('json')($scope.form);
@@ -157,7 +157,7 @@ angular.module('DashboardFormBuilderModule')
 
   // run when app is loaded
   $scope.$on('$viewContentLoaded', function() {
-        $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
+        $http.get('/api/form/template/company/'+$rootScope.admin_id).
          success(function(data, status, headers, config) {
            console.log(data);
            //$scope.prevJson = $filter('json')($scope.form);
