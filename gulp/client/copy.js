@@ -20,6 +20,6 @@ gulp.task('copy:bower-components', function () {
  * to the dist folder
  */
 gulp.task('copy:views', function () {
-  return gulp.src(['./client/index.html', './client/app/**/*.html'])
+  return gulp.src([ './client/app/**/*.html'])
     .pipe(gulp.dest('./dist/views/'));
 });
