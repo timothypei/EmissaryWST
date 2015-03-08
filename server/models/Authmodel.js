@@ -9,7 +9,7 @@ var adminSchema = mongoose.Schema({
   password: String,
   token: String,
   company_name: String,
-	company_phone_number: String
+  company_phone_number: String
 });
 
 // methods ======================
