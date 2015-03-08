@@ -74,9 +74,19 @@ src: local('Myriad Pro Bold'), url('../fonts/MYRIADPRO-BOLD.woff') format('woff'
     border-color: red;
 }
 .ng-valid.ng-dirty {
-    border-color: yellowgreen;
+    /*border-color: yellowgreen;*/
 }
 body{
     max-width: 100%;
 
+}
+
+
+/* Patient queue */
+#patient-queue table tr td.patient-queue-text {
+	vertical-align: middle;
+}
+
+.patient-queue-container {
+	font-family: 'Myriad Pro Regular';
 }

@@ -16,6 +16,6 @@ gulp.task('serve:frontend', ['build:dev'], function () {
 /* Watch Files For Changes */
 gulp.task('frontend',['serve:frontend'], function() {
   gulp.watch('./client/bower_components', ['copy:bower-components', 'bower']);
-  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat', 'copy:views', 'bower']);
+  gulp.watch(['./client/index.html', './client/app/**/*'], ['concat:js', 'copy:views', 'bower']);
   gulp.watch('./client/assets/**', ['copy:assets']);
 });
