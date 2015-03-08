@@ -79,7 +79,6 @@ angular.module('dashboard')
 
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
     $scope.displayedCollection = [].concat($scope.rowCollection);
-    debugger
     //remove to the real data holder modal
     $scope.removeItem = function(row){
       var modalInstance = $modal.open({
