@@ -1,10 +1,9 @@
-<h1>Create a new form</h1> <br>
 <blockquote>
     <p>Select field type you want to add to the form below and click on 'Add Field' button. Don't forget to set field properties. After you finish creating the form, you can preview the form by clicking Preview Form button.</p>
 </blockquote>
 
 <div class="well">
-    <div class="form-fields" ng-hide="previewMode">
+    <div class="form-fields" style="display:inline-block;">
         <div class="form-properties">
             <h3>Form Properties</h3>
             <div class="row">
@@ -13,7 +12,7 @@
             </div>
             <div class="row">
                 <div class="span2">Form Name:</div>
-                <div class="span4"><input type="text" name="form-name" ng-disabled="previewMode" ng-model="form.form_name"></div>
+                <div class="span4"><input type="text" name="form-name" ng-model="form.form_name"></div>
             </div>
         </div>
 
@@ -22,12 +21,12 @@
         <h3>Fields</h3>
         <div class="add-field">
             <select ng-model="addField.new" ng-options="type.name as type.value for type in addField.types"></select>
-            <button type="submit" class="btn" ng-click="addNewField()"><i class="icon-plus"></i> Add Field</button>
+            <button type="submit" class="btn addField" ng-click="addNewField()"><i class="icon-plus"></i> Add Field</button>
         </div>
         <hr>
         <p ng-show="form.form_fields.length == 0">No fields added yet.</p>
         <accordion close-others="accordion.oneAtATime">
-            <accordion-group heading="{{field.field_title}}" ng-repeat="field in form.form_fields">
+            <accordion-group heading="{{field.field_title}}" ng-repeat="field in form.form_fields"> 
 
                 <div class="accordion-edit">
                     <button class="btn btn-danger pull-right" type="button" ng-click="deleteField(field.field_id)"><i class="icon-trash icon-white"></i> Delete</button>
@@ -48,8 +47,8 @@
                         <div class="span4"><input type="text" ng-model="field.field_title" value="{{field.field_title}}"></div>
                     </div>
                     <div class="row">
-                        <div class="span2">Field Default Value:</div>
-                        <div class="span4"><input type="text" ng-model="field.field_value" value="{{field.field_value}}"></div>
+                        <div class="span2">Field Placeholder:</div>
+                        <div class="span4"><input type="text" ng-model="field.field_placeholder" placeholder="{{field.field_placeholder}}"></div>
                     </div>
                     <div class="row" ng-show="showAddOptions(field)">
                         <div class="span2">Field Options:</div>
@@ -69,12 +68,12 @@
                         <div class="span2">Required:</div>
                         <div class="span4">
                             <label>
-                                <input type="radio" ng-value="true" ng-selected ng-model="field.field_required"/>
-                                &nbsp; Yes
+                                <input class="require-radio" type="radio" ng-value="true" ng-selected ng-model="field.field_required"/>
+                                Yes
                             </label>
                             <label>
-                                <input type="radio" ng-value="false" ng-model="field.field_required"/>
-                                &nbsp; No
+                                <input class="require-radio" type="radio" ng-value="false" ng-model="field.field_required"/>
+                                No
                             </label>
                         </div>
                     </div>
@@ -85,12 +84,12 @@
 						<div class="span2">Disabled:</div>
                         <div class="span4">
                             <label>
-                                <input type="radio" ng-value="true" ng-selected ng-model="field.field_disabled"/>
-                                &nbsp; Yes
+                                <input class="require-radio" type="radio" ng-value="true" ng-selected ng-model="field.field_disabled"/>
+                                Yes
                             </label>
                             <label>
-                                <input type="radio" ng-value="false" ng-model="field.field_disabled"/>
-                                &nbsp; No
+                                <input class="require-radio" type="radio" ng-value="false" ng-model="field.field_disabled"/>
+                                No
                             </label>
                         </div>
                     </div>
@@ -99,7 +98,9 @@
         </accordion>
 
         <p class="text-center">
-            <button class="btn btn-primary right" type="button" ng-click="previewOn()"><i class="icon-eye-open icon-white"></i> Preview Form</button>
+
+            <button class="btn btn-primary right" type="button" ng-click="editOn()"><i class="icon-eye-open icon-white"></i> Edit existing template</button>
+
             <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Reset</button>
         </p>
 
@@ -116,12 +117,8 @@
         </div>
     </div>
 
-    <div class="form-fields-preview" ng-show="previewMode">
-        <form-directive form="previewForm"></form-directive>
-
-        <p class="text-center">
-            <button class="btn btn-primary btn-large right" type="button" ng-click="previewOff()"><i class="icon-arrow-left icon-white"></i> Back to Create Mode</button>
-        </p>
+    <div class="form-fields-preview" style="display:inline-block; vertical-align:top;" ng-show="previewMode">
+        <form-directive form="form"></form-directive>
     </div>
 </div>
 

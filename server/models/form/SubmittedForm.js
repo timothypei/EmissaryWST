@@ -9,7 +9,7 @@ var submittedForm = new mongoose.Schema({
   lastName : {type: String},
   email : {type: String},
   date : {type: Date, default: Date.now},
-  _admin_id: { type: Schema.Types.ObjectId, ref: 'AdminUser', required: true }
+  _admin_id: { type: Schema.Types.ObjectId, ref: 'Admin', required: true }
 
 });
 

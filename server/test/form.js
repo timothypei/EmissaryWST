@@ -181,7 +181,8 @@ describe("Forms", function() {
         it('should save the template', function(done){
           request(url)
             .post('/api/form/template')
-            .query({email: credentials.email, token: credentials.token})
+            .query({email: credentials.email, token: credentials.token, isAdmin:true})
+            .expect(200)
             .send({
               _admin_id: credentials.admin._id,
               template: templateForm,
@@ -199,7 +200,7 @@ describe("Forms", function() {
         it('Should respond with template data', function(done){
           request(url)
             .get('/api/form/template/' + templateFormId)
-            .query({email: credentials.email, token: credentials.token})
+            .query({email: credentials.email, token: credentials.token, isAdmin:true})
             .end(function(err, res){
               res.body.should.have.property('_id');
               res.body.should.have.property('_admin_id');
@@ -216,7 +217,7 @@ describe("Forms", function() {
         it('Should respond with company template data', function(done){
           request(url)
             .get('/api/form/template/company/' + credentials.admin._id)
-            .query({email: credentials.email, token: credentials.token})
+            .query({email: credentials.email, token: credentials.token, isAdmin:true})
             .end(function(err, res){
               res.body.should.have.property('_id');
               res.body.should.have.property('_admin_id');
@@ -233,7 +234,7 @@ describe("Forms", function() {
         it('Should delete the template data', function(done){
           request(url)
             .delete('/api/form/template/' + templateFormId)
-            .query({email: credentials.email, token: credentials.token})
+            .query({email: credentials.email, token: credentials.token, isAdmin:true})
             .end(function(err, res){
               res.body.should.have.property('_id');
               res.body.should.have.property('_admin_id');
@@ -257,7 +258,7 @@ describe("Forms", function() {
         it('should save submitted form', function(done){
           request(url)
             .post('/api/form/patient')
-            .query({email: credentials.email, token: credentials.token})
+            .query({email: credentials.email, token: credentials.token, isAdmin:true})
             .send({
               _admin_id: credentials.admin._id,
               form: submittedForm,
@@ -280,7 +281,7 @@ describe("Forms", function() {
         it('should respond with submitted form data', function(done){
           request(url)
             .get('/api/form/patient/' + submittedFormId)
-            .query({email: credentials.email, token: credentials.token})
+            .query({email: credentials.email, token: credentials.token, isAdmin:true})
             .end(function(err, res){
               res.body.should.have.property('_id');
               res.body.should.have.property('firstName');
