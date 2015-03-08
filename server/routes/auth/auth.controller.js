@@ -10,9 +10,9 @@ Functions:
 	authResetCredentials()
 */
 
-var Employee = require('../models/Employee');
+
 var express = require('express');
-var config = require('../config/config');
+var config = require('../../config/config');
 var router = express.Router();
 
 /* need this to enable cross origin resource sharing.If disabled, we might
@@ -20,29 +20,31 @@ var router = express.Router();
 * when front end is served from a something other than our app server.
 */
 var cors = require('cors');
-var Authmodel = require('../models/Authmodel');
+var Authmodel = require('../../models/Authmodel');
 var jwt = require('jwt-simple');
 
 /****** AUTH TEMPLATE ROUTES ******/
-modules.exports.template = {};
+module.exports.template = {};
 
 /**authSignup- Used to sign up a user.*/
-modules.exports.template.authSignup = function(req, res) {
+module.exports.template.authSignup = function(req, res) {
 	//Put them into the database
 	var admin = new Authmodel();
 	admin.email = req.body.email;
 	admin.password = admin.generateHash(req.body.password);
 	admin.token = jwt.encode(req.body.email, config.secret);
-	// save the user
-	admin.save(function(err) {
-		if(err)
-			return res.status(400).send(err);
-		return res.status(200).json({token: admin.token, admin_id: admin._id});
+    admin.company_name = req.body.company_name;
+    admin.company_phone_number = req.body.company_phone_number;
+    // save the user
+    admin.save(function(err) {
+      if(err)
+        return res.status(400).send(err);
+      return res.status(200).json({token: admin.token, admin_id: admin._id, company_name: admin.company_name, company_phone_number: admin.company_phone_number});
 	});
 };
 
 /**authLogin- logs in a user*/
-modules.exports.template.authLogin = function(req, res) {
+module.exports.template.authLogin = function(req, res) {
 	//Give them a token
 	// find a user whose email is the same as the forms email
 	// we are checking to see if the user trying to login already exists
@@ -58,13 +60,13 @@ modules.exports.template.authLogin = function(req, res) {
 		user.save(function(err, admin) {
 			if(err)
 				return res.status(400);
-			return res.json({token: newToken, admin_id: admin._id});
+			return res.json({token: newToken, admin_id: admin._id, company_name: admin.company_name, company_phone_number: admin.company_phone_number});
 		});
 	});
 };
 
 /**authResetCredentials- resets a user's credentials*/
-modules.exports.template.authResetCredentials = function(req, res) {
+module.exports.template.authResetCredentials = function(req, res) {
 	Authmodel.findOne({email: req.params.user}, function (err, admin) {
     if(err || !admin)
       res.json(err);
@@ -82,6 +84,15 @@ modules.exports.template.authResetCredentials = function(req, res) {
     //update email
     if (req.body.newemail !== undefined)
   	 admin.email = req.body.newemail;
+	
+	//update company name
+    if (req.body.new_company_name !== undefined)
+  	 admin.company_name = req.body.new_company_name;
+	
+	//update company's phone number
+    if (req.body.new_company_phone_number !== undefined)
+  	 admin.company_phone_number = req.body.new_company_phone_number;
+	
     admin.save(function(err) {
       if(err) {
         res.status(400).send(err);
