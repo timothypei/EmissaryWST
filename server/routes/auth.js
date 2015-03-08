@@ -25,7 +25,7 @@ router.post('/signup', function(req, res) {
   admin.password = admin.generateHash(req.body.password);
   admin.token = jwt.encode(req.body.email, config.secret);
   admin.company_name = req.body.company_name;
-  admin.company_phone_number = req.body.company_phone_number
+  admin.company_phone_number = req.body.company_phone_number;
   // save the user
   admin.save(function(err) {
     if(err)
