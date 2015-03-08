@@ -24,11 +24,13 @@ router.post('/signup', function(req, res) {
   admin.email = req.body.email;
   admin.password = admin.generateHash(req.body.password);
   admin.token = jwt.encode(req.body.email, config.secret);
+  admin.company_name = req.body.company_name;
+  admin.company_phone_number = req.body.company_phone_number
   // save the user
   admin.save(function(err) {
     if(err)
       return res.status(400).send(err);
-    return res.status(200).json({token: admin.token, admin_id: admin._id});
+    return res.status(200).json({token: admin.token, admin_id: admin._id, company_name: admin.company_name, company_phone_number: admin.company_phone_number});
   });
 });
 
@@ -50,7 +52,7 @@ router.post('/login', function(req, res) {
     user.save(function(err, admin) {
       if(err)
         return res.status(400);
-      return res.json({token: newToken, admin_id: admin._id});
+      return res.json({token: newToken, admin_id: admin._id, company_name: admin.company_name, company_phone_number: admin.company_phone_number});
     });
 
   });
@@ -74,6 +76,15 @@ router.put("/setting/:user", function(req, res) {
     //update email
     if (req.body.newemail !== undefined)
   	 admin.email = req.body.newemail;
+    
+	//update company name
+    if (req.body.new_company_name !== undefined)
+  	 admin.company_name = req.body.new_company_name;
+	
+	//update company's phone number
+    if (req.body.new_company_phone_number !== undefined)
+  	 admin.company_phone_number = req.body.new_company_phone_number;
+	
     admin.save(function(err) {
       if(err) {
         res.status(400).send(err);
