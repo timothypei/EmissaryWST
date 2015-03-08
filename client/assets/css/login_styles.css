@@ -81,6 +81,7 @@ html, body {
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
 	font-size: 12px;
 }
+
 form {
 	margin: 0 auto;
 	margin-top: 20px;
@@ -90,7 +91,7 @@ form {
 label {
 	color: #555;
 	display: inline-block;
-	margin-left: 18px;
+	margin-left: 50px;
 	padding-top: 10px;
 	font-size: 14px;
 }
@@ -152,6 +153,11 @@ input[type=checkbox] {
 	font-size: 11px;
 	color: #444;
 	text-shadow: 0 1px 0 #fff;
+}
+
+#signinCheck {
+    width: initial;
+	height: initial;   
 }
 
 input[type=submit] {

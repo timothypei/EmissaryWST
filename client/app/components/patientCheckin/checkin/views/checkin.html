@@ -8,10 +8,13 @@
 </head>
 <body ng-app="checkin">	
 	<div ng-controller="ModalDemoCtrl">
-		<div ng-controller="CheckinController">
+		<div ng-controller="CheckinController" class="foo">
 			<div class="form_container">	
 				<form ng-submit="checkin()">		
-					
+					<h1> Welcome to BlueJay </h1>
+					<input type="name" placeholder="Name">		
+					<input type="email" placeholder="Email">		
+					<input type="submit" value="Check In">
 
 				</form>
 			</div>
