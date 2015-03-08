@@ -11,7 +11,10 @@
 		<div ng-controller="CheckinController" class="foo" data-ng-init="init()">
 			<div class="form_container">	
 				<form ng-submit="checkin()">		
-					<h1> Welcome to BlueJay </h1>
+					
+				    <div class="form-fields-preview" style="display:inline-block; vertical-align:top;">
+				        <form-directive form="form"></form-directive>
+				    </div>
 
 				</form>
 			</div>
