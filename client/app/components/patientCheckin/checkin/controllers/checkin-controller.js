@@ -28,7 +28,7 @@ angular.module('checkin')
     $scope.checkin = function(){
       console.log("test");
       if($scope.user.email.indexOf('@')==-1||$scope.user.email.indexOf('.')==-1){
-        $scope.errMessage = 'Invalid Email/Password'
+        $scope.errMessage = 'Invalid Email/Password';
       }
       else{
           var account = this;

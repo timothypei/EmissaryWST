@@ -21,15 +21,15 @@ input{
 }
 .form_container {
 	background-color: rgba(9, 41, 14, .8);
-	padding-top: 30px;
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-bottom: 40px;
-	max-width: 600px;
-	position: relative;
-	top: 175px;
-	color: black;
-	margin: auto;
+  padding-top: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 50px;
+  max-width: 600px;
+  top: 175px;
+  color: black;
+  margin: auto;
+  margin-top: 100px;
 }
 
 #settings{

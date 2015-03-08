@@ -22,7 +22,7 @@ angular.module('signin')
             //redirects to the person's home page when a success
           else{  
            $rootScope.token = data.token;
-           $rootScope.email = $scope.user.email;
+           $rootScope.admin_id = data.admin_id;
         	 $location.path('../../../dashboard/views/dashboard.html');
         	 return data;
           }
