@@ -14,23 +14,23 @@
 		</div>
 
 		<div id="container" >
-			<h1>Sign Up Form</h1>
+			<!--<h1>Sign Up Form</h1> -->
 			<form ng-submit="reg()" class="signupform">
 
 				<div class="formfield">
-					<b>Name</b> <input type="name" placeholder="Company Name">
+					<b>Company Name</b> <input type="name" placeholder="Company Name">
 				</div>
 
 				<div class="formfield">
+					<b>Create a Password</b>  <input type="password" placeholder="Password" ng-model="user.password">
+				</div>
+
+				<div class="formfield">
+					<b>Confirm your Password</b> <input type="password" placeholder="Confirm Password" ng-model="pass">
+				</div>
+                
+                <div class="formfield">
 					<b>Email</b> <input type="Email" placeholder="Email" ng-model="user.email">
-				</div>
-
-				<div class="formfield">
-					<b>Password</b>  <input type="password" placeholder="Password" ng-model="user.password">
-				</div>
-
-				<div class="formfield">
-					<b>Confirm Password</b> <input type="password" placeholder="Confirm Password" ng-model="pass">
 				</div>
 
 				<div class="checkboxfield">
