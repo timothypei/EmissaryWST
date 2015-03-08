@@ -12,6 +12,11 @@ angular.module('checkin')
         $timeout(tick, $scope.tickInterval); // reset the timer
         
     }
+
+      $scope.forms = function(){
+        
+      }
+
     $scope.checkin = function(){
         $location.path('/thankyouCheckIn');
     }
@@ -19,6 +24,8 @@ angular.module('checkin')
 
     $timeout(tick, $scope.tickInterval);
   }]);
+
+
 
 angular.module('checkin')
   .controller('signinCtrl', ['$scope', '$rootScope', '$location', 'SigninService', function($scope, $rootScope, $location, SigninService){
