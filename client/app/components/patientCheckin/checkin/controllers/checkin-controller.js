@@ -6,16 +6,27 @@ angular.module('checkin')
     $scope.clock = "loading clock..."; // initialise the time variable
     $scope.tickInterval = 1000; //ms
     $scope.user = {email: $rootScope.email, password: ''};
-
+    $scope.dat;
     var tick = function () {
         $scope.clock = Date.now(); // get the current time
         $timeout(tick, $scope.tickInterval); // reset the timer
         
     }
 
-      $scope.forms = function(){
-        
+      $scope.init = function(){
+        CheckinService.getForms($rootScope.admin_id).success(
+          function(data){
+          $scope.form = JSON.parse(data.template);
+            return data;
+          })
+        .error(function(err){
+          console.log("nono");
+          console.log(err);
+          return err;
+        }
+          );
       }
+
 
     $scope.checkin = function(){
         $location.path('/thankyouCheckIn');

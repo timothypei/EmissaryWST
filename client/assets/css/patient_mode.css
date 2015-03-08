@@ -31,8 +31,11 @@ input{
   padding-bottom: 40px;
   max-width: 600px;
   position: relative;
-  color: black;
+  color: white;
   margin: auto;
+  float:center;
+  vertical-align: center;
+  
 }
 
 #settings{
