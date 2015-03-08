@@ -10,10 +10,11 @@
 	<div ng-controller="ModalDemoCtrl">
 		<div ng-controller="CheckinController" class="foo" data-ng-init="init()">
 			<div class="form_container">	
-				<form ng-submit="checkin()">		
-					<h1> Welcome to BlueJay </h1>
-
-				</form>
+				 <div class="form-fields-preview" style="display:inline-block; vertical-align:top;">
+        			<form-directive form="form">
+        			</form-directive>
+        			{{ form }}
+    			</div>
 			</div>
 				<div id = "settings">
 					<a ng-click="open()"><img id="icon" src="images/settings.png"></a>

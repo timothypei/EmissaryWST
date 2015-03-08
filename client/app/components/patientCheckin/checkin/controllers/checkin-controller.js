@@ -10,15 +10,14 @@ angular.module('checkin')
     var tick = function () {
         $scope.clock = Date.now(); // get the current time
         $timeout(tick, $scope.tickInterval); // reset the timer
-        
     }
 
       $scope.init = function(){
-        CheckinService.getForms($rootScope.admin_id).success(
-          function(data){
+        CheckinService.getForms($rootScope.admin_id)
+        .success(function(data){
             console.log("yay");
-            console.log(data);
-            $scope.dat = data;
+            $scope.form = data.template;
+
             return data;
           })
         .error(function(err){
