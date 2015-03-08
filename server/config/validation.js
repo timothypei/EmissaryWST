@@ -1,15 +1,36 @@
-var Authmodel = require('../models/Authmodel');
+var Authmodel = require('../models/Authmodel'),
+    config = require('../config/config'),
+    jwt = require('jwt-simple');
 
 
 module.exports = function(req, res, next) {
-  if(!req.query.email)
+
+  var token,
+      email;
+
+  /* Get token from http header */
+  token = req.header('token');
+
+  /* If no token in header, we reject request */
+  if(!token){
     return res.sendStatus(401);
-  Authmodel.findOne({email: req.query.email}, function(err, user) {
+  }
+
+  /* Attempt to decoding the token which should give us the admins email */
+  try{
+    email = jwt.decode(token, config.secret);
+  } catch(err) {
+    return res.status(401).send('Invalid token');
+  }
+
+  Authmodel.findOne({email: email}, function(err, user) {
     // if there are any errors, return the error before anything else
-    if(err || !user)
-      return res.status(400).send(err);
-    if(user.token !== req.query.token)
-      return res.status(401).send("Invalid token");
-    next();
+    if(err){
+      return res.status(500).send(err);
+    } else if (!user) {
+      return res.status(401).send('Invalid token');
+    } else {
+      next();
+    }
   });
 };

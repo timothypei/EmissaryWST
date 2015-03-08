@@ -11,6 +11,7 @@ var morgan = require('morgan');
 var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
+var socketIO = require('./socket/socket');
 
 /*
  * App configs
@@ -26,6 +27,11 @@ var app = express();
 
 app.use(morgan('dev', {"stream": winstonConfig.stream}));
 
+
+/*
+ * Create Socket.io server.
+ */
+var server = socketIO.createServer(app);
 
 /*
  * Connect to MongoDB.
@@ -57,8 +63,6 @@ require('./routes')(app);
  */
 var user = require('./routes/user');
 var product = require('./routes/product');
-var theme = require('./routes/theme');
-var employee = require ('./routes/employee');
 var auth = require('./routes/auth');
 
 /*
@@ -71,8 +75,6 @@ if(app.get('env') !== 'development') {
 app.use('/auth', auth);
 app.use('/api', user);
 app.use('/api', product);
-app.use('/api', theme);
-app.use('/api', employee);
 
 /*
  * Error Handler.

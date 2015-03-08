@@ -4,7 +4,9 @@
  * This module is meant to house all of the API
  * routes that pertain to authentication of admins
  */
+var Employee = require('../models/Employee');
 var express = require('express');
+var config = require('../config/config');
 var router = express.Router();
 
 /* need this to enable cross origin resource sharing.If disabled, we might
@@ -21,7 +23,7 @@ router.post('/signup', function(req, res) {
   var admin = new Authmodel();
   admin.email = req.body.email;
   admin.password = admin.generateHash(req.body.password);
-  admin.token = jwt.encode(req.body.email, admin.generateHash(new Date().getTime()));
+  admin.token = jwt.encode(req.body.email, config.secret);
   // save the user
   admin.save(function(err) {
     if(err)
@@ -39,12 +41,11 @@ router.post('/login', function(req, res) {
     if(err || !user)
       return res.status(400).send(err);
 
-
     // if the user is found but the password is wrong
     if(!user.validPassword(req.body.password))
       return res.status(401).send('loginMessage', 'Oops! Wrong password');
 
-    var newToken = jwt.encode(req.body.email, user.generateHash(new Date().getTime()));
+    var newToken = jwt.encode(req.body.email, config.secret);
     user.token = newToken;
     user.save(function(err, admin) {
       if(err)
@@ -56,30 +57,30 @@ router.post('/login', function(req, res) {
 });
 
 router.put("/setting/:user", function(req, res) {
-   Authmodel.findOne({email: req.params.user}, function (err, admin) {
-      if(err || !admin)
-         res.json(err);
+  Authmodel.findOne({email: req.params.user}, function (err, admin) {
+    if(err || !admin)
+      res.json(err);
  	
      
-     // if the user is found but the password is wrong
-     if(!admin.validPassword(req.body.password))
-       return res.status(401).send('loginMessage', 'Oops! Wrong password');
-	 //update password
+    // if the user is found but the password is wrong
+    if(!admin.validPassword(req.body.password))
+      return res.status(401).send('loginMessage', 'Oops! Wrong password');
+	  //update password
 	
-	 //upadate password
-	 if (req.body.newpassword !== undefined)
-	 	admin.password = admin.generateHash(req.body.newpassword);
+	  //upadate password
+    if (req.body.newpassword !== undefined)
+	 	 admin.password = admin.generateHash(req.body.newpassword);
 	
-	//update email
-	 if (req.body.newemail !== undefined)
-		 admin.email = req.body.newemail;
-      admin.save(function(err) {
-        if(err) {
-          res.json(err);
-        }
-      });
-      return res.sendStatus(200);
-   });
+    //update email
+    if (req.body.newemail !== undefined)
+  	 admin.email = req.body.newemail;
+    admin.save(function(err) {
+      if(err) {
+        res.status(400).send(err);
+      }
+    });
+    return res.sendStatus(200);
+  });
 });
 
 

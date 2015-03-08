@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $location) {
+  .controller('FormEditController', function ($scope, $modal, FormService, $http, $filter, $location) {
 
   $scope.templateId = 0;
   $scope.prevJson = $filter('json')($scope.form);
@@ -42,6 +42,7 @@ angular.module('DashboardFormBuilderModule')
       "field_disabled" : false
     };
 
+
     // put newField into fields array
     $scope.form.form_fields.push(newField);
     if($scope.previewMode == false) {
@@ -50,7 +51,8 @@ angular.module('DashboardFormBuilderModule')
     $scope.form.submitted = false;
   };
 
-  // deletes particular field on button click
+  
+// deletes particular field on button click
   $scope.deleteField = function (field_id){
     var modalInstance = $modal.open({
         templateUrl: 'views/components/dashboard/formBuilder/views/deleteModal.html',
@@ -111,19 +113,77 @@ angular.module('DashboardFormBuilderModule')
     }
   };
 
-  $scope.editOn = function(){
-    $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
+
+   // posts form template as Json
+  $scope.postJson = function (){
+    // object of this form template
+    var formJson = $filter('json')($scope.form);
+     var putJson = { 
+                        "template":formJson,
+                        "template_id":$scope.templateId//"54f8f382191b38ec26dd57a6"
+                    };
+     $http.put('/api/form/template', putJson).
+     success(function(data, status, headers, config) {
+       // this callback will be called asynchronously
+       // when the response is available
+       console.log("put success");
+       alert("Data successfully Updated!");
+       console.log(data);
+       // revert to previous json
+       //$scope.form = JSON.parse($scope.prevJson);
+
+     }).
+     error(function(data, status, headers, config) {
+       // called asynchronously if an error occurs
+       // or server returns response with an error status.
+       console.log("no forms posted");
+     });
+  };      
+
+  // fetch a template from the server
+  $scope.fetchSavedTemplate = function(){
+     $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
          success(function(data, status, headers, config) {
            console.log(data);
-           $scope.prevJson = $filter('json')($scope.form);
+           //$scope.prevJson = $filter('json')($scope.form);
            $scope.templateId = data._id;
            $scope.form = JSON.parse(data.template);
-           $location.path("/editform");
+           $scope.addField.lastAddedID = $scope.form.form_fields.length;
          }).
          error(function(data, status, headers, config) {
            alert("You have no saved templates.");
          });
+  }; 
 
+  // run when app is loaded
+  $scope.$on('$viewContentLoaded', function() {
+        $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
+         success(function(data, status, headers, config) {
+           console.log(data);
+           //$scope.prevJson = $filter('json')($scope.form);
+           $scope.templateId = data._id;
+           $scope.form = JSON.parse(data.template);
+           $scope.addField.lastAddedID = $scope.form.form_fields.length;
+
+          for(var i = 0; i < field.field_options.length; i++){
+            $scope.form.form_fields.push(
+                $scope.form.form_fields[i]
+              );
+          }
+           
+           if($scope.previewMode == false) {
+             $scope.previewMode = true;
+           }
+           $scope.form.submitted = false;
+
+         }).
+         error(function(data, status, headers, config) {
+           alert("You have no saved templates.");
+         });
+  });
+
+  $scope.editOn = function(){
+   $location.path('/createform');
   };
 
   // decides whether field options block will be shown (true for dropdown and radio fields)
@@ -155,4 +215,5 @@ angular.module('DashboardFormBuilderModule')
       );
     }
   };
+
 });

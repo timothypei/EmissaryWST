@@ -1,5 +1,5 @@
 <blockquote>
-    <p>Select field type you want to add to the form below and click on 'Add Field' button. Don't forget to set field properties. After you finish creating the form, you can preview the form by clicking Preview Form button.</p>
+    <p>Select field type you want to add to the form below and click on 'Add Field' button. Don't forget to set field properties.</p>
 </blockquote>
 
 <div class="well">
@@ -12,7 +12,7 @@
             </div>
             <div class="row">
                 <div class="span2">Form Name:</div>
-                <div class="span4"><input type="text" name="form-name" ng-model="form.form_name"></div>
+                <div class="span4"><input type="text" name="form-name" ng-disabled="previewMode" ng-model="form.form_name"></div>
             </div>
         </div>
 
@@ -67,7 +67,7 @@
                     <div class="row">
                         <div class="span2">Required:</div>
                         <div class="span4">
-                            <label>
+                             <label>
                                 <input class="require-radio" type="radio" ng-value="true" ng-selected ng-model="field.field_required"/>
                                 Yes
                             </label>
@@ -98,18 +98,17 @@
         </accordion>
 
         <p class="text-center">
-
-            <button class="btn btn-primary right" type="button" ng-click="editOn()"><i class="icon-eye-open icon-white"></i> Edit existing template</button>
-
-            <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Reset</button>
+            <button class="btn btn-primary right" type="button" ng-click="postJson()"><i class="icon-eye-open icon-white"></i> Submit Form</button>
+            <button class="btn btn-primary right" type="button" ng-click="fetchSavedTemplate()"><i class="icon-eye-open icon-white"></i> Retrieve Template</button>
+        </p>
+        <p class="text-center">
+            <button class="btn btn-primary right" type="button" ng-click="editOn()"><i class="icon-eye-open icon-white"></i> Back to Create Mode</button>
+            <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Clear</button>
         </p>
 
         <br><hr>
 
-		<div class="text-center">
-			<a class="btn btn-small btn-primary" ng-show="!showJson" ng-click="showJson = true">Show form json object</a>
-			<a class="btn btn-small btn-inverse" ng-show="showJson" ng-click="showJson = false">Hide form json object</a><br><br>
-		</div>
+
 
         <div ng-show="showJson">
             <h4>Form object content:</h4>
@@ -118,7 +117,6 @@
     </div>
 
     <div class="form-fields-preview" style="display:inline-block; vertical-align:top;" ng-show="previewMode">
-        <form-directive form="form"></form-directive>
-    </div>
+       <form-directive form="form"></form-directive>
+   </div>
 </div>
-

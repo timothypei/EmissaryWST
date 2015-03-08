@@ -14,6 +14,7 @@ angular.module('robobetty',
    'checkin',
    'thankyouCheckIn'
   ])
+
   .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/patientQueue');
     $stateProvider
@@ -31,6 +32,13 @@ angular.module('robobetty',
         templateUrl: 'views/components/dashboard/formBuilder/views/create.html',
         parent: 'common',
         title: 'Create New Form'
+      })
+      .state('editForm', {
+        url: '/editform',
+        controller: 'FormEditController',
+        templateUrl: 'views/components/dashboard/formBuilder/views/edit.html',
+        parent: 'common',
+        title: 'Edit Existing Template'
       })
       .state('dashboard',{
         url:'/dashboard',
