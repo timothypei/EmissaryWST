@@ -12,7 +12,9 @@ angular.module('robobetty',
   'thankyou',
   'DashboardFormBuilderModule',
    'checkin',
-   'thankyouCheckIn'
+   'thankyouCheckIn',
+   'recovery',
+   'recoverythx'
   ])
 
   .config(function($stateProvider, $urlRouterProvider) {
@@ -77,6 +79,16 @@ angular.module('robobetty',
       .state('thankyouCheckIn', {
         url: '/thankyouCheckIn',
         templateUrl: 'views/components/patientCheckin/checkin/views/CheckInthankyou.html'
+      })
+      .state('recovery', {
+        url: '/recovery',
+         controller: 'RecoveryController',
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recovery.html'
+      })
+      .state('recoverythx',{
+        url: '/recoverythx',
+        controller: 'RecoveryConfirmController',
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recoveryconfirm.html'
       });
   })
   .run(['$rootScope', '$injector', function($rootScope, $injector){
