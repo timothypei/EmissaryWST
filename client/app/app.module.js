@@ -14,7 +14,9 @@ angular.module('robobetty',
    'checkin',
    'thankyouCheckIn',
    'recovery',
-   'recoverythx'  ])
+   'recoverythx',
+   'themes' 
+   ])
 
   .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/patientQueue');
@@ -88,6 +90,11 @@ angular.module('robobetty',
         url: '/recoverythx',
         controller: 'RecoveryConfirmController',
         templateUrl: 'views/components/receptionistPortal/recovery/views/recoveryconfirm.html'
+      })
+      .state('themes',{
+        url: '/themes',
+        controller: 'ThemesController',
+        templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
       });
   })
   .run(['$rootScope', '$injector', function($rootScope, $injector){

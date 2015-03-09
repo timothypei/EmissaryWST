@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+</head>
+
+  <body ng-app="themes">
+    <div class="nav" ng-controller="ThemesController as themesCTRL">
+      <div class="container-fluid">
+        <form ng-submit="submitTheme()">
+          <div class="row" >
+            <div class ="col-md-4">
+              <input ng-model="selectedImage" class="img-responsive" type="image" style="border: 0; background: transparent" src="http://image.blingee.com/images17/content/output/000/000/000/64a/553650356_765517.gif?4" value="http://image.blingee.com/images17/content/output/000/000/000/64a/553650356_765517.gif?4">
+              </input>
+            </div>
+            <div class ="col-md-4">
+              <input ng-model="selectedImage" class="img-responsive" type="image" style="border: 0; background: transparent" src="http://www.stuffintheair.com/images/keep-on-spoiling-our-nature-21473378.jpg" value="http://www.stuffintheair.com/images/keep-on-spoiling-our-nature-21473378.jpg">
+              </input>
+            </div>
+            <div class ="col-md-4">
+              <input ng-model="selectedImage" class="img-responsive" type="image" style="border: 0; background: transparent" src="http://fc06.deviantart.net/fs50/i/2009/329/c/8/nature_by_tomatokisses.jpg" value="http://fc06.deviantart.net/fs50/i/2009/329/c/8/nature_by_tomatokisses.jpg">
+              </input>
+            </div>
+          </div>
+          
+          <div class="row" >
+            <div class ="col-md-4">
+              <input ng-model="selectedImage" class="img-responsive" type="image" style="border: 0; background: transparent" src="http://www.stuffintheair.com/images/keep-on-spoiling-our-nature-21473378.jpg" value="http://www.stuffintheair.com/images/keep-on-spoiling-our-nature-21473378.jpg">
+              </input>
+            </div>
+            <div class ="col-md-4">
+              <input ng-model="selectedImage" class="img-responsive" type="image" style="border: 0; background: transparent" src="http://fc06.deviantart.net/fs50/i/2009/329/c/8/nature_by_tomatokisses.jpg" value="http://fc06.deviantart.net/fs50/i/2009/329/c/8/nature_by_tomatokisses.jpg">
+              </input>
+            </div>
+            <div class ="col-md-4">
+              <input ng-model="selectedImagea" class="img-responsive" type="image" style="border: 0; background: transparent" src="http://image.blingee.com/images17/content/output/000/000/000/64a/553650356_765517.gif?4" value="http://image.blingee.com/images17/content/output/000/000/000/64a/553650356_765517.gif?4">
+              </input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <input ng-click="cancelTheme()" type="button" class="btn btn-block" style='background-color:#434343;' value="Cancel"></input>
+            </div>
+            <div class="col-md-6">
+              <input type="submit" class="btn btn-block" style='background-color:#6c9fd5;' value="Save"></input>
+            </div>
+          </div>
+
+        </form>
+      </div>
+	 </div>
+  </body>
+</html>
