@@ -1,6 +1,6 @@
 #patient-queue{
     height:37em;
-    overflow:scroll;
+		overflow-x: hidden;
 }
 
 #patient-queue td{
