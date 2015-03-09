@@ -35,9 +35,11 @@ input{
   margin: auto;
   float:center;
   vertical-align: center;
-  
 }
 
+.form-fields-actual {
+  padding-left: 195px;
+}
 #settings{
   bottom: 60px;
   margin-left: 5%;
