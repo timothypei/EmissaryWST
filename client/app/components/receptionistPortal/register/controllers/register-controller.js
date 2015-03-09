@@ -8,9 +8,15 @@ angular.module('register')
       $scope.err=false;
       $scope.check = false;
       $scope.errorMessage='';
-  		$scope.reg = function(){  
-        console.log(typeof $scope.user.company_phone_number);
-        $scope.user.company_phone_number = $scope.number.toString();
+  		$scope.reg = function(){ 
+        $scope.user.company_phone_number = '';    
+            
+        //making sure the number is not null before calling toString method
+        if($scope.number != null){
+            console.log(typeof $scope.user.company_phone_number);
+            $scope.user.company_phone_number = $scope.number.toString();
+        }
+            
         //Email, password, company name, or phone fields are empty
         if($scope.user.email=='' || $scope.user.password=='' || $scope.user.company_name=='' || 
             $scope.user.company_phone_number==''){
