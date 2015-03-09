@@ -16,7 +16,6 @@
 ::-moz-selection {
  	color: #fff;
  	text-shadow: none;
- 	background: #444;
 }
 
 /* Basics */
@@ -25,7 +24,7 @@ html, body {
 	width: 100%;
 	height: 100%;
 	font-family: "Helvetica Neue", Helvetica, sans-serif;
-	color: #444;
+	background-color: white;
 }
 #logo{
 	float:center;

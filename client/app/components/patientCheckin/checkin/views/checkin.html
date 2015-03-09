@@ -4,14 +4,13 @@
 	
 	<title>Check In</title>	
   	<link rel="stylesheet" href="css/patient_mode.css">
-
+  	<link rel="stylesheet" href="css/form.css">
 </head>
 <body ng-app="checkin">	
 	<div ng-controller="ModalDemoCtrl">
 		<div ng-controller="CheckinController" class="foo" data-ng-init="init()">
 			<div class="form_container">	
 				<form ng-submit="checkin()">		
-					
 				    <div class="form-fields-preview" style="display:inline-block; vertical-align:top;">
 				        <form-directive form="form"></form-directive>
 				    </div>
@@ -20,7 +19,7 @@
 			</div>
 				<div id = "settings">
 					<a ng-click="open()"><img id="icon" src="images/settings.png"></a>
-					<h1>{{clock | date: 'hh:mm:ss a'}}</h1>
+					<h1>{{clock | date:'hh:mm:ss a'}}</h1>
 				</div>
 		    	<script type="text/ng-template" id="myModalContent.html">
 		    	<div ng-controller="signinCtrl">
