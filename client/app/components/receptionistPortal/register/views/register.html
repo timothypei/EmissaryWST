@@ -37,23 +37,24 @@
 			<form ng-submit="reg()" class="signupform">
 
 				<div class="formfield">
-                    <b>Company Name</b> <input type="name" id="formSpacing" placeholder="Company Name"></span>
+                    <b>Company Name</b> <input type="name" class="formSpacing" placeholder="Company Name" ng-model="user.company_name">
 				</div>
 
 				<div class="formfield">
-					<b>Create a Password</b> </br> <input type="password" id="formSpacing" placeholder="Password" ng-model="user.password">
+					<b>Create a Password</b> </br> <input type="password" class="formSpacing" placeholder="Password" ng-model="user.password">
+                <ul id="strength" check-strength="user.password"></ul>
 				</div>
 
 				<div class="formfield">
-					<b>Confirm your Password</b> <input type="password" id="formSpacing" placeholder="Confirm Password" ng-model="pass">
+					<b>Confirm your Password</b> <input type="password" class="formSpacing" placeholder="Confirm Password" ng-model="pass">
 				</div>
         
                 <div class="formfield">
-					<b>Mobile Phone</b> <input type="Phone" id="formSpacing" placeholder="Phone">
+					<b>Mobile Phone</b> <input type="number" class="formSpacing" placeholder="Phone" ng-model="user.company_phone_number">
 				</div>
                 
                 <div class="formfield">
-					<b>Your current email address</b> <input type="Email" id="formSpacing" placeholder="Email" ng-model="user.email">
+					<b>Your current email address</b> <input type="Email" class="formSpacing" placeholder="Email" ng-model="user.email">
 				</div>
 
 				<div class="checkboxfield">
