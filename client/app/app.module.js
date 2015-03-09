@@ -14,8 +14,7 @@ angular.module('robobetty',
    'checkin',
    'thankyouCheckIn',
    'recovery',
-   'recoverythx'
-  ])
+   'recoverythx'  ])
 
   .config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/patientQueue');

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('signin')
-  .controller('SigninController', ['$scope', '$rootScope', '$location', 'SigninService', function($scope, $rootScope, $location, SigninService){
+  .controller('SigninController', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
   	$scope.user = {email: '', password: ''};
     $scope.errMessage ='';
     console.log("test");
@@ -14,7 +14,7 @@ angular.module('signin')
       else{
   		  var account = this;
         //calls the API to login
-  		  SigninService.login($scope.user)
+  		  AuthService.signin($scope.user)
       	 .success(function(data){
           if(data=='Oops! Wrong password'){
             $scope.errMessage = 'Invalid Email/Password'; 
