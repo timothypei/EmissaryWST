@@ -32,7 +32,7 @@ describe('AuthService', function() {
 
     beforeEach(function() {
       /* Mock routes and credentials */
-      authRoute = 'auth/signin';
+      authRoute = 'auth/login';
       apiRoute = 'api/test';
       token = 'mocktoken';
       credentials = {

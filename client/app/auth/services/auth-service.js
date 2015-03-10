@@ -24,6 +24,7 @@ angular.module('auth')
 
       /* Return promise to caller so they can call success and error too */
       return $http.post('/auth/login', payload);
+
     };
 
     this.reg = function register(account) {

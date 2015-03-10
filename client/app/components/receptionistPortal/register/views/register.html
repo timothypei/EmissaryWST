@@ -12,7 +12,7 @@
 				</div>
 			</div>
 		</div>
-        
+        <div id='images'>
         <div class="image2">
            <img src="images/company_sign_in.png">
         </div>
@@ -27,9 +27,6 @@
            <h5> Your office check-in solution </h5>
            <h6> Create one form, and display it on all of your devices </h6>
         </div>
-        
-        <div class="learnMore">
-            <h6> <a href="">Learn more</a> about why we ask for this information</h6>
         </div>
 
 		<div id="container" >
@@ -39,7 +36,9 @@
 				<div class="formfield">
                     <b>Company Name</b> <input type="name" class="formSpacing" placeholder="Company Name" ng-model="user.company_name">
 				</div>
-
+                <div class="formfield">
+					<b>Your current email address</b> <input type="Email" class="formSpacing" placeholder="Email" ng-model="user.email">
+				</div>
 				<div class="formfield">
 					<b>Create a Password</b> </br> <input type="password" class="formSpacing" placeholder="Password" ng-model="user.password">
                 <ul id="strength" check-strength="user.password"></ul>
@@ -52,10 +51,7 @@
                 <div class="formfield">
 					<b>Mobile Phone</b> <input type="number" class="formSpacing" placeholder="Phone" ng-model="number">
 				</div>
-                
-                <div class="formfield">
-					<b>Your current email address</b> <input type="Email" class="formSpacing" placeholder="Email" ng-model="user.email">
-				</div>
+              
 
 				<div class="checkboxfield">
 					<input type="checkbox" id="registerCheck" ng-model="check">
