@@ -10,7 +10,6 @@ angular.module('checkin')
     var tick = function () {
         $scope.clock = Date.now(); // get the current time
         $timeout(tick, $scope.tickInterval); // reset the timer
-        
     }
 
       $scope.init = function(){
@@ -39,7 +38,7 @@ angular.module('checkin')
 
 
 angular.module('checkin')
-  .controller('signinCtrl', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
+  .controller('admin_signinCtrl', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
     $scope.user = {email: $rootScope.email, password: ''};
     $scope.errMessage ='';
     //this function is called when we press the login button
@@ -60,6 +59,7 @@ angular.module('checkin')
           else{  
            $rootScope.token = data.token;
            $rootScope.email = $scope.user.email;
+           
              $location.path('../../../dashboard/views/dashboard.html');
              return data;
           }
