@@ -196,23 +196,6 @@ describe("Forms", function() {
         });
       });
 
-      describe('GET /api/form/template/:id', function(){
-        it('Should respond with template data', function(done){
-          request(url)
-            .get('/api/form/template/' + templateFormId)
-            .query({email: credentials.email, token: credentials.token, isAdmin:true})
-            .end(function(err, res){
-              res.body.should.have.property('_id');
-              res.body.should.have.property('_admin_id');
-              res.body.should.have.property('template').and.be.instanceof(Object);
-
-              res.body.template.should.deep.equal(templateForm);
-              res.body._id.should.equal(templateFormId);
-              done();
-            });
-        });
-      });
-
       describe('GET /api/form/template/company/:id', function(){
         it('Should respond with company template data', function(done){
           request(url)
