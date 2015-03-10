@@ -10,7 +10,6 @@ angular.module('checkin')
     var tick = function () {
         $scope.clock = Date.now(); // get the current time
         $timeout(tick, $scope.tickInterval); // reset the timer
-        
     }
 
       $scope.init = function(){
@@ -39,19 +38,19 @@ angular.module('checkin')
 
 
 angular.module('checkin')
-  .controller('signinCtrl', ['$scope', '$rootScope', '$location', 'SigninService', function($scope, $rootScope, $location, SigninService){
+  .controller('admin_signinCtrl', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
     $scope.user = {email: $rootScope.email, password: ''};
     $scope.errMessage ='';
     //this function is called when we press the login button
     $scope.checkin = function(){
       console.log("test");
-      if($scope.user.email.indexOf('@')==-1||$scope.user.email.indexOf('.')==-1){
+      if($rootScope.email.indexOf('@')==-1||$rootScope.email.indexOf('.')==-1){
         $scope.errMessage = 'Invalid Email/Password';
       }
       else{
           var account = this;
         //calls the API to login
-          SigninService.login($scope.user)
+          AuthService.signin($scope.user)
          .success(function(data){
           if(data=='Oops! Wrong password'){
             $scope.errMessage = 'Invalid Email/Password'; 
@@ -60,6 +59,7 @@ angular.module('checkin')
           else{  
            $rootScope.token = data.token;
            $rootScope.email = $scope.user.email;
+           
              $location.path('../../../dashboard/views/dashboard.html');
              return data;
           }

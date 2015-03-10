@@ -23,6 +23,7 @@ angular.module('signin')
           else{  
            $rootScope.token = data.token;
            $rootScope.admin_id = data.admin_id;
+           $rootScope.email = $scope.user.email;
         	 $location.path('../../../dashboard/views/dashboard.html');
         	 return data;
           }
