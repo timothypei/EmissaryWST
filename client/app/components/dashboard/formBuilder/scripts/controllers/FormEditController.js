@@ -23,7 +23,6 @@ angular.module('DashboardFormBuilderModule')
   $scope.addField = {};
   $scope.addField.types = FormService.fields;
   $scope.addField.new = $scope.addField.types[0].name;
-  //$scope.editField.new = $scope.addField.types[0].name;
   $scope.addField.lastAddedID = 0;
 
   // accordion settings
