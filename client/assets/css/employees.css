@@ -25,11 +25,13 @@
 }
 
 #doctors-table .table-striped > tbody > tr:hover:nth-of-type(odd) {
-  background-color: #E6E6E6;
+  /*background-color: #E6E6E6;*/
+  background-color:#a8c6e6;
 }
 
 #doctors-table .table-striped > tbody > tr:hover:nth-of-type(even) {
-  background-color: #E6E6E6;
+  /*background-color: #E6E6E6;*/
+  background-color:#a8c6e6;
 }
 
 .edit-input{
