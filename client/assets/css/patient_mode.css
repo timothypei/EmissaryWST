@@ -29,12 +29,13 @@ input{
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 40px;
-  max-width: 600px;
+  max-width: 500px;
   position: relative;
   color: white;
   margin: auto;
   float:center;
   vertical-align: center;
+  margin-bottom: 200px;
 }
 
 .form-fields-actual {
@@ -43,7 +44,7 @@ input{
 #settings{
   bottom: 60px;
   margin-left: 5%;
-  position: absolute;
+  position: fixed;
 }
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */

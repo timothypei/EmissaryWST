@@ -10,7 +10,7 @@
 ::selection {
  	color: #fff;
  	text-shadow: none;
- 	background: #444;
+ 	background: #fff;
 }
 
 ::-moz-selection {
