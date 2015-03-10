@@ -13,7 +13,7 @@ angular.module('dashboard')
         function($scope,$rootScope, $cookieStore, SidebarService){
     var mobileView = 992;
     $scope.company_name = $rootScope.company_name;
-    $scope.phone=$rootScope.number;
+    $scope.email=$rootScope.email;
     $scope.options = SidebarService.getSidebarOptions();
     $scope.sidebarHeader = SidebarService.getSidebarHeader();
     $scope.getWidth = function() {
