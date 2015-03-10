@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $location) {
+  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $rootScope) {
 
   $scope.templateId = 0;
   $scope.prevJson = $filter('json')($scope.form);
   // preview form mode
-  $scope.previewMode = false;
+  $scope.previewMode = true;
   $scope.editMode = false;
 
   // new form
@@ -28,6 +28,21 @@ angular.module('DashboardFormBuilderModule')
   // accordion settings
   $scope.accordion = {};
   $scope.accordion.oneAtATime = true;
+
+  // **Need to test and enable rootscope
+  $scope.$on('$viewContentLoaded', function() {
+
+        //$http.get('/api/form/template/company/'+ $rootScope.admin_id).
+        $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
+         success(function(data, status, headers, config) {
+           $scope.templateId = data._id;
+           $scope.form = JSON.parse(data.template);
+           $scope.addField.lastAddedID = $scope.form.form_fields.length;
+         }).
+         error(function(data, status, headers, config) {
+            // no saved templates
+         });
+  });
 
   // create new field button click
   $scope.addNewField = function(){
@@ -111,21 +126,6 @@ angular.module('DashboardFormBuilderModule')
     }
   };
 
-  $scope.editOn = function(){
-    $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
-         success(function(data, status, headers, config) {
-           console.log(data);
-           $scope.prevJson = $filter('json')($scope.form);
-           $scope.templateId = data._id;
-           $scope.form = JSON.parse(data.template);
-           $location.path("/editform");
-         }).
-         error(function(data, status, headers, config) {
-           alert("You have no saved templates.");
-         });
-
-  };
-
   // decides whether field options block will be shown (true for dropdown and radio fields)
   $scope.showAddOptions = function (field){
     if(field.field_type == "radio" || field.field_type == "dropdown")
@@ -133,6 +133,36 @@ angular.module('DashboardFormBuilderModule')
     else
       return false;
   };
+
+
+    // posts form template as Json
+  $scope.postJson = function (){
+    // object of this form template
+     var formJson = $filter('json')($scope.form);
+     var putJson = { 
+                        "template":formJson,
+                        "admin_id":"54f8f23546b787e8335980e7"
+                        //"admin_id":$rootScope.admin_id
+                    };
+     // **Need to change this command and test
+     $http.post('/api/form/template', putJson).
+     success(function(data, status, headers, config) {
+       // this callback will be called asynchronously
+       // when the response is available
+       console.log("Post Success");
+       alert("Data successfully Updated!");
+       console.log(data);
+       // revert to previous json
+       //$scope.form = JSON.parse($scope.prevJson);
+
+     }).
+     error(function(data, status, headers, config) {
+       // called asynchronously if an error occurs
+       // or server returns response with an error status.
+       console.log("no forms posted");
+     });
+  }; 
+
 
   // deletes all the fields
   $scope.reset = function (){
