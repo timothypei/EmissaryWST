@@ -17,12 +17,23 @@ angular.module('themes')
                    '../images/themes/tron.jpg',
                    '../images/themes/walkway.jpg'];
 
-  	$scope.selectedImage = '';
+    function splitRows(arr, size) {
+  		var newArr = [];
+  		for(var i = 0; i < arr.length; i += size) {
+  			newArr.push(arr.slice(i, i + size));
+  		}
+  		return newArr;
+  	}
+
+  	$scope.splitData = splitRows($scope.img, 3);
+
+  	$scope.selectedImage = { value :'' };
   	var selected = '';
 
 
   	$scope.submitTheme = function() {
-  		selected = $scope.img[$scope.selectedImage];
+  		console.log($scope.selectedImage);
+  		selected = $scope.img[$scope.selectedImage.value];
   		console.log(selected);
       
   	};
