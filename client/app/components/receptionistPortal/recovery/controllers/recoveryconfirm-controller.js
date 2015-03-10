@@ -5,7 +5,7 @@ angular.module('recoverythx')
     $timeout(redirectToSignin, 3000);
     
     function redirectToSignin() {
-      $location.path('/signin')
+      $location.path('/signin');
     }
 
 	}]);
