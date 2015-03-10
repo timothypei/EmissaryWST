@@ -10,6 +10,8 @@
  	background: #444;
 }
 
+
+
 html, body {
 	width: 100%;
 	height: 100%;
@@ -43,8 +45,8 @@ html, body {
 	position: absolute;
 	padding-top: 10px;
     margin-right: auto;
-    margin-left: 50%;
-    margin-top: 5%;
+    margin-left: 60%;
+    margin-top: 55px;
     margin-bottom: 10%;
 	box-shadow: 0 1px 2px 3px rgba(0, 0, 0, .1);
 }
@@ -92,7 +94,9 @@ input[type=email] {
 	border-radius: 2px;
 	box-shadow: inset 0 1.5px 3px rgba(190,190,190,0.4), 0 0 0 5px #F5F7F8;
 }
-
+#images{
+	margin-left: 3%;
+}
 input[type=submit] {
 	float: right;
 	margin-top: 10px;
@@ -161,27 +165,27 @@ h1{
 
 .image2 {
  position: absolute;
- margin-top: 25%;
+ margin-top: 370px;
 }
 
 .logoImage {
  position: absolute;
- margin-top: 8%;
- margin-left: 19%;
+ margin-top: 90px;
+ margin-left: 240px;
 }
 
 .createYourAccount {
   position: absolute;
-  margin-top: 5%;
-  margin-left: 9%;
+  margin-top: 60px;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
+  margin-left: 110px;
 }
 
 .description {
   position: absolute;
-  margin-top: 20%;
-  margin-left: 14%;
+  margin-top: 247px;
   text-align: center;
+  margin-left: 180px;
 }
 
 .learnMore {
