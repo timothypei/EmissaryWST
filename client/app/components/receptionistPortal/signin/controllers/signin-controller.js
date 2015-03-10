@@ -21,7 +21,10 @@ angular.module('signin')
           }
             //redirects to the person's home page when a success
           else{  
+            console.log(data);
            $rootScope.token = data.token;
+           $rootScope.number = data.company_phone_number;
+           $rootScope.company_name = data.company_name;
            $rootScope.admin_id = data.admin_id;
            $rootScope.email = $scope.user.email;
         	 $location.path('../../../dashboard/views/dashboard.html');

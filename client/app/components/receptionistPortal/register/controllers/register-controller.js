@@ -50,7 +50,10 @@ angular.module('register')
           //when the API call was a success
       	  .success(function(data){
           $rootScope.token = data.token;
+           $rootScope.number = data.company_phone_number;
+           $rootScope.company_name = data.company_name;
            $rootScope.admin_id = data.admin_id;
+           $rootScope.email = $scope.user.email;
             console.log(data);
           $location.path('/thankyou');
           return data;
