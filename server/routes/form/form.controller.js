@@ -32,6 +32,30 @@ module.exports.template.findByCompanyId =  function(req, res) {
   });
 };
 
+module.exports.template.findByAdminId = function(req,res){
+  TemplateForm.findOne({'_admin_id' : req.params.adminid}, function(err, template) {
+    if(err)
+      res.status(400).json({error: "There was an error finding the template form."});
+    else
+      res.status(200).json(template);
+  });
+};
+
+module.exports.template.sendByAdminId = function(req,res){
+  /*TemplateForm.findOne({'_admin_id' : req.params.adminid}, function(err, template) {
+    if(err)
+      res.status(400).json({error: "There was an error finding the template form."});
+    else if(template){//if doesn't exist
+      console.log('here');*/
+      createWithAdminId(req,res);
+    /*}
+    else{
+      console.log('shouldnt be here');
+      updateWithAdminId(req,res);
+    }
+  });*/
+};
+
 module.exports.template.create =  function(req, res) {
   var newTemplate = new TemplateForm();
   newTemplate._admin_id = new mongoose.Types.ObjectId(req.body._admin_id);
@@ -44,6 +68,31 @@ module.exports.template.create =  function(req, res) {
       res.json(template);
   });
 };
+
+function createWithAdminId(req,res){
+  var newTemplate = new TemplateForm();
+  newTemplate._admin_id = req.params.adminid;
+  newTemplate.template = req.body.template;
+
+  newTemplate.save(function(err, template) {
+    if(err)
+        return res.status(400).json(err);
+    else
+        return res.status(200).json(template);
+  });
+}
+
+function updateWithAdminId(req,res){
+  var update = {template: req.body.template};
+
+  TemplateForm.findOneAndUpdate({_admin_id: req.params.adminid}, update,
+    function(err, template) {
+        if(err)
+          return res.status(400).json({error: "There was an error updating a template."});
+        else
+          return res.status(200).json(template);
+    });
+}
 
 /* Accept PUT request at /form/template */
 module.exports.template.update =  function(req, res) {
