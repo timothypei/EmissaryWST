@@ -13,16 +13,6 @@ var TemplateForm = require('../../models/form/FormTemplate');
 /********** FORM TEMPLATE ROUTES **********/
 module.exports.template = {};
 
-module.exports.template.findById =  function(req, res) {
-  TemplateForm.findOne({'_id' : req.params.id}, function(err, template) {
-    if(err)
-      res.status(400).json({error: "There was an error finding the template form."});
-    else
-      res.json(template);
-  });
-};
-
-
 module.exports.template.findByCompanyId =  function(req, res) {
   TemplateForm.findOne({'_admin_id' : req.params.id}, function(err, template) {
     if(err)
@@ -42,30 +32,15 @@ module.exports.template.findByAdminId = function(req,res){
 };
 
 module.exports.template.sendByAdminId = function(req,res){
-  /*TemplateForm.findOne({'_admin_id' : req.params.adminid}, function(err, template) {
+  TemplateForm.findOne({'_admin_id' : req.params.adminid}, function(err, template) {
     if(err)
       res.status(400).json({error: "There was an error finding the template form."});
-    else if(template){//if doesn't exist
-      console.log('here');*/
+    else if(!template){//if doesn't exist
       createWithAdminId(req,res);
-    /*}
+    }
     else{
-      console.log('shouldnt be here');
       updateWithAdminId(req,res);
     }
-  });*/
-};
-
-module.exports.template.create =  function(req, res) {
-  var newTemplate = new TemplateForm();
-  newTemplate._admin_id = new mongoose.Types.ObjectId(req.body._admin_id);
-  newTemplate.template = req.body.template;
-
-  newTemplate.save(function(err, template) {
-    if(err)
-        res.status(400).json(err);
-    else
-      res.json(template);
   });
 };
 
@@ -93,6 +68,20 @@ function updateWithAdminId(req,res){
           return res.status(200).json(template);
     });
 }
+
+module.exports.template.create =  function(req, res) {
+  var newTemplate = new TemplateForm();
+  newTemplate._admin_id = new mongoose.Types.ObjectId(req.body._admin_id);
+  newTemplate.template = req.body.template;
+
+  newTemplate.save(function(err, template) {
+    if(err)
+        res.status(400).json(err);
+    else
+      res.json(template);
+  });
+};
+
 
 /* Accept PUT request at /form/template */
 module.exports.template.update =  function(req, res) {

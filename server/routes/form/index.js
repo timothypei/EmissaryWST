@@ -8,7 +8,6 @@ var router = express.Router();
 var bodyparser = require('body-parser');
 var urlparser = bodyparser.urlencoded({extended: false});
 
-router.get('/template/:id', controller.template.findById);
 router.get('/template/company/:id', controller.template.findByCompanyId);
 router.get('/template/:adminid',controller.template.findByAdminId);
 router.post('/template/:adminid',controller.template.sendByAdminId);
