@@ -1,8 +1,15 @@
 'use strict';
 
 angular.module('themes')
-  .controller('ThemesController', ['$scope', '$location', 'ThemesService', function($scope, $location) {
-  	$scope.theme ={};
+  .controller('ThemesController', ['$scope', '$location', '$rootScope', 'ThemesService', function($scope, $location, $rootScope, ThemesService) {
+  	$scope.theme = {form_color: 'default',
+                    background_img: 'default',
+                    displayPhone : true,
+                    diplayClock: true,
+                    displaySignature: true,
+                    additionalComments: true};
+
+    // add new background themes to this list. View will update dynamically
     $scope.img =  ['../images/themes/pink_trees.jpg',
                    '../images/themes/city0.jpg',
                    '../images/themes/city1.jpg',
@@ -28,19 +35,24 @@ angular.module('themes')
   	$scope.splitData = splitRows($scope.img, 3);
 
   	$scope.selectedImage = { value :'' };
-  	var selected = '';
 
 
   	$scope.submitTheme = function() {
-  		console.log($scope.selectedImage);
-  		selected = $scope.img[$scope.selectedImage.value];
-  		console.log(selected);
-      
+  		$scope.theme.background_img = $scope.img[$scope.selectedImage.value];
+
+      ThemesService.update($scope.theme)
+        .success(function(data){
+         // $location.path('/dashboard'); // route needs to be set
+          return data;
+        })
+        .error(function(err){
+          console.log("Theme selction failed.");
+          return err;
+        });
   	};
 
     $scope.cancel = function(){
       console.log("Theme selection canceled. Rerouting...");
       $location.path('/themes'); // Where do we go after cancel is pressed?
     };
-
 }]);
