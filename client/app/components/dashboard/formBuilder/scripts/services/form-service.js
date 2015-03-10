@@ -78,9 +78,12 @@ angular.module('DashboardFormBuilderModule').service('FormService', function For
             return $http.post('api/form/template/', {
                 template : form,
                 _admin_id : $rootScope.admin_id
-            }).then(function(response){
-                console.log("create resp");
-                console.log(response);
+            });
+        },
+        updateNewForm: function (form, id) {
+            return $http.put('api/form/template', {
+                template : form,
+                template_id : id
             });
         }
     };

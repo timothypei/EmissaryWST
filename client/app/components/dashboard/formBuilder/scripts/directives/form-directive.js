@@ -6,6 +6,7 @@ angular.module('DashboardFormBuilderModule')
       controller: function($scope, FormService, $modal){
         $scope.submit = function(){
           FormService.getForm().then(function (response) {
+            console.log(response.data);
             if(response.formExist === false) // doesnt exist make a new one
             {
               $scope.form.submitted = true;
@@ -15,12 +16,15 @@ angular.module('DashboardFormBuilderModule')
             }
             else // does exist ask to replace
             {
-              //console.log("make sure!!!");
-
               var modalInstance = $modal.open({
                 templateUrl: 'views/components/dashboard/formBuilder/views/replaceFormModal.html',
                 controller : 'CreateNewFormModalInstanceCtrl',
-                controllerAs : 'vm'
+                controllerAs : 'vm',
+                resolve : {
+                  formId: function () {
+                    return response.data._id;
+                  }
+                }
               });
             }
           });
