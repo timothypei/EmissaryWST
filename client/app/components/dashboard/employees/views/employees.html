@@ -9,16 +9,17 @@
 		<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
 			<thead>
 				<tr>
-					<th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+					<th colspan="5"><input st-search="" class="form-control" placeholder="Global Search ..." type="text"/></th>
 				</tr>
 				<tr>
-					<th st-sort="firstName">Name</th>
-					<th st-sort="birthDate">Phone Number</th>
-					<th st-sort="balance">Email</th>
+					<th st-sort="Name">Name</th>
+					<th>Phone Number</th>
+					<th st-sort="Email">Email</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="row in displayedCollection">
+					<p ng-show="checkIfEmptyTable()" class="empty-block">No Employees Fitting Search Criteria Found!</p>
 					<td style="padding-left:2em;" data-ng-click="editMode = true; editRowCollection(row)">
 						<span data-ng-hide="editMode">{{row.Name}}</span>
 						<input name="name" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Name" ng-pattern="/^[^0-9]+$/" data-ng-required required />

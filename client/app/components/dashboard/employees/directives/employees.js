@@ -68,6 +68,16 @@ angular.module('dashboard')
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
     $scope.displayedCollection = [].concat($scope.rowCollection);
 
+    
+    $scope.checkIfEmptyTable = function(){
+        return ($scope.displayedCollection.length == 0);
+    }
+
+
+    
+    
+  
+
     //edit a row
     $scope.editRowCollection = function(row) {
         $scope.editing = $scope.rowCollection.indexOf(row);
@@ -125,5 +135,6 @@ angular.module('dashboard')
     		$scope.rowCollection.push(result);
     	});
     }
+
 
 }]);
