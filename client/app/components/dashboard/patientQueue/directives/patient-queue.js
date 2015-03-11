@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dashboard')
-  .controller('PatientQueueCtrl', ['$scope', '$modal', '$rootScope', 'socket', function ($scope, $modal, $rootScope, socket) {
+  .controller('PatientQueueCtrl', ['$scope', '$modal', '$rootScope', 'socket', 'DoctorService',
+   function ($scope, $modal, $rootScope, socket, DoctorService) {
 
     socket.on('request_id', function(){
       if($rootScope.admin_id){
@@ -20,73 +21,73 @@ angular.module('dashboard')
       {
         id: 1,
         Name: "Meg Whitman",
-        Doctor: "Soe",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 2,
         Name: "Pooja Sankar",
-        Doctor: "Kua",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 3,
         Name: "Marissa Mayer",
-        Doctor: "Soe",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 4,
         Name: "Elizabeth Holmes",
-        Doctor: "Kua",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 5,
         Name: "Sam Altman",
-        Doctor: "Du",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 6,
         Name: "Pooja Sankar",
-        Doctor: "Kua",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 7,
         Name: "Meg Whitman",
-        Doctor: "Soe",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 8,
         Name: "Marissa Mayer",
-        Doctor: "Soe",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 9,
         Name: "Martine Rothhblatt",
-        Doctor: "Soe",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 10,
         Name: "Elizabeth Holmes",
-        Doctor: "Kua",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 11,
         Name: "Angelique De Castro",
-        Doctor: "Du",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       },
       {
         id: 12,
         Name: "Sam Altman",
-        Doctor: "Du",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date().toLocaleTimeString().replace(/:\d+ /, ' ')
       }
     ];

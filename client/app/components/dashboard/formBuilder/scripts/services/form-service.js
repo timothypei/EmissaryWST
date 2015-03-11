@@ -47,6 +47,7 @@ angular.module('DashboardFormBuilderModule').service('FormService', function For
         form:function (id) {
             // $http returns a promise, which has a then function, which also returns a promise
             return $http.get(formsJsonPath).then(function (response) {
+                console.log('ddd', response);
                 var requestedForm = {};
                 angular.forEach(response.data, function (form) {
                     if (form.form_id == id) requestedForm = form;
