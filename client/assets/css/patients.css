@@ -11,8 +11,10 @@
 
 #patient-queue .table-striped > tbody > tr:hover:nth-of-type(odd) {
   background-color: #E6E6E6;
+  cursor: pointer;
 }
 
 #patient-queue .table-striped > tbody > tr:hover:nth-of-type(even) {
   background-color: #E6E6E6;
+  cursor: pointer;
 }
