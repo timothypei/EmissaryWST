@@ -2,7 +2,8 @@
 
 angular.module('dashboard')
   .controller('ThemesController', ['$scope', '$location', '$rootScope', 'ThemesService', function($scope, $location, $rootScope, ThemesService) {
-  	$scope.theme = {form_color: 'default',
+    $scope.message = '';
+    $scope.theme = {form_color: 'default',
                     background_img: 'default',
                     displayPhone : true,
                     diplayClock: true,
@@ -46,22 +47,27 @@ angular.module('dashboard')
           return data;
         })
         .error(function(err){
-
           console.log("Theme selction failed.");
           return err;
         });
 
+      if($scope.selectedImage.value != ''){
         ThemesService.update($scope.theme)
           .success(function(data){
-           // $location.path('/dashboard'); // route needs to be set
-           console.log("updated");
-           console.log(data);
+            // $location.path('/dashboard'); // route needs to be set
+            console.log("updated");
+            console.log(data);
+            $scope.message = "Theme updated successfully!";
             return data;
           })
           .error(function(err){
+            $scope.message = 'Error selecting theme.';
             console.log("Theme selction failed.");
             return err;
           });
+        } else {
+          $scope.message = "Please select an image first."
+        }
   	};
 
     $scope.cancel = function(){
