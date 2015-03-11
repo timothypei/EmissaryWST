@@ -33,11 +33,12 @@ angular.module('DashboardFormBuilderModule')
   $scope.$on('$viewContentLoaded', function() {
 
         //$http.get('/api/form/template/company/'+ $rootScope.admin_id).
-        $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
+        $http.get('/api/form/template/company/55008ccf0a6edf181c321db8').
          success(function(data, status, headers, config) {
-           $scope.templateId = data._id;
+           //$scope.templateId = data._id;
            $scope.form = JSON.parse(data.template);
-           $scope.addField.lastAddedID = $scope.form.form_fields.length;
+           //$scope.addField.lastAddedID = $scope.form.form_fields.length;
+           console.log(data);
          }).
          error(function(data, status, headers, config) {
             // no saved templates
@@ -141,7 +142,7 @@ angular.module('DashboardFormBuilderModule')
      var formJson = $filter('json')($scope.form);
      var putJson = { 
                         "template":formJson,
-                        "admin_id":"54f8f23546b787e8335980e7"
+                        "admin_id":"55008b822e5a70cc199d4e62"
                         //"admin_id":$rootScope.admin_id
                     };
      // **Need to change this command and test
