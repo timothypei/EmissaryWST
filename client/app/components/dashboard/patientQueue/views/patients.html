@@ -29,10 +29,10 @@
             </tr>
             </thead>
             <tbody>
-            <h5 ng-show="!checkIfEmptyTable()"> There are currently {{displayedCollection.length}} patients in database and fitting search criteria</h5>
-            <h5 style="color:red" ng-show="checkIfEmptyTable()" class="empty-block">
+            <h4 ng-show="!checkIfEmptyTable()"> There are currently {{displayedCollection.length}} patients in database and fitting search criteria</h4>
+            <h4 style="color:red" ng-show="checkIfEmptyTable()" class="empty-block">
                     No patients fitting search criteria found!
-            </h5>
+            </h4>
             <tr ng-repeat="row in displayedCollection" ng-click="removeItem(row)">
                   <!-- <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
                     <i class="glyphicon glyphicon-remove-circle">
@@ -41,7 +41,7 @@
                 </td>
                 <td class="patient-queue-text"> {{row.Name}}</td>
                 <td class="patient-queue-text"> {{row.Doctor}}</td>
-                <td class="patient-queue-text"> {{row.Time}}</td>
+                <td class="patient-queue-text"><span ng-show="checkIfLongWait(row.TimeValue)" tooltip="Patient Needs Attending To!" class="text-danger"><i ng-show="checkIfLongWait(row.TimeValue)" class="fa fa-warning"></i></span> {{(row.Time)}}</td>
             </tr>
             </tbody>
         </table>

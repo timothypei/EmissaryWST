@@ -20,10 +20,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<h5 ng-show="!checkIfEmptyTable()"> There are currently {{displayedCollection.length}} employees in database and fitting search criteria</h5>
-                <h5 style="color:red" ng-show="checkIfEmptyTable()" class="empty-block">
+				<h4 ng-show="!checkIfEmptyTable()"> There are currently {{displayedCollection.length}} employees in database and fitting search criteria</h4>
+                <h4 style="color:red" ng-show="checkIfEmptyTable()" class="empty-block">
                     No employees fitting search criteria found!
-                </h5>					
+                </h4>					
 				<tr ng-repeat="row in displayedCollection">
 					<td >
 						<input class='ngSelectionCheckbox' type='checkbox' ng-checked='row.selected' ng-model='row.selected'>
