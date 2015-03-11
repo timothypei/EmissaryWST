@@ -8,6 +8,7 @@ angular.module('DashboardFormBuilderModule')
   // preview form mode
   $scope.previewMode = false;
   $scope.editMode = false;
+  $scope.showDelete = false;
 
   // new form
   $scope.form = {};
@@ -52,28 +53,17 @@ angular.module('DashboardFormBuilderModule')
 
   // deletes particular field on button click
   $scope.deleteField = function (field_id){
-    var modalInstance = $modal.open({
-        templateUrl: 'views/components/dashboard/formBuilder/views/deleteModal.html',
-        controller : 'DeleteModalInstanceCtrl',
-        controllerAs : 'vm'
-      });
-
-    modalInstance.result.then(function() {
-      // confirmed delete
-      for(var i = 0; i < $scope.form.form_fields.length; i++){
-        if($scope.form.form_fields[i].field_id == field_id){
-          $scope.form.form_fields.splice(i, 1);
-          break;
-        }
+    // confirmed delete
+    for(var i = 0; i < $scope.form.form_fields.length; i++){
+      if($scope.form.form_fields[i].field_id == field_id){
+        $scope.form.form_fields.splice(i, 1);
+        break;
       }
-      if($scope.form.form_fields === null || $scope.form.form_fields.length === 0) {
-        $scope.previewMode = false;
-        $scope.form.submitted = false;
-      }
-    }, function() {
-      // delete canceled
     }
-    );
+    if($scope.form.form_fields === null || $scope.form.form_fields.length === 0) {
+      $scope.previewMode = false;
+      $scope.form.submitted = false;
+    }
   };
 
   // add new option to the field
