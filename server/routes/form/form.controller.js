@@ -13,16 +13,6 @@ var TemplateForm = require('../../models/form/FormTemplate');
 /********** FORM TEMPLATE ROUTES **********/
 module.exports.template = {};
 
-module.exports.template.findById =  function(req, res) {
-  TemplateForm.findOne({'_id' : req.params.id}, function(err, template) {
-    if(err)
-      res.status(400).json({error: "There was an error finding the template form."});
-    else
-      res.json(template);
-  });
-};
-
-
 module.exports.template.findByCompanyId =  function(req, res) {
   TemplateForm.findOne({'_admin_id' : req.params.id}, function(err, template) {
     if(err)
@@ -31,6 +21,53 @@ module.exports.template.findByCompanyId =  function(req, res) {
       res.json(template);
   });
 };
+
+module.exports.template.findByAdminId = function(req,res){
+  TemplateForm.findOne({'_admin_id' : req.params.adminid}, function(err, template) {
+    if(err)
+      res.status(400).json({error: "There was an error finding the template form."});
+    else
+      res.status(200).json(template);
+  });
+};
+
+module.exports.template.sendByAdminId = function(req,res){
+  TemplateForm.findOne({'_admin_id' : req.params.adminid}, function(err, template) {
+    if(err)
+      res.status(400).json({error: "There was an error finding the template form."});
+    else if(!template){//if doesn't exist
+      createWithAdminId(req,res);
+    }
+    else{
+      updateWithAdminId(req,res);
+    }
+  });
+};
+
+function createWithAdminId(req,res){
+  var newTemplate = new TemplateForm();
+  newTemplate._admin_id = req.params.adminid;
+  newTemplate.template = req.body.template;
+
+  newTemplate.save(function(err, template) {
+    if(err)
+        return res.status(400).json(err);
+    else
+        return res.status(200).json(template);
+  });
+}
+
+function updateWithAdminId(req,res){
+  var update = {template: req.body.template};
+
+  TemplateForm.findOneAndUpdate({_admin_id: req.params.adminid}, update,
+    function(err, template) {
+        if(err)
+          return res.status(400).json({error: "There was an error updating a template."});
+        else
+          return res.status(200).json(template);
+    });
+}
 
 module.exports.template.create =  function(req, res) {
   var newTemplate = new TemplateForm();
@@ -44,6 +81,7 @@ module.exports.template.create =  function(req, res) {
       res.json(template);
   });
 };
+
 
 /* Accept PUT request at /form/template */
 module.exports.template.update =  function(req, res) {

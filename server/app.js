@@ -29,11 +29,6 @@ app.use(morgan('dev', {"stream": winstonConfig.stream}));
 
 
 /*
- * Create Socket.io server.
- */
-var server = socketIO.createServer(app);
-
-/*
  * Connect to MongoDB.
  */
 mongoose.connect(config.mongoDBUrl);
@@ -81,13 +76,17 @@ app.use('/api', product);
  */
 app.use(errorHandler());
 
-/*
- * Start Express server.
- */
-app.listen(app.get('port'), function() {
-  console.info('Express server listening on port %d in %s mode',
+var server = require('http').createServer(app);
+var io = require('socket.io')(server)
+server.listen(app.get('port'), function() {
+  console.log('Express server listening on port %d in %s mode',
     app.get('port'),
     app.get('env'));
 });
+
+/*
+ * Create Socket.io server.
+ */
+var server = socketIO.createServer(io);
 
 module.exports = app;

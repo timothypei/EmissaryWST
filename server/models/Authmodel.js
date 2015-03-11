@@ -7,7 +7,9 @@ var bcrypt = require('bcrypt-nodejs');
 var adminSchema = mongoose.Schema({
   email: {type: String, unique: true, index: true, required: true},
   password: String,
-  token: String
+  token: String,
+  company_name: String,
+  company_phone_number: String
 });
 
 // methods ======================
