@@ -1,16 +1,26 @@
 'use strict';
 
 angular.module('register')
-  .controller('RegisterController', ['$scope','$location', 'RegisterService',function($scope,$location, RegisterService){
-  		$scope.user = {email: '', password: ''};
+  .controller('RegisterController', ['$scope','$rootScope','$location', 'AuthService',function($scope,$rootScope,$location, AuthService){
+  		$scope.user = {email: '', password: '', company_name: '', company_phone_number: ''};
+      $scope.number='';
       $scope.pass = '';
       $scope.err=false;
       $scope.check = false;
       $scope.errorMessage='';
-  		$scope.reg = function(){
-        //Email and password fields are empty
-        if($scope.user.email==''){
-          $scope.errorMessage='Email and Password and mandatory fields';
+  		$scope.reg = function(){ 
+        $scope.user.company_phone_number = '';    
+            
+        //making sure the number is not null before calling toString method
+        if($scope.number != null){
+            console.log(typeof $scope.user.company_phone_number);
+            $scope.user.company_phone_number = $scope.number.toString();
+        }
+            
+        //Email, password, company name, or phone fields are empty
+        if($scope.user.email=='' || $scope.user.password=='' || $scope.user.company_name=='' || 
+            $scope.user.company_phone_number==''){
+            $scope.errorMessage='Please provide company name, password, phone, and email.';
         }
         //Passwords differ
         else if($scope.pass!=$scope.user.password){
@@ -22,15 +32,29 @@ angular.module('register')
           $scope.errorMessage='Password must be at least 4 characters';
           return;
         }
+            
+        //Phone number must be 10-11 numbers
+        else if($scope.user.company_phone_number.length!=10 && $scope.user.company_phone_number.length!=11)
+        {
+            $scope.errorMessage='Phone number should be 10-11 numbers long.';
+            return;
+        }
+            
         //Did not agree to the terms
         else if(!($scope.check)) {
           $scope.errorMessage='You must agree to the terms and conditions';
           return;
         }
         else{
-  		    RegisterService.reg($scope.user)
+  		    AuthService.reg($scope.user)
           //when the API call was a success
       	  .success(function(data){
+          $rootScope.token = data.token;
+           $rootScope.number = data.company_phone_number;
+           $rootScope.company_name = data.company_name;
+           $rootScope.admin_id = data.admin_id;
+           $rootScope.email = $scope.user.email;
+            console.log(data);
           $location.path('/thankyou');
           return data;
       	 })
