@@ -1,5 +1,5 @@
 <blockquote>
-    <p>Select field type you want to add to the form below and click on 'Add Field' button. You can name your form as well as name the fields that will appear for the patient. Placeholder text is also optional and will display until a patient enters their information into the field.</p>
+
 </blockquote>
 
 <div class="well">
@@ -93,19 +93,7 @@
             <button class="btn btn-danger right" type="button" ng-click="postJson()"><i class="icon-refresh icon-white"></i> Submit</button>
             <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Reset</button>
         </p>
-        <p class="text-center">
-            <button class="btn btn-primary right" type="button" ng-click="fetchSavedTemplate()"><i class="icon-eye-open icon-white"></i>Fetch Template</button>
-        </p>
-        <p class="text-center">
-            <button class="btn btn-primary right" type="button" ng-click="postJson()"><i class="icon-eye-open icon-white"></i>Save Template</button>
-        </p>
 
-        <br><hr>
-
-        <div ng-show="showJson">
-            <h4>Form object content:</h4>
-            <pre>{{ form | json }}</pre>
-        </div>
     </div>
 
     <div class="form-fields-preview" style="display:inline-block; vertical-align:top;" ng-show="previewMode">
