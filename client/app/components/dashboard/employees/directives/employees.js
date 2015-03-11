@@ -227,3 +227,5 @@ angular.module('dashboard')
     	});
     }
 }]);
+	
+	

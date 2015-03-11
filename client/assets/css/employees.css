@@ -14,7 +14,6 @@
 #doctors-table{
     height:100em;
 		overflow-y: scroll;
-    overflow-x: scroll
 }
 
 #doctors-table td{
