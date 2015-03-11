@@ -33,6 +33,7 @@ angular.module('robobetty',
         parent: 'common',
         title: 'Create New Form'
       })
+      /* Enables route to editforms page
       .state('editForm', {
         url: '/editform',
         controller: 'FormEditController',
@@ -40,6 +41,7 @@ angular.module('robobetty',
         parent: 'common',
         title: 'Edit Existing Template'
       })
+      */
       .state('dashboard',{
         url:'/dashboard',
         template: '',

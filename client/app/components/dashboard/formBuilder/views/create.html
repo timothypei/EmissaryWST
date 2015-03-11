@@ -1,15 +1,11 @@
 <blockquote>
-    <p>Select field type you want to add to the form below and click on 'Add Field' button. Don't forget to set field properties. After you finish creating the form, you can preview the form by clicking Preview Form button.</p>
+    <p>Select field type you want to add to the form below and click on 'Add Field' button. You can name your form as well as name the fields that will appear for the patient. Placeholder text is also optional and will display until a patient enters their information into the field.</p>
 </blockquote>
 
 <div class="well">
     <div class="form-fields" style="display:inline-block;">
         <div class="form-properties">
             <h3>Form Properties</h3>
-            <div class="row">
-                <div class="span2">Form ID: </div>
-                <div class="span4"><input type="text" name="form-id" ng-disabled="true" ng-model="form.form_id"></div>
-            </div>
             <div class="row">
                 <div class="span2">Form Name:</div>
                 <div class="span4"><input type="text" name="form-name" ng-model="form.form_name"></div>
@@ -31,10 +27,6 @@
                 <div class="accordion-edit">
                     <button class="btn btn-danger pull-right" type="button" ng-click="deleteField(field.field_id)"><i class="icon-trash icon-white"></i> Delete</button>
 
-                    <div class="row">
-                        <div class="span2">Field ID: </div>
-                        <div class="span4">{{field.field_id}}</div>
-                    </div>
                     <div class="row">
                         <div class="span2">Field Type:</div>
                         <div class="span4">{{field.field_type}}</div>
@@ -98,9 +90,7 @@
         </accordion>
 
         <p class="text-center">
-
-            <button class="btn btn-primary right" type="button" ng-click="editOn()"><i class="icon-eye-open icon-white"></i> Edit existing template</button>
-
+            <button class="btn btn-danger right" type="button" ng-click="postJson()"><i class="icon-refresh icon-white"></i> Submit</button>
             <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Reset</button>
         </p>
         <p class="text-center">
@@ -111,11 +101,6 @@
         </p>
 
         <br><hr>
-
-		<div class="text-center">
-			<a class="btn btn-small btn-primary" ng-show="!showJson" ng-click="showJson = true">Show form json object</a>
-			<a class="btn btn-small btn-inverse" ng-show="showJson" ng-click="showJson = false">Hide form json object</a><br><br>
-		</div>
 
         <div ng-show="showJson">
             <h4>Form object content:</h4>

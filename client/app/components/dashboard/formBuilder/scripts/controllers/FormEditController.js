@@ -175,8 +175,8 @@ angular.module('DashboardFormBuilderModule')
              $scope.previewMode = true;
            }
            $scope.form.submitted = false;
-
          }).
+         
          error(function(data, status, headers, config) {
            alert("You have no saved templates.");
          });
