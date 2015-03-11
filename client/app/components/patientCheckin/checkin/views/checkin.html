@@ -17,7 +17,8 @@
 				</form>
 			</div>
 				<div id = "settings">
-					<a ng-click="open()" ng-init="imgsrc='images/settings.png'" ng-mouseover="imgsrc='images/settings_dark.png'" ng-mouseout="imgsrc='images/settings.png'"> <img id='icon' ng-src="{{imgsrc}}"/></a>
+					<!--<a ng-click="open()" ng-init="imgsrc='images/settings.png'" ng-mouseover="imgsrc='images/settings_dark.png'" ng-mouseout="imgsrc='images/settings.png'"> <img id='icon' ng-src="{{imgsrc}}"/></a>-->
+                    <button type="button" id='toDashboard' ng-click="open()"> Dashboard </button>
 					<h1>{{clock | date: 'hh:mm:ss a'}}</h1>
 				</div>
 		    	<script type="text/ng-template" id="myModalContent.html">

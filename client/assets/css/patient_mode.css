@@ -5,8 +5,15 @@ html, body, .ng-scope{
 h1{
   color:white;
 }
-#icon{
-  padding-left: 65px;
+#toDashboard{
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 10px;
+  margin-left: 50px;
+  width: 120px;
+  height: 40px;
+  background-color: white;
+  border: 2px solid white;
 }
 input{
   margin-left: auto;
@@ -42,6 +49,7 @@ input{
   padding-left: 195px;
 }
 #settings{
+  background-color: rgba(9, 41, 14, .8);
   bottom: 60px;
   margin-left: 5%;
   position: fixed;
