@@ -12,8 +12,9 @@
 }
 
 #doctors-table{
-    height:32em;
-		overflow-x: hidden;
+    height:100em;
+		overflow-y: scroll;
+    overflow-x: scroll
 }
 
 #doctors-table td{
