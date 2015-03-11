@@ -164,11 +164,6 @@ angular.module('dashboard')
         return ($scope.displayedCollection.length == 0);
     }
 
-
-    
-    
-  
-
     //edit a row
     $scope.editRowCollection = function(row) {
         $scope.editing = $scope.rowCollection.indexOf(row);

@@ -14,17 +14,17 @@
 					<th colspan="5"><input st-search="" class="form-control" placeholder="Search ..." type="text"/></th>
 				</tr>
 				<tr>
-					<th></th>
-					<th>Name</th>
-					<th>Phone Number</th>
-					<th>Email</th>
+					<th st-sort="Name">Name</th>
+					<th st-sort="PhoneNumber">Phone Number</th>
+					<th st-sort="Email">Email</th>
 				</tr>
 			</thead>
 			<tbody>
+				<h5 ng-show="!checkIfEmptyTable()"> There are currently {{displayedCollection.length}} employees in database and fitting search criteria</h5>
+                <h5 style="color:red" ng-show="checkIfEmptyTable()" class="empty-block">
+                    No employees fitting search criteria found!
+                </h5>					
 				<tr ng-repeat="row in displayedCollection">
-                    <p ng-show="checkIfEmptyTable()" class="empty-block">
-                        No Employees Fitting Search Criteria Found!
-                    </p>					
 					<td >
 						<input class='ngSelectionCheckbox' type='checkbox' ng-checked='row.selected' ng-model='row.selected'>
 					</td>

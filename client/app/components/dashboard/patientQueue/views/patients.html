@@ -23,13 +23,16 @@
                 <th colspan="5"><input st-search="" class="form-control" placeholder="Search ..." type="text"/></th>
             </tr>
             <tr>
-                <th>Name</th>
-                <th>Doctor</th>
-                <th>Check-in Time</th>
+                <th st-sort="Name">Name</th>
+                <th st-sort="Doctor">Doctor</th>
+                <th st-sort="Time">Check-in Time</th>
             </tr>
             </thead>
             <tbody>
-            <p ng-show="checkIfEmptyTable()" class="empty-block">No Patients Fitting Search Criteria Found!</p>   
+            <h5 ng-show="!checkIfEmptyTable()"> There are currently {{displayedCollection.length}} patients in database and fitting search criteria</h5>
+            <h5 style="color:red" ng-show="checkIfEmptyTable()" class="empty-block">
+                    No patients fitting search criteria found!
+            </h5>
             <tr ng-repeat="row in displayedCollection" ng-click="removeItem(row)">
                   <!-- <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
                     <i class="glyphicon glyphicon-remove-circle">
