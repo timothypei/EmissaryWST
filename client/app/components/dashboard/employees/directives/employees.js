@@ -9,7 +9,7 @@ angular.module('dashboard')
       controllerAs: 'employeeCtrl'
     };
   })
-  .controller('EmployeeController', ['$scope', '$window', '$modal', function ($scope, $window, $modal) {
+  .controller('EmployeeController', ['$scope', '$window', '$modal', 'filterFilter', function ($scope, $window, $modal, filterFilter) {
     // include root slecope
     $scope.rowCollection = [
         {
