@@ -14,7 +14,7 @@
 			<div class="form-group" ng-class="{'has-error': modalForm.number.$invalid && !modalForm.number.$pristine }">
 				<label for="modalNumber" class="col-sm-2 control-label">Number</label>
 				<div class="col-sm-10">
-					<input type="text" name="number" class="form-control" id="modalNumber" ng-model="modal.PhoneNumber" ui-mask="{{'(999) 999-9999'}}" required >
+					<input type="text" name="number" class="form-control" id="modalNumber" ng-model="modal.PhoneNumber" ui-mask="(999) 999-9999" required >
 					<p ng-show="modalForm.number.$invalid && !modalForm.number.$pristine" class="help-block">Please enter a valid phone number Ex: (123)456-7890</p>
 				</div>
 			</div>
@@ -26,8 +26,8 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary" ng-disabled="modalForm.$invalid">OK</button>
-				<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+				<button type="submit" class="btn btn-primary" style="background-color:green" ng-disabled="modalForm.$invalid">OK</button>
+				<button class="btn btn-primary" style="background-color:red" ng-click="cancel()">Cancel</button>
 			</div>
 		</form>
 	</div>
