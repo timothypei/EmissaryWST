@@ -4,9 +4,8 @@ angular.module('DashboardFormBuilderModule')
   .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $rootScope) {
 
   $scope.templateId = 0;
-  $scope.prevJson = $filter('json')($scope.form);
   // preview form mode
-  $scope.previewMode = true;
+  $scope.previewMode = false;
   $scope.editMode = false;
 
   // new form
@@ -28,15 +27,15 @@ angular.module('DashboardFormBuilderModule')
   $scope.accordion = {};
   $scope.accordion.oneAtATime = true;
 
-  // **Need to test and enable rootscope
-  $scope.$on('$viewContentLoaded', function() {
 
-        //$http.get('/api/form/template/company/'+ $rootScope.admin_id).
+  $scope.$on('$viewContentLoaded', function() {
         $http.get('/api/form/template/company/' + $rootScope.admin_id).
          
          success(function(data, status, headers, config) {
            if (data != null){
               $scope.form = data.template;//JSON.parse(data.template);
+              $scope.form.submitted = false;
+              FormService.formData = data.template;
               $scope.addField.lastAddedID = $scope.form.form_fields.length;
             }
            console.log(data);
@@ -45,6 +44,8 @@ angular.module('DashboardFormBuilderModule')
          error(function(data, status, headers, config) {
             // no saved templates
          });
+
+         $scope.previewMode = true;
   });
 
   // create new field button click
