@@ -4,9 +4,8 @@ angular.module('DashboardFormBuilderModule')
 .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $rootScope) {
 
   $scope.templateId = 0;
-  $scope.prevJson = $filter('json')($scope.form);
   // preview form mode
-  $scope.previewMode = true;
+  $scope.previewMode = false;
   $scope.editMode = false;
 
   // new form
@@ -28,28 +27,25 @@ angular.module('DashboardFormBuilderModule')
   $scope.accordion = {};
   $scope.accordion.oneAtATime = true;
 
-  // **Need to test and enable rootscope
-   $scope.$on('$viewContentLoaded', function() {
+  $scope.$on('$viewContentLoaded', function() {
+        $http.get('/api/form/template/company/' + $rootScope.admin_id).
+         
+         success(function(data, status, headers, config) {
+           if (data != null){
+              $scope.form = data.template;//JSON.parse(data.template);
+              $scope.form.submitted = false;
+              FormService.formData = data.template;
+              $scope.addField.lastAddedID = $scope.form.form_fields.length;
+            }
+           console.log(data);
 
-       //$http.get('/api/form/template/company/'+ $rootScope.admin_id).
-       $http.get('/api/form/template/company/55009aba141bc50c1a4e87d8'/* + $rootScope.admin_id*/).
-        
-        success(function(data, status, headers, config) {
-          if (data != null){
-             $scope.form = data.template;//JSON.parse(data.template);
-             $scope.form.submitted = false;
-             FormService.formData = data.template;
-             $scope.addField.lastAddedID = $scope.form.form_fields.length;
-           }
-          console.log(data);
+         }).
+         error(function(data, status, headers, config) {
+            // no saved templates
+         });
 
-        }).
-        error(function(data, status, headers, config) {
-           // no saved templates
-        });
-
-        $scope.previewMode = true;
- });
+         $scope.previewMode = true;
+  });
 
   // create new field button click
   $scope.addNewField = function(){
@@ -142,6 +138,7 @@ angular.module('DashboardFormBuilderModule')
       return false;
   };
 
+<<<<<<< HEAD
 
     // posts form template as Json
   $scope.postJson = function (){
@@ -172,6 +169,8 @@ angular.module('DashboardFormBuilderModule')
   }; 
 
 
+=======
+>>>>>>> 62b9f1a7bc7618157f025940b60f826a4916c308
   // deletes all the fields
   $scope.reset = function (){
     if($scope.form.form_fields !== null && $scope.form.form_fields.length !== 0) {
