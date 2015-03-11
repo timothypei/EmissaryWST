@@ -16,12 +16,12 @@
 		overflow-x: hidden;
 }
 
-#doctors-table td{
+.center{
 	/*padding:1em 1em 0em 1em;
 	*/
-	padding:1em;
-	min-width:10em;
-	max-width:10em;
+	padding-top:.8em;
+	/*min-width:10em;
+	max-width:10em;*/
 }
 
 #doctors-table .table-striped > tbody > tr:hover:nth-of-type(odd) {

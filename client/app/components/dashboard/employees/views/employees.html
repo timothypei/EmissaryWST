@@ -1,7 +1,9 @@
 <div ng-controller="EmployeeController" class="container">
-	<button type="button" class="btn btn-block btn-success" ng-click="openModal()">
-		<i class="glyphicon glyphicon-plus">
-		</i> Add
+	<button type="button" class="btn btn-success" ng-click="openModal()">
+		<i class="glyphicon glyphicon-plus"></i> Add Employee
+	</button>
+	<button type="button" class="btn btn-danger" ng-click"removeMultiple(row)">
+		<i class="glyphicon glyphicon-trash"></i> Remove Employee
 	</button>
 	<br>
 	<br>
@@ -9,9 +11,10 @@
 		<table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
 			<thead>
 				<tr>
-					<th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+					<th colspan="5"><input st-search="" class="form-control" placeholder="Search ..." type="text"/></th>
 				</tr>
 				<tr>
+					<th></th>
 					<th st-sort="firstName">Name</th>
 					<th st-sort="birthDate">Phone Number</th>
 					<th st-sort="balance">Email</th>
@@ -19,28 +22,30 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="row in displayedCollection">
-					<td style="padding-left:2em;" data-ng-click="editMode = true; editRowCollection(row)">
-						<span data-ng-hide="editMode">{{row.Name}}</span>
-						<input name="name" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Name" ng-pattern="/^[^0-9]+$/" data-ng-required required />
+					<td >
+						<input class='ngSelectionCheckbox' type='checkbox' ng-checked='row.selected' ng-model='row.selected'>
+					</td>
+					<td style="min-width:10em;max-width:10em;" data-ng-click="editMode = true; editRowCollection(row)">
+						<div class="center" data-ng-hide="editMode"><span >{{row.Name}}</span></div>
+						<input name="name" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Name" ng-pattern="/^[^0-9]+$/" data-ng-required  style="margin-top:.3em;" required />
 						<p ng-show="!row.Name" class="help-block">Name cannot have numbers.</p>
 					</td>
-					<td data-ng-click="editMode = true; editRowCollection(row)">
-						<span data-ng-hide="editMode">{{row.PhoneNumber}}</span>
-						<input name="number" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.PhoneNumber" ui-mask="{{'(999) 999-9999'}}" data-ng-required required>
+					<td style="min-width:10em;max-width:10em;" data-ng-click="editMode = true; editRowCollection(row)">
+						<div class="center" data-ng-hide="editMode">{{row.PhoneNumber}}</div>
+						<input name="number" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.PhoneNumber" ui-mask="{{'(999) 999-9999'}}" data-ng-required required  style="margin-top:.3em;"/>
 						<p ng-show="!row.PhoneNumber" class="help-block">Enter a valid phone number.</p>
 					</td>
-					<td data-ng-click="editMode = true; editRowCollection(row)">
-						<span data-ng-hide="editMode">{{row.Email}}</span>
-						<input type="email" name="email" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Email" data-ng-required required>
+					<td style="min-width:10em;max-width:10em;" data-ng-click="editMode = true; editRowCollection(row)">
+						<div class="center" data-ng-hide="editMode">{{row.Email}}</div>
+						<input type="email" name="email" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Email" data-ng-required required  style="margin-top:.3em;"/>
 						<p ng-show="!row.Email" class="help-block">Enter a valid email.</p>
 					</td>
-					<td>
-						<button type="submit" popover="Press ctrl+z or command+z to undo changes" popover-trigger="mouseenter" data-ng-show="editMode" data-ng-click="editMode=false; editRowCollection(row)" class="btn col-md-5 btn-primary"  style="margin-right:.5em;" ng-disabled="!row.Name || !row.PhoneNumber || !row.Email">
-							<i class="glyphicon glyphicon-ok-circle">
-							</i>
+					<td style="min-width:5em;max-width:5em;">
+						<button type="submit" data-ng-show="editMode" data-ng-click="editMode=false; editRowCollection(row)" class="btn col-md-5 btn-primary"  style="margin:.3em .5em 0 0;" ng-disabled="!row.Name || !row.PhoneNumber || !row.Email">
+							<i class="glyphicon glyphicon-ok-circle"></i>
 						</button>
-						<button type="button" ng-click="editMode ? cancel(row) : removeEmployee(row); editMode=false" class="btn col-md-5 btn-danger" >
-							<i ng-class="editMode ? 'glyphicon glyphicon-ban-circle':'glyphicon glyphicon-remove'"></i>
+						<button type="button" data-ng-show="editMode" ng-click="cancel(row); editMode=false" class="btn col-md-5 btn-default" style="margin-top:.3em;">
+							<i class="glyphicon glyphicon-ban-circle"></i>
 						</button>
 					</td>
 				</tr>
