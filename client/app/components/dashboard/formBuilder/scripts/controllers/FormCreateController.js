@@ -29,20 +29,27 @@ angular.module('DashboardFormBuilderModule')
   $scope.accordion.oneAtATime = true;
 
   // **Need to test and enable rootscope
-  $scope.$on('$viewContentLoaded', function() {
+   $scope.$on('$viewContentLoaded', function() {
 
-        //$http.get('/api/form/template/company/'+ $rootScope.admin_id).
-        $http.get('/api/form/template/company/55008ccf0a6edf181c321db8').
-         success(function(data, status, headers, config) {
-           //$scope.templateId = data._id;
-           $scope.form = JSON.parse(data.template);
-           //$scope.addField.lastAddedID = $scope.form.form_fields.length;
-           console.log(data);
-         }).
-         error(function(data, status, headers, config) {
-            // no saved templates
-         });
-  });
+       //$http.get('/api/form/template/company/'+ $rootScope.admin_id).
+       $http.get('/api/form/template/company/55009aba141bc50c1a4e87d8'/* + $rootScope.admin_id*/).
+        
+        success(function(data, status, headers, config) {
+          if (data != null){
+             $scope.form = data.template;//JSON.parse(data.template);
+             $scope.form.submitted = false;
+             FormService.formData = data.template;
+             $scope.addField.lastAddedID = $scope.form.form_fields.length;
+           }
+          console.log(data);
+
+        }).
+        error(function(data, status, headers, config) {
+           // no saved templates
+        });
+
+        $scope.previewMode = true;
+ });
 
   // create new field button click
   $scope.addNewField = function(){
@@ -142,8 +149,8 @@ angular.module('DashboardFormBuilderModule')
      var formJson = $filter('json')($scope.form);
      var putJson = { 
                         "template":formJson,
-                        "admin_id":"55008b822e5a70cc199d4e62"
-                        //"admin_id":$rootScope.admin_id
+                        //"admin_id":"55008b822e5a70cc199d4e62"
+                        "admin_id":'55009aba141bc50c1a4e87d8'
                     };
      // **Need to change this command and test
      $http.post('/api/form/template', putJson).

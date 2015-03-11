@@ -60,7 +60,7 @@ angular.module('DashboardFormBuilderModule').service('FormService', function For
             });
         },
         getForm: function () {
-            return $http.get('api/form/template/company/' + $rootScope.admin_id).then(function(response){
+            return $http.get('api/form/template/company/' + '55009aba141bc50c1a4e87d8').then(function(response){
                 if(response.data === null)
                 {
                     response.formExist = false;
@@ -77,7 +77,7 @@ angular.module('DashboardFormBuilderModule').service('FormService', function For
             console.log(form);
             return $http.post('api/form/template/', {
                 template : form,
-                _admin_id : $rootScope.admin_id
+                _admin_id :'55009aba141bc50c1a4e87d8'
             });
         },
         updateNewForm: function (form, id) {
