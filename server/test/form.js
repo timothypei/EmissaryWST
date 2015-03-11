@@ -255,6 +255,9 @@ describe("Forms", function() {
               res.body.should.have.property('form').and.be.instanceof(Object);
               res.body.should.have.property('_admin_id').and.be.equal(''+credentials.admin._id);
               submittedFormId = res.body._id;
+              submittedFormFirstName = res.body.firstName;
+              submittedFormLastName = res.body.lastName;
+              submittedFormEmail = res.body.patientEmail;
               done();
             });
         });
@@ -269,7 +272,7 @@ describe("Forms", function() {
               res.body.should.have.property('_id');
               res.body.should.have.property('firstName');
               res.body.should.have.property('lastName');
-              res.body.should.have.property('email');
+              res.body.should.have.property('patientEmail');
               res.body.should.have.property('_admin_id');
               res.body.should.have.property('date');
               res.body.should.have.property('form').and.be.instanceof(Object);
@@ -280,7 +283,33 @@ describe("Forms", function() {
             });
         });
       });
+
+      describe('GET /api/form/', function(){
+        it('should respond with submitted form data', function(done){
+          request(url)
+            .get('/api/form/patient/')
+            .query({firstName: submittedFormFirstName, lastName: submittedFormLastName, patientEmail: submittedFormEmail})
+            .end(function(err,res){
+              
+              res.body.should.have.property('firstName');
+              res.body.should.have.property('lastName');
+              res.body.should.have.property('patientEmail');
+              res.body.should.have.property('_admin_id');
+              res.body.should.have.property('date');
+              res.body.should.have.property('form').and.be.instanceof(Object);
+
+              res.body.form.should.deep.equal(submittedForm);
+              res.body.patientEmail.should.equal(submittedFormEmail);
+              res.body.firstName.should.equal(submittedFormFirstName);
+              res.body.lastName.should.equal(submittedFormLastName);
+              done();
+            });
+        });
+      });
+
     });
+
+      
     
 
     after(function(done) {
