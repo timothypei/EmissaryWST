@@ -13,13 +13,22 @@ angular.module('checkin')
     }
 
       $scope.init = function(){
+        CheckinService.getTheme($rootScope.admin_id)
+        .success(function(data){
+          console.log(data);
+            return data;
+          })
+        .error(function(err){
+          console.log(err);
+          return err;
+        }
+          );
         CheckinService.getForms($rootScope.admin_id).success(
           function(data){
           $scope.form = JSON.parse(data.template);
             return data;
           })
         .error(function(err){
-          console.log("nono");
           console.log(err);
           return err;
         }

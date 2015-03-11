@@ -2,8 +2,9 @@
 
 angular.module('themes')
   .service('ThemesService', ['$http', '$rootScope', function($http, $rootScope) {
-  	var userid = $rootScope.email;
+  	var userid = $rootScope.admin_id;
   	this.read = function(){
+      console.log('read');
   		return $http.get('/api/' + userid + '/theme');
   	};
 
@@ -13,6 +14,7 @@ angular.module('themes')
   	};
 
   	this.create = function(theme){
+      console.log("success");
   		return $http.post('/api/' + userid + '/theme', theme);
   	};
 

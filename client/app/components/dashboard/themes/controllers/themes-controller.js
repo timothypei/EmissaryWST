@@ -39,16 +39,50 @@ angular.module('themes')
 
   	$scope.submitTheme = function() {
   		$scope.theme.background_img = $scope.img[$scope.selectedImage.value];
-
-      ThemesService.update($scope.theme)
-        .success(function(data){
+      var hasTheme = false;
+      ThemesService.read().success(function(data){
          // $location.path('/dashboard'); // route needs to be set
+         
+         console.log('read');
+         console.log('the data is '+data);
+         if(data!=null){
+           hasTheme=true;
+         }
           return data;
         })
         .error(function(err){
           console.log("Theme selction failed.");
           return err;
         });
+
+      if(hasTheme){
+        ThemesService.update($scope.theme)
+          .success(function(data){
+           // $location.path('/dashboard'); // route needs to be set
+           console.log("update");
+           console.log(data);
+           console.log("success");
+            return data;
+          })
+          .error(function(err){
+            console.log("Theme selction failed.");
+            return err;
+          });
+      }
+      else{
+        ThemesService.create($scope.theme)
+          .success(function(data){
+           // $location.path('/dashboard'); // route needs to be set
+           console.log("create");
+           console.log(data);
+           console.log("success");
+            return data;
+          })
+          .error(function(err){
+            console.log("Theme selction failed.");
+            return err;
+          });
+      }
   	};
 
     $scope.cancel = function(){

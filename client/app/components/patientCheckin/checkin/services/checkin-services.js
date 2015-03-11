@@ -2,6 +2,12 @@
 
 angular.module('checkin')
   .service('CheckinService', ['$http', function($http) {
+      this.getTheme = function(id){
+      	 console.log(id);
+      	 console.log("getThemes");
+      	 var path = '/api/'+id+'/theme';
+      	 return $http.get(path);
+      };  	
   	  this.getForms = function(id) {
   	  	console.log(id);
   	  	console.log("getForms");
@@ -9,4 +15,5 @@ angular.module('checkin')
   	  	console.log(url);
         return $http.get(url);
       };
+
   }]);
