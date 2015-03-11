@@ -1,7 +1,21 @@
 'use strict';
 
 angular.module('dashboard')
-  .controller('PatientQueueCtrl', ['$scope', '$modal', function ($scope, $modal) {
+  .controller('PatientQueueCtrl', ['$scope', '$modal', '$rootScope', 'socket', function ($scope, $modal, $rootScope, socket) {
+
+    socket.on('request_id', function(){
+      if($rootScope.admin_id){
+        socket.emit('_admin_id', {_admin_id:$rootScope.admin_id});
+      }else{
+        console.log("Socket cannot connect. No AdminId Found.");
+      }
+    });
+
+    socket.on('queue_updated', function(data) { 
+     $scope.rowCollection = data;
+     $scope.displayedCollection = $scope.rowCollection;
+   }); 
+
     $scope.rowCollection = [
       {
         id: 1,
@@ -78,7 +92,7 @@ angular.module('dashboard')
     ];
 
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
-    $scope.displayedCollection = [].concat($scope.rowCollection);
+    $scope.displayedCollection = [].concat($scope.rowCollection);  
     //remove to the real data holder modal
     $scope.removeItem = function(row){
       var modalInstance = $modal.open({
@@ -97,6 +111,7 @@ angular.module('dashboard')
         var index = $scope.rowCollection.indexOf($scope.row);
         if (index !== -1) {
           $scope.rowCollection.splice(index, 1);
+          socket.emit('queue_updated', $scope.rowCollection);
         }
       });
     };
