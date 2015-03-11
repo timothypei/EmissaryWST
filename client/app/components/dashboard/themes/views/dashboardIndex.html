@@ -17,7 +17,7 @@
     <div class="row" ng-repeat="rows in splitData">
       <div class ="col-md-4" ng-repeat="image in rows">
         <!-- $parent.index is the row number, $index is the column number -->
-        <input class="img-responsive" type="image" style="border: 0; background: transparent" src="{{image}}" ng-click="selectedImage.value = $parent.$index*3+$index"></input>
+        <input class="img-responsive" type="image" style="border: 0; background: transparent; padding-left: 0; border: 1px solid white" src="{{image}}" ng-click="selectedImage.value = $parent.$index*3+$index"></input>
       </div>
     </div>
     
