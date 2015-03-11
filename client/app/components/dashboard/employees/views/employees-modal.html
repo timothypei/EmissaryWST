@@ -8,22 +8,22 @@
 			<div class="form-group" ng-class="{'has-error': modalForm.name.$invalid && !modalForm.name.$pristine }">
 				<label for="modalName" class="col-sm-2 control-label">Name</label>
 				<div class="col-sm-10">
-					<input name="name" type="text" class="form-control" id="modalName" placeholder="Jane Doe" ng-model="modal.Name" ng-pattern="/^[^0-9]+$/" required>
-					<p ng-show="modalForm.name.$invalid && !modalForm.name.$pristine" class="help-block">Name cannot have numbers.</p>
+					<input name="name" type="text" class="form-control" id="modalName" placeholder="Jane Doe" ng-model="modal.Name" pattern="[A-Za-z]+\s[A-Za-z]+" required>
+					<p ng-show="modalForm.name.$invalid && !modalForm.name.$pristine" class="help-block">Please enter first and last name. Ex: First Last</p>
 				</div>
 			</div>
 			<div class="form-group" ng-class="{'has-error': modalForm.number.$invalid && !modalForm.number.$pristine }">
 				<label for="modalNumber" class="col-sm-2 control-label">Number</label>
 				<div class="col-sm-10">
-					<input type="text" name="number" class="form-control" id="modalNumber" ng-model="modal.PhoneNumber" ui-mask="{{'(999) 999-9999'}}" required>
-					<p ng-show="modalForm.number.$invalid && !modalForm.number.$pristine" class="help-block">Enter a valid phone number.</p>
+					<input type="text" name="number" class="form-control" id="modalNumber" ng-model="modal.PhoneNumber" ui-mask="{{'(999) 999-9999'}}" required >
+					<p ng-show="modalForm.number.$invalid && !modalForm.number.$pristine" class="help-block">Please enter a valid phone number Ex: (123)456-7890</p>
 				</div>
 			</div>
 			<div class="form-group" ng-class="{'has-error': modalForm.email.$invalid && !modalForm.email.$pristine }">
 				<label class="col-sm-2 control-label" for="modalEmail">Email</label>
 				<div class="col-sm-10">
-					<input type="email" class="form-control" id="modalEmail" placeholder="jane.doe@example.com" ng-model="modal.Email" name="email" required>
-					<p ng-show="modalForm.email.$invalid && !modalForm.email.$pristine" class="help-block">Enter a valid email.</p>
+					<input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required class="form-control" id="modalEmail" placeholder="jane.doe@example.com" ng-model="modal.Email" name="email" required>
+					<p ng-show="modalForm.email.$invalid && !modalForm.email.$pristine" class="help-block">Please enter a valid email Ex: email@address.com</p>
 				</div>
 			</div>
 			<div class="modal-footer">

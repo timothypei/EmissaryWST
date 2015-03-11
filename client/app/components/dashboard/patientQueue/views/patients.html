@@ -22,21 +22,14 @@
                 <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
             </tr>
             <tr>
-                <th></th>
                 <th st-sort="Name">Name</th>
                 <th st-sort="Doctor">Doctor</th>
                 <th st-sort="Time">Check-in Time</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="row in displayedCollection" ng-click="openPatientModal(row)">
-                <td style="text-align:center">
-                <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-info btn-edit">
-                    <i class="glyphicon glyphicon-pencil">
-                    </i>
-                    Check In
-                </button>
-                <!-- <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+            <tr ng-repeat="row in displayedCollection" ng-click="removeItem(row)">
+                  <!-- <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
                     <i class="glyphicon glyphicon-remove-circle">
                     </i>
                 </button> -->
