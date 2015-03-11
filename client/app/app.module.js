@@ -93,7 +93,8 @@ angular.module('robobetty',
       })
       .state('themes',{
         url: '/themes',
-        controller: 'ThemesController',
+        parent: 'common',
+        title: 'Themes',        
         templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
       });
   })

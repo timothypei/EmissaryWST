@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('themes')
+angular.module('dashboard')
   .controller('ThemesController', ['$scope', '$location', '$rootScope', 'ThemesService', function($scope, $location, $rootScope, ThemesService) {
   	$scope.theme = {form_color: 'default',
                     background_img: 'default',
