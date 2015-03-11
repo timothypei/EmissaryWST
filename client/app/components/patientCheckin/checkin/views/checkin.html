@@ -8,7 +8,7 @@
 </head>
 <body ng-app="checkin">	
 	<div ng-controller="ModalDemoCtrl">
-		<div ng-controller="CheckinController" class="foo" data-ng-init="init()">
+		<div ng-controller="CheckinController" class="foo" data-ng-init="init()" style = "background-image: url({{background_image}});">
 			<div class="form_container">	
 				<form ng-submit="checkin()">		
 				    <div class="form-fields-preview" style="display:inline-block; vertical-align:top;">

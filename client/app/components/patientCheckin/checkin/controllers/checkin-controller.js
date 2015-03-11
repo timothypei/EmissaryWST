@@ -7,6 +7,7 @@ angular.module('checkin')
     $scope.tickInterval = 1000; //ms
     $scope.user = {email: $rootScope.email, password: ''};
     $scope.dat;
+    $scope.background_image;
     var tick = function () {
         $scope.clock = Date.now(); // get the current time
         $timeout(tick, $scope.tickInterval); // reset the timer
@@ -16,6 +17,7 @@ angular.module('checkin')
         CheckinService.getTheme($rootScope.admin_id)
         .success(function(data){
           console.log(data);
+            $scope.background_image=data.background_img;
             return data;
           })
         .error(function(err){

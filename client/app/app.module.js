@@ -15,11 +15,11 @@ angular.module('robobetty',
    'thankyouCheckIn',
    'recovery',
    'recoverythx',
-   'themes' 
+   'themes'
    ])
 
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/patientQueue');
+      $urlRouterProvider.otherwise('/patientQueue');
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',

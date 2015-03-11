@@ -23,7 +23,6 @@ angular.module('themes')
                    '../images/themes/old-fashioned.jpg',
                    '../images/themes/tron.jpg',
                    '../images/themes/walkway.jpg'];
-
     function splitRows(arr, size) {
   		var newArr = [];
   		for(var i = 0; i < arr.length; i += size) {
@@ -42,47 +41,27 @@ angular.module('themes')
       var hasTheme = false;
       ThemesService.read().success(function(data){
          // $location.path('/dashboard'); // route needs to be set
-         
-         console.log('read');
-         console.log('the data is '+data);
-         if(data!=null){
-           hasTheme=true;
-         }
+         console.log('currently has');
+         console.log(data);
           return data;
         })
         .error(function(err){
+
           console.log("Theme selction failed.");
           return err;
         });
 
-      if(hasTheme){
         ThemesService.update($scope.theme)
           .success(function(data){
            // $location.path('/dashboard'); // route needs to be set
-           console.log("update");
+           console.log("updated");
            console.log(data);
-           console.log("success");
             return data;
           })
           .error(function(err){
             console.log("Theme selction failed.");
             return err;
           });
-      }
-      else{
-        ThemesService.create($scope.theme)
-          .success(function(data){
-           // $location.path('/dashboard'); // route needs to be set
-           console.log("create");
-           console.log(data);
-           console.log("success");
-            return data;
-          })
-          .error(function(err){
-            console.log("Theme selction failed.");
-            return err;
-          });
-      }
   	};
 
     $scope.cancel = function(){

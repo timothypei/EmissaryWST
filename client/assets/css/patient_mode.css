@@ -1,8 +1,5 @@
-body { 
-    background-image: url('../images/pink_trees.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center; 
+html, body, .ng-scope{
+  height:100%;
 }
 
 h1{
@@ -21,6 +18,9 @@ input{
 }
 .foo {
     padding-top: 5%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
 }
 
 .form_container {
