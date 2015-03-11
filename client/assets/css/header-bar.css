@@ -51,7 +51,8 @@ ul.topbar-right li a{
 
 ul.topbar-right li:hover {
   color:#f7f7f7;
-  /*border-top: 3px solid #e99d1a;*/
+  border-bottom: 5px solid #e99d1a;
+  height: 50px;
   background-color: rgb(100, 100, 100);
   cursor: pointer;
 }
