@@ -32,12 +32,15 @@ angular.module('DashboardFormBuilderModule')
   $scope.$on('$viewContentLoaded', function() {
 
         //$http.get('/api/form/template/company/'+ $rootScope.admin_id).
-        $http.get('/api/form/template/company/55008ccf0a6edf181c321db8').
+        $http.get('/api/form/template/company/' + $rootScope.admin_id).
+         
          success(function(data, status, headers, config) {
-           //$scope.templateId = data._id;
-           $scope.form = JSON.parse(data.template);
-           //$scope.addField.lastAddedID = $scope.form.form_fields.length;
+           if (data != null){
+              $scope.form = data.template;//JSON.parse(data.template);
+              $scope.addField.lastAddedID = $scope.form.form_fields.length;
+            }
            console.log(data);
+
          }).
          error(function(data, status, headers, config) {
             // no saved templates
@@ -134,36 +137,6 @@ angular.module('DashboardFormBuilderModule')
     else
       return false;
   };
-
-
-    // posts form template as Json
-  $scope.postJson = function (){
-    // object of this form template
-     var formJson = $filter('json')($scope.form);
-     var putJson = { 
-                        "template":formJson,
-                        "admin_id":"55008b822e5a70cc199d4e62"
-                        //"admin_id":$rootScope.admin_id
-                    };
-     // **Need to change this command and test
-     $http.post('/api/form/template', putJson).
-     success(function(data, status, headers, config) {
-       // this callback will be called asynchronously
-       // when the response is available
-       console.log("Post Success");
-       alert("Data successfully Updated!");
-       console.log(data);
-       // revert to previous json
-       //$scope.form = JSON.parse($scope.prevJson);
-
-     }).
-     error(function(data, status, headers, config) {
-       // called asynchronously if an error occurs
-       // or server returns response with an error status.
-       console.log("no forms posted");
-     });
-  }; 
-
 
   // deletes all the fields
   $scope.reset = function (){
