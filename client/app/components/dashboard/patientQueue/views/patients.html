@@ -1,4 +1,4 @@
-<div ng-controller="PatientQueueCtrl" class="container patient-queue-container">
+<div ng-controller="PatientQueueCtrl" class="container patient-queue-container" >
     <!-- <form class="form-inline">
       <div class="form-group">
         <label for="exampleInputName2">Name</label>
@@ -15,11 +15,12 @@
     </button>
       </div>
     </form> -->
+    <p>Click on a patient for check-out.</p>
     <div id="patient-queue">
         <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
             <thead>
             <tr>
-                <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+                <th colspan="5"><input st-search="" class="form-control" placeholder="Search ..." type="text"/></th>
             </tr>
             <tr>
                 <th st-sort="Name">Name</th>
