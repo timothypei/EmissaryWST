@@ -59,7 +59,98 @@ angular.module('dashboard')
             Name: "Daniel Mariano",
             PhoneNumber: "(234) 458-2343",
             Email: "dmariano@ucsd.edu"
+        },
+				{
+            id: 9,
+            Name: "Mandy Ngo",
+            PhoneNumber: "(123)456-789",
+            Email: "mandyngo@ucsd.edu"
+        },
+				{
+            id: 10,
+            Name: "John Smith",
+            PhoneNumber: "(626)484-0871",
+            Email: "johnsmith@ucsd.edu"
+        },
+        {
+            id: 11,
+            Name: "Kevin Zhang",
+            PhoneNumber: "(345)982-2390",
+            Email: "kevingz@ucsd.edu"
+        },
+        {
+            id: 12,
+            Name: "Karen Lo",
+            PhoneNumber: "(019)348-8210",
+            Email: "karenlo@ucsd.edu"
+        },
+        {
+            id: 13,
+            Name: "Wesley Yao",
+            PhoneNumber: "(938)231-1133",
+            Email: "Wesyao@ucsd.edu"
+        },
+        {
+            id: 14,
+            Name: "Dylan Moz",
+            PhoneNumber: "(342)930-1232",
+            Email: "dylanmoz@ucsd.edu"
+        },
+        {
+            id: 15,
+            Name: "Eduardo Aguilar",
+            PhoneNumber: "(234)458-2343",
+            Email: "edag@ucsd.edu"
+        },
+        {
+            id: 16,
+            Name: "Krishna Kolli",
+            PhoneNumber: "(257)432-2343",
+            Email: "Krishna@ucsd.edu"
+        },
+        {
+            id: 17,
+            Name: "Jason Tan",
+            PhoneNumber: "(234)458-2343",
+            Email: "jason@ucsd.edu"
+        },
+				{
+            id: 18,
+            Name: "Connor Nicholson",
+            PhoneNumber: "(123)456-789",
+            Email: "Nick@ucsd.edu"
+        },
+				{
+            id: 19,
+            Name: "Phat Huynh",
+            PhoneNumber: "(257)432-2343",
+            Email: "phat@ucsd.edu"
+        },
+        {
+            id: 20,
+            Name: "Jason Wang",
+            PhoneNumber: "(234)458-2343",
+            Email: "jason@ucsd.edu"
+        },
+				{
+            id: 21,
+            Name: "John Doe",
+            PhoneNumber: "(123)456-789",
+            Email: "John@ucsd.edu"
+        },
+				{
+            id: 22,
+            Name: "Patient One",
+            PhoneNumber: "(234)458-2343",
+            Email: "patient1@ucsd.edu"
+        },
+				{
+            id: 23,
+            Name: "Patient Two",
+            PhoneNumber: "(123)456-789",
+            Email: "patient2@ucsd.edu"
         }
+				
     ];
 
     var id = 1;
@@ -67,6 +158,16 @@ angular.module('dashboard')
     $scope.editing = false;
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
     $scope.displayedCollection = [].concat($scope.rowCollection);
+
+    
+    $scope.checkIfEmptyTable = function(){
+        return ($scope.displayedCollection.length == 0);
+    }
+
+
+    
+    
+  
 
     //edit a row
     $scope.editRowCollection = function(row) {
@@ -157,5 +258,4 @@ angular.module('dashboard')
             );
     	});
     }
-
 }]);

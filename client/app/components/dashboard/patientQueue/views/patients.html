@@ -29,6 +29,7 @@
             </tr>
             </thead>
             <tbody>
+            <p ng-show="checkIfEmptyTable()" class="empty-block">No Patients Fitting Search Criteria Found!</p>   
             <tr ng-repeat="row in displayedCollection" ng-click="removeItem(row)">
                   <!-- <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
                     <i class="glyphicon glyphicon-remove-circle">
