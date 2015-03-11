@@ -15,13 +15,16 @@
 				</tr>
 				<tr>
 					<th></th>
-					<th st-sort="Name">Name</th>
-					<th st-sort="PhoneNumaber">Phone Number</th>
-					<th st-sort="Email">Email</th>
+					<th>Name</th>
+					<th>Phone Number</th>
+					<th>Email</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="row in displayedCollection">
+                    <p ng-show="checkIfEmptyTable()" class="empty-block">
+                        No Employees Fitting Search Criteria Found!
+                    </p>					
 					<td >
 						<input class='ngSelectionCheckbox' type='checkbox' ng-checked='row.selected' ng-model='row.selected'>
 					</td>
