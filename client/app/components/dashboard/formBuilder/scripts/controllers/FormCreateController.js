@@ -35,6 +35,7 @@ angular.module('DashboardFormBuilderModule')
         $http.get('/api/form/template/company/' + $rootScope.admin_id).
          
          success(function(data, status, headers, config) {
+          console.log(data);
            if (data != null){
 
               for(var i = 0; i < data.template.form_fields.length; i++)

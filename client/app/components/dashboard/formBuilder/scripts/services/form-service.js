@@ -61,29 +61,14 @@ angular.module('DashboardFormBuilderModule').service('FormService', function For
         },
         getForm: function () {
             return $http.get('api/form/template/company/' + $rootScope.admin_id).then(function(response){
-                if(response.data === null)
-                {
-                    response.formExist = false;
-                }
-                else
-                {
-                    response.formExist = true;
-                }
                 return response;
             });
         },
         createNewForm: function (form) {
             console.log("create ");
             console.log(form);
-            return $http.post('api/form/template/', {
-                template : form,
-                _admin_id : $rootScope.admin_id
-            });
-        },
-        updateNewForm: function (form, id) {
-            return $http.put('api/form/template', {
-                template : form,
-                template_id : id
+            return $http.post('api/form/template/' + $rootScope.admin_id, {
+                template : form
             });
         }
     };
