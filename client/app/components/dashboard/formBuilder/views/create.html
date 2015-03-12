@@ -1,5 +1,6 @@
 <blockquote>
     <p>Select field type you want to add to the form below and click on 'Add Field' button. Then set a placeholder to hint your patient what kind of information to put in.</p>
+
 </blockquote>
 
 <div class="well">
@@ -27,10 +28,6 @@
                 <div class="accordion-edit">
                     <button class="btn btn-danger pull-right" type="button" ng-click="deleteField(field.field_id)"><i class="icon-trash icon-white"></i> Delete</button>
 
-                    <div class="row">
-                        <div class="span2">Field ID: </div>
-                        <div class="span4">{{field.field_id}}</div>
-                    </div>
                     <div class="row">
                         <div class="span2">Field Type:</div>
                         <div class="span4">{{field.field_type}}</div>
@@ -94,11 +91,15 @@
         </accordion>
 
         <p class="text-center">
-
-            <button class="btn btn-primary right" type="button" ng-click="editOn()"><i class="icon-eye-open icon-white"></i> Edit existing template</button>
-
             <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Reset</button>
         </p>
+
+        <br><hr>
+
+        <div ng-show="showJson">
+            <h4>Form object content:</h4>
+            <pre>{{ form | json }}</pre>
+        </div>
     </div>
 
     <div class="form-fields-preview" style="display:inline-block; vertical-align:top;" ng-show="previewMode">

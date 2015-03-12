@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $location, $rootScope) {
+  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $rootScope) {
 
   $scope.templateId = 0;
-  $scope.prevJson = $filter('json')($scope.form);
   // preview form mode
   $scope.previewMode = false;
   $scope.editMode = false;
@@ -27,6 +26,27 @@ angular.module('DashboardFormBuilderModule')
   // accordion settings
   $scope.accordion = {};
   $scope.accordion.oneAtATime = true;
+
+
+  $scope.$on('$viewContentLoaded', function() {
+        $http.get('/api/form/template/company/' + $rootScope.admin_id).
+         
+         success(function(data, status, headers, config) {
+           if (data != null){
+              $scope.form = data.template;//JSON.parse(data.template);
+              $scope.form.submitted = false;
+              FormService.formData = data.template;
+              $scope.addField.lastAddedID = $scope.form.form_fields.length;
+            }
+           console.log(data);
+
+         }).
+         error(function(data, status, headers, config) {
+            // no saved templates
+         });
+
+         $scope.previewMode = true;
+  });
 
   // create new field button click
   $scope.addNewField = function(){
@@ -109,21 +129,6 @@ angular.module('DashboardFormBuilderModule')
         break;
       }
     }
-  };
-
-  $scope.editOn = function(){
-    $http.get('/api/form/template/company/54f8f23546b787e8335980e7').
-         success(function(data, status, headers, config) {
-           console.log(data);
-           $scope.prevJson = $filter('json')($scope.form);
-           $scope.templateId = data._id;
-           $scope.form = JSON.parse(data.template);
-           $location.path("/editform");
-         }).
-         error(function(data, status, headers, config) {
-           alert("You have no saved templates.");
-         });
-
   };
 
   // decides whether field options block will be shown (true for dropdown and radio fields)
