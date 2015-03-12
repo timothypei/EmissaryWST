@@ -12,11 +12,14 @@ angular.module('robobetty',
   'thankyou',
   'DashboardFormBuilderModule',
    'checkin',
-   'thankyouCheckIn'
-  ])
+   'thankyouCheckIn',
+   'recovery',
+   'recoverythx',
+   'themes'
+   ])
 
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/patientQueue');
+      $urlRouterProvider.otherwise('/patientQueue');
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',
@@ -79,6 +82,22 @@ angular.module('robobetty',
       .state('thankyouCheckIn', {
         url: '/thankyouCheckIn',
         templateUrl: 'views/components/patientCheckin/checkin/views/CheckInthankyou.html'
+      })
+      .state('recovery', {
+        url: '/recovery',
+         controller: 'RecoveryController',
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recovery.html'
+      })
+      .state('recoverythx',{
+        url: '/recoverythx',
+        controller: 'RecoveryConfirmController',
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recoveryconfirm.html'
+      })
+      .state('themes',{
+        url: '/themes',
+        parent: 'common',
+        title: 'Themes',        
+        templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
       });
   })
   .run(['$rootScope', '$injector', function($rootScope, $injector){

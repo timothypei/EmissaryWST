@@ -1,1 +1,1 @@
-angular.module("register", []);
+angular.module("register", ['auth']);
