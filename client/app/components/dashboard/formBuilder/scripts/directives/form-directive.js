@@ -6,11 +6,19 @@ angular.module('DashboardFormBuilderModule')
       controller: function($scope, FormService, $modal){
         $scope.submit = function(){
           FormService.getForm().then(function (response) {
-            console.log(response.data);
+            console.log($scope);
             if(response.formExist === false) // doesnt exist make a new one
             {
               $scope.form.submitted = true;
+
+              for(var i = 0; i < $scope.form.form_fields.length; i++)
+              {
+                $scope.form.form_fields[i].field_readonly = false;
+                console.log($scope.form.form_fields);
+              }
+
               FormService.formData.submitted = true;
+              //console.log($scope.form.form_fields);
 
               FormService.createNewForm(FormService.formData);
             }
