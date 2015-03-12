@@ -5,21 +5,21 @@
 	<title>Login</title>	
   	<link rel="stylesheet" href="css/login_styles.css">
 </head>
-<body ng-app="signin">	
-	<div ng-controller="SigninController as signin">
+<body ng-app="auth">	
+	<div ng-controller="SigninController">
 		<div id="header"></div>
 		<div id="container">
 			<form ng-submit="login()">		
 
 				<img id="logo" src="images/logo.png">
 
-				<input ng-model="user.email" type="name" placeholder="Company Name">		
+				<input ng-model="user.email" type="name" placeholder="Company Email">		
 				<input type="password" ng-model="user.password" placeholder="Password">		
 				<div id="lower">
 					<input type="submit" value="Sign In">
-					<input type="checkbox"><label class="check" for="checkbox">Remember Me</label>
+                    <input type="checkbox" id="signinCheck"><label class="check" for="checkbox"> Remember Me </label>
 
-					<a href="" id="help">Forgot Password?</a>
+					<a href="#/recovery" id="help">Forgot Password?</a>
 
 				</div>
 			

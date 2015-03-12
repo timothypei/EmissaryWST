@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $location) {
+  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $location, $rootScope) {
 
   $scope.templateId = 0;
   $scope.prevJson = $filter('json')($scope.form);
@@ -11,7 +11,6 @@ angular.module('DashboardFormBuilderModule')
 
   // new form
   $scope.form = {};
-  $scope.form.form_id = 1;
   $scope.form.form_name = 'My Form';
   $scope.form.form_fields = [];
 
@@ -48,6 +47,7 @@ angular.module('DashboardFormBuilderModule')
       $scope.previewMode = true;
     }
     $scope.form.submitted = false;
+    FormService.formData = $scope.form;
   };
 
   // deletes particular field on button click

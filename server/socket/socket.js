@@ -36,6 +36,12 @@ exports.createServer = function(io_in) {
         socket.on('disconnect', function() {
             console.log('user disconnected from ' + adminID);
         });
+
+        socket.on('queue_updated', function(queue) {
+            if(adminID == null) socket.emit('request_id');
+            io.to(adminID).emit('queue_updated', queue);
+        });
+
     });
     return server;
 };

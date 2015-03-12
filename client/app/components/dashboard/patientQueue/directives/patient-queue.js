@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dashboard')
-  .controller('PatientQueueCtrl', ['$scope', '$modal', function ($scope, $modal) {
+  .controller('PatientQueueCtrl', ['$scope', '$modal', '$rootScope', 'socket', 'DoctorService',
+   function ($scope, $modal, $rootScope, socket, DoctorService) {
     var d = new Date();
 
     //How many milliseconds in a minute
@@ -10,11 +11,24 @@ angular.module('dashboard')
     //The maximum number of minutes patients should wait before warning notification pops up on queue
     var EXPECTED_WAITING_TIME = 20;
 
+    socket.on('request_id', function(){
+      if($rootScope.admin_id){
+        socket.emit('_admin_id', {_admin_id:$rootScope.admin_id});
+      }else{
+        console.log("Socket cannot connect. No AdminId Found.");
+      }
+    });
+
+    socket.on('queue_updated', function(data) { 
+     $scope.rowCollection = data;
+     $scope.displayedCollection = $scope.rowCollection;
+   }); 
+
     $scope.rowCollection = [
       {
         id: 1,
         Name: "Meg Whitman",
-        Doctor: "Soe",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 31)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 31)).valueOf()
       },
@@ -22,7 +36,7 @@ angular.module('dashboard')
       {
         id: 2,
         Name: "Pooja Sankar",
-        Doctor: "Kua",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 27)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 27)).valueOf()
       },
@@ -30,21 +44,21 @@ angular.module('dashboard')
       {
         id: 3,
         Name: "Marissa Mayer",
-        Doctor: "Soe",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 22)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 22)).valueOf()
       },
       {
         id: 4,
         Name: "Elizabeth Holmes",
-        Doctor: "Kua",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 19)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 19)).valueOf()
       },
       {
         id: 5,
         Name: "Sam Altman",
-        Doctor: "Du",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 15)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 15)).valueOf()
       },
@@ -58,42 +72,42 @@ angular.module('dashboard')
       {
         id: 7,
         Name: "Meg Whitman",
-        Doctor: "Soe",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 7)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 7)).valueOf()
       },
       {
         id: 8,
         Name: "Marissa Mayer",
-        Doctor: "Soe",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 6)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 6)).valueOf()
       },
       {
         id: 9,
         Name: "Martine Rothhblatt",
-        Doctor: "Soe",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 4)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 4)).valueOf()
       },
       {
         id: 10,
         Name: "Elizabeth Holmes",
-        Doctor: "Kua",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 4)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 4)).valueOf()
       },
       {
         id: 11,
         Name: "Angelique De Castro",
-        Doctor: "Du",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 2)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 2)).valueOf()
       },
       {
         id: 12,
         Name: "Sam Altman",
-        Doctor: "Du",
+        Doctor: DoctorService.getRandomDoctor(),
         Time: new Date(d.valueOf()-(MINUTE_VAL * 1)).toLocaleTimeString().replace(/:\d+ /, ' '),
         TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 1)).valueOf()
       }
@@ -133,6 +147,7 @@ angular.module('dashboard')
         var index = $scope.rowCollection.indexOf($scope.row);
         if (index !== -1) {
           $scope.rowCollection.splice(index, 1);
+          socket.emit('queue_updated', $scope.rowCollection);
         }
       });
     };
