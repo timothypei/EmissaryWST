@@ -23,7 +23,7 @@ angular.module('auth')
       }
 
       /* Return promise to caller so they can call success and error too */
-      return $http.post('/auth/login', payload);
+      return $http.post('/auth/login', payload).success(success).error(error);
 
     };
 
@@ -43,7 +43,7 @@ angular.module('auth')
       }
 
       function error(err) {
-        TokenInjector.setToken(undefined); // TODO: need to check this
+        TokenInjector.setToken(undefined).success(success).error(error); // TODO: need to check this
       }
 
       /* Return promise to caller so they can call success and error too */
