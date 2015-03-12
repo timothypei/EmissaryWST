@@ -4,6 +4,8 @@ html, body, .ng-scope{
 
 h1{
   color:white;
+  text-align: left;
+  width: 150%;
 }
 #toDashboard{
   margin-top: 10px;
@@ -23,6 +25,7 @@ input{
   display: block;
   width: 250px;
   height: 40px;
+  color: black;
 }
 .foo {
     padding-top: 5%;
@@ -50,7 +53,7 @@ input{
   padding-left: 195px;
 }
 #settings{
-  max-width: 227px;
+  max-width: 250px;
   background-color: rgba(9, 41, 14, .8);
   padding-left: 10px;
   padding-right: 10px;
@@ -69,10 +72,7 @@ input{
   background-color:#000000;
   opacity: 0.8;
 }
-h1{
-  color:white;
-  text-align: center;
-}
+
 .ng-modal-dialog {
   /* A centered div above the overlay with a box shadow. */
   z-index:10000;
@@ -97,7 +97,7 @@ input[type=submit] {
   float: center;
   font-size: 18px;
   font-weight: bold;
-  color: #fff;
+  color: black;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#3D8CC4), to(#3D8CC4));
   background-image: -moz-linear-gradient(top left 90deg, #3D8CC4 0%, #3D8CC4 100%);
   background-image: linear-gradient(top left 90deg, #3D8CC4 0%, #3D8CC4 100%);
