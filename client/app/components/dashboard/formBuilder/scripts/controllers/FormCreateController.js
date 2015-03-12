@@ -36,6 +36,13 @@ angular.module('DashboardFormBuilderModule')
          
          success(function(data, status, headers, config) {
            if (data != null){
+
+              for(var i = 0; i < data.template.form_fields.length; i++)
+              {
+                data.template.form_fields[i].field_readonly = true;
+              }
+              console.log(data.template);
+
               $scope.form = data.template;//JSON.parse(data.template);
               $scope.form.submitted = false;
 
@@ -67,7 +74,8 @@ angular.module('DashboardFormBuilderModule')
       "field_type" : $scope.addField.new,
       "field_placeholder" : "",
       "field_required" : true,
-      "field_disabled" : false
+      "field_disabled" : false,
+      "field_readonly" : true
     };
 
     // put newField into fields array
