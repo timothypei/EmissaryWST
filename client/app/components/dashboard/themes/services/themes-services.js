@@ -4,18 +4,23 @@ angular.module('themes')
   .service('ThemesService', ['$http', '$rootScope', function($http, $rootScope) {
   	var userid = $rootScope.admin_id;
   	this.read = function(){
-      console.log('read');
-  		return $http.get('/api/' + userid + '/theme');
+      console.log($rootScope.admin_id);
+          console.log(userid);
+
+  		return $http.get('/api/' + $rootScope.admin_id + '/theme');
+
   	};
 
   	this.update = function(theme){
-  		console.log("Sending the post req to: " + userid);
-  		return $http.put('/api/' + userid + '/theme', theme);
+          console.log($rootScope.admin_id);
+
+  		console.log("Sending the update req to: " + userid);
+  		return $http.put('/api/' + $rootScope.admin_id + '/theme', theme);
   	};
 
   	this.create = function(theme){
-      console.log("success");
-  		return $http.post('/api/' + userid + '/theme', theme);
+      console.log("Create");
+  		return $http.post('/api/' + $rootScope.admin_id + '/theme', theme);
   	};
 
   	this.delete = function(){
