@@ -11,6 +11,7 @@ angular.module('dashboard')
   })
   .controller('EmployeeController', ['$scope', '$window', '$modal', 'filterFilter', function ($scope, $window, $modal, filterFilter) {
     // include root slecope
+		$("#toaster").hide();					// Hide toaster
     $scope.rowCollection = [
         {
             id: 1,
@@ -251,6 +252,12 @@ angular.module('dashboard')
                 Email:result.Email
             }
             );
+				//on click show it
+				$("#toaster").fadeIn();
+				//5 second then hide it
+				setTimeout(function() {
+					$("#toaster").fadeOut();
+				}, 1000);
     	});
     }
 }]);

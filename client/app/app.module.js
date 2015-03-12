@@ -12,7 +12,7 @@ angular.module('robobetty',
   'thankyou',
   'DashboardFormBuilderModule',
    'checkin',
-   'thankyouCheckIn'
+   'thankyouCheckIn',
   ])
 
   .config(function($stateProvider, $urlRouterProvider) {
