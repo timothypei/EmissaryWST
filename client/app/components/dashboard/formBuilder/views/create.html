@@ -98,7 +98,13 @@
         </accordion>
 
         <p class="text-center">
-            <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Reset</button>
+            <button class="btn btn-danger pull-left" type="button" ng-click="showReset = !showReset" ng-show="!showReset"><i class="icon-refresh icon-white"></i> Reset</button>
+            <div class="pull-left" ng-show="showReset">
+                <label>Are you sure?</label>
+                <br>
+                <button class="btn btn-success" type="button" ng-click="reset(); showReset = !showReset">Yes</button>
+                <button class="btn btn-danger" type="button" ng-click="showReset = !showReset">No</button>
+            </div>
         </p>
 
         <br><hr>

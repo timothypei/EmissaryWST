@@ -8,6 +8,8 @@ angular.module('DashboardFormBuilderModule')
   $scope.previewMode = false;
   $scope.editMode = false;
   $scope.showDelete = false;
+  $scope.showReset = false;
+
 
   // new form
   $scope.form = {};
@@ -132,22 +134,10 @@ angular.module('DashboardFormBuilderModule')
   // deletes all the fields
   $scope.reset = function (){
     if($scope.form.form_fields !== null && $scope.form.form_fields.length !== 0) {
-      var modalInstance = $modal.open({
-          templateUrl: 'views/components/dashboard/formBuilder/views/deleteModal.html',
-          controller : 'DeleteModalInstanceCtrl',
-          controllerAs : 'vm'
-        });
-
-      modalInstance.result.then(function() {
-        // confirmed reset
         $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
         $scope.addField.lastAddedID = 0;
         $scope.previewMode = false;
         $scope.form.submitted = false;
-      }, function() {
-        // reset canceled
-      }
-      );
     }
   };
 });

@@ -11,7 +11,6 @@ function CreateNewFormModalInstanceCtrl($modalInstance, FormService, formId){
   	};
 
   	vm.cancel = function () {
-  		console.log("NO!, i change my mind!");
     	$modalInstance.dismiss('cancel');
   	};
 }
