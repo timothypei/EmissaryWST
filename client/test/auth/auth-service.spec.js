@@ -52,12 +52,12 @@ describe('AuthService', function() {
 
     it('Should POST to the api route', function() {
       httpBackend.expectPOST(authRoute);
-      AuthService.signin(credentials.email, credentials.password);
+      AuthService.signin(credentials);
       httpBackend.flush();
     });
 
     it('Should use TokenInjector to set token', function() {
-      AuthService.signin(credentials.email, credentials.password);
+      AuthService.signin(credentials);
       httpBackend.flush();
       expect(TokenInjector.getToken()).to.deep.equal(token);
     });

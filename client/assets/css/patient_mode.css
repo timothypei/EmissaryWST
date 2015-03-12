@@ -1,15 +1,20 @@
-body { 
-    background-image: url('../images/pink_trees.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center; 
+html, body, .ng-scope{
+  height:100%;
 }
 
 h1{
   color:white;
 }
-#icon{
-  padding-left: 65px;
+#toDashboard{
+  margin-top: 10px;
+  text-align: center;
+  border-radius: 10px;
+  margin-left: 50px;
+  width: 120px;
+  height: 40px;
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
 }
 input{
   margin-left: auto;
@@ -21,6 +26,9 @@ input{
 }
 .foo {
     padding-top: 5%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
 }
 
 .form_container {
@@ -42,6 +50,10 @@ input{
   padding-left: 195px;
 }
 #settings{
+  max-width: 227px;
+  background-color: rgba(9, 41, 14, .8);
+  padding-left: 10px;
+  padding-right: 10px;
   bottom: 60px;
   margin-left: 5%;
   position: fixed;

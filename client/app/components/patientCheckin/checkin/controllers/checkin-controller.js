@@ -7,6 +7,7 @@ angular.module('checkin')
     $scope.tickInterval = 1000; //ms
     $scope.user = {email: $rootScope.email, password: ''};
     $scope.dat;
+    $scope.background_image;
     var tick = function () {
         $scope.clock = Date.now(); // get the current time
         $timeout(tick, $scope.tickInterval); // reset the timer
@@ -15,7 +16,15 @@ angular.module('checkin')
       $scope.init = function(){
         CheckinService.getTheme($rootScope.admin_id)
         .success(function(data){
+          console.log("Currently has Is");
           console.log(data);
+          if(data==null||data.background_img=="default"){
+            $scope.background_image="../images/themes/city0.jpg";
+          }
+          else{
+            console.log(data.background_img);
+            $scope.background_image=data.background_img;
+          }
             return data;
           })
         .error(function(err){
@@ -25,7 +34,9 @@ angular.module('checkin')
           );
         CheckinService.getForms($rootScope.admin_id).success(
           function(data){
-          $scope.form = JSON.parse(data.template);
+            console.log(data);
+            data.template.submitted = false;
+            $scope.form = data.template;
             return data;
           })
         .error(function(err){

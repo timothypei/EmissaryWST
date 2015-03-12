@@ -15,10 +15,10 @@ angular.module('robobetty',
    'thankyouCheckIn',
    'recovery',
    'recoverythx',
-   'themes' 
+   'themes'
    ])
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/patientQueue');
+      $urlRouterProvider.otherwise('/patientQueue');
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',
@@ -35,6 +35,7 @@ angular.module('robobetty',
         parent: 'common',
         title: 'Create New Form'
       })
+      /* Enables route to editforms page
       .state('editForm', {
         url: '/editform',
         controller: 'FormEditController',
@@ -42,6 +43,7 @@ angular.module('robobetty',
         parent: 'common',
         title: 'Edit Existing Template'
       })
+      */
       .state('dashboard',{
         url:'/dashboard',
         template: '',
@@ -92,19 +94,19 @@ angular.module('robobetty',
       })
       .state('themes',{
         url: '/themes',
-        controller: 'ThemesController',
+        parent: 'common',
+        title: 'Themes',        
         templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
       });
   })
-  .run(['$rootScope', '$injector', function($rootScope, $injector){
-    $injector.get("$http").defaults.transformRequest = function(data, headersGetter) 
-    { 
-      if ($rootScope.token) headersGetter()['token'] = $rootScope.token;
-      if ($rootScope.email) headersGetter()['email'] = $rootScope.email; 
-      if (data) 
-        { 
-            return angular.toJson(data); 
-          }
-    } 
+  .run(['$rootScope', '$location', function($rootScope, $location) {
+
+    $rootScope.$on('$stateChangeStart', function (event, next, current) {
+      // if route requires auth and user is not logged in
+      if (!$rootScope.admin_id) {
+        $location.path('/signin');
+      }
+    });
+
   }]);
 

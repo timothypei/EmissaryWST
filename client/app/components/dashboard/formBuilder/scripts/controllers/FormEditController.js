@@ -164,19 +164,13 @@ angular.module('DashboardFormBuilderModule')
            $scope.templateId = data._id;
            $scope.form = JSON.parse(data.template);
            $scope.addField.lastAddedID = $scope.form.form_fields.length;
-
-          for(var i = 0; i < field.field_options.length; i++){
-            $scope.form.form_fields.push(
-                $scope.form.form_fields[i]
-              );
-          }
            
            if($scope.previewMode == false) {
              $scope.previewMode = true;
            }
            $scope.form.submitted = false;
-
          }).
+         
          error(function(data, status, headers, config) {
            alert("You have no saved templates.");
          });
