@@ -12,8 +12,8 @@
 }
 
 #doctors-table{
-    height:100em;
-		overflow-y: scroll;
+    height:37em;
+		overflow-x: hidden;
 }
 
 .center{
