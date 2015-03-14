@@ -44,9 +44,9 @@ angular.module('dashboard')
          // $location.path('/dashboard'); // route needs to be set
          console.log('currently has');
          console.log(data);
-         if(data==null){
+         if(data=="null"){
             ThemesService.create($scope.theme)
-          .success(function(data2){
+          .success(function(data2){ 
             // $location.path('/dashboard'); // route needs to be set
             console.log("create");
             console.log(data2);

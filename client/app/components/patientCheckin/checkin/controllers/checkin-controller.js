@@ -18,7 +18,7 @@ angular.module('checkin')
         .success(function(data){
           console.log("Currently has Is");
           console.log(data);
-          if(data==null||data.background_img=="default"){
+          if(data=="null"||data.background_img=="default"){
             $scope.background_image="../images/themes/city0.jpg";
           }
           else{
