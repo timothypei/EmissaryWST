@@ -38,11 +38,12 @@ angular.module('dashboard')
 
 
   	$scope.submitTheme = function() {
+        //sets the background image to what the user selected
   		$scope.theme.background_img = $scope.img[$scope.selectedImage.value];
       var hasTheme = false;
+        
       ThemesService.read().success(function(data){
          // $location.path('/dashboard'); // route needs to be set
-         console.log('currently has');
          console.log(data);
          if(data=="null"){
             ThemesService.create($scope.theme)
@@ -68,11 +69,14 @@ angular.module('dashboard')
             $scope.message = 'Error selecting theme.';
             console.log("Theme selction failed.");
           });
-        } else {
+        }
+          
+          else {
           $scope.message = "Please select an image first."
         }
           return data;
         })
+      
         .error(function(err){
           console.log("Theme selction failed.");
           return err;
