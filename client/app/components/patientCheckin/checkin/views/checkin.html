@@ -6,13 +6,26 @@
   	<link rel="stylesheet" href="css/patient_mode.css">
   	<link rel="stylesheet" href="css/form.css">
 </head>
+
+<style>
+	.modal-footer {
+		color: red;
+    text-align: center;
+    font-style: italic;
+    font-size: 12px;
+	}
+
+	.logo {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+</style>
+
+
 <body ng-app="checkin">	
 	<div ng-controller="ModalDemoCtrl">
-<<<<<<< HEAD
 		<div ng-controller="CheckinController" class="foo" data-ng-init="init()" style = "background-image: url({{background_image}}); background-size :100% 100%">
-=======
-		<div ng-controller="CheckinController" class="checkInDiv" data-ng-init="init()" style = "background-image: url({{background_image}});">
->>>>>>> 624e34cd6afb77dac4c358c9559eeb3a87e5713f
 			<div class="form_container">	
 				<form ng-submit="checkin()">		
 				    <div class="form-fields-preview" style="display:inline-block; vertical-align:top;">
@@ -28,7 +41,7 @@
 			    	<div ng-controller="admin_signinCtrl">
 		    			<form ng-submit="checkin()">		
 		        			<div class="modal-body">
-								<img id="logo" src="images/logo.png">
+								<img class="logo" src="images/logo.png">
 								<input type="password" ng-model="user.password" placeholder="Password">		
 		        			</div>
 		        			<div class="modal-footer">
