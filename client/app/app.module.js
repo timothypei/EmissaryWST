@@ -112,18 +112,18 @@ angular.module('robobetty',
         mobile: false
       });
   })
-  .run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
-    $rootScope.$on('$stateChangeSuccess', 
-    function(event, toState, toParams, fromState, fromParams) {
+  .ionicCallback(IS_MOBILE);
 
-      debugger
+  function initRunCallback($rootScope, $state, appConfig) {
+    $rootScope.$on('$stateChangeSuccess',
+    function(event, toState, toParams, fromState, fromParams) {
 
       // Routing for mobile app
       if(appConfig.isMobile) {
         // if(toState == "")
       }
 
-      if(!appConfig.debugMode) { 
+      if(!appConfig.debugMode) {
         if(!$rootScope.admin_id) {
           if(toState.name != 'signin') {
             $state.go("signin");
@@ -131,5 +131,20 @@ angular.module('robobetty',
         }
       }
     });
-  }]);
+  }
 
+  function ionicCallback(isMobile) {
+    if(isMobile) {
+      this.run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
+        initRunCallback($rootScope, $state, appConfig);
+      }]);
+    } else {
+      this.run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
+          ionicPlatform.ready(
+            function() {
+              initRunCallback($rootScope, $state, appConfig);
+            }
+          );
+      }]);
+    }
+  }
