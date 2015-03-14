@@ -11,7 +11,7 @@
     background-color:#6c9fd5;
 }
 
-#doctors-table{
+#employees-table{
     height:37em;
 		overflow-x: hidden;
 }
@@ -24,12 +24,12 @@
 	max-width:10em;*/
 }
 
-#doctors-table .table-striped > tbody > tr:hover:nth-of-type(odd) {
+#employees-table .table-striped > tbody > tr:hover:nth-of-type(odd) {
   background-color: #E6E6E6;
   cursor: pointer;
 }
 
-#doctors-table .table-striped > tbody > tr:hover:nth-of-type(even) {
+#employees-table .table-striped > tbody > tr:hover:nth-of-type(even) {
   background-color: #E6E6E6;
   cursor: pointer;
 }
