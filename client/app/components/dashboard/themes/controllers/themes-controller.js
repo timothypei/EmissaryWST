@@ -49,14 +49,9 @@ angular.module('dashboard')
         if(data=="null"){
             ThemesService.create($scope.theme)
               .success(function(data2){ 
-           // $location.path('/dashboard'); // route needs to be set
-           console.log(data);
-           if(data=="null"){
-              ThemesService.create($scope.theme)
-            .success(function(data2){ 
-              // $location.path('/dashboard'); // route needs to be set
-              console.log("create");
-              console.log(data2);
+                // $location.path('/dashboard'); // route needs to be set
+                console.log("create");
+                console.log(data2);
               })
               .error(function(err){
                 $scope.message = 'Error selecting theme.';
@@ -65,7 +60,6 @@ angular.module('dashboard')
         }
 
         if($scope.selectedImage.value !== ''){
-          console.log("BKGD UPDATE");
           ThemesService.update($scope.theme)
             .success(function(data3){
               // $location.path('/dashboard'); // route needs to be set
