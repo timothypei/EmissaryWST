@@ -49,8 +49,13 @@
 				</div>
         
                 <div class="formfield">
-					<b>Mobile Phone</b> <input type="number" class="formSpacing" placeholder="Phone" ng-model="number">
+					<b>Mobile Phone</b> <input type="number" class="formSpacing" placeholder="Phone" ng-model="number" id="numberField">
 				</div>
+            
+                <script>
+                   numfield = document.getElementById("numberField")
+                   numfield.addEventListener("mousewheel", function(evt){ evt.preventDefault(); })
+                </script>
               
 
 				<div class="checkboxfield">
