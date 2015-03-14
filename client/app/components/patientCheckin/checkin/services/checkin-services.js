@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('checkin')
-  .service('CheckinService', ['$http', function($http) {
+  .service('CheckinService', ['$http', '$rootScope', function CheckinService($http, $rootScope) {
+                  console.log("========================" + $rootScope);
+
       this.getTheme = function(id){
       	 console.log(id);
       	 console.log("getThemes");
@@ -16,5 +18,24 @@ angular.module('checkin')
   	  	console.log(url);
         return $http.get(url);
       };
+      
+      this.formData = {};
+      
+      this.submitForm = function (form) {
+           // console.log("YAYYYY submit ");
+        //    console.log($rootScope);
+            return $http.post('api/form/patient/', {
+                _admin_id: $rootScope.admin_id,
+                form : form,
+            });
+      };
 
+      this.checkinPatient = function (form) {
+          //  console.log("YAYYYY checkin ");
+            //console.log($rootScope);
+            return $http.post('api/patient/checkin', {
+                _admin_id: $rootScope.admin_id,
+                name : "John Doe"
+            });
+      };
   }]);
