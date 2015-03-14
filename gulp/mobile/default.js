@@ -20,7 +20,7 @@ gulp.task('copy:dist', function () {
 
 gulp.task('build:mobile', function () {
     var target = gulp.src('./mobile/www/index.html');
-    var sources = gulp.src(['./mobile/www/ionic/**/*.js', './mobile/www/ionic/**/*.css'], {read: false});
+    var sources = gulp.src(['./mobile/www/ionic/*.js', './mobile/www/ionic/*.css'], {read: false});
     return target.pipe(inject(sources, {relative: true})).pipe(gulp.dest('./mobile/www/'));
 });
 
