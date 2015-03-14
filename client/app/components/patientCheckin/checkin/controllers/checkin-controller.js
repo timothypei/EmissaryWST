@@ -54,7 +54,7 @@ angular.module('checkin')
 
 //controller that handles the admin sign in from the check in screen
 angular.module('checkin')
-  .controller('admin_signinCtrl', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
+  .controller('admin_signinCtrl', ['$scope', '$rootScope', '$location', 'AuthService', 'CheckinService', function($scope, $rootScope, $location, AuthService, CheckinService){
     //user object that is used to store the email and password of the company, preset email so
     //admin only needs to type in password to get back to dashboard
     $scope.user = {email: $rootScope.email, password: ''};
@@ -78,11 +78,12 @@ angular.module('checkin')
           }
             //redirects to the person's home page when a success
           else{  
-           $rootScope.token = data.token;
-           $rootScope.email = $scope.user.email;
-           
-             $location.path('../../../dashboard/views/dashboard.html');
-             return data;
+            $rootScope.token = data.token;
+            $rootScope.email = $scope.user.email;
+            CheckinService.closeModal();
+            //$modalInstance.close($scope.selected.item);
+            $location.path('../../../dashboard/views/dashboard.html');
+            return data;
           }
          })
          .error(function(err){
