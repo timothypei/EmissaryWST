@@ -24,7 +24,7 @@ angular.module('DashboardFormBuilderModule')
               //console.log($scope.form.form_fields);
 
               FormService.createNewForm(FormService.formData);
-              $timeout(redirectToCheckin, 5000);
+              //$timeout(redirectToCheckin, 5000);
         };
       
       },
