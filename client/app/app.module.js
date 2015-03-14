@@ -1,25 +1,24 @@
 'use strict';
 
-angular.module('robobetty', 
+angular.module('robobetty', appendIonic(
   [
-  IONIC,
-  'ui.router',
-  'widget',
-  'product', 
-  'dashboard',
-  'ui.bootstrap',
-  'signin',
-  'register',
-  'thankyou',
-  'DashboardFormBuilderModule',
-   'checkin',
-   'thankyouCheckIn',
-   'recovery',
-   'recoverythx',
-   'themes'
-   ])
+    'ui.router',
+    'widget',
+    'product', 
+    'dashboard',
+    'ui.bootstrap',
+    'signin',
+    'register',
+    'thankyou',
+    'DashboardFormBuilderModule',
+    'checkin',
+    'thankyouCheckIn',
+    'recovery',
+    'recoverythx',
+    'themes'
+   ]))
   .config(function($stateProvider, $urlRouterProvider) {
-      $urlRouterProvider.otherwise('/patientQueue');
+    $urlRouterProvider.otherwise('/patientQueue');
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',
@@ -28,7 +27,8 @@ angular.module('robobetty',
       })
       .state('home', {
         url: '/home',
-        templateUrl: 'views/components/home/views/home.html'
+        templateUrl: 'views/components/home/views/home.html',
+        mobile: false
       })
       .state('createForm', {
         url: '/createform',
@@ -51,7 +51,8 @@ angular.module('robobetty',
         url:'/dashboard',
         template: '',
         parent: 'common',
-        title: ''
+        title: '',
+        mobile: false
       })
        .state('patientQueue', {
         url: '/patientQueue',
@@ -112,41 +113,42 @@ angular.module('robobetty',
         mobile: false
       });
   })
-  .ionicCallback(IS_MOBILE);
+  ionicCallback(IS_MOBILE);
 
   function initRunCallback($rootScope, $state, appConfig) {
-    $rootScope.$on('$stateChangeSuccess',
-    function(event, toState, toParams, fromState, fromParams) {
+    // debugger
+    // $rootScope.$on('$stateChangeSuccess',
+    // function(event, toState, toParams, fromState, fromParams) {
 
-      // Routing for mobile app
-      if(appConfig.isMobile) {
-        if(toState.mobile == false) {
-          $state.go("checkin");
-        }
-      }
+    //   // Routing for mobile app
+    //   if(appConfig.isMobile) {
+    //     if(toState.mobile == false) {
+    //       $state.go("checkin");
+    //     }
+    //   }
 
-      if(!appConfig.debugMode) {
-        if(!$rootScope.admin_id) {
-          if(toState.name != 'signin') {
-            $state.go("signin");
-          }
-        }
-      }
-    });
+    //   if(!appConfig.debugMode) {
+    //     if(!$rootScope.admin_id) {
+    //       if(toState.name != 'signin') {
+    //         $state.go("signin");
+    //       }
+    //     }
+    //   }
+    // });
   }
 
-  function ionicCallback(isMobile) {
-    if(isMobile) {
-      this.run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
-        initRunCallback($rootScope, $state, appConfig);
-      }]);
-    } else {
-      this.run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
-          ionicPlatform.ready(
-            function() {
-              initRunCallback($rootScope, $state, appConfig);
-            }
-          );
-      }]);
-    }
+  function ionicCallback(isMobile, app) {
+    // if(isMobile) {
+    //   app.run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
+    //     initRunCallback($rootScope, $state, appConfig);
+    //   }]);
+    // } else {
+    //   app.run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
+    //       ionicPlatform.ready(
+    //         function() {
+    //           initRunCallback($rootScope, $state, appConfig);
+    //         }
+    //       );
+    //   }]);
+    // }
   }
