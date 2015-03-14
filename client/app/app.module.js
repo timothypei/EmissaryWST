@@ -99,12 +99,14 @@ angular.module('robobetty',
         templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
       });
   })
-  .run(['$rootScope', '$state', function($rootScope, $state){
+  .run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
     $rootScope.$on('$stateChangeSuccess', 
     function(event, toState, toParams, fromState, fromParams){
-      if(!$rootScope.admin_id) {
-        if(toState.name != 'signin') {
-          // $state.go("signin");
+      if(!appConfig.debugMode) { 
+        if(!$rootScope.admin_id) {
+          if(toState.name != 'signin') {
+            $state.go("signin");
+          }
         }
       }
     });

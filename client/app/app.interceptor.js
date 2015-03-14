@@ -2,17 +2,24 @@ angular.module('robobetty')
 .config(["$httpProvider", function($httpProvider) {
 	$httpProvider.interceptors.push('middleware');
 }])
-.factory('middleware', function(appConfig, VIEW_NAMESPACE) {
+.factory('middleware', function(appConfig, BACKEND_NAMESPACE) {
 	return {
 		request: function(config) {
 			if(appConfig.isMobile) {
-				debugger	
 		            // Check if config url starts with views namespace
-		            if(config.url.indexOf(VIEW_NAMESPACE) != 0) {
-		            	config.url = "//example.com/api/" + config.url;
-		            	return config;
-		            }
+		        var shouldAppend = false;
+		        // Cycling through each namespace and seeing if it prepends it
+		        for(var i = 0; i < BACKEND_NAMESPACE.length; i++) {
+		        	if(config.url.indexOf(BACKEND_NAMESPACE[i]) == 0) {
+		        		console.log(BACKEND_NAMESPACE[i] + " " +  config.url);
+		        		shouldAppend = true;
+		        	}
 		        }
-		    }
-		}
-	});
+		        if(shouldAppend) {
+	            	config.url = appConfig.baseUrl + config.url;
+            	}
+	        }
+        	return config;
+	    }
+	}
+});

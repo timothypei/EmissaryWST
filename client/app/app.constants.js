@@ -1,7 +1,7 @@
 // Constants file
 // Angular constants
 angular.module('robobetty')
-	.constant('VIEW_NAMESPACE', 'views/')
+	.constant('VIEW_NAMESPACE', ['api', 'auth'])
 ;
 
 // JavaScript constants
