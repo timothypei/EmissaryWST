@@ -3,7 +3,13 @@
 angular.module('DashboardFormBuilderModule')
   .directive('formDirective', function () {
     return {
-      controller: function($scope, FormService, $modal){
+      controller: function($scope, FormService, $modal, $timeout){
+
+    function redirectToCheckin() {
+      console.log("redirecttoCheckin");
+       $scope.form.submitted= false;
+    }
+
         $scope.submit = function(){
           
               $scope.form.submitted = true;
@@ -18,7 +24,9 @@ angular.module('DashboardFormBuilderModule')
               //console.log($scope.form.form_fields);
 
               FormService.createNewForm(FormService.formData);
+              $timeout(redirectToCheckin, 5000);
         };
+      
       },
       templateUrl: 'views/components/dashboard/formBuilder/views/directive-templates/form/form.html',
       restrict: 'E',

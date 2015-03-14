@@ -27,7 +27,7 @@ input{
   height: 40px;
   color: black;
 }
-.foo {
+.checkInDiv {
     padding-top: 5%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -54,6 +54,8 @@ input{
 }
 #settings{
   max-width: 250px;
+  width: 270px;
+  height: 120px;
   background-color: rgba(9, 41, 14, .8);
   padding-left: 10px;
   padding-right: 10px;

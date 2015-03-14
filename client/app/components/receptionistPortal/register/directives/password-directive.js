@@ -1,5 +1,9 @@
 'use strict';
 
+/*
+directive that was found online that handles determining the strength of a password
+and displaying that strength to the user as a strength indicator bar.
+*/
 angular.module('register')
 .directive('checkStrength', function () {
 
