@@ -58,12 +58,12 @@ angular.module('checkin')
 
 
 angular.module('checkin')
-  .controller('admin_signinCtrl', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
+  .controller('admin_signinCtrl', ['$scope', '$rootScope', '$location', 'AuthService', 'CheckinService', function($scope, $rootScope, $location, AuthService, CheckinService){
     $scope.user = {email: $rootScope.email, password: ''};
     $scope.errMessage ='';
     //this function is called when we press the login button
     $scope.checkin = function(){
-      console.log("test");
+      console.log("Made it to the checkin controller checkin function.");
       if($rootScope.email.indexOf('@')==-1||$rootScope.email.indexOf('.')==-1){
         $scope.errMessage = 'Invalid Email/Password';
       }
@@ -77,11 +77,12 @@ angular.module('checkin')
           }
             //redirects to the person's home page when a success
           else{  
-           $rootScope.token = data.token;
-           $rootScope.email = $scope.user.email;
-           
-             $location.path('../../../dashboard/views/dashboard.html');
-             return data;
+            $rootScope.token = data.token;
+            $rootScope.email = $scope.user.email;
+            CheckinService.closeModal();
+            //$modalInstance.close($scope.selected.item);
+            $location.path('../../../dashboard/views/dashboard.html');
+            return data;
           }
          })
          .error(function(err){
