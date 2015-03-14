@@ -5,5 +5,6 @@ angular.module('robobetty')
 ;
 
 // JavaScript constants
-
+var IS_MOBILE = false;
+var IONIC = ""; 
 

@@ -120,7 +120,9 @@ angular.module('robobetty',
 
       // Routing for mobile app
       if(appConfig.isMobile) {
-        // if(toState == "")
+        if(toState.mobile == false) {
+          $state.go("checkin");
+        }
       }
 
       if(!appConfig.debugMode) {
