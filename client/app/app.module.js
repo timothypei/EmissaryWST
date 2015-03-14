@@ -23,7 +23,8 @@ angular.module('robobetty',
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',
-        abstract: true
+        abstract: true,
+        mobile: false
       })
       .state('home', {
         url: '/home',
@@ -34,7 +35,8 @@ angular.module('robobetty',
         controller: 'FormCreateController',
         templateUrl: 'views/components/dashboard/formBuilder/views/create.html',
         parent: 'common',
-        title: 'Create New Form'
+        title: 'Create New Form',
+        mobile: false
       })
       /* Enables route to editforms page
       .state('editForm', {
@@ -73,7 +75,7 @@ angular.module('robobetty',
       .state('register', {
         url: '/register',
         templateUrl: 'views/components/receptionistPortal/register/views/register.html',
-        mobile: false
+        mobile: true
       })
       .state('checkin', {
         url: '/checkin',
@@ -82,42 +84,44 @@ angular.module('robobetty',
       })
       .state('thankyou', {
         url: '/thankyou',
-        templateUrl: 'views/components/receptionistPortal/register/views/thankyou.html'
+        templateUrl: 'views/components/receptionistPortal/register/views/thankyou.html',
+        mobile: true
       })
       .state('thankyouCheckIn', {
         url: '/thankyouCheckIn',
-        templateUrl: 'views/components/patientCheckin/checkin/views/CheckInthankyou.html'
+        templateUrl: 'views/components/patientCheckin/checkin/views/CheckInthankyou.html',
+        mobile: true
       })
       .state('recovery', {
         url: '/recovery',
          controller: 'RecoveryController',
-        templateUrl: 'views/components/receptionistPortal/recovery/views/recovery.html'
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recovery.html',
+        mobile: true
       })
       .state('recoverythx',{
         url: '/recoverythx',
         controller: 'RecoveryConfirmController',
-        templateUrl: 'views/components/receptionistPortal/recovery/views/recoveryconfirm.html'
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recoveryconfirm.html',
+        mobile: false
       })
       .state('themes',{
         url: '/themes',
         parent: 'common',
         title: 'Themes',        
-        templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
+        templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html',
+        mobile: false
       });
   })
-  .ionicCallback();
+  .run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
+    $rootScope.$on('$stateChangeSuccess', 
+    function(event, toState, toParams, fromState, fromParams) {
 
+      debugger
 
-  // This is called app.run()
-  function initRunCallback($rootScope, $state, appConfig) {
-     $rootScope.$on('$stateChangeSuccess', 
-    function(event, toState, toParams, fromState, fromParams){
-      // var nonMobile = ["da"]
-
-      // // Routing for mobile app
-      // if(appConfig.isMobile) {
-      //   if(toState == "")
-      // }
+      // Routing for mobile app
+      if(appConfig.isMobile) {
+        // if(toState == "")
+      }
 
       if(!appConfig.debugMode) { 
         if(!$rootScope.admin_id) {
@@ -127,25 +131,5 @@ angular.module('robobetty',
         }
       }
     });
-  }
-
-  ////////////////////
-  
-  function ionicCallback(isMobile) {
-    if(mobile) {
-      this.run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
-        initRunCallback($rootScope, $state, appConfig);
-      }])
-    } else {
-      this.run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
-          ionicPlatform.ready(
-            function() {
-              initRunCallback($rootScope, $state, appConfig)
-            }
-          );
-      }]);
-    }
-  };
-
-
+  }]);
 
