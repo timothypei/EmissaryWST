@@ -104,8 +104,7 @@ angular.module('robobetty',
     function(event, toState, toParams, fromState, fromParams){
       if(!$rootScope.admin_id) {
         if(toState.name != 'signin') {
-      // debugger
-          $state.go("signin");
+          // $state.go("signin");
         }
       }
     });
