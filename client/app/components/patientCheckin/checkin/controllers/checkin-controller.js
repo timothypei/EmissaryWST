@@ -7,7 +7,6 @@ angular.module('checkin')
     $scope.tickInterval = 1000; //ms
       
     $scope.user = {email: $rootScope.email, password: ''};
-    $scope.dat;
     $scope.background_image;
       
     //makes the clock re-display every second  
