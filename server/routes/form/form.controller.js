@@ -13,16 +13,6 @@ var TemplateForm = require('../../models/form/FormTemplate');
 /********** FORM TEMPLATE ROUTES **********/
 module.exports.template = {};
 
-module.exports.template.findById =  function(req, res) {
-  TemplateForm.findOne({'_id' : req.params.id}, function(err, template) {
-    if(err)
-      res.status(400).json({error: "There was an error finding the template form."});
-    else
-      res.json(template);
-  });
-};
-
-
 module.exports.template.findByCompanyId =  function(req, res) {
   TemplateForm.findOne({'_admin_id' : req.params.id}, function(err, template) {
     if(err)
@@ -31,6 +21,53 @@ module.exports.template.findByCompanyId =  function(req, res) {
       res.json(template);
   });
 };
+
+module.exports.template.findByAdminId = function(req,res){
+  TemplateForm.findOne({'_admin_id' : req.params.adminid}, function(err, template) {
+    if(err)
+      res.status(400).json({error: "There was an error finding the template form."});
+    else
+      res.status(200).json(template);
+  });
+};
+
+module.exports.template.sendByAdminId = function(req,res){
+  TemplateForm.findOne({'_admin_id' : req.params.adminid}, function(err, template) {
+    if(err)
+      res.status(400).json({error: "There was an error finding the template form."});
+    else if(!template){//if doesn't exist
+      createWithAdminId(req,res);
+    }
+    else{
+      updateWithAdminId(req,res);
+    }
+  });
+};
+
+function createWithAdminId(req,res){
+  var newTemplate = new TemplateForm();
+  newTemplate._admin_id = req.params.adminid;
+  newTemplate.template = req.body.template;
+
+  newTemplate.save(function(err, template) {
+    if(err)
+        return res.status(400).json(err);
+    else
+        return res.status(200).json(template);
+  });
+}
+
+function updateWithAdminId(req,res){
+  var update = {template: req.body.template};
+
+  TemplateForm.findOneAndUpdate({_admin_id: req.params.adminid}, update,
+    function(err, template) {
+        if(err)
+          return res.status(400).json({error: "There was an error updating a template."});
+        else
+          return res.status(200).json(template);
+    });
+}
 
 module.exports.template.create =  function(req, res) {
   var newTemplate = new TemplateForm();
@@ -44,6 +81,7 @@ module.exports.template.create =  function(req, res) {
       res.json(template);
   });
 };
+
 
 /* Accept PUT request at /form/template */
 module.exports.template.update =  function(req, res) {
@@ -97,7 +135,7 @@ module.exports.submitted_form.create = function(req, res) {
   form._admin_id = req.body._admin_id;
   form.firstName = req.body.firstName;
   form.lastName = req.body.lastName;
-  form.email = req.body.patientEmail;
+  form.patientEmail = req.body.patientEmail;
   form.date = new Date();
   form.save(function(err, savedForm){
     if (err){
@@ -111,15 +149,17 @@ module.exports.submitted_form.findByPatientInfo = function(req, res) {
   var query = {},
     firstName = req.query.firstName,
     lastName = req.query.lastName,
-    email = req.query.patientEmail;
+    patientEmail = req.query.patientEmail;
 
-  if(!((firstName && lastName) || email)) {
+
+  if(!((firstName && lastName) || patientEmail)) {
     res.status(400).json({error: "You must specify either both first and last name or email"});
     return;
   }
-  query.firstName = firstName || null;
-  query.lastName = lastName || null;
-  query.email = email || null;
+  if(firstName) query.firstName = firstName;
+  if(lastName) query.lastName = lastName;
+  if(patientEmail) query.patientEmail = patientEmail;
+
 
   if(req.query.mostRecent == "true") {
     SubmittedForm.findOne(query).sort('-date').exec(function (err, submittedForm) {
@@ -131,7 +171,7 @@ module.exports.submitted_form.findByPatientInfo = function(req, res) {
     });
   }
   else {
-    SubmittedForm.find(query, function(err, submittedForms) {
+      SubmittedForm.findOne(query, function(err, submittedForms) {
       if (err) {
         res.status(400).json({error: "An error occured while finding patient forms"});
         return;

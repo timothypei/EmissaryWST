@@ -38,7 +38,7 @@ exports.sendEmail = function(employees, done) {
     };
   };
   // iterate through all employees
-  if(employees === null || (employees.length <= 0));
+  if(employees === null || (employees.length <= 0))
     if(done) return done();
   for (var index = 0; index < employees.length; index++) {
     // create the email object that will be sent

@@ -6,7 +6,7 @@ angular.module('dashboard')
 		$scope.selectedPatient = item;
 
 		$scope.ok = function (item) {
-            $modalInstance.close($scope.selectedPatient);
+			$modalInstance.close($scope.selectedPatient);
 		};
 
 		$scope.cancel = function () {

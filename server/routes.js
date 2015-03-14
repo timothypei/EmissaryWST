@@ -16,8 +16,9 @@ module.exports = function(app) {
 
 
   app.use('/api/patient'      , r('./routes/patientqueue'));
-  //app.use('/auth'             , r('./routes/auth'));
+  app.use('/auth'             , r('./routes/auth'));
   //app.use('/api/*'            , r('./config/validation'));
+  //app.use('/socket'             , r('./test/socket_test'))
 
   // All other routes should redirect to the index.html
   /*app.route('/*')
