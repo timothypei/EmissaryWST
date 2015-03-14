@@ -22,18 +22,20 @@ angular.module('checkin')
       this.formData = {};
       
       this.submitForm = function (form) {
-            console.log("YAYYYY submit ");
-            console.log($rootScope);
+           // console.log("YAYYYY submit ");
+        //    console.log($rootScope);
             return $http.post('api/form/patient/', {
                 _admin_id: $rootScope.admin_id,
                 form : form,
-                
-                //hardcoded for now until API change confirmed
-                firstName : "John",
-                lastName : "Doe",
-                patientEmail: "John@BlueJay.com"
-                
             });
       };
 
+      this.checkinPatient = function (form) {
+          //  console.log("YAYYYY checkin ");
+            //console.log($rootScope);
+            return $http.post('api/patient/checkin', {
+                _admin_id: $rootScope.admin_id,
+                name : "John Doe"
+            });
+      };
   }]);

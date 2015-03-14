@@ -17,8 +17,9 @@ angular.module('checkin')
               CheckinService.formData.submitted = true;
               //console.log($scope.form.form_fields);
 
-            console.log("YAY patient directive" );
+           // console.log("YAY patient directive" );
               CheckinService.submitForm(CheckinService.formData);
+              CheckinService.checkinPatient(CheckinService.formData);
         };
       },
       templateUrl: 'views/components/patientCheckin/checkin/views/directive-templates/form/form.html',
