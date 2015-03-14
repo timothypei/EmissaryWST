@@ -9,9 +9,11 @@ angular.module('dashboard')
       controllerAs: 'sidebarCtrl'
     };
   }).controller('SidebarController', 
-        ['$scope','$cookieStore', 'SidebarService',
-        function($scope, $cookieStore, SidebarService){
+        ['$scope','$rootScope', '$cookieStore', 'SidebarService',
+        function($scope,$rootScope, $cookieStore, SidebarService){
     var mobileView = 992;
+    $scope.company_name = $rootScope.company_name;
+    $scope.email=$rootScope.email;
     $scope.options = SidebarService.getSidebarOptions();
     $scope.sidebarHeader = SidebarService.getSidebarHeader();
     $scope.getWidth = function() {

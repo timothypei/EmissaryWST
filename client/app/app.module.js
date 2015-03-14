@@ -12,11 +12,13 @@ angular.module('robobetty',
   'thankyou',
   'DashboardFormBuilderModule',
    'checkin',
-   'thankyouCheckIn'
-  ])
-
+   'thankyouCheckIn',
+   'recovery',
+   'recoverythx',
+   'themes'
+   ])
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/patientQueue');
+      $urlRouterProvider.otherwise('/patientQueue');
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',
@@ -79,17 +81,32 @@ angular.module('robobetty',
       .state('thankyouCheckIn', {
         url: '/thankyouCheckIn',
         templateUrl: 'views/components/patientCheckin/checkin/views/CheckInthankyou.html'
+      })
+      .state('recovery', {
+        url: '/recovery',
+         controller: 'RecoveryController',
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recovery.html'
+      })
+      .state('recoverythx',{
+        url: '/recoverythx',
+        controller: 'RecoveryConfirmController',
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recoveryconfirm.html'
+      })
+      .state('themes',{
+        url: '/themes',
+        parent: 'common',
+        title: 'Themes',        
+        templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
       });
   })
-  .run(['$rootScope', '$injector', function($rootScope, $injector){
-    $injector.get("$http").defaults.transformRequest = function(data, headersGetter) 
-    { 
-      if ($rootScope.token) headersGetter()['token'] = $rootScope.token;
-      if ($rootScope.email) headersGetter()['email'] = $rootScope.email; 
-      if (data) 
-        { 
-            return angular.toJson(data); 
-          }
-    } 
+  .run(['$rootScope', '$location', function($rootScope, $location) {
+
+    $rootScope.$on('$stateChangeStart', function (event, next, current) {
+      // if route requires auth and user is not logged in
+      if (!$rootScope.admin_id) {
+        $location.path('/signin');
+      }
+    });
+
   }]);
 

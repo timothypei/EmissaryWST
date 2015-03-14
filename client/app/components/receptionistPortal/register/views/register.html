@@ -12,29 +12,49 @@
 				</div>
 			</div>
 		</div>
+        <div id='images'>
+        <div class="image2">
+           <img src="images/company_sign_in.png">
+        </div>
+        
+        <div class="logoImage">
+           <img src="images/logo.png">
+        </div>
+        
+        <h1 class="createYourAccount"> CREATE YOUR ACCOUNT </h1>
+        
+        <div class="description">
+           <h5> Your office check-in solution </h5>
+           <h6> Create one form, and display it on all of your devices </h6>
+        </div>
+        </div>
 
 		<div id="container" >
-			<h1>Sign Up Form</h1>
+			<!--<h1>Sign Up Form</h1> -->
 			<form ng-submit="reg()" class="signupform">
 
 				<div class="formfield">
-					<b>Name</b> <input type="name" placeholder="Company Name">
+                    <b>Company Name</b> <input type="name" class="formSpacing" placeholder="Company Name" ng-model="user.company_name">
+				</div>
+                <div class="formfield">
+					<b>Your current email address</b> <input type="Email" class="formSpacing" placeholder="Email" ng-model="user.email">
+				</div>
+				<div class="formfield">
+					<b>Create a Password</b> </br> <input type="password" class="formSpacing" placeholder="Password" ng-model="user.password">
+                <ul id="strength" check-strength="user.password"></ul>
 				</div>
 
 				<div class="formfield">
-					<b>Email</b> <input type="Email" placeholder="Email" ng-model="user.email">
+					<b>Confirm your Password</b> <input type="password" class="formSpacing" placeholder="Confirm Password" ng-model="pass">
 				</div>
-
-				<div class="formfield">
-					<b>Password</b>  <input type="password" placeholder="Password" ng-model="user.password">
+        
+                <div class="formfield">
+					<b>Mobile Phone</b> <input type="number" class="formSpacing" placeholder="Phone" ng-model="number">
 				</div>
-
-				<div class="formfield">
-					<b>Confirm Password</b> <input type="password" placeholder="Confirm Password" ng-model="pass">
-				</div>
+              
 
 				<div class="checkboxfield">
-					<input type="checkbox" ng-model="check">
+					<input type="checkbox" id="registerCheck" ng-model="check">
 					<label class="check" for="checkbox">I agree to the <a href="">Terms of Service</a> and <a href="">Privacy Policy</a></label>
 				</div>
 
