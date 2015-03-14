@@ -2,6 +2,7 @@
 
 angular.module('robobetty', 
   [
+  IONIC,
   'ui.router',
   'widget',
   'product', 
@@ -22,7 +23,8 @@ angular.module('robobetty',
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',
-        abstract: true
+        abstract: true,
+        mobile: false
       })
       .state('home', {
         url: '/home',
@@ -33,7 +35,8 @@ angular.module('robobetty',
         controller: 'FormCreateController',
         templateUrl: 'views/components/dashboard/formBuilder/views/create.html',
         parent: 'common',
-        title: 'Create New Form'
+        title: 'Create New Form',
+        mobile: false
       })
       /* Enables route to editforms page
       .state('editForm', {
@@ -54,55 +57,73 @@ angular.module('robobetty',
         url: '/patientQueue',
         templateUrl: 'views/components/dashboard/patientQueue/views/patients.html',
         parent: 'common',
-        title: 'Patients Queue'
+        title: 'Patients Queue',
+        mobile: false
       })    
       .state('employees', {
         url: '/employees',
         templateUrl: 'views/components/dashboard/employees/views/employees.html',
         parent: 'common',
-        title: 'Employees'
+        title: 'Employees',
+        mobile: false
       })
       .state('signin', {
         url: '/signin',
-        templateUrl: 'views/components/receptionistPortal/signin/views/login.html'
+        templateUrl: 'views/components/receptionistPortal/signin/views/login.html',
+        mobile: true
       })
       .state('register', {
         url: '/register',
-        templateUrl: 'views/components/receptionistPortal/register/views/register.html'
+        templateUrl: 'views/components/receptionistPortal/register/views/register.html',
+        mobile: true
       })
       .state('checkin', {
         url: '/checkin',
-        templateUrl: 'views/components/patientCheckin/checkin/views/checkin.html'
+        templateUrl: 'views/components/patientCheckin/checkin/views/checkin.html',
+        mobile: true
       })
       .state('thankyou', {
         url: '/thankyou',
-        templateUrl: 'views/components/receptionistPortal/register/views/thankyou.html'
+        templateUrl: 'views/components/receptionistPortal/register/views/thankyou.html',
+        mobile: true
       })
       .state('thankyouCheckIn', {
         url: '/thankyouCheckIn',
-        templateUrl: 'views/components/patientCheckin/checkin/views/CheckInthankyou.html'
+        templateUrl: 'views/components/patientCheckin/checkin/views/CheckInthankyou.html',
+        mobile: true
       })
       .state('recovery', {
         url: '/recovery',
          controller: 'RecoveryController',
-        templateUrl: 'views/components/receptionistPortal/recovery/views/recovery.html'
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recovery.html',
+        mobile: true
       })
       .state('recoverythx',{
         url: '/recoverythx',
         controller: 'RecoveryConfirmController',
-        templateUrl: 'views/components/receptionistPortal/recovery/views/recoveryconfirm.html'
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recoveryconfirm.html',
+        mobile: false
       })
       .state('themes',{
         url: '/themes',
         parent: 'common',
         title: 'Themes',        
-        templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
+        templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html',
+        mobile: false
       });
   })
-  .run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
-    $rootScope.$on('$stateChangeSuccess', 
-    function(event, toState, toParams, fromState, fromParams){
-      if(!appConfig.debugMode) { 
+  .ionicCallback(IS_MOBILE);
+
+  function initRunCallback($rootScope, $state, appConfig) {
+    $rootScope.$on('$stateChangeSuccess',
+    function(event, toState, toParams, fromState, fromParams) {
+
+      // Routing for mobile app
+      if(appConfig.isMobile) {
+        // if(toState == "")
+      }
+
+      if(!appConfig.debugMode) {
         if(!$rootScope.admin_id) {
           if(toState.name != 'signin') {
             $state.go("signin");
@@ -110,5 +131,20 @@ angular.module('robobetty',
         }
       }
     });
-  }]);
+  }
 
+  function ionicCallback(isMobile) {
+    if(isMobile) {
+      this.run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
+        initRunCallback($rootScope, $state, appConfig);
+      }]);
+    } else {
+      this.run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
+          ionicPlatform.ready(
+            function() {
+              initRunCallback($rootScope, $state, appConfig);
+            }
+          );
+      }]);
+    }
+  }
