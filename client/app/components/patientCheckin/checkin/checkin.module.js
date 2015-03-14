@@ -1,2 +1,2 @@
-angular.module('checkin', []);
+angular.module('checkin', ['auth']);
 

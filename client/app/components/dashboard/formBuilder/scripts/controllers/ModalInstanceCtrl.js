@@ -13,5 +13,5 @@ function ModalInstanceCtrl($modalInstance){
   	};
 }
 
-angular.module('robobetty')
+angular.module('DashboardFormBuilderModule')
 	.controller('ModalInstanceCtrl', ['$modalInstance', ModalInstanceCtrl]);

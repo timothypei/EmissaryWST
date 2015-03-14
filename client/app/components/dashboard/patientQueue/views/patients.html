@@ -1,4 +1,4 @@
-<div ng-controller="PatientQueueCtrl" class="container patient-queue-container">
+<div ng-controller="PatientQueueCtrl" class="container patient-queue-container" >
     <!-- <form class="form-inline">
       <div class="form-group">
         <label for="exampleInputName2">Name</label>
@@ -15,35 +15,33 @@
     </button>
       </div>
     </form> -->
+    <h5>Click on a patient for check-out.</h5>
     <div id="patient-queue">
         <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
             <thead>
             <tr>
-                <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+                <th colspan="5"><input st-search="" class="form-control" placeholder="Search ..." type="text"/></th>
             </tr>
             <tr>
-                <th></th>
                 <th st-sort="Name">Name</th>
                 <th st-sort="Doctor">Doctor</th>
                 <th st-sort="Time">Check-in Time</th>
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="row in displayedCollection" ng-click="openPatientModal(row)">
-                <td style="text-align:center">
-                <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-info btn-edit">
-                    <i class="glyphicon glyphicon-pencil">
-                    </i>
-                    Check In
-                </button>
-                <!-- <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+            <h4 ng-show="!checkIfEmptyTable()"> There are currently {{displayedCollection.length}} patients in database and fitting search criteria</h4>
+            <h4 style="color:red" ng-show="checkIfEmptyTable()" class="empty-block">
+                    No patients fitting search criteria found!
+            </h4>
+            <tr ng-repeat="row in displayedCollection" ng-click="removeItem(row)">
+                  <!-- <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
                     <i class="glyphicon glyphicon-remove-circle">
                     </i>
                 </button> -->
                 </td>
                 <td class="patient-queue-text"> {{row.Name}}</td>
                 <td class="patient-queue-text"> {{row.Doctor}}</td>
-                <td class="patient-queue-text"> {{row.Time}}</td>
+                <td class="patient-queue-text"><span ng-show="checkIfLongWait(row.TimeValue)" tooltip="Patient Needs Attending To!" class="text-danger"><i ng-show="checkIfLongWait(row.TimeValue)" class="fa fa-warning"></i></span> {{(row.Time)}}</td>
             </tr>
             </tbody>
         </table>

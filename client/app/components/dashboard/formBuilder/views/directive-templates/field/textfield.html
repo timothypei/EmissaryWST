@@ -6,7 +6,7 @@
 			placeholder="{{field.field_placeholder}}" 
 			ng-required="field.field_required"
 			ng-disabled="field.field_disabled"
-			readonly>
+			ng-readonly="field.field_readonly">
         <span class="required-error" ng-show="field.field_required && !field.field_value">* required</span>
     </div>
 </div>

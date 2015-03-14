@@ -2,7 +2,6 @@
 
 angular.module('dashboard')
 	.controller('EmployeeModalController', function ($scope, $modalInstance) {
-
 		$scope.ok = function () {
 			$modalInstance.close($scope.modal);
 		};
@@ -10,5 +9,4 @@ angular.module('dashboard')
 		$scope.cancel = function () {
 			$modalInstance.dismiss('cancel');
 		};
-
 });

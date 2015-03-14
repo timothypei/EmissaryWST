@@ -12,11 +12,13 @@ angular.module('robobetty',
   'thankyou',
   'DashboardFormBuilderModule',
    'checkin',
-   'thankyouCheckIn'
-  ])
-
+   'thankyouCheckIn',
+   'recovery',
+   'recoverythx',
+   'themes'
+   ])
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/patientQueue');
+      $urlRouterProvider.otherwise('/patientQueue');
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',
@@ -33,6 +35,7 @@ angular.module('robobetty',
         parent: 'common',
         title: 'Create New Form'
       })
+      /* Enables route to editforms page
       .state('editForm', {
         url: '/editform',
         controller: 'FormEditController',
@@ -40,6 +43,7 @@ angular.module('robobetty',
         parent: 'common',
         title: 'Edit Existing Template'
       })
+      */
       .state('dashboard',{
         url:'/dashboard',
         template: '',
@@ -77,17 +81,33 @@ angular.module('robobetty',
       .state('thankyouCheckIn', {
         url: '/thankyouCheckIn',
         templateUrl: 'views/components/patientCheckin/checkin/views/CheckInthankyou.html'
+      })
+      .state('recovery', {
+        url: '/recovery',
+         controller: 'RecoveryController',
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recovery.html'
+      })
+      .state('recoverythx',{
+        url: '/recoverythx',
+        controller: 'RecoveryConfirmController',
+        templateUrl: 'views/components/receptionistPortal/recovery/views/recoveryconfirm.html'
+      })
+      .state('themes',{
+        url: '/themes',
+        parent: 'common',
+        title: 'Themes',        
+        templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
       });
   })
-  .run(['$rootScope', '$injector', function($rootScope, $injector){
-    $injector.get("$http").defaults.transformRequest = function(data, headersGetter) 
-    { 
-      if ($rootScope.token) headersGetter()['token'] = $rootScope.token;
-      if ($rootScope.email) headersGetter()['email'] = $rootScope.email; 
-      if (data) 
-        { 
-            return angular.toJson(data); 
-          }
-    } 
+  .run(['$rootScope', '$state', function($rootScope, $state){
+    $rootScope.$on('$stateChangeSuccess', 
+    function(event, toState, toParams, fromState, fromParams){
+      if(!$rootScope.admin_id) {
+        if(toState.name != 'signin') {
+      // debugger
+          $state.go("signin");
+        }
+      }
+    });
   }]);
 
