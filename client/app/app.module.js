@@ -54,25 +54,30 @@ angular.module('robobetty',
         url: '/patientQueue',
         templateUrl: 'views/components/dashboard/patientQueue/views/patients.html',
         parent: 'common',
-        title: 'Patients Queue'
+        title: 'Patients Queue',
+        mobile: false
       })    
       .state('employees', {
         url: '/employees',
         templateUrl: 'views/components/dashboard/employees/views/employees.html',
         parent: 'common',
-        title: 'Employees'
+        title: 'Employees',
+        mobile: false
       })
       .state('signin', {
         url: '/signin',
-        templateUrl: 'views/components/receptionistPortal/signin/views/login.html'
+        templateUrl: 'views/components/receptionistPortal/signin/views/login.html',
+        mobile: true
       })
       .state('register', {
         url: '/register',
-        templateUrl: 'views/components/receptionistPortal/register/views/register.html'
+        templateUrl: 'views/components/receptionistPortal/register/views/register.html',
+        mobile: false
       })
       .state('checkin', {
         url: '/checkin',
-        templateUrl: 'views/components/patientCheckin/checkin/views/checkin.html'
+        templateUrl: 'views/components/patientCheckin/checkin/views/checkin.html',
+        mobile: true
       })
       .state('thankyou', {
         url: '/thankyou',
@@ -99,9 +104,20 @@ angular.module('robobetty',
         templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
       });
   })
-  .run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
-    $rootScope.$on('$stateChangeSuccess', 
+  .ionicCallback();
+
+
+  // This is called app.run()
+  function initRunCallback($rootScope, $state, appConfig) {
+     $rootScope.$on('$stateChangeSuccess', 
     function(event, toState, toParams, fromState, fromParams){
+      // var nonMobile = ["da"]
+
+      // // Routing for mobile app
+      // if(appConfig.isMobile) {
+      //   if(toState == "")
+      // }
+
       if(!appConfig.debugMode) { 
         if(!$rootScope.admin_id) {
           if(toState.name != 'signin') {
@@ -110,5 +126,25 @@ angular.module('robobetty',
         }
       }
     });
-  }]);
+  }
+
+  ////////////////////
+  
+  function ionicCallback(isMobile) {
+    if(mobile) {
+      this.run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
+        initRunCallback($rootScope, $state, appConfig);
+      }])
+    } else {
+      this.run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
+          ionicPlatform.ready(
+            function() {
+              initRunCallback($rootScope, $state, appConfig)
+            }
+          );
+      }]);
+    }
+  };
+
+
 
