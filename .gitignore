@@ -7,3 +7,8 @@ npm-debug.log
 .idea
 .DS_Store
 server/log
+
+mobile/platforms/
+mobile/plugins/
+mobile/www/*
+!mobile/www/ionic/
