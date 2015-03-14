@@ -2,12 +2,17 @@
 
 angular.module('register')
   .controller('RegisterController', ['$scope','$rootScope','$location', 'AuthService',function($scope,$rootScope,$location, AuthService){
+        //a user object that contains the email, password, company name, and phone number
+        //that the user entered in
   		$scope.user = {email: '', password: '', company_name: '', company_phone_number: ''};
-      $scope.number='';
-      $scope.pass = '';
+      
+      $scope.number='';   //variable to store phone number entered by user, which needs to be converted to a string
+      $scope.pass = '';   //variable to store what user entered into confirm password
       $scope.err=false;
       $scope.check = false;
       $scope.errorMessage='';
+      
+        //function that is called when user clicks submit that stores information in the backend
   		$scope.reg = function(){ 
         $scope.user.company_phone_number = '';    
             
@@ -22,11 +27,13 @@ angular.module('register')
             $scope.user.company_phone_number==''){
             $scope.errorMessage='Please provide company name, password, phone, and email.';
         }
+            
         //Passwords differ
         else if($scope.pass!=$scope.user.password){
           $scope.errorMessage='Please make sure your passwords match';
           return;
         }
+            
         //Password not 4 characters or more
         else if($scope.pass.length<4){
           $scope.errorMessage='Password must be at least 4 characters';
@@ -45,7 +52,10 @@ angular.module('register')
           $scope.errorMessage='You must agree to the terms and conditions';
           return;
         }
+            
+        //if all information was entered in properly
         else{
+            //pass in user object that contains the information the user typed in
   		    AuthService.reg($scope.user)
           //when the API call was a success
       	  .success(function(data){
@@ -54,10 +64,11 @@ angular.module('register')
            $rootScope.company_name = data.company_name;
            $rootScope.admin_id = data.admin_id;
            $rootScope.email = $scope.user.email;
-            console.log(data);
           $location.path('/thankyou');
           return data;
       	 })
+            
+         //when API call was not a success    
       	 .error(function(err){
             $scope.errorMessage = 'You have already created an account';
        	  	return err;
