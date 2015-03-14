@@ -34,29 +34,33 @@ angular.module('dashboard')
 
   	$scope.splitData = splitRows($scope.img, 3);
 
-  	$scope.selectedImage = { value :'' };
+  	$scope.selectedImage = { value : '' };
 
 
   	$scope.submitTheme = function() {
   		$scope.theme.background_img = $scope.img[$scope.selectedImage.value];
+      console.log("BKGD : " + $scope.selectedImage.value);
       var hasTheme = false;
       ThemesService.read().success(function(data){
-         // $location.path('/dashboard'); // route needs to be set
-         console.log('currently has');
-         console.log(data);
-         if(data=="null"){
-            ThemesService.create($scope.theme)
-          .success(function(data2){ 
+       // $location.path('/dashboard'); // route needs to be set
+       console.log('currently has');
+       console.log(data);
+
+      if(data=="null"){
+          ThemesService.create($scope.theme)
+            .success(function(data2){ 
             // $location.path('/dashboard'); // route needs to be set
             console.log("create");
             console.log(data2);
-          })
-          .error(function(err){
-            $scope.message = 'Error selecting theme.';
-            console.log("Theme selction failed.");
-          });
-         }
-      if($scope.selectedImage.value != ''){
+            })
+            .error(function(err){
+              $scope.message = 'Error selecting theme.';
+              console.log("Theme selction failed.");
+            });
+      }
+
+      if($scope.selectedImage.value !== ''){
+        console.log("BKGD UPDATE");
         ThemesService.update($scope.theme)
           .success(function(data3){
             // $location.path('/dashboard'); // route needs to be set
@@ -68,9 +72,10 @@ angular.module('dashboard')
             $scope.message = 'Error selecting theme.';
             console.log("Theme selction failed.");
           });
-        } else {
+      } 
+      else {
           $scope.message = "Please select an image first."
-        }
+      }
           return data;
         })
         .error(function(err){
@@ -79,8 +84,9 @@ angular.module('dashboard')
         });
   	};
 
-    $scope.cancel = function(){
-      console.log("Theme selection canceled. Rerouting...");
-      $location.path('/themes'); // Where do we go after cancel is pressed?
+    $scope.clear = function(){
+      $scope.theme.background_img = '';
+      $scope.selectedImage.value = '';
+      $scope.message = '';
     };
 }]);
