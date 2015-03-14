@@ -5,7 +5,6 @@ angular.module('thankyouCheckIn')
     $timeout(redirectToCheckin, 5000);
     console.log("Im in");
     function redirectToCheckin() {
-    	console.log('test');
       $location.path('/checkin')
     }
 }]);

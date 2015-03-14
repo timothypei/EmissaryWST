@@ -31,9 +31,7 @@ angular.module('dashboard')
   		}
   		return newArr;
   	}
-
   	$scope.splitData = splitRows($scope.img, 3);
-
   	$scope.selectedImage = { value :'' };
 
 
