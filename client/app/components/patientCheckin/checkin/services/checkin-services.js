@@ -2,6 +2,7 @@
 
 angular.module('checkin')
   .service('CheckinService', ['$http', function($http) {
+      var checkinModal = '';
       this.getTheme = function(id){
       	 console.log(id);
       	 console.log("getThemes");
@@ -17,4 +18,11 @@ angular.module('checkin')
         return $http.get(url);
       };
 
+      this.setModal = function(data){
+        checkinModal = data;
+      };
+
+      this.closeModal = function(){
+        checkinModal.dismiss('cancel');
+      };
   }]);

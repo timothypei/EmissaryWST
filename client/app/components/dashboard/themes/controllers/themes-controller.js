@@ -31,57 +31,64 @@ angular.module('dashboard')
   		}
   		return newArr;
   	}
-
   	$scope.splitData = splitRows($scope.img, 3);
-
   	$scope.selectedImage = { value : '' };
 
-
   	$scope.submitTheme = function() {
+        //sets the background image to what the user selected
   		$scope.theme.background_img = $scope.img[$scope.selectedImage.value];
       console.log("BKGD : " + $scope.selectedImage.value);
       var hasTheme = false;
-      ThemesService.read().success(function(data){
-       // $location.path('/dashboard'); // route needs to be set
-       console.log('currently has');
-       console.log(data);
+        
+      ThemesService.read()
+        .success(function(data){
+        // $location.path('/dashboard'); // route needs to be set
+        console.log('currently has');
+        console.log(data);
 
-      if(data=="null"){
-          ThemesService.create($scope.theme)
+        if(data=="null"){
+            ThemesService.create($scope.theme)
+              .success(function(data2){ 
+           // $location.path('/dashboard'); // route needs to be set
+           console.log(data);
+           if(data=="null"){
+              ThemesService.create($scope.theme)
             .success(function(data2){ 
-            // $location.path('/dashboard'); // route needs to be set
-            console.log("create");
-            console.log(data2);
+              // $location.path('/dashboard'); // route needs to be set
+              console.log("create");
+              console.log(data2);
+              })
+              .error(function(err){
+                $scope.message = 'Error selecting theme.';
+                console.log("Theme selction failed.");
+              });
+        }
+
+        if($scope.selectedImage.value !== ''){
+          console.log("BKGD UPDATE");
+          ThemesService.update($scope.theme)
+            .success(function(data3){
+              // $location.path('/dashboard'); // route needs to be set
+              console.log("updated");
+              console.log(data3);
+              $scope.message = "Theme updated successfully!";
             })
             .error(function(err){
               $scope.message = 'Error selecting theme.';
               console.log("Theme selction failed.");
             });
-      }
-
-      if($scope.selectedImage.value !== ''){
-        console.log("BKGD UPDATE");
-        ThemesService.update($scope.theme)
-          .success(function(data3){
-            // $location.path('/dashboard'); // route needs to be set
-            console.log("updated");
-            console.log(data3);
-            $scope.message = "Theme updated successfully!";
-          })
-          .error(function(err){
-            $scope.message = 'Error selecting theme.';
-            console.log("Theme selction failed.");
-          });
-      } 
-      else {
-          $scope.message = "Please select an image first."
-      }
-          return data;
-        })
-        .error(function(err){
-          console.log("Theme selction failed.");
-          return err;
-        });
+        } 
+        else {
+            $scope.message = "Please select an image first."
+        }
+        
+        return data;
+      })
+      
+      .error(function(err){
+        console.log("Theme selction failed.");
+        return err;
+      });
   	};
 
     $scope.clear = function(){

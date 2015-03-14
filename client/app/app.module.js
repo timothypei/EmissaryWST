@@ -99,14 +99,15 @@ angular.module('robobetty',
         templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
       });
   })
-  .run(['$rootScope', '$location', function($rootScope, $location) {
-
-    $rootScope.$on('$stateChangeStart', function (event, next, current) {
-      // if route requires auth and user is not logged in
-      if (!$rootScope.admin_id) {
-        $location.path('/signin');
+  .run(['$rootScope', '$state', function($rootScope, $state){
+    $rootScope.$on('$stateChangeSuccess', 
+    function(event, toState, toParams, fromState, fromParams){
+      if(!$rootScope.admin_id) {
+        if(toState.name != 'signin') {
+      // debugger
+          $state.go("signin");
+        }
       }
     });
-
   }]);
 
