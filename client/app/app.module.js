@@ -2,6 +2,7 @@
 
 angular.module('robobetty', 
   [
+  IONIC,
   'ui.router',
   'widget',
   'product', 
