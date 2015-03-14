@@ -8,7 +8,7 @@
 </head>
 <body ng-app="checkin">	
 	<div ng-controller="ModalDemoCtrl">
-		<div ng-controller="CheckinController" class="foo" data-ng-init="init()" style = "background-image: url({{background_image}});">
+		<div ng-controller="CheckinController" class="checkInDiv" data-ng-init="init()" style = "background-image: url({{background_image}});">
 			<div class="form_container">	
 				<form ng-submit="checkin()">		
 				    <div class="form-fields-preview" style="display:inline-block; vertical-align:top;">
@@ -17,7 +17,6 @@
 				</form>
 			</div>
 				<div id = "settings">
-					<!--<a ng-click="open()" ng-init="imgsrc='images/settings.png'" ng-mouseover="imgsrc='images/settings_dark.png'" ng-mouseout="imgsrc='images/settings.png'"> <img id='icon' ng-src="{{imgsrc}}"/></a>-->
                     <button type="button" id='toDashboard' ng-click="open()"> Admin Sign In </button>
 					<h1>{{clock | date: 'hh:mm:ss a'}}</h1>
 				</div>

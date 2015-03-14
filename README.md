@@ -28,3 +28,7 @@ routes.
 # How To run entire app with our backend
 1. `gulp build:dev`
 2. `nf start web`
+
+# If you want to run our backend while watching for changes to the frontend
+1. Run our entire app with our backend with the steps above
+2. In a separate terminal run `gulp frontend:combined`
