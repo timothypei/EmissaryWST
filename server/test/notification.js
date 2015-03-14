@@ -9,19 +9,19 @@ var Email = require('../notification/email');
 var TextModel = require('../notification/text');
 
 // SAMPLE : [{phone_number: "XXX-XXX-XXXX", email: "XXXXX@XXXXX.com"}];
-var employees = [];
+var employees = [{phone_number: "4254785233", email: "a1shih@ucsd.edu"}];
 
 describe("Notification", function() {
 
     it('It should send an email', function(done){
       this.timeout(9000);
-      Email.sendEmail(employees, done);
+      Email.sendEmail("Tony Montana", employees, done);
       //done();
     });
 
     it('It should send an text', function(done){
       this.timeout(9000);
-      TextModel.sendText(employees, done);
+      TextModel.sendText("Tony Montana", employees, done);
       //done();
     });
   }
