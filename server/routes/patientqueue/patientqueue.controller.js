@@ -42,7 +42,7 @@ exports.checkin = function(req, res) {
                     var respond = function() {
                         i++;
                         if(i == 2) {
-                            res.json({queue: queue});
+                            res.status(200).json({queue: queue});
                         }
                     };
 
