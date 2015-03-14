@@ -35,7 +35,8 @@ angular.module('checkin')
         CheckinService.getForms($rootScope.admin_id).success(
           function(data){
             console.log(data);
-          $scope.form = JSON.parse(data.template);
+            data.template.submitted = false;
+            $scope.form = data.template;
             return data;
           })
         .error(function(err){

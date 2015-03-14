@@ -17,7 +17,6 @@ angular.module('robobetty',
    'recoverythx',
    'themes'
    ])
-
   .config(function($stateProvider, $urlRouterProvider) {
       $urlRouterProvider.otherwise('/patientQueue');
     $stateProvider
@@ -110,6 +109,5 @@ angular.module('robobetty',
         }
       }
     });
-    
   }]);
 

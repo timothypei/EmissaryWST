@@ -8,6 +8,8 @@ angular.module('DashboardFormBuilderModule')
   $scope.previewMode = false;
   $scope.editMode = false;
   $scope.showDelete = false;
+  $scope.showReset = false;
+
 
   // new form
   $scope.form = {};
@@ -33,11 +35,25 @@ angular.module('DashboardFormBuilderModule')
         $http.get('/api/form/template/company/' + $rootScope.admin_id).
          
          success(function(data, status, headers, config) {
+          console.log(data);
            if (data != null){
+
+              for(var i = 0; i < data.template.form_fields.length; i++)
+              {
+                data.template.form_fields[i].field_readonly = true;
+              }
+              console.log(data.template);
+
               $scope.form = data.template;//JSON.parse(data.template);
               $scope.form.submitted = false;
+
               FormService.formData = data.template;
-              $scope.addField.lastAddedID = $scope.form.form_fields.length;
+
+              if(data.template.form_fields){
+                $scope.addField.lastAddedID = $scope.form.form_fields.length;
+              } else {
+                $scope.form.form_fields = [];
+              }
             }
            console.log(data);
 
@@ -59,7 +75,8 @@ angular.module('DashboardFormBuilderModule')
       "field_type" : $scope.addField.new,
       "field_placeholder" : "",
       "field_required" : true,
-      "field_disabled" : false
+      "field_disabled" : false,
+      "field_readonly" : true
     };
 
     // put newField into fields array
@@ -132,22 +149,10 @@ angular.module('DashboardFormBuilderModule')
   // deletes all the fields
   $scope.reset = function (){
     if($scope.form.form_fields !== null && $scope.form.form_fields.length !== 0) {
-      var modalInstance = $modal.open({
-          templateUrl: 'views/components/dashboard/formBuilder/views/deleteModal.html',
-          controller : 'DeleteModalInstanceCtrl',
-          controllerAs : 'vm'
-        });
-
-      modalInstance.result.then(function() {
-        // confirmed reset
         $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
         $scope.addField.lastAddedID = 0;
         $scope.previewMode = false;
         $scope.form.submitted = false;
-      }, function() {
-        // reset canceled
-      }
-      );
     }
   };
 });

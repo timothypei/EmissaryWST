@@ -47,6 +47,7 @@ angular.module('DashboardFormBuilderModule').service('FormService', function For
         form:function (id) {
             // $http returns a promise, which has a then function, which also returns a promise
             return $http.get(formsJsonPath).then(function (response) {
+                console.log('ddd', response);
                 var requestedForm = {};
                 angular.forEach(response.data, function (form) {
                     if (form.form_id == id) requestedForm = form;
@@ -61,29 +62,14 @@ angular.module('DashboardFormBuilderModule').service('FormService', function For
         },
         getForm: function () {
             return $http.get('api/form/template/company/' + $rootScope.admin_id).then(function(response){
-                if(response.data === null)
-                {
-                    response.formExist = false;
-                }
-                else
-                {
-                    response.formExist = true;
-                }
                 return response;
             });
         },
         createNewForm: function (form) {
             console.log("create ");
             console.log(form);
-            return $http.post('api/form/template/', {
-                template : form,
-                _admin_id : $rootScope.admin_id
-            });
-        },
-        updateNewForm: function (form, id) {
-            return $http.put('api/form/template', {
-                template : form,
-                template_id : id
+            return $http.post('api/form/template/' + $rootScope.admin_id, {
+                template : form
             });
         }
     };
