@@ -13,5 +13,5 @@ function DeleteModalInstanceCtrl($modalInstance){
   	};
 }
 
-angular.module('robobetty')
+angular.module('DashboardFormBuilderModule')
 	.controller('DeleteModalInstanceCtrl', ['$modalInstance', DeleteModalInstanceCtrl]);
