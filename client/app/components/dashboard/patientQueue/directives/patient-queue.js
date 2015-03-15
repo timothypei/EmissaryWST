@@ -17,7 +17,9 @@ angular.module('dashboard')
     socket.emit("request_queue", $rootScope.admin_id);
 
     socket.on('request_id', function(){
+      console.log("on request_id");
       if($rootScope.admin_id){
+        console.log($rootScope.admin_id);
         socket.emit('_admin_id', {_admin_id:$rootScope.admin_id});
       }else{
         console.log("Socket cannot connect. No AdminId Found.");
@@ -65,7 +67,35 @@ angular.module('dashboard')
       });
       $scope.displayedCollection = $scope.rowCollection;
     }); 
-    /*
+    socket.on('queue_updated', function(data) { 
+     console.log("queue updated received", data);
+       //console.log("patient length", data.patient.length);
+       $scope.rowCollection = [];
+       $scope.patientqueue = data;
+       var patientLength = 0;
+       if(data.patients == null){
+        patientLength = data.length;
+      }
+      else{
+        patientLength = data.patients.length;   
+      }
+      console.log("patient length",patientLength);
+      var i =0;
+      for(i = 0;i<patientLength;i++){
+        $scope.rowCollection.push(
+        {
+          id: data.patients[i]._id,
+          Name: data.patients[i].name,
+          Doctor: DoctorService.getRandomDoctor(),
+
+          Time: new Date(new Date(data.patients[i].checkin_time).valueOf()-(MINUTE_VAL * 31)).toLocaleTimeString().replace(/:\d+ /, ' '),
+          TimeValue: new Date(new Date(data.patients[i].checkin_time).valueOf()-(MINUTE_VAL * 31)).valueOf()
+        });
+      }
+      console.log("rowCollection",$scope.rowCollection);
+      $scope.displayedCollection = $scope.rowCollection;
+   }); 
+/*
     $scope.rowCollection = [
       {
         id: 1,
