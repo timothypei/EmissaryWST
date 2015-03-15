@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $rootScope) {
+.controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $rootScope) {
 
   $scope.templateId = 0;
   // preview form mode
@@ -29,7 +29,6 @@ angular.module('DashboardFormBuilderModule')
   // accordion settings
   $scope.accordion = {};
   $scope.accordion.oneAtATime = true;
-
 
   $scope.$on('$viewContentLoaded', function() {
         $http.get('/api/form/template/company/' + $rootScope.admin_id).
@@ -146,6 +145,39 @@ angular.module('DashboardFormBuilderModule')
       return false;
   };
 
+<<<<<<< HEAD
+
+    // posts form template as Json
+  $scope.postJson = function (){
+    // object of this form template
+     var formJson = $filter('json')($scope.form);
+     var putJson = { 
+                        "template":formJson,
+                        //"admin_id":"55008b822e5a70cc199d4e62"
+                        "admin_id":'55009aba141bc50c1a4e87d8'
+                    };
+     // **Need to change this command and test
+     $http.post('/api/form/template', putJson).
+     success(function(data, status, headers, config) {
+       // this callback will be called asynchronously
+       // when the response is available
+       console.log("Post Success");
+       alert("Data successfully Updated!");
+       console.log(data);
+       // revert to previous json
+       //$scope.form = JSON.parse($scope.prevJson);
+
+     }).
+     error(function(data, status, headers, config) {
+       // called asynchronously if an error occurs
+       // or server returns response with an error status.
+       console.log("no forms posted");
+     });
+  }; 
+
+
+=======
+>>>>>>> 62b9f1a7bc7618157f025940b60f826a4916c308
   // deletes all the fields
   $scope.reset = function (){
     if($scope.form.form_fields !== null && $scope.form.form_fields.length !== 0) {
