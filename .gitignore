@@ -13,4 +13,5 @@ mobile/plugins/
 mobile/www/*
 !mobile/www/ionic/
 !mobile/resources/
+!mobile/README
 *.swp
