@@ -19,8 +19,10 @@
 				<tr>
 					<th colspan="1"></th>
 					<th colspan="1" st-sort="Name">Name</th>
-					<th colspan="1" st-sort="PhoneNumber">Phone Number</th>
-					<th colspan="1" st-sort="Email">Email</th>
+          <th colspan="1"></th>
+          <th colspan="1" st-sort="PhoneNumber">Phone Number</th>
+          <th colspan="1"></th>
+          <th colspan="1" st-sort="Email">Email</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,21 +31,31 @@
                     No employees fitting search criteria found!
                 </h4>					
 				<tr ng-repeat="row in displayedCollection">
-					<td style="min-width:3em;max-width:3em;">
+					<td class="">
 						<input class='ngSelectionCheckbox' type='checkbox' ng-checked='row.selected' ng-model='row.selected'>
 					</td>
-					<td style="min-width:10em;max-width:10em;" data-ng-click="editMode = true; editRowCollection(row)">
-						<div class="center" data-ng-hide="editMode"><span >{{row.Name}}</span></div>
+					<td class="employee"
+              data-ng-click="editMode = true; editRowCollection(row)">
+						<div class="center" data-ng-hide="editMode">{{row.Name}}</div>
 						<input name="name" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Name" ng-pattern="/^[^0-9]+$/" data-ng-required  style="margin-top:.3em;" required />
 						<p ng-show="!row.Name" class="help-block">Name cannot have numbers.</p>
 					</td>
-					<td style="min-width:10em;max-width:10em;" data-ng-click="editMode = true; editRowCollection(row)">
+          <td class="">
+            <input type="checkbox">
+          </td>
+					<td class="employee"
+              data-ng-click="editMode = true; editRowCollection(row)">
 						<div class="center" data-ng-hide="editMode">{{row.PhoneNumber}}</div>
 						<input name="number" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.PhoneNumber"  data-ng-required required  style="margin-top:.3em;"/>
 						<p ng-show="!row.PhoneNumber" class="help-block">Enter a valid phone number.</p>
 					</td>
-					<td style="min-width:10em;max-width:10em;" data-ng-click="editMode = true; editRowCollection(row)">
-						<div class="center" data-ng-hide="editMode">{{row.Email}}</div>
+          <td class="">
+            <input type="checkbox">
+          </td>
+					<td class="employee"
+              data-ng-click="editMode = true; editRowCollection(row)">
+						<div class="center" data-ng-hide="editMode">{{row
+              .Email}}</div>
 						<input type="email" name="email" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Email" data-ng-required required  style="margin-top:.3em;"/>
 						<p ng-show="!row.Email" class="help-block">Enter a valid email.</p>
 					</td>
