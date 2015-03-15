@@ -14,7 +14,7 @@ angular.module('checkin').controller('ModalDemoCtrl', ['$scope', '$modal', '$log
       }
     });
 
-    CheckinService.setModal(modalInstance);
+    CheckinService.setModal(modalInstance); // send the modal to the service so the checkin controller can access it
 
     modalInstance.result.then(function (selectedItem) {
       $scope.selected = selectedItem;

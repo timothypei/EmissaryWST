@@ -18,11 +18,17 @@ angular.module('checkin')
         return $http.get(url);
       };
 
+      // This function takes in the checkinModal data
       this.setModal = function(data){
         checkinModal = data;
       };
 
+      // Closes the checkinModal - 
       this.closeModal = function(){
-        checkinModal.dismiss('cancel');
+        if(checkinModal != ''){
+          checkinModal.dismiss('cancel'); 
+        }else{
+          console.log("Error, modal not set");
+        }
       };
   }]);
