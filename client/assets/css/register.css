@@ -305,4 +305,5 @@ ul#strength {
 @media (min-width: 1001px) {
 	.logoImage-mobile {
 		display: none !important;
+	}
 }
