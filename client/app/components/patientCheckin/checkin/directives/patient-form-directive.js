@@ -27,10 +27,7 @@ angular.module('checkin')
               CheckinService.submitForm(CheckinService.formData);
               CheckinService.checkinPatient($scope.form.form_fields[0].field_value);
               
-              for(var i = 0; i < $scope.form.form_fields.length; i++)
-              {
-                $scope.form.form_fields[i].field_value = " ";
-              }
+
               $timeout(redirectToCheckin, 5000);
 
         };
