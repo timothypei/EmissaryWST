@@ -7,9 +7,14 @@ angular.module('dashboard')
 
     //How many milliseconds in a minute
     var MINUTE_VAL = 60000;
+    $scope.rowCollection = new Array();
+    $scope.patientqueue;
 
     //The maximum number of minutes patients should wait before warning notification pops up on queue
     var EXPECTED_WAITING_TIME = 20;
+
+    // add hardcoded patient
+    socket.emit("request_queue", $rootScope.admin_id);
 
     socket.on('request_id', function(){
       if($rootScope.admin_id){
@@ -20,20 +25,32 @@ angular.module('dashboard')
     });
 
     socket.on('queue_updated', function(data) { 
-      console.log("queueaaa", data);
-      console.log("rowCollection", $scope.rowCollection);
-      /*if(data){
-        $scope.rowCollection = [];
-        for(var i=0; i<data.length; i++){
-          $scope.rowCollection.push({
-            Name: data[i].name,
-            Doctor: DoctorService.getRandomDoctor(),
-            Time: data[i].checkin_time
-          });
+      console.log("queue updated received", data);
+      //console.log("patient length", data.patient.length);
+      $scope.rowCollection = [];
+       $scope.patientqueue = data;
+       var patientLength = 0;
+       if(data.patients == null){
+        patientLength = data.length;
+      }
+      else{
+        patientLength = data.patients.length;   
+      }
+      console.log("patient length",patientLength);
+      var i =0;
+      for(i = 0;i<patientLength;i++){
+        $scope.rowCollection.push(
+        {
+          id: data.patients[i]._id,
+          Name: data.patients[i].name,
+          Doctor: DoctorService.getRandomDoctor(),
+          Time: new Date(data.patients[i].checkin_time),
+          TimeValue: data.patients[i].checkin_time
         }
-      }*/
-      //$scope.rowCollection = data;
-      //$scope.displayedCollection = $scope.rowCollection;
+        );
+      }
+      console.log("rowCollection",$scope.rowCollection);
+      $scope.displayedCollection = $scope.rowCollection;
     }); 
 
     socket.on('patient_added', function(data) { 
@@ -43,11 +60,12 @@ angular.module('dashboard')
       $scope.rowCollection.push({
         Name: data.name,
         Doctor: newDoctor,
-        Time: data.checkin_time
+        Time: new Date(new Date(data.checkin_time).valueOf()-(MINUTE_VAL * 31)).toLocaleTimeString().replace(/:\d+ /, ' '),
+        TimeValue: new Date(new Date(data.checkin_time).valueOf()-(MINUTE_VAL * 31)).valueOf()
       });
       $scope.displayedCollection = $scope.rowCollection;
     }); 
-
+    /*
     $scope.rowCollection = [
       {
         id: 1,
@@ -137,6 +155,7 @@ angular.module('dashboard')
       }
       
     ];
+    */
 
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
     $scope.displayedCollection = [].concat($scope.rowCollection);
@@ -170,9 +189,26 @@ angular.module('dashboard')
         $scope.row = result;
         var index = $scope.rowCollection.indexOf($scope.row);
         if (index !== -1) {
+          var patientName = $scope.rowCollection[index].Name;
+          console.log(patientName);
           $scope.rowCollection.splice(index, 1);
-          socket.emit('queue_updated', $scope.rowCollection);
+
+          var newQueue = [];
+          var patientqueueLength = $scope.rowCollection.length;
+          var a = 0;
+          for(a = 0;a<patientqueueLength;a++){
+              newQueue.push(
+              {
+                _admin_id:$rootScope.admin_id,
+                _id:$scope.rowCollection[a].id,
+                checkin_time: $scope.rowCollection[a].TimeValue,
+                name: $scope.rowCollection[a].Name
+              }
+            );
+          }
         }
+        $scope.patientqueue.patients = newQueue;
+        socket.emit('patient_removed', {queue: $scope.patientqueue, patientName: patientName});
       });
     };
 }]);
