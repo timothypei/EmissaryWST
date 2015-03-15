@@ -240,3 +240,69 @@ ul#strength {
     position:fixed;
     bottom:5px;
 }
+
+/* Friendly for mobile */
+@media (max-width: 1000px) {
+	#images {
+		margin-left: 0;
+	}
+
+	.image2 {
+		display: none;
+	}
+
+	.logoImage-mobile {
+		display: block !important;
+		position: relative;
+		margin-left: 90px;
+		margin-top: -40px;
+	}
+
+	.logoImage {
+		display: none;
+	}
+
+	.createYourAccount {
+		position: relative;
+		text-align: center;
+		font-size: 25px;
+		margin-left: 0;
+	}
+
+	.description {
+		display: none;
+	}
+
+	#container {
+		position: relative;
+		margin-top: 20px;
+		height: 640px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+/** Friendly for iPhone 4/5 */
+@media (max-width: 322px) {
+	.logoImage-mobile {
+		margin-left: 70px;
+	}
+
+	.formfield {
+		padding-left: 20px;
+	}
+
+	.checkboxfield {
+		padding-left: 20px;
+	}
+
+	#container {
+		width: 320px;
+	}
+}
+
+/* Hide mobile bluejay logo */
+@media (min-width: 1001px) {
+	.logoImage-mobile {
+		display: none !important;
+}
