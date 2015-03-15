@@ -3,13 +3,17 @@
 angular.module('checkin')
   .service('CheckinService', ['$http', function($http) {
       var checkinModal = '';
+      
+      //function that gets the theme of the user based off the user id passed in
       this.getTheme = function(id){
       	 console.log(id);
       	 console.log("getThemes");
       	 var path = '/api/'+id+'/theme';
          console.log(path);
       	 return $http.get('/api/' + id + '/theme');
-      };  	
+      }; 
+      
+      //returns the template for the form based off the user id passed in
   	  this.getForms = function(id) {
   	  	console.log(id);
   	  	console.log("getForms");

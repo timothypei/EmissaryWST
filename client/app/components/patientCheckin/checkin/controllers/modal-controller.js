@@ -2,6 +2,7 @@ angular.module('checkin').controller('ModalDemoCtrl', ['$scope', '$modal', '$log
 
   $scope.items = ['item1', 'item2', 'item3'];
   
+  //opens the modal that allows the admin to sign back in, displays the html specificed by the template
   $scope.open = function (size) {
     var modalInstance = $modal.open({
       templateUrl: 'myModalContent.html',
