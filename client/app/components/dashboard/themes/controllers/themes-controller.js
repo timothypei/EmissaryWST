@@ -31,22 +31,21 @@ angular.module('dashboard')
   		}
   		return newArr;
   	}
-
   	$scope.splitData = splitRows($scope.img, 3);
-
   	$scope.selectedImage = { value :'' };
 
 
   	$scope.submitTheme = function() {
+        //sets the background image to what the user selected
   		$scope.theme.background_img = $scope.img[$scope.selectedImage.value];
       var hasTheme = false;
+        
       ThemesService.read().success(function(data){
          // $location.path('/dashboard'); // route needs to be set
-         console.log('currently has');
          console.log(data);
-         if(data==null){
+         if(data=="null"){
             ThemesService.create($scope.theme)
-          .success(function(data2){
+          .success(function(data2){ 
             // $location.path('/dashboard'); // route needs to be set
             console.log("create");
             console.log(data2);
@@ -68,11 +67,14 @@ angular.module('dashboard')
             $scope.message = 'Error selecting theme.';
             console.log("Theme selction failed.");
           });
-        } else {
+        }
+          
+          else {
           $scope.message = "Please select an image first."
         }
           return data;
         })
+      
         .error(function(err){
           console.log("Theme selction failed.");
           return err;

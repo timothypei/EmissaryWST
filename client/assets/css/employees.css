@@ -12,10 +12,6 @@
     max-width:10em;
 }
 
-.checkbox{
-
-}
-
 /* format table populated with employee info */
 #employees-table .table-striped > tbody > tr:hover:nth-of-type(odd) {
   background-color: #E6E6E6;

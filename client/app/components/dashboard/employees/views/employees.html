@@ -40,18 +40,12 @@
 						<input name="name" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Name" ng-pattern="/^[^0-9]+$/" data-ng-required  style="margin-top:.3em;" required />
 						<p ng-show="!row.Name" class="help-block">Name cannot have numbers.</p>
 					</td>
-          <td class="">
-            <input type="checkbox">
-          </td>
 					<td class="employee"
               data-ng-click="editMode = true; editRowCollection(row)">
 						<div class="center" data-ng-hide="editMode">{{row.PhoneNumber}}</div>
 						<input name="number" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.PhoneNumber"  data-ng-required required  style="margin-top:.3em;"/>
 						<p ng-show="!row.PhoneNumber" class="help-block">Enter a valid phone number.</p>
 					</td>
-          <td class="">
-            <input type="checkbox">
-          </td>
 					<td class="employee"
               data-ng-click="editMode = true; editRowCollection(row)">
 						<div class="center" data-ng-hide="editMode">{{row
