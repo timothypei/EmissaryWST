@@ -64,11 +64,12 @@ angular.module('DashboardFormBuilderModule')
                                             "field_disabled" : false,
                                             "field_readonly" : true};
               $scope.form.form_fields.push(DefaultField);
-              FormService.formData = $scope.form;
+              
               if($scope.previewMode === false) {
                 $scope.previewMode = true;
               }
               $scope.form.submitted = false;
+              FormService.formData = $scope.form;
 
             }
            console.log(data);
