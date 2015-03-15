@@ -97,6 +97,12 @@ angular.module('robobetty',
         parent: 'common',
         title: 'Themes',        
         templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
+      })
+      .state('settings',{
+        url: '/settings',
+        parent: 'common',
+        title: 'Settings',
+        templateUrl: 'views/components/dashboard/settings/views/settings.html'
       });
   })
   .run(['$rootScope', '$state', function($rootScope, $state){
