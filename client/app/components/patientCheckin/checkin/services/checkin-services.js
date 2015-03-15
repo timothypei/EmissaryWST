@@ -35,7 +35,7 @@ angular.module('checkin')
             //console.log($rootScope);
             return $http.post('api/patient/checkin', {
                 _admin_id: $rootScope.admin_id,
-                name : "John Doe"
+                name : form.form_fields[0].
             });
       };
   }]);
