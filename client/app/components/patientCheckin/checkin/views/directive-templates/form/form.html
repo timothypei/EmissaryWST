@@ -1,4 +1,4 @@
-<h3 ng-show="!form.submitted">{{ form.form_name }}</h3>
+<h3 ng-show = "!form.submitted">{{ form.form_name }}</h3>
 
 <div ng-show="!form.submitted">
     <form name="myForm" id="myForm">
@@ -12,7 +12,7 @@
 
     <div class="form-actions" style="margin-top:10px;">
         <p class="text-center">
-            <button class="btn btn-success right" type="button" ng-disabled="myForm.$valid" ng-click="submit()"><i class="icon-edit icon-white"></i> Save </button>
+            <button class="btn btn-success right" type="button" ng-disabled="myForm.$valid" ng-click="submit()"><i class="icon-edit icon-white"></i> Submit Form</button>
         </p>
     </div>
 </div>
