@@ -104,6 +104,18 @@ input[type=email] {
 #images{
 	margin-left: 3%;
 }
+
+#register-signup-btn {
+	float: left;
+	margin-left: 10px;
+	margin-top: 4px;
+	color: #3D8CC4;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#FFF));
+	background-image: -moz-linear-gradient(top left 90deg, #FFF 0%, #FFF 100%);
+	background-image: linear-gradient(top left 90deg, #FFF 0%, #FFF 100%);
+	border: 1px solid #FFF;
+}
+
 input[type=submit] {
 	float: right;
 	margin-top: 10px;
