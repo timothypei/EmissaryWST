@@ -36,7 +36,7 @@ angular.module('DashboardFormBuilderModule')
          
          success(function(data, status, headers, config) {
           console.log(data);
-           if (data != null){
+           if (data !== null){
 
               for(var i = 0; i < data.template.form_fields.length; i++)
               {
@@ -81,7 +81,7 @@ angular.module('DashboardFormBuilderModule')
 
     // put newField into fields array
     $scope.form.form_fields.push(newField);
-    if($scope.previewMode == false) {
+    if($scope.previewMode === false) {
       $scope.previewMode = true;
     }
     $scope.form.submitted = false;

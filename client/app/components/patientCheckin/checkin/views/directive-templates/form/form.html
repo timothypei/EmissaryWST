@@ -1,4 +1,4 @@
-<h3>{{ form.form_name }}</h3>
+<h3 ng-show = "!form.submitted">{{ form.form_name }}</h3>
 
 <div ng-show="!form.submitted">
     <form name="myForm" id="myForm">
@@ -17,10 +17,7 @@
     </div>
 </div>
 
-<div ng-show="form.submitted">
-    <h3>Submitted Data</h3>
-    <div ng-repeat="field in form.form_fields">
-        Field Title: {{ field.field_title }} <br>
-        Field Placeholder: {{ field.field_placeholder }} <br><br>
-    </div>
+<div ng-show="form.submitted" id="tyDiv">
+    <img src="images/logo.png" id="tyLogo"></img>
+    <h3 id = "tyText">Thank You For Checking In</h3>
 </div>

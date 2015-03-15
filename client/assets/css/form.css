@@ -17,7 +17,6 @@ input {
 .require-radio {
 	width: 13px;
 	height: 13px;
-	padding
 }
 
 label {
@@ -33,5 +32,16 @@ label {
 	color: white;
 }
 #logo{
-	margin: auto;
+   margin: auto;
+}
+#tyLogo{
+    padding-left: 40%;
+}
+#tyText{
+    padding-left: 17%;
+    text-align: center;
+    white-space: nowrap;
+}
+#tyDiv{
+    margin: auto;   
 }
