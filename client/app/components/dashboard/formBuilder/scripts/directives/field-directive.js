@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('robobetty').directive('fieldDirective', function ($http, $compile) {
+angular.module('DashboardFormBuilderModule').directive('fieldDirective', function ($http, $compile) {
 
         var getTemplateUrl = function(field) {
             var type = field.field_type;
