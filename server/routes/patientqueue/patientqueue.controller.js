@@ -52,7 +52,7 @@ exports.checkin = function(req, res) {
             );
 
             // New queue is sent to the socket
-            Socket.notifyNewQueue(req.body._admin_id, queue);
+            //Socket.notifyNewQueue(req.body._admin_id, queue);
         }
     );
 };

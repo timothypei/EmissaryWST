@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('checkin')
-  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService', function($scope,$rootScope,$timeout,$location, CheckinService){
+  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService', '$http', 'socket',
+    function($scope,$rootScope,$timeout,$location, CheckinService, $http, socket){
 
     $scope.clock = "loading clock..."; // initialize the time variable
     $scope.tickInterval = 1000; //ms
@@ -34,6 +35,15 @@ angular.module('checkin')
           function(data){
             data.template.submitted = false;
             $scope.form = data.template;
+            console.log("trying to post", $rootScope.admin_id);
+            $http.post('/api/patient/checkin', {_admin_id: $rootScope.admin_id, name: 'Brian Soe'})
+              .success(function(data, status, headers, config) {
+                console.log("success", data);
+                socket.emit('patient_added', data.queue.patients[data.queue.patients.length -1]);
+              })
+              .error(function(data, status, headers, config) {
+                console.log("error", data, status, headers);
+              });
             return data;
           })
         .error(function(err){
