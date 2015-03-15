@@ -122,7 +122,8 @@ input[type=submit] {
   float: center;
   font-size: 18px;
   font-weight: bold;
-  color: black;
+  color: white;
+  padding: 5px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#3D8CC4), to(#3D8CC4));
   background-image: -moz-linear-gradient(top left 90deg, #3D8CC4 0%, #3D8CC4 100%);
   background-image: linear-gradient(top left 90deg, #3D8CC4 0%, #3D8CC4 100%);
