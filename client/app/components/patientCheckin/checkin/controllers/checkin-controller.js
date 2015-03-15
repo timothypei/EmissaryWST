@@ -80,8 +80,7 @@ angular.module('checkin')
           else{  
             $rootScope.token = data.token;
             $rootScope.email = $scope.user.email;
-            CheckinService.closeModal();
-            //$modalInstance.close($scope.selected.item);
+            CheckinService.closeModal();  // close the checkin modal
             $location.path('../../../dashboard/views/dashboard.html');
             return data;
           }
