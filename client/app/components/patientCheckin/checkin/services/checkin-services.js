@@ -30,12 +30,13 @@ angular.module('checkin')
             });
       };
 
-      this.checkinPatient = function (form) {
+      this.checkinPatient = function (patient_name) {
           //  console.log("YAYYYY checkin ");
             //console.log($rootScope);
+            console.log(patient_name);
             return $http.post('api/patient/checkin', {
                 _admin_id: $rootScope.admin_id,
-                name : form.form_fields[0].
+                name : patient_name
             });
       };
   }]);
