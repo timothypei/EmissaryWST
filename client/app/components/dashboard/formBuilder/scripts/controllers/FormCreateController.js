@@ -56,13 +56,19 @@ angular.module('DashboardFormBuilderModule')
               }
             } else {
               console.log("New form");
-              $scope.form.form_fields[0] = {"field_id" : 1,
+             var DefaultField            = {"field_id" : 1,
                                             "field_title" : "Name",
                                             "field_type" : "textfield",
                                             "field_placeholder" : "Name",
                                             "field_required" : true,
                                             "field_disabled" : false,
                                             "field_readonly" : true};
+              $scope.form.form_fields.push(DefaultField);
+              FormService.formData = $scope.form;
+              if($scope.previewMode === false) {
+                $scope.previewMode = true;
+              }
+              $scope.form.submitted = false;
 
             }
            console.log(data);

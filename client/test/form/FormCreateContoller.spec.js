@@ -42,7 +42,7 @@ describe('Form Create Controller', function() {
     it('addNewField()', function(){
       scope.addNewField();
       expect(scope.addField.lastAddedID).to.equal(2);
-      expect(scope.form.form_fields.length).to.equal(1);
+      expect(scope.form.form_fields.length).to.equal(2);
       scope.addNewField();
       scope.addNewField();
       expect(scope.addField.lastAddedID).to.equal(4);
@@ -53,7 +53,7 @@ describe('Form Create Controller', function() {
     it('deleteField()',function(){
       scope.addNewField();
       expect(scope.addField.lastAddedID).to.equal(2);
-      expect(scope.form.form_fields.length).to.equal(1);
+      expect(scope.form.form_fields.length).to.equal(2);
       scope.deleteField(1);
       expect(scope.addField.lastAddedID).to.equal(2);
       expect(scope.form.form_fields.length).to.equal(1);
