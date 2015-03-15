@@ -1,6 +1,6 @@
 angular.module("robobetty")
     .constant("appConfig", {
-        isMobile: true, 
+        isMobile: IS_MOBILE, 
         baseUrl: "http://blue-jay-dev.herokuapp.com/",
         debugMode: true
     });

@@ -116,7 +116,6 @@ angular.module('robobetty', appendIonic(
   ionicCallback(IS_MOBILE);
 
   function initRunCallback($rootScope, $state, appConfig) {
-    debugger
     $rootScope.$on('$stateChangeSuccess',
     function(event, toState, toParams, fromState, fromParams) {
 
@@ -135,15 +134,15 @@ angular.module('robobetty', appendIonic(
         }
       }
     });
-  }
+  } 
 
-  function ionicCallback(isMobile, app) {
-    if(isMobile) {
-      app.run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
+  function ionicCallback(isMobile) {
+    if(!isMobile) {
+      angular.module("robobetty").run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
         initRunCallback($rootScope, $state, appConfig);
       }]);
     } else {
-      app.run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
+      angular.module("robobetty").run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
           ionicPlatform.ready(
             function() {
               if (window.StatusBar) {
