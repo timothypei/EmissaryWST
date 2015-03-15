@@ -19,3 +19,18 @@
   background-color: #E6E6E6;
  	cursor: pointer;
 }
+
+.st-sort-ascent i:before {
+    content:  "\f0de";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}
+.st-sort-descent i:before {
+    content:  "\f0dd";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}
