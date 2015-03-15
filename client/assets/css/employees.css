@@ -30,3 +30,17 @@
 .edit-input{ /* format edit field */
 	width:14em;	
 }
+.st-sort-ascent i:before {
+    content:  "\f0de";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}
+.st-sort-descent i:before {
+    content:  "\f0dd";
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+}
