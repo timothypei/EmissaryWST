@@ -26,16 +26,16 @@ angular.module('checkin')
         //    console.log($rootScope);
             return $http.post('api/form/patient/', {
                 _admin_id: $rootScope.admin_id,
-                form : form,
+                form : form
             });
       };
 
-      this.checkinPatient = function (form) {
+      this.checkinPatient = function (patient_name) {
           //  console.log("YAYYYY checkin ");
             //console.log($rootScope);
             return $http.post('api/patient/checkin', {
                 _admin_id: $rootScope.admin_id,
-                name : form.form_fields[0].
+                name : patient_name
             });
       };
   }]);

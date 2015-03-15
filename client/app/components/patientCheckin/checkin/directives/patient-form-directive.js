@@ -19,12 +19,13 @@ angular.module('checkin')
                 console.log($scope.form.form_fields);
               }
 
+              CheckinService.formData.data = $scope.form.form_fields;
               CheckinService.formData.submitted = true;
               //console.log($scope.form.form_fields);
 
            // console.log("YAY patient directive" );
               CheckinService.submitForm(CheckinService.formData);
-              CheckinService.checkinPatient(CheckinService.formData);
+              CheckinService.checkinPatient($scope.form.form_fields[0].field_value);
               $timeout(redirectToCheckin, 5000);
 
         };
