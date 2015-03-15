@@ -109,7 +109,7 @@ angular.module('robobetty',
     $rootScope.$on('$stateChangeSuccess', 
     function(event, toState, toParams, fromState, fromParams){
       if(!$rootScope.admin_id) {
-        if(toState.name != 'signin') {
+        if(toState.name != 'signin'&&toState.name!='register') {
       // debugger
           $state.go("signin");
         }
