@@ -143,7 +143,7 @@ angular.module('robobetty', appendIonic(
       }]);
     } else {
       angular.module("robobetty").run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
-          ionicPlatform.ready(
+          $ionicPlatform.ready(
             function() {
               if (window.StatusBar) {
                 return StatusBar.hide();
