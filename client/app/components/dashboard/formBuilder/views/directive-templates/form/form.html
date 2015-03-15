@@ -12,15 +12,12 @@
 
     <div class="form-actions" style="margin-top:10px;">
         <p class="text-center">
-            <button class="btn btn-success right" type="button" ng-disabled="myForm.$valid" ng-click="submit()"><i class="icon-edit icon-white"></i> Submit Form</button>
+            <button class="btn btn-success right" type="button" ng-disabled="myForm.$valid" ng-click="submit()"><i class="icon-edit icon-white"></i> Save </button>
         </p>
     </div>
 </div>
 
 <div ng-show="form.submitted">
-    <h3>Submitted Data</h3>
-    <div ng-repeat="field in form.form_fields">
-        Field Title: {{ field.field_title }} <br>
-        Field Placeholder: {{ field.field_placeholder }} <br><br>
-    </div>
+    <img src="images/logo.png" id="logo"></img>
+    <h3>Thank You For Checking In</h3>
 </div>

@@ -42,6 +42,11 @@ exports.createServer = function(io_in) {
             io.to(adminID).emit('queue_updated', queue);
         });
 
+        socket.on('patient_added', function(patient) {
+            if(adminID == null) socket.emit('request_id');
+            io.to(adminID).emit('patient_added', patient);
+        });
+
     });
     return server;
 };

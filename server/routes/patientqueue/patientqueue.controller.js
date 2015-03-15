@@ -46,13 +46,13 @@ exports.checkin = function(req, res) {
                         }
                     };
 
-                    Email.sendEmail(employees, function(){respond();});
-                    TextModel.sendText(employees, function(){respond();});
+                    Email.sendEmail(req.body.name, employees, function(){respond();});
+                    TextModel.sendText(req.body.name, employees, function(){respond();});
                 }
             );
 
             // New queue is sent to the socket
-            Socket.notifyNewQueue(req.body._admin_id, queue);
+            //Socket.notifyNewQueue(req.body._admin_id, queue);
         }
     );
 };
