@@ -24,7 +24,7 @@ angular.module('DashboardFormBuilderModule')
   $scope.addField = {};
   $scope.addField.types = FormService.fields;
   $scope.addField.new = $scope.addField.types[0].name;
-  $scope.addField.lastAddedID = 0;
+  $scope.addField.lastAddedID = 1;
 
   // accordion settings
   $scope.accordion = {};
@@ -36,7 +36,7 @@ angular.module('DashboardFormBuilderModule')
          
          success(function(data, status, headers, config) {
           console.log(data);
-           if (data != null){
+           if (data.template != null && data.template.form_fields != null){
 
               for(var i = 0; i < data.template.form_fields.length; i++)
               {
@@ -54,6 +54,16 @@ angular.module('DashboardFormBuilderModule')
               } else {
                 $scope.form.form_fields = [];
               }
+            } else {
+              console.log("New form");
+              $scope.form.form_fields[0] = {"field_id" : 1,
+                                            "field_title" : "Name",
+                                            "field_type" : "textfield",
+                                            "field_placeholder" : "Name",
+                                            "field_required" : true,
+                                            "field_disabled" : false,
+                                            "field_readonly" : true};
+
             }
            console.log(data);
 
@@ -149,9 +159,9 @@ angular.module('DashboardFormBuilderModule')
   // deletes all the fields
   $scope.reset = function (){
     if($scope.form.form_fields !== null && $scope.form.form_fields.length !== 0) {
-        $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
+        $scope.form.form_fields.splice(1, $scope.form.form_fields.length);
         $scope.addField.lastAddedID = 0;
-        $scope.previewMode = false;
+        $scope.previewMode = true;
         $scope.form.submitted = false;
     }
   };
