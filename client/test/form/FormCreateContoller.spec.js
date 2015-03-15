@@ -41,22 +41,22 @@ describe('Form Create Controller', function() {
 
     it('addNewField()', function(){
       scope.addNewField();
-      expect(scope.addField.lastAddedID).to.equal(1);
-      expect(scope.form.form_fields.length).to.equal(1);
+      expect(scope.addField.lastAddedID).to.equal(2);
+      expect(scope.form.form_fields.length).to.equal(2);
       scope.addNewField();
       scope.addNewField();
-      expect(scope.addField.lastAddedID).to.equal(3);
-      expect(scope.form.form_fields.length).to.equal(3);
+      expect(scope.addField.lastAddedID).to.equal(4);
+      expect(scope.form.form_fields.length).to.equal(4);
 
 
     });
     it('deleteField()',function(){
       scope.addNewField();
-      expect(scope.addField.lastAddedID).to.equal(1);
-      expect(scope.form.form_fields.length).to.equal(1);
+      expect(scope.addField.lastAddedID).to.equal(2);
+      expect(scope.form.form_fields.length).to.equal(2);
       scope.deleteField(0);
-      expect(scope.addField.lastAddedID).to.equal(1);
-      expect(scope.form.form_fields.length).to.equal(1);
+      expect(scope.addField.lastAddedID).to.equal(2);
+      expect(scope.form.form_fields.length).to.equal(2);
     });
   });
 
