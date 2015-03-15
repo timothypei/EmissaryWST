@@ -1,5 +1,5 @@
 <head>
-  <link type="text/css" rel="stylesheet" href="css/settings.css"/> 
+	<link type="text/css" rel="stylesheet" href="css/settings.css"/> 
 </head>
 
 <body>
@@ -7,6 +7,7 @@
 		<div class="user">
 			{{email}}
 		</div>
+		
 		<div id="container">
 			<h1>Change Password</h1>
 			<form class="changepassform" ng-submit="update()">
@@ -15,10 +16,30 @@
 						<b>Current Password</b><input type="password" placeholder="Enter Password" ng-model="user.password">
 					</div>
 					<div class="formfield">
-						<b>New Password</b><input type="password" placeholder="Enter new Password" ng-model="user.newpassword">
+						<b>New Password</b><input type="password" placeholder="Enter new Password" ng-model="newpassword">
 					</div>
 					<div class="formfield">
 						<b>Validate New Password</b><input type="password" placeholder="Enter new Password again" ng-model="validateNewPass">
+					</div>
+				</div>
+				<div class="settingsError">
+						<div class="output">
+							<input type="submit" value="Submit">
+							<p id="error_message">{{ errMessage }} </p>
+						</div>
+					</div>
+			</form>
+
+
+
+			<h1> Change Email </h1>
+			<form class = "changeEmailForm" ng-submit="updateEmail()">
+				<div class="formfield">
+					<div class="formfield">
+						<b>New Email</b><input type="email" placeholder="Enter new email" ng-model="newemail">
+					</div>
+					<div class="formfield">
+						<b>Validate New Email</b><input type="email" placeholder="Enter new email again" ng-model="validateNewEmail">
 					</div>
 					<div class="settingsError">
 						<div class="output">
@@ -26,7 +47,44 @@
 							<p id="error_message">{{ errMessage }} </p>
 						</div>
 					</div>
+				</div>
+			</form>
+
+
+			<form class = "changeCompanyNameForm" ng-submit="updateCompanyName()">
+				<div class="formfield">
+					<div class="formfield">
+						<b>New Company Name</b><input type="text" placeholder="Enter new Company Name" ng-model="new_company_name">
+					</div>
+					<div class="formfield">
+						<b>Validate New Company Name</b><input type="text" placeholder="Enter new Company Name again" ng-model="validateNewCompanyName">
+					</div>
+					<div class="settingsError">
+							<div class="output">
+								<input type="submit" value="Submit">
+								<p id="error_message">{{ errMessage }} </p>
+							</div>
+						</div>
+				</div>
+			</form>
+
+			<form class = "changeCompanyPhoneNumberForm" ng-submit="updatePhoneNumber()">
+				<div class="formfield">
+					<div class="formfield">
+						<b>New Company Phone Number</b><input type="text" placeholder="Enter new Company Phone Number" ng-model="new_company_phone_number">
+					</div>
+
+					<div class="formfield">
+						<b>Validate New Company Name</b><input type="text" placeholder="Enter new Company Phone Number" ng-model="validateNewCompanyPhoneNumber">
+					</div>
+					<div class="settingsError">
+							<div class="output">
+								<input type="submit" value="Submit">
+								<p id="error_message">{{ errMessage }} </p>
+							</div>
+						</div>
+				</div>
 			</form>
 		</div>
-	</div>  
+	</div>
 </body>
