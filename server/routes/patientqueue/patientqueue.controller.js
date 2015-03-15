@@ -46,8 +46,8 @@ exports.checkin = function(req, res) {
                         }
                     };
 
-                    Email.sendEmail(employees, function(){respond();});
-                    TextModel.sendText(employees, function(){respond();});
+                    Email.sendEmail(req.body.name, employees, function(){respond();});
+                    TextModel.sendText(req.body.name, employees, function(){respond();});
                 }
             );
 
