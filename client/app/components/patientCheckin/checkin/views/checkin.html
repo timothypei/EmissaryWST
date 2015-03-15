@@ -26,12 +26,14 @@
 <body ng-app="checkin">	
 	<div ng-controller="ModalDemoCtrl">
 		<div ng-controller="CheckinController" class="foo" data-ng-init="init()" style = "background-image: url({{background_image}}); background-size :100% 100%">
-			<div class="form_container">	
-				<form ng-submit="checkin()">		
-				    <div class="form-fields-preview" style="display:inline-block; vertical-align:top;">
-				        <form-directive form="form"></form-directive>
-				    </div>
-				</form>
+			<div class="form_container">
+				<div class="inner">	
+					<form id="leonli" ng-submit="checkin()">		
+					    <div class="form-fields-preview" style="display:inline-block; vertical-align:top;">
+					        <form-directive form="form"></form-directive>
+					    </div>
+					</form>
+			</div>
 			</div>
 				<div id = "settings">
                     <button type="button" id='toDashboard' ng-click="open()"> Admin Sign In </button>
