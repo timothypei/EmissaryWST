@@ -83,8 +83,6 @@ module.exports.template.update = function(req, res) {
 
             res.status(200).json(theme);
         });
-        
-        return res.status(200).json(theme);
 
     });
 };
