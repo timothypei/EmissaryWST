@@ -13,3 +13,4 @@ mobile/plugins/
 mobile/www/*
 !mobile/www/ionic/
 !mobile/resources/
+*.swp
