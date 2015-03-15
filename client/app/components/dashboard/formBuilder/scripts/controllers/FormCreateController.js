@@ -36,7 +36,7 @@ angular.module('DashboardFormBuilderModule')
          
          success(function(data, status, headers, config) {
           console.log(data);
-           if (data.template !== null && data.template.form_fields !== null){
+           if (typeof data.template !== 'undefined' && typeof data.template !== null && typeof data.template.form_fields !== 'undefined' && data.template.form_fields !== null){
 
               for(var i = 0; i < data.template.form_fields.length; i++)
               {

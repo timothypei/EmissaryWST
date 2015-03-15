@@ -19,6 +19,7 @@ angular.module('checkin')
                 console.log($scope.form.form_fields);
               }
 
+              CheckinService.formData.data = $scope.form.form_fields;
               CheckinService.formData.submitted = true;
               //console.log($scope.form.form_fields);
 

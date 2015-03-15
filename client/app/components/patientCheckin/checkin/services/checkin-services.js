@@ -26,7 +26,7 @@ angular.module('checkin')
         //    console.log($rootScope);
             return $http.post('api/form/patient/', {
                 _admin_id: $rootScope.admin_id,
-                form : form,
+                form : form
             });
       };
 
