@@ -19,9 +19,7 @@
 				<tr>
 					<th colspan="1"></th>
 					<th colspan="1" st-sort="Name">Name <i st-sort="Name" class="fa fa-sort"></i></th>
-          <th colspan="1"></th>
           <th colspan="1" st-sort="PhoneNumber">Phone Number <i st-sort="PhoneNumber" class="fa fa-sort"></i></th>
-          <th colspan="1"></th>
           <th colspan="1" st-sort="Email">Email <i st-sort="Email" class="fa fa-sort"></i></th>
 				</tr>
 			</thead>
@@ -34,23 +32,20 @@
 					<td class="">
 						<input class='ngSelectionCheckbox' type='checkbox' ng-checked='row.selected' ng-model='row.selected'>
 					</td>
-					<td class="employee"
-              data-ng-click="editMode = true; editRowCollection(row)">
-						<div class="center" data-ng-hide="editMode">{{row.Name}}</div>
-						<input name="name" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Name" ng-pattern="/^[^0-9]+$/" data-ng-required  style="margin-top:.3em;" required />
-						<p ng-show="!row.Name" class="help-block">Name cannot have numbers.</p>
+					<td style="min-width:10em;max-width:10em;" data-ng-click="editMode = true; editRowCollection(row)">
+						<div class="center" data-ng-hide="editMode"><span >{{row.Name}}</span></div>
+						<input name="name" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Name" ng-pattern="/^[^0-9][A-Za-z,.'-]+\s[A-Za-z,.'-\s]+$/" data-ng-required  style="margin-top:.3em;" required />
+						<p ng-show="!row.Name" class="help-block">Enter a valid name.</p>
 					</td>
 					<td class="employee"
               data-ng-click="editMode = true; editRowCollection(row)">
 						<div class="center" data-ng-hide="editMode">{{row.PhoneNumber}}</div>
-						<input name="number" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.PhoneNumber"  data-ng-required required  style="margin-top:.3em;"/>
+						<input name="number" type="text" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.PhoneNumber"  ui-mask="(999) 999-9999" data-ng-required required  style="margin-top:.3em;"/>
 						<p ng-show="!row.PhoneNumber" class="help-block">Enter a valid phone number.</p>
 					</td>
-					<td class="employee"
-              data-ng-click="editMode = true; editRowCollection(row)">
-						<div class="center" data-ng-hide="editMode">{{row
-              .Email}}</div>
-						<input type="email" name="email" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Email" data-ng-required required  style="margin-top:.3em;"/>
+					<td style="min-width:10em;max-width:10em;" data-ng-click="editMode = true; editRowCollection(row)">
+						<div class="center" data-ng-hide="editMode">{{row.Email}}</div>
+						<input type="email" name="email" class="form-control edit-input" data-ng-show="editMode" data-ng-model="row.Email" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/" data-ng-required required  style="margin-top:.3em;"/>
 						<p ng-show="!row.Email" class="help-block">Enter a valid email.</p>
 					</td>
 					<td style="min-width:5em;max-width:5em;">
