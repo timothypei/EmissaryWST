@@ -39,6 +39,7 @@ angular.module('dashboard')
 					$scope.user.newpassword = $scope.newpassword;
 				}
 				
+                //call the update function of settings service to update the info about the user
 				SettingsService.update($scope.user)
 					.success(function(data){
 						if(data=='Oops! Wrong password')

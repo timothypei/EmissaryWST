@@ -15,6 +15,8 @@ angular.module('checkin')
         $timeout(tick, $scope.tickInterval); // reset the timer
     }
 
+      //function that sets the background by using the getTheme method of the CheckinService
+      //also, uses the CheckinService to get the forms that the business wants to display
       $scope.init = function(){
         CheckinService.getTheme($rootScope.admin_id)
         .success(function(data){
@@ -30,6 +32,8 @@ angular.module('checkin')
           return err;
         }
           );
+          
+        //function that retrieves the form template for the current admin  
         CheckinService.getForms($rootScope.admin_id).success(
           function(data){
             data.template.submitted = false;
@@ -69,7 +73,7 @@ angular.module('checkin')
         
       else{
           var account = this;
-          //calls the API to login using passing in a user object which has a email and password, displays
+          //calls the API to login passing in a user object which has a email and password, displays
           //error if login was unsuccessful
           AuthService.signin($scope.user)
          .success(function(data){
