@@ -162,8 +162,8 @@ angular.module('dashboard')
 
     
     $scope.checkIfEmptyTable = function(){
-        return ($scope.displayedCollection.length == 0);
-    }
+        return ($scope.displayedCollection.length === 0);
+    };
 
     //edit a row
     $scope.editRowCollection = function(row) {
@@ -217,14 +217,14 @@ angular.module('dashboard')
             $scope.selectedEmployees = result;
             $scope.removeMultipleFinal($scope.selectedEmployees);
           });
-    }
+    };
 
     // removeMultiple helper function to return unselected rows
     $scope.removeMultipleFinal = function(row){
         $scope.rowCollection = filterFilter($scope.rowCollection, function(row){
                 return !row.selected;
         });
-    }
+    };
 
     //add employee info
     $scope.submitForm = function(row){
@@ -233,7 +233,7 @@ angular.module('dashboard')
       $scope.addForm.name.$setPristine();
       $scope.addForm.number.$setPristine();
       $scope.addForm.email.$setPristine();
-    }
+    };
 
     //open add employee form
     $scope.openModal = function(){
@@ -259,7 +259,7 @@ angular.module('dashboard')
 					$("#toaster").fadeOut();
 				}, 2000);
     	});
-    }
+    };
 }]);
 	
 	
