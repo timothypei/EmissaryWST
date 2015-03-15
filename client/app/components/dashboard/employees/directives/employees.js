@@ -257,7 +257,7 @@ angular.module('dashboard')
 				//5 second then hide it
 				setTimeout(function() {
 					$("#toaster").fadeOut();
-				}, 1000);
+				}, 2000);
     	});
     }
 }]);

@@ -19,14 +19,14 @@
     <div id="patient-queue">
         <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-striped">
             <thead>
-            <tr>
-                <th colspan="5"><input st-search="" class="form-control" placeholder="Search ..." type="text"/></th>
-            </tr>
-            <tr>
-                <th st-sort="Name">Name</th>
-                <th st-sort="Doctor">Doctor</th>
-                <th st-sort="Time">Check-in Time</th>
-            </tr>
+                <tr>
+                    <th colspan="5"><input st-search="" class="form-control" placeholder="Search ..." type="text"/></th>
+                </tr>
+                <tr>
+                    <th st-sort="Name">Name</th>
+                    <th st-sort="Doctor">Doctor</th>
+                    <th st-sort="Time">Check-in Time</th>
+                </tr>
             </thead>
             <tbody>
             <h4 ng-show="!checkIfEmptyTable()"> There are currently {{displayedCollection.length}} patients in database and fitting search criteria</h4>
