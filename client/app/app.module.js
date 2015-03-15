@@ -116,39 +116,42 @@ angular.module('robobetty', appendIonic(
   ionicCallback(IS_MOBILE);
 
   function initRunCallback($rootScope, $state, appConfig) {
-    // debugger
-    // $rootScope.$on('$stateChangeSuccess',
-    // function(event, toState, toParams, fromState, fromParams) {
+    debugger
+    $rootScope.$on('$stateChangeSuccess',
+    function(event, toState, toParams, fromState, fromParams) {
 
-    //   // Routing for mobile app
-    //   if(appConfig.isMobile) {
-    //     if(toState.mobile == false) {
-    //       $state.go("checkin");
-    //     }
-    //   }
+      // Routing for mobile app
+      if(appConfig.isMobile) {
+        if(toState.mobile == false) {
+          $state.go("checkin");
+        }
+      }
 
-    //   if(!appConfig.debugMode) {
-    //     if(!$rootScope.admin_id) {
-    //       if(toState.name != 'signin') {
-    //         $state.go("signin");
-    //       }
-    //     }
-    //   }
-    // });
+      if(!appConfig.debugMode) {
+        if(!$rootScope.admin_id) {
+          if(toState.name != 'signin') {
+            $state.go("signin");
+          }
+        }
+      }
+    });
   }
 
   function ionicCallback(isMobile, app) {
-    // if(isMobile) {
-    //   app.run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
-    //     initRunCallback($rootScope, $state, appConfig);
-    //   }]);
-    // } else {
-    //   app.run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
-    //       ionicPlatform.ready(
-    //         function() {
-    //           initRunCallback($rootScope, $state, appConfig);
-    //         }
-    //       );
-    //   }]);
-    // }
+    if(isMobile) {
+      app.run(['$rootScope', '$state', 'appConfig', function($rootScope, $state, appConfig){
+        initRunCallback($rootScope, $state, appConfig);
+      }]);
+    } else {
+      app.run(['$rootScope', '$state', 'appConfig', '$ionicPlatform', function($rootScope, $state, appConfig, $ionicPlatform){
+          ionicPlatform.ready(
+            function() {
+              if (window.StatusBar) {
+                return StatusBar.hide();
+              }
+              initRunCallback($rootScope, $state, appConfig);
+            }
+          );
+      }]);
+    }
   }
