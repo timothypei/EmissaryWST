@@ -7,6 +7,11 @@ angular.module('checkin')
         function redirectToCheckin() {
           console.log("redirecttoCheckin");
            $scope.form.submitted= false;
+
+          $scope.form.form_fields.forEach(function(field) {
+            field.field_value = '';
+          });
+
         }
           
           $scope.submit = function(){

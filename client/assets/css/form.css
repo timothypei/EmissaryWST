@@ -5,13 +5,13 @@
 }
 
 .form-fields-preview {
-	padding-left: 19px;
+	margin-right: auto;
 }
 
 input {
-	width: 95%;
-	height: 35px;
-	padding-left: 5px;
+  width: initial;
+	height: initial;
+	margin-top: 20px;
 }
 
 .require-radio {

@@ -97,13 +97,19 @@ angular.module('robobetty',
         parent: 'common',
         title: 'Themes',        
         templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html'
+      })
+      .state('settings',{
+        url: '/settings',
+        parent: 'common',
+        title: 'Settings',
+        templateUrl: 'views/components/dashboard/settings/views/settings.html'
       });
   })
   .run(['$rootScope', '$state', function($rootScope, $state){
     $rootScope.$on('$stateChangeSuccess', 
     function(event, toState, toParams, fromState, fromParams){
       if(!$rootScope.admin_id) {
-        if(toState.name != 'signin') {
+        if(toState.name != 'signin'&&toState.name!='register') {
       // debugger
           $state.go("signin");
         }
