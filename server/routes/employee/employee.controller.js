@@ -57,7 +57,7 @@ exports.insert = function(req, res) {
 exports.update = function(req, res) {
     Employee.findById(req.params.id, function (err, employee) {
       if(err)
-         res.json(err);
+         return res.status(400).json(err);
  
       employee.name = req.body.name || employee.name;
       employee.email = req.body.email || employee.email;
@@ -65,9 +65,8 @@ exports.update = function(req, res) {
       employee._admin_id = req.body._admin_id || employee._admin_id;
 
       employee.save(function(err) {
-        if(err) {
+        if(err)
           return res.status(400).json(err);
-        }
       });
       return res.status(200).send(employee);
    });

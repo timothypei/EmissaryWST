@@ -111,6 +111,13 @@ angular.module('robobetty', appendIonic(
         title: 'Themes',        
         templateUrl: 'views/components/dashboard/themes/views/dashboardIndex.html',
         mobile: false
+      })
+      .state('settings',{
+        url: '/settings',
+        parent: 'common',
+        title: 'Settings',
+        templateUrl: 'views/components/dashboard/settings/views/settings.html',
+        mobile: false
       });
   })
   ionicCallback(IS_MOBILE);
@@ -118,7 +125,6 @@ angular.module('robobetty', appendIonic(
   function initRunCallback($rootScope, $state, appConfig) {
     $rootScope.$on('$stateChangeSuccess',
     function(event, toState, toParams, fromState, fromParams) {
-
       // Routing for mobile app
       if(appConfig.isMobile) {
         if(toState.mobile == false) {
@@ -126,15 +132,18 @@ angular.module('robobetty', appendIonic(
         }
       }
 
+      // Routing for non-registered
       if(!appConfig.debugMode) {
         if(!$rootScope.admin_id) {
-          if(toState.name != 'signin') {
+          if(toState.name != 'signin' && toState.name != 'register') {
             $state.go("signin");
           }
         }
       }
+
     });
-  } 
+  }
+  
 
   function ionicCallback(isMobile) {
     if(!isMobile) {

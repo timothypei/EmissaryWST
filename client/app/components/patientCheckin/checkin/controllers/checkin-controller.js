@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('checkin')
-  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService', '$http', 'socket',
-    function($scope,$rootScope,$timeout,$location, CheckinService, $http, socket){
+  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService',
+    function($scope,$rootScope,$timeout,$location, CheckinService){
 
     $scope.clock = "loading clock..."; // initialize the time variable
     $scope.tickInterval = 1000; //ms
@@ -16,6 +16,8 @@ angular.module('checkin')
         $timeout(tick, $scope.tickInterval); // reset the timer
     }
 
+      //function that sets the background by using the getTheme method of the CheckinService
+      //also, uses the CheckinService to get the forms that the business wants to display
       $scope.init = function(){
         CheckinService.getTheme($rootScope.admin_id)
         .success(function(data){
@@ -29,32 +31,23 @@ angular.module('checkin')
           })
         .error(function(err){
           return err;
-        }
-          );
+        });
+          
+        //function that retrieves the form template for the current admin  
         CheckinService.getForms($rootScope.admin_id).success(
           function(data){
             data.template.submitted = false;
             $scope.form = data.template;
-            console.log("trying to post", $rootScope.admin_id);
-            $http.post('/api/patient/checkin', {_admin_id: $rootScope.admin_id, name: 'Brian Soe'})
-              .success(function(data, status, headers, config) {
-                console.log("success", data);
-                socket.emit('patient_added', data.queue.patients[data.queue.patients.length -1]);
-              })
-              .error(function(data, status, headers, config) {
-                console.log("error", data, status, headers);
-              });
             return data;
           })
-        .error(function(err){
-          return err;
-        }
-          );
+          .error(function(err){
+            return err;
+          });
       }
 
     //after user has finished check-in, go to a thank you page
     $scope.checkin = function(){
-        $location.path('/thankyouCheckIn');
+	    $location.path('/thankyouCheckIn');
     }
     // Start the timer
 
@@ -64,7 +57,7 @@ angular.module('checkin')
 
 //controller that handles the admin sign in from the check in screen
 angular.module('checkin')
-  .controller('admin_signinCtrl', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
+  .controller('admin_signinCtrl', ['$scope', '$rootScope', '$location', 'AuthService', 'CheckinService', function($scope, $rootScope, $location, AuthService, CheckinService){
     //user object that is used to store the email and password of the company, preset email so
     //admin only needs to type in password to get back to dashboard
     $scope.user = {email: $rootScope.email, password: ''};
@@ -79,7 +72,7 @@ angular.module('checkin')
         
       else{
           var account = this;
-          //calls the API to login using passing in a user object which has a email and password, displays
+          //calls the API to login passing in a user object which has a email and password, displays
           //error if login was unsuccessful
           AuthService.signin($scope.user)
          .success(function(data){
@@ -88,11 +81,11 @@ angular.module('checkin')
           }
             //redirects to the person's home page when a success
           else{  
-           $rootScope.token = data.token;
-           $rootScope.email = $scope.user.email;
-           
-             $location.path('../../../dashboard/views/dashboard.html');
-             return data;
+            $rootScope.token = data.token;
+            $rootScope.email = $scope.user.email;
+            CheckinService.closeModal();  // close the checkin modal
+            $location.path('../../../dashboard/views/dashboard.html');
+            return data;
           }
          })
          .error(function(err){

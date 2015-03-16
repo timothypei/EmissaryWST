@@ -37,7 +37,9 @@
                     </div>
                     <div class="row">
                         <div class="span2">Field Type:</div>
-                        <div class="span4">{{field.field_type}}</div>
+                        <div class="add-field">
+                            <select ng-model="field.field_type" ng-options="type.name as type.value for type in addField.types"></select>
+                        </div>
                     </div>
 
                     <div class="clear"></div> <hr>
@@ -107,13 +109,6 @@
         </p>
 
         <br><hr>
-
-
-
-        <div ng-show="showJson">
-            <h4>Form object content:</h4>
-            <pre>{{ form | json }}</pre>
-        </div>
     </div>
 
     <div class="form-fields-preview" style="display:inline-block; vertical-align:top;" ng-show="previewMode">

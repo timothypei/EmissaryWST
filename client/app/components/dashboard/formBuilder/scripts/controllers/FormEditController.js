@@ -41,8 +41,7 @@ angular.module('DashboardFormBuilderModule')
       "field_required" : true,
       "field_disabled" : false
     };
-
-
+    //$scope
     // put newField into fields array
     $scope.form.form_fields.push(newField);
     if($scope.previewMode == false) {
@@ -50,8 +49,13 @@ angular.module('DashboardFormBuilderModule')
     }
     $scope.form.submitted = false;
   };
-
-  
+  var removeOptions = function(){
+    for(var i = 0; i < $scope.form.form_fields.length; i++){
+          if($scope.form.form_fields[i].field_type != "radio" || $scope.addField.new != "dropdown"){
+              $scope.form.form_fields[i].field_options = [];
+          }
+        }
+  };
 // deletes particular field on button click
   $scope.deleteField = function (field_id){
     var modalInstance = $modal.open({
@@ -116,6 +120,8 @@ angular.module('DashboardFormBuilderModule')
 
    // posts form template as Json
   $scope.postJson = function (){
+
+    removeOptions();
     // object of this form template
     var formJson = $filter('json')($scope.form);
      var putJson = { 

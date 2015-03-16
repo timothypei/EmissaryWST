@@ -7,136 +7,65 @@ angular.module('dashboard')
 
     //How many milliseconds in a minute
     var MINUTE_VAL = 60000;
+    $scope.rowCollection = new Array();
+    $scope.patientqueue;
 
     //The maximum number of minutes patients should wait before warning notification pops up on queue
     var EXPECTED_WAITING_TIME = 20;
 
+    // add hardcoded patient
+    socket.emit("request_queue", $rootScope.admin_id);
+
     socket.on('request_id', function(){
+      console.log("on request_id", $rootScope.admin_id);
       if($rootScope.admin_id){
+        console.log($rootScope.admin_id);
         socket.emit('_admin_id', {_admin_id:$rootScope.admin_id});
       }else{
         console.log("Socket cannot connect. No AdminId Found.");
       }
     });
 
-    socket.on('queue_updated', function(data) { 
-      console.log("queueaaa", data);
-      console.log("rowCollection", $scope.rowCollection);
-      /*if(data){
-        $scope.rowCollection = [];
-        for(var i=0; i<data.length; i++){
-          $scope.rowCollection.push({
-            Name: data[i].name,
-            Doctor: DoctorService.getRandomDoctor(),
-            Time: data[i].checkin_time
-          });
-        }
-      }*/
-      //$scope.rowCollection = data;
-      //$scope.displayedCollection = $scope.rowCollection;
-    }); 
-
-    socket.on('patient_added', function(data) { 
+   /* socket.on('patient_added', function(data) { 
       console.log("patient addeeed", data);
       console.log("roww collection", $scope.rowCollection);
       var newDoctor = DoctorService.getRandomDoctor();
       $scope.rowCollection.push({
         Name: data.name,
         Doctor: newDoctor,
-        Time: data.checkin_time
+        Time: new Date(new Date(data.checkin_time).valueOf()-(MINUTE_VAL * 31)).toLocaleTimeString().replace(/:\d+ /, ' '),
+        TimeValue: new Date(new Date(data.checkin_time).valueOf()-(MINUTE_VAL * 31)).valueOf()
       });
       $scope.displayedCollection = $scope.rowCollection;
-    }); 
+    }); */
 
-    $scope.rowCollection = [
-      {
-        id: 1,
-        Name: "Meg Whitman",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 31)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 31)).valueOf()
-      },
-      
-      {
-        id: 2,
-        Name: "Pooja Sankar",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 27)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 27)).valueOf()
-      },
-      
-      {
-        id: 3,
-        Name: "Marissa Mayer",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 22)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 22)).valueOf()
-      },
-      {
-        id: 4,
-        Name: "Elizabeth Holmes",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 19)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 19)).valueOf()
-      },
-      {
-        id: 5,
-        Name: "Sam Altman",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 15)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 15)).valueOf()
-      },
-      {
-        id: 6,
-        Name: "Pooja Sankar",
-        Doctor: "Kua",
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 10)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 10)).valueOf()
-      },
-      {
-        id: 7,
-        Name: "Meg Whitman",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 7)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 7)).valueOf()
-      },
-      {
-        id: 8,
-        Name: "Marissa Mayer",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 6)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 6)).valueOf()
-      },
-      {
-        id: 9,
-        Name: "Martine Rothhblatt",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 4)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 4)).valueOf()
-      },
-      {
-        id: 10,
-        Name: "Elizabeth Holmes",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 4)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 4)).valueOf()
-      },
-      {
-        id: 11,
-        Name: "Angelique De Castro",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 2)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 2)).valueOf()
-      },
-      {
-        id: 12,
-        Name: "Sam Altman",
-        Doctor: DoctorService.getRandomDoctor(),
-        Time: new Date(d.valueOf()-(MINUTE_VAL * 1)).toLocaleTimeString().replace(/:\d+ /, ' '),
-        TimeValue: new Date(d.valueOf()-(MINUTE_VAL * 1)).valueOf()
+    socket.on('queue_updated', function(data) { 
+     console.log("queue updated received", data);
+       //console.log("patient length", data.patient.length);
+      $scope.rowCollection = [];
+      $scope.patientqueue = data;
+      var patientLength = 0;
+      if(data.patients == null){
+        patientLength = data.length;
       }
-      
-    ];
+      else{
+        patientLength = data.patients.length;   
+      }
+      console.log("patient length",patientLength);
+      var i =0;
+      for(i = 0;i<patientLength;i++){
+        $scope.rowCollection.push(
+        {
+          id: data.patients[i]._id,
+          Name: data.patients[i].name,
+          Doctor: DoctorService.getRandomDoctor(),
+          Time: new Date(new Date(data.patients[i].checkin_time).valueOf()-(MINUTE_VAL * 31)).toLocaleTimeString().replace(/:\d+ /, ' '),
+          TimeValue: new Date(new Date(data.patients[i].checkin_time).valueOf()-(MINUTE_VAL * 31)).valueOf()
+        });
+      }
+      console.log("rowCollection",$scope.rowCollection);
+      $scope.displayedCollection = $scope.rowCollection;
+   }); 
 
     //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
     $scope.displayedCollection = [].concat($scope.rowCollection);
@@ -170,9 +99,26 @@ angular.module('dashboard')
         $scope.row = result;
         var index = $scope.rowCollection.indexOf($scope.row);
         if (index !== -1) {
+          var patientName = $scope.rowCollection[index].Name;
+          console.log(patientName);
           $scope.rowCollection.splice(index, 1);
-          socket.emit('queue_updated', $scope.rowCollection);
+
+          var newQueue = [];
+          var patientqueueLength = $scope.rowCollection.length;
+          var a = 0;
+          for(a = 0;a<patientqueueLength;a++){
+              newQueue.push(
+              {
+                _admin_id:$rootScope.admin_id,
+                _id:$scope.rowCollection[a].id,
+                checkin_time: $scope.rowCollection[a].TimeValue,
+                name: $scope.rowCollection[a].Name
+              }
+            );
+          }
         }
+        $scope.patientqueue.patients = newQueue;
+        socket.emit('patient_removed', {queue: $scope.patientqueue, patientName: patientName});
       });
     };
 }]);
