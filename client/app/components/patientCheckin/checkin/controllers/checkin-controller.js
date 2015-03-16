@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('checkin')
-  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService', '$http', 'socket',
-    function($scope,$rootScope,$timeout,$location, CheckinService, $http, socket){
+  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService',
+    function($scope,$rootScope,$timeout,$location, CheckinService){
 
     $scope.clock = "loading clock..."; // initialize the time variable
     $scope.tickInterval = 1000; //ms
@@ -31,34 +31,23 @@ angular.module('checkin')
           })
         .error(function(err){
           return err;
-        }
-          );
+        });
           
         //function that retrieves the form template for the current admin  
         CheckinService.getForms($rootScope.admin_id).success(
           function(data){
             data.template.submitted = false;
             $scope.form = data.template;
-            console.log("trying to post", $rootScope.admin_id);
-            $http.post('/api/patient/checkin', {_admin_id: $rootScope.admin_id, name: 'Brian Soe'})
-              .success(function(data, status, headers, config) {
-                console.log("success", data);
-                socket.emit('patient_added', data.queue.patients[data.queue.patients.length -1]);
-              })
-              .error(function(data, status, headers, config) {
-                console.log("error", data, status, headers);
-              });
             return data;
           })
-        .error(function(err){
-          return err;
-        }
-          );
+          .error(function(err){
+            return err;
+          });
       }
 
     //after user has finished check-in, go to a thank you page
     $scope.checkin = function(){
-        $location.path('/thankyouCheckIn');
+	    $location.path('/thankyouCheckIn');
     }
     // Start the timer
 

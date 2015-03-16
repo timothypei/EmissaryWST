@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('checkin')
-  .service('CheckinService', ['$http', '$rootScope', function CheckinService($http, $rootScope) {
+  .service('CheckinService', ['$http', '$rootScope', 'socket', function CheckinService($http, $rootScope, socket) {
 
     var checkinModal = '';
 
@@ -38,9 +38,14 @@ angular.module('checkin')
           //  console.log("YAYYYY checkin ");
             //console.log($rootScope);
             console.log(patient_name);
-            return $http.post('api/patient/checkin', {
-                _admin_id: $rootScope.admin_id,
-                name : patient_name
+            $http.post('/api/patient/checkin', 
+              {_admin_id: $rootScope.admin_id, name: patient_name})
+            .success(function(data, status, headers, config) {
+              console.log("checkinsuccess", data);
+              socket.emit('patient_added', {patients: data.queue.patients});
+            })
+            .error(function(data, status, headers, config) {
+              console.log("error", data, status, headers);
             });
       };
     
