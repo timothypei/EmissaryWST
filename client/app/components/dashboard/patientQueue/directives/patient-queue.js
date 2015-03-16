@@ -20,9 +20,33 @@ angular.module('dashboard')
     });
 
     socket.on('queue_updated', function(data) { 
-     $scope.rowCollection = data;
-     $scope.displayedCollection = $scope.rowCollection;
-   }); 
+      console.log("queueaaa", data);
+      console.log("rowCollection", $scope.rowCollection);
+      /*if(data){
+        $scope.rowCollection = [];
+        for(var i=0; i<data.length; i++){
+          $scope.rowCollection.push({
+            Name: data[i].name,
+            Doctor: DoctorService.getRandomDoctor(),
+            Time: data[i].checkin_time
+          });
+        }
+      }*/
+      //$scope.rowCollection = data;
+      //$scope.displayedCollection = $scope.rowCollection;
+    }); 
+
+    socket.on('patient_added', function(data) { 
+      console.log("patient addeeed", data);
+      console.log("roww collection", $scope.rowCollection);
+      var newDoctor = DoctorService.getRandomDoctor();
+      $scope.rowCollection.push({
+        Name: data.name,
+        Doctor: newDoctor,
+        Time: data.checkin_time
+      });
+      $scope.displayedCollection = $scope.rowCollection;
+    }); 
 
     $scope.rowCollection = [
       {

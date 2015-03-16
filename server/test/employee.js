@@ -79,11 +79,11 @@ describe("Employee", function() {
       });
 
       // TEST GET ALL EMPLOYEES
-      describe('GET /api/employee/', function(){
+      describe('GET /api/employee/admin/:id', function(){
           it("should return all employees", function(done){
 
             request(url)
-              .get('/api/employee')
+              .get('/api/employee/admin/'+credentials.admin._id)
               .query({email: credentials.email, token: credentials.token})
               .send({
                 _admin_id: credentials.admin._id
