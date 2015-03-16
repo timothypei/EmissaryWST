@@ -18,7 +18,7 @@ module.exports.template.findByCompanyId =  function(req, res) {
     if(err)
       res.status(400).json({error: "There was an error finding the template form."});
     else
-      res.json(template);
+      res.status(200).json(template);
   });
 };
 
@@ -78,7 +78,7 @@ module.exports.template.create =  function(req, res) {
     if(err)
         res.status(400).json(err);
     else
-      res.json(template);
+      res.status(200).json(template);
   });
 };
 
@@ -93,7 +93,7 @@ module.exports.template.update =  function(req, res) {
           if(err)
             res.status(400).json({error: "There was an error updating a template."});
           else
-            res.json(template);
+            res.status(200).json(template);
       });
 };
 
@@ -109,10 +109,10 @@ module.exports.template.delete =  function (req, res) {
 
     TemplateForm.findOneAndRemove({_id: templateID}, function(err, result) {
       if(err) {
-        res.status(500).json({error: 'There was problem removing the form template'});
+        res.status(400).json({error: 'There was problem removing the form template'});
         return;
       }
-      res.json(result);
+      res.status(200).json(result);
     });
 };
 
@@ -125,7 +125,7 @@ module.exports.submitted_form.findById = function(req, res) {
       res.status(400).json({error: "An error occured while finding patient form"});
       return;
     }
-    res.json(submittedForm);
+    res.status(200).json(submittedForm);
   });
 };
 
@@ -141,7 +141,7 @@ module.exports.submitted_form.create = function(req, res) {
     if (err){
       res.status(400).json({error: "An error occured while saving the submitted form"});
     }
-    res.json(savedForm);
+    res.status(200).json(savedForm);
   });
 };
 
@@ -167,7 +167,7 @@ module.exports.submitted_form.findByPatientInfo = function(req, res) {
         res.status(400).json({error: "An error occured while finding patient form"});
         return;
       }
-      res.json(submittedForm);
+      res.status(200).json(submittedForm);
     });
   }
   else {
@@ -176,7 +176,7 @@ module.exports.submitted_form.findByPatientInfo = function(req, res) {
         res.status(400).json({error: "An error occured while finding patient forms"});
         return;
       }
-      res.json(submittedForms);
+      res.status(200).json(submittedForms);
     });
   }
 };
