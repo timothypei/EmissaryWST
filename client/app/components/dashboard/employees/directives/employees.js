@@ -9,7 +9,8 @@ angular.module('dashboard')
       controllerAs: 'employeeCtrl'
     };
   })
-  .controller('EmployeeController', ['$scope', '$window', '$modal', 'filterFilter', function ($scope, $window, $modal, filterFilter) {
+  .controller('EmployeeController', ['$scope', '$window', '$modal', 'filterFilter', '$http', '$rootScope',
+    function ($scope, $window, $modal, filterFilter, $http, $rootScope) {
     // include root slecope
 		$("#toaster").hide();					// Hide toaster
     $scope.rowCollection = [
@@ -250,14 +251,27 @@ angular.module('dashboard')
                 Name:result.Name,
                 PhoneNumber:'('+phone.substring(0,3)+') '+phone.substring(3,6)+'-'+phone.substring(6,10),
                 Email:result.Email
-            }
-            );
-				//on click show it
-				$("#toaster").fadeIn();
-				//5 second then hide it
-				setTimeout(function() {
-					$("#toaster").fadeOut();
-				}, 1000);
+            });
+			//on click show it
+            $("#toaster").fadeIn();
+			//5 second then hide it
+			setTimeout(function() {
+				$("#toaster").fadeOut();
+			}, 1000);
+
+            $http.post('/api/employee', 
+                {
+                _admin_id: $rootScope.admin_id,
+                name: result.Name,
+                email: result.Email,
+                phone_number: phone
+                })
+            .success(function(data, status, headers, config) {
+              console.log("Employee Added", data);
+            })
+            .error(function(data, status, headers, config) {
+              console.log("Employee failed to add", data, status, headers);
+            });
     	});
     }
 }]);
