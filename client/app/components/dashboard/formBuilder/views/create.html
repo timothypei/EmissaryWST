@@ -27,11 +27,13 @@
                     <span ng-class="{'text-muted': isDisabled}" class="ng-binding" ng-click="showDelete = false">{{field.field_title}}</span>
                 </accordion-heading>
                 <div class="accordion-edit">
-                    <button class="btn btn-danger pull-right" type="button" ng-click="showDelete = !showDelete" ng-show="!showDelete"><i class="icon-trash icon-white"></i> Delete</button>
-                    <div class="pull-right" ng-show="showDelete">
-                        <label>Are you sure?</label>
-                        <button class="btn btn-success" type="button" ng-click="deleteField(field.field_id)">Yes</button>
-                        <button class="btn btn-danger" type="button" ng-click="showDelete = !showDelete">No</button>
+                    <div ng-show="field.field_id != 1">
+                        <button class="btn btn-danger pull-right" type="button" ng-click="showDelete = !showDelete" ng-show="!showDelete"><i class="icon-trash icon-white"></i> Delete</button>
+                        <div class="pull-right" ng-show="showDelete">
+                            <label>Are you sure?</label>
+                            <button class="btn btn-success" type="button" ng-click="deleteField(field.field_id)">Yes</button>
+                            <button class="btn btn-danger" type="button" ng-click="showDelete = !showDelete">No</button>
+                        </div>
                     </div>
 
                     <div class="row">

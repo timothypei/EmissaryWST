@@ -8,15 +8,17 @@ h1{
   width: 150%;
 }
 #toDashboard{
-  margin-top: 10px;
   text-align: center;
   border-radius: 10px;
-  margin-left: 50px;
-  width: 120px;
-  height: 40px;
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
+  display: inline;
+  margin-left: 0;
+  margin-top: 5px;
+  width: 120px;
+  height: 25px;
+  float: left;
 }
 input{
   margin-left: auto;
@@ -27,16 +29,19 @@ input{
   height: 40px;
   color: black;
 }
-.foo {
+.checkInDiv {
     padding-top: 5%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center; 
+    background-size :100% 100%
 }
-
+.foo{
+  width:100%;
+  height:100%;
+}
 .form_container {
-  background-color: rgba(9, 41, 14, .8);
-  padding-top: 20px;
+  padding-top: 50px;
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 40px;
@@ -48,19 +53,39 @@ input{
   vertical-align: center;
   margin-bottom: 200px;
 }
-
+.inner{
+  background-color: rgba(9, 41, 14, .8);
+  max-width: 500px;
+  position: relative;
+  color: white;
+}
 .form-fields-actual {
   padding-left: 195px;
 }
 #settings{
-  max-width: 250px;
   background-color: rgba(9, 41, 14, .8);
   padding-left: 10px;
   padding-right: 10px;
   bottom: 60px;
   margin-left: 5%;
-  position: fixed;
+  position: absolute;
+  max-width: 100%;
+  width: 100%;
+  height: 35px;
+  right: 0;
+  top: 0;
 }
+
+#clock-container {
+  float: right;  
+}
+
+#clock {
+  right: 0;
+  margin-top: 8px;
+  font-size: 16px;
+}
+
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */
   position:absolute;
@@ -97,7 +122,8 @@ input[type=submit] {
   float: center;
   font-size: 18px;
   font-weight: bold;
-  color: black;
+  color: white;
+  padding: 5px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#3D8CC4), to(#3D8CC4));
   background-image: -moz-linear-gradient(top left 90deg, #3D8CC4 0%, #3D8CC4 100%);
   background-image: linear-gradient(top left 90deg, #3D8CC4 0%, #3D8CC4 100%);

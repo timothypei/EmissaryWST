@@ -2,26 +2,28 @@
 
 angular.module('signin')
   .controller('SigninController', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
-  	$scope.user = {email: '', password: ''};
-    $scope.errMessage ='';
-    console.log("test");
+  	$scope.user = {email: '', password: ''};    //variable to strore the users email and password they enter
+    $scope.errMessage ='';                      //The error message to display to the user if there is a problem
+      
     //this function is called when we press the login button
   	$scope.login = function(){
-      console.log("test");
+      //if there is not a @ or . in the email, then invalid
       if($scope.user.email.indexOf('@')==-1||$scope.user.email.indexOf('.')==-1){
         $scope.errMessage = 'Invalid Email/Password'
       }
+        
       else{
   		  var account = this;
-        //calls the API to login
+          
+          //calls the API to login, have to pass in user object that contains the email and password
   		  AuthService.signin($scope.user)
       	 .success(function(data){
+          //if API call worked but email-password combination doesn't exist
           if(data=='Oops! Wrong password'){
             $scope.errMessage = 'Invalid Email/Password'; 
           }
             //redirects to the person's home page when a success
           else{  
-            console.log(data);
            $rootScope.token = data.token;
            $rootScope.number = data.company_phone_number;
            $rootScope.company_name = data.company_name;
@@ -31,6 +33,8 @@ angular.module('signin')
         	 return data;
           }
       	 })
+          
+          //if API call was not successful
       	 .error(function(err){
           console.log("failure");
        	  	$scope.errMessage = 'Invalid Email/Password'; 

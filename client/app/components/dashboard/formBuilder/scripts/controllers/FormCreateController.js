@@ -24,7 +24,7 @@ angular.module('DashboardFormBuilderModule')
   $scope.addField = {};
   $scope.addField.types = FormService.fields;
   $scope.addField.new = $scope.addField.types[0].name;
-  $scope.addField.lastAddedID = 0;
+  $scope.addField.lastAddedID = 1;
 
   // accordion settings
   $scope.accordion = {};
@@ -35,7 +35,7 @@ angular.module('DashboardFormBuilderModule')
          
          success(function(data, status, headers, config) {
           console.log(data);
-           if (data != null){
+           if (typeof data.template !== 'undefined' && typeof data.template !== null && typeof data.template.form_fields !== 'undefined' && data.template.form_fields !== null){
 
               for(var i = 0; i < data.template.form_fields.length; i++)
               {
@@ -53,6 +53,23 @@ angular.module('DashboardFormBuilderModule')
               } else {
                 $scope.form.form_fields = [];
               }
+            } else {
+              console.log("New form");
+             var DefaultField            = {"field_id" : 1,
+                                            "field_title" : "Name",
+                                            "field_type" : "textfield",
+                                            "field_placeholder" : "Name",
+                                            "field_required" : true,
+                                            "field_disabled" : false,
+                                            "field_readonly" : true};
+              $scope.form.form_fields.push(DefaultField);
+              
+              if($scope.previewMode === false) {
+                $scope.previewMode = true;
+              }
+              $scope.form.submitted = false;
+              FormService.formData = $scope.form;
+
             }
            console.log(data);
 
@@ -80,7 +97,7 @@ angular.module('DashboardFormBuilderModule')
 
     // put newField into fields array
     $scope.form.form_fields.push(newField);
-    if($scope.previewMode == false) {
+    if($scope.previewMode === false) {
       $scope.previewMode = true;
     }
     $scope.form.submitted = false;
@@ -148,9 +165,9 @@ angular.module('DashboardFormBuilderModule')
   // deletes all the fields
   $scope.reset = function (){
     if($scope.form.form_fields !== null && $scope.form.form_fields.length !== 0) {
-        $scope.form.form_fields.splice(0, $scope.form.form_fields.length);
+        $scope.form.form_fields.splice(1, $scope.form.form_fields.length);
         $scope.addField.lastAddedID = 0;
-        $scope.previewMode = false;
+        $scope.previewMode = true;
         $scope.form.submitted = false;
     }
   };
