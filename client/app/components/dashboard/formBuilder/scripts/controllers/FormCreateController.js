@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('DashboardFormBuilderModule')
-  .controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $rootScope) {
+.controller('FormCreateController', function ($scope, $modal, FormService, $http, $filter, $rootScope) {
 
   $scope.templateId = 0;
   // preview form mode
@@ -29,7 +29,6 @@ angular.module('DashboardFormBuilderModule')
   // accordion settings
   $scope.accordion = {};
   $scope.accordion.oneAtATime = true;
-
 
   $scope.$on('$viewContentLoaded', function() {
         $http.get('/api/form/template/company/' + $rootScope.admin_id).
