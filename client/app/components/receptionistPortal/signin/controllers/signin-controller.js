@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('signin')
-  .controller('SigninController', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService){
+  .controller('SigninController', ['$scope', '$rootScope', '$location', 'AuthService', 'socket', function($scope, $rootScope, $location, AuthService, socket){
   	$scope.user = {email: '', password: ''};    //variable to strore the users email and password they enter
     $scope.errMessage ='';                      //The error message to display to the user if there is a problem
       
@@ -23,12 +23,13 @@ angular.module('signin')
             $scope.errMessage = 'Invalid Email/Password'; 
           }
             //redirects to the person's home page when a success
-          else{  
+          else{ 
            $rootScope.token = data.token;
            $rootScope.number = data.company_phone_number;
            $rootScope.company_name = data.company_name;
            $rootScope.admin_id = data.admin_id;
            $rootScope.email = $scope.user.email;
+           socket.emit('_admin_id', {_admin_id:$rootScope.admin_id});
         	 $location.path('../../../dashboard/views/dashboard.html');
         	 return data;
           }

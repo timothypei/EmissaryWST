@@ -9,9 +9,10 @@ angular.module('dashboard')
       controllerAs: 'employeeCtrl'
     };
   })
-  .controller('EmployeeController', ['$scope', '$window', '$modal', 'filterFilter', function ($scope, $window, $modal, filterFilter) {
+  .controller('EmployeeController', ['$scope', '$window', '$modal', 'filterFilter', '$http', '$rootScope',
+    function ($scope, $window, $modal, filterFilter, $http, $rootScope) {
     // include root slecope
-		$("#toaster").hide();					// Hide toaster
+	$("#toaster").hide();					// Hide toaster
     $scope.rowCollection = [
         {
             id: 1,
@@ -222,7 +223,35 @@ angular.module('dashboard')
     // removeMultiple helper function to return unselected rows
     $scope.removeMultipleFinal = function(row){
         $scope.rowCollection = filterFilter($scope.rowCollection, function(row){
-                return !row.selected;
+            if(row.selected){
+                $http.delete('/api/employee/' + row.id)
+                    .success(function(data, status, headers, config) {
+                        console.log("Removed id", data);
+                    })
+                    .error(function(data, status, headers, config) {
+                        console.log("Could not remove employee id.", data);
+                        console.log("Trying to remove from database by email");
+                        $http.get('/api/employee/admin/' + $rootScope.admin_id)
+                            .success(function(data, status, headers, config) {
+                                for(var j=0; j<data.length; j++){
+                                    if(row.Email == data[j].email){
+                                        console.log("Found! Removing ", row.Email);
+                                        $http.delete('/api/employee/' + data[j]._id)
+                                        .success(function(data, status, headers, config) {
+                                            console.log("Removed id", data);
+                                        })
+                                        .error(function(data, status, headers, config) {
+                                            console.log("Completely failed to remove employee", data);
+                                        });
+                                    }
+                                }
+                            })
+                            .error(function(data, status, headers, config) {
+                                console.log("Could not retrieve and remove emlpoyees", data);
+                            });
+                    });
+            } 
+            return !row.selected;
         });
     };
 
@@ -250,14 +279,30 @@ angular.module('dashboard')
                 Name:result.Name,
                 PhoneNumber:'('+phone.substring(0,3)+') '+phone.substring(3,6)+'-'+phone.substring(6,10),
                 Email:result.Email
-            }
-            );
-				//on click show it
-				$("#toaster").fadeIn();
-				//5 second then hide it
-				setTimeout(function() {
-					$("#toaster").fadeOut();
-				}, 2000);
+            });
+            
+			//on click show it
+            $("#toaster").fadeIn();
+			//5 second then hide it
+			setTimeout(function() {
+				$("#toaster").fadeOut();
+			}, 2000);
+
+            $http.post('/api/employee', 
+                {
+                _admin_id: $rootScope.admin_id,
+                name: result.Name,
+                email: result.Email,
+                phone_number: phone
+                })
+            .success(function(data, status, headers, config) {
+              console.log("Employee Added", data);
+              $scope.rowCollection[$scope.rowCollection.length -1].id = data._id;
+
+            })
+            .error(function(data, status, headers, config) {
+              console.log("Employee failed to add", data, status, headers);
+            });
     	});
     };
 }]);

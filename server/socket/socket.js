@@ -6,6 +6,8 @@ var io = require('socket.io')();
 var port = process.env.PORT || 3000;
 var exports = module.exports;
 
+var PatientQueue = require('../models/PatientQueue');
+
 /********** Socket IO Module **********/
 exports.createServer = function(io_in) {
     io = io_in;
@@ -31,15 +33,57 @@ exports.createServer = function(io_in) {
             adminID = data._admin_id;
             console.log('user connected to ' + adminID);
             socket.join(adminID);
+            PatientQueue.findOne({_admin_id: adminID}, function(err, q){
+                if(err)
+                    throw(err);
+                else
+                    exports.notifyNewQueue(admin, q ? q : []);
+            });
+        });
+
+        socket.on('request_queue', function(data) {
+            PatientQueue.findOne({_admin_id : adminID}, function(err, q){
+                if(err)
+                    throw(err);
+                else
+                    exports.notifyNewQueue(adminID, q ? q : []);
+            });
         });
 
         socket.on('disconnect', function() {
             console.log('user disconnected from ' + adminID);
         });
 
-        socket.on('queue_updated', function(queue) {
+        socket.on('patient_removed', function(data) {
             if(adminID == null) socket.emit('request_id');
-            io.to(adminID).emit('queue_updated', queue);
+            console.log(data.patientName);
+            if(!data.patientName) return;
+            console.log("remove name",data.patientName);
+            var patient = {
+                _admin_id: adminID,
+                name: data.patientName
+            };
+            var queue = {
+                _admin_id: adminID,
+                $pull: {"patients": patient}
+            };
+            PatientQueue.findOneAndUpdate(
+                {_admin_id: adminID},
+                queue,
+                {safe: true, upsert: true},
+                function(err, q) {
+                    if(err)
+                        throw(err)
+
+                }
+            );
+            io.to(adminID).emit('queue_updated', data.queue);
+
+        });
+
+        socket.on('patient_added', function(patient) {
+            if(adminID == null) socket.emit('request_id');
+            io.to(adminID).emit('queue_updated', patient);
         });
 
     });

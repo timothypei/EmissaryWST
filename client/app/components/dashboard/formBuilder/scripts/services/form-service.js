@@ -70,6 +70,7 @@ angular.module('DashboardFormBuilderModule').service('FormService', function For
             console.log(form);
             return $http.post('api/form/template/' + $rootScope.admin_id, {
                 template : form
+
             });
         }
     };
