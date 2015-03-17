@@ -15,13 +15,13 @@ describe("Notification", function() {
 
     it('It should send an email', function(done){
       this.timeout(9000);
-      Email.sendEmail(employees, done);
+      Email.sendEmail("Tony Montana", employees, done);
       //done();
     });
 
     it('It should send an text', function(done){
       this.timeout(9000);
-      TextModel.sendText(employees, done);
+      TextModel.sendText("Tony Montana", employees, done);
       //done();
     });
   }

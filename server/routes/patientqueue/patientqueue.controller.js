@@ -42,17 +42,17 @@ exports.checkin = function(req, res) {
                     var respond = function() {
                         i++;
                         if(i == 2) {
-                            res.json({queue: queue});
+                            res.status(200).json({queue: queue});
                         }
                     };
 
-                    Email.sendEmail(employees, function(){respond();});
-                    TextModel.sendText(employees, function(){respond();});
+                    Email.sendEmail(req.body.name, employees, function(){respond();});
+                    TextModel.sendText(req.body.name, employees, function(){respond();});
                 }
             );
 
             // New queue is sent to the socket
-            Socket.notifyNewQueue(req.body._admin_id, queue);
+            //Socket.notifyNewQueue(req.body._admin_id, queue);
         }
     );
 };

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('checkin')
-  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService', function($scope,$rootScope,$timeout,$location, CheckinService){
+  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService',
+    function($scope,$rootScope,$timeout,$location, CheckinService){
 
     $scope.clock = "loading clock..."; // initialize the time variable
     $scope.tickInterval = 1000; //ms
@@ -30,8 +31,7 @@ angular.module('checkin')
           })
         .error(function(err){
           return err;
-        }
-          );
+        });
           
         //function that retrieves the form template for the current admin  
         CheckinService.getForms($rootScope.admin_id).success(
@@ -40,15 +40,14 @@ angular.module('checkin')
             $scope.form = data.template;
             return data;
           })
-        .error(function(err){
-          return err;
-        }
-          );
+          .error(function(err){
+            return err;
+          });
       }
 
     //after user has finished check-in, go to a thank you page
     $scope.checkin = function(){
-        $location.path('/thankyouCheckIn');
+	    $location.path('/thankyouCheckIn');
     }
     // Start the timer
 

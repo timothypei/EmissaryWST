@@ -60,7 +60,7 @@ module.exports.template.authLogin = function(req, res) {
 		user.save(function(err, admin) {
 			if(err)
 				return res.status(400);
-			return res.json({token: newToken, admin_id: admin._id, company_name: admin.company_name, company_phone_number: admin.company_phone_number});
+			return res.status(200).json({token: newToken, admin_id: admin._id, company_name: admin.company_name, company_phone_number: admin.company_phone_number});
 		});
 	});
 };
@@ -98,6 +98,6 @@ module.exports.template.authResetCredentials = function(req, res) {
         res.status(400).send(err);
       }
     });
-    return res.sendStatus(200);
+    return res.status(200).json(admin);;
   });
 };
