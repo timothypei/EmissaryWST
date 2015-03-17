@@ -14,7 +14,7 @@ angular.module('dashboard')
       };
 
       this.getSidebarHeader = function(){
-      		return "RoboBetty";
+      		return "iReceptionist";
       };
 
   }]);
