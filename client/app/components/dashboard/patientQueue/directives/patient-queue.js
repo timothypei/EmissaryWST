@@ -75,12 +75,12 @@ angular.module('dashboard')
         var currTime = (new Date()).valueOf();
         return ((currTime - checkin) >= (MINUTE_VAL * EXPECTED_WAITING_TIME));
 
-    }
+    };
 
     //Checks if no results from search
     $scope.checkIfEmptyTable = function(){
-        return ($scope.displayedCollection.length == 0);
-    }
+        return ($scope.displayedCollection.length === 0);
+    };
     
     //remove to the real data holder modal
     $scope.removeItem = function(row){
