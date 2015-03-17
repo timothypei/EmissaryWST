@@ -30,6 +30,11 @@
 .edit-input{ /* format edit field */
   width:14em; 
 }
+
+.fa{
+  cursor:pointer;
+}
+
 .st-sort-ascent i:before {
     content:  "\f0de";
     font-family: FontAwesome;
