@@ -65,55 +65,55 @@ angular.module('dashboard')
 				{
             id: 9,
             Name: "Mandy Ngo",
-            PhoneNumber: "(123)456-789",
+            PhoneNumber: "(123) 456-789",
             Email: "mandyngo@ucsd.edu"
         },
 				{
             id: 10,
             Name: "John Smith",
-            PhoneNumber: "(626)484-0871",
+            PhoneNumber: "(626) 484-0871",
             Email: "johnsmith@ucsd.edu"
         },
         {
             id: 11,
             Name: "Kevin Zhang",
-            PhoneNumber: "(345)982-2390",
+            PhoneNumber: "(345) 982-2390",
             Email: "kevingz@ucsd.edu"
         },
         {
             id: 12,
             Name: "Karen Lo",
-            PhoneNumber: "(019)348-8210",
+            PhoneNumber: "(019) 348-8210",
             Email: "karenlo@ucsd.edu"
         },
         {
             id: 13,
             Name: "Wesley Yao",
-            PhoneNumber: "(938)231-1133",
+            PhoneNumber: "(938) 231-1133",
             Email: "Wesyao@ucsd.edu"
         },
         {
             id: 14,
             Name: "Dylan Moz",
-            PhoneNumber: "(342)930-1232",
+            PhoneNumber: "(342) 930-1232",
             Email: "dylanmoz@ucsd.edu"
         },
         {
             id: 15,
             Name: "Eduardo Aguilar",
-            PhoneNumber: "(234)458-2343",
+            PhoneNumber: "(234) 458-2343",
             Email: "edag@ucsd.edu"
         },
         {
             id: 16,
             Name: "Krishna Kolli",
-            PhoneNumber: "(257)432-2343",
+            PhoneNumber: "(257) 432-2343",
             Email: "Krishna@ucsd.edu"
         },
         {
             id: 17,
             Name: "Jason Tan",
-            PhoneNumber: "(234)458-2343",
+            PhoneNumber: "(234) 458-2343",
             Email: "jason@ucsd.edu"
         },
 				{
@@ -125,31 +125,31 @@ angular.module('dashboard')
 				{
             id: 19,
             Name: "Phat Huynh",
-            PhoneNumber: "(257)432-2343",
+            PhoneNumber: "(257) 432-2343",
             Email: "phat@ucsd.edu"
         },
         {
             id: 20,
             Name: "Jason Wang",
-            PhoneNumber: "(234)458-2343",
+            PhoneNumber: "(234) 458-2343",
             Email: "jason@ucsd.edu"
         },
 				{
             id: 21,
             Name: "John Doe",
-            PhoneNumber: "(123)456-789",
+            PhoneNumber: "(123) 456-789",
             Email: "John@ucsd.edu"
         },
 				{
             id: 22,
             Name: "Patient One",
-            PhoneNumber: "(234)458-2343",
+            PhoneNumber: "(234) 458-2343",
             Email: "patient1@ucsd.edu"
         },
 				{
             id: 23,
             Name: "Patient Two",
-            PhoneNumber: "(123)456-789",
+            PhoneNumber: "(123) 456-789",
             Email: "patient2@ucsd.edu"
         }
 				
@@ -163,8 +163,8 @@ angular.module('dashboard')
 
     
     $scope.checkIfEmptyTable = function(){
-        return ($scope.displayedCollection.length == 0);
-    }
+        return ($scope.displayedCollection.length === 0);
+    };
 
     //edit a row
     $scope.editRowCollection = function(row) {
@@ -218,7 +218,7 @@ angular.module('dashboard')
             $scope.selectedEmployees = result;
             $scope.removeMultipleFinal($scope.selectedEmployees);
           });
-    }
+    };
 
     // removeMultiple helper function to return unselected rows
     $scope.removeMultipleFinal = function(row){
@@ -253,7 +253,7 @@ angular.module('dashboard')
             } 
             return !row.selected;
         });
-    }
+    };
 
     //add employee info
     $scope.submitForm = function(row){
@@ -262,7 +262,7 @@ angular.module('dashboard')
       $scope.addForm.name.$setPristine();
       $scope.addForm.number.$setPristine();
       $scope.addForm.email.$setPristine();
-    }
+    };
 
     //open add employee form
     $scope.openModal = function(){
@@ -280,12 +280,13 @@ angular.module('dashboard')
                 PhoneNumber:'('+phone.substring(0,3)+') '+phone.substring(3,6)+'-'+phone.substring(6,10),
                 Email:result.Email
             });
+            
 			//on click show it
             $("#toaster").fadeIn();
 			//5 second then hide it
 			setTimeout(function() {
 				$("#toaster").fadeOut();
-			}, 1000);
+			}, 2000);
 
             $http.post('/api/employee', 
                 {
@@ -303,7 +304,7 @@ angular.module('dashboard')
               console.log("Employee failed to add", data, status, headers);
             });
     	});
-    }
+    };
 }]);
 	
 	
