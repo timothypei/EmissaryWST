@@ -54,10 +54,15 @@ input{
   margin-bottom: 200px;
 }
 .inner{
-  background-color: rgba(9, 41, 14, .8);
-  max-width: 500px;
-  position: relative;
-  color: white;
+background-color: rgba(9, 41, 14, .8);
+max-width: 1000px;
+position: relative;
+color: white;
+padding-left: 30px;
+padding-top: 20px;
+margin-top: 40px;
+padding-bottom: 30px;
+padding-right: 30px;
 }
 .form-fields-actual {
   padding-left: 195px;
