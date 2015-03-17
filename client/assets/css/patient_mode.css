@@ -2,10 +2,9 @@ html, body, .ng-scope{
   height:100%;
 }
 
-h1{
+h3{
   color:white;
-  text-align: left;
-  width: 150%;
+  text-align: center;
 }
 #toDashboard{
   text-align: center;
@@ -54,12 +53,15 @@ input{
   margin-bottom: 200px;
 }
 .inner{
-  background-color: rgba(9, 41, 14, .8);
-  max-width: 500px;
-  position: relative;
-  color: white;
-  padding: 40px;
-  margin-top: 55px;
+background-color: rgba(9, 41, 14, .8);
+max-width: 1000px;
+position: relative;
+color: white;
+padding-left: 30px;
+padding-top: 20px;
+margin-top: 40px;
+padding-bottom: 30px;
+padding-right: 30px;
 }
 .form-fields-actual {
   padding-left: 195px;
@@ -86,6 +88,7 @@ input{
   right: 0;
   margin-top: 8px;
   font-size: 16px;
+  color:white;
 }
 
 .ng-modal-overlay {
