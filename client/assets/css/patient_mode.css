@@ -2,10 +2,9 @@ html, body, .ng-scope{
   height:100%;
 }
 
-h1{
+h3{
   color:white;
-  text-align: left;
-  width: 150%;
+  text-align: center;
 }
 #toDashboard{
   text-align: center;
