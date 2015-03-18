@@ -22,7 +22,7 @@ angular.module('checkin')
         CheckinService.getTheme($rootScope.admin_id)
         .success(function(data){
           if(data=="null"||data.background_img=="default"){
-            $scope.background_image="../images/themes/city0.jpg";
+            $scope.background_image="images/themes/city0.jpg";
           }
           else{
             $scope.background_image=data.background_img;
