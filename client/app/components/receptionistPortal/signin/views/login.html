@@ -17,9 +17,10 @@
 				<input type="password" ng-model="user.password" placeholder="Password">		
 				<div id="lower">
 					<input type="submit" value="Sign In">
-                    <input type="checkbox" id="signinCheck"><label class="check" for="checkbox"> Remember Me </label>
+                    <input ng-show="!appConfig.isMobile" type="checkbox" id="signinCheck">
+                    <label ng-show="!appConfig.isMobile" class="check" for="checkbox"> Remember Me </label>
 
-					<a href="#/recovery" id="help">Forgot Password?</a>
+					<a ng-show="!appConfig.isMobile" href="#/recovery" id="help">Forgot Password?</a>
 
 				</div>
 			
@@ -29,7 +30,7 @@
 			</div>
 
 		</div>
-		<div class="register">
+		<div ng-show="!appConfig.isMobile" class="register">
 			<a href="#/register">Create an account</a> 
 		</div>
 	</div>

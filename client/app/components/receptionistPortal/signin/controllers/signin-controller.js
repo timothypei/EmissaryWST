@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('signin')
-  .controller('SigninController', ['$scope', '$rootScope', '$location', 'AuthService', 'socket', function($scope, $rootScope, $location, AuthService, socket){
+  .controller('SigninController', ['$scope', '$rootScope', '$location', 'AuthService', 'socket', 'appConfig',
+    function($scope, $rootScope, $location, AuthService, socket, appConfig){
   	$scope.user = {email: '', password: ''};    //variable to strore the users email and password they enter
     $scope.errMessage ='';                      //The error message to display to the user if there is a problem
-      
+    $scope.appConfig = appConfig;
     //this function is called when we press the login button
   	$scope.login = function(){
       //if there is not a @ or . in the email, then invalid
