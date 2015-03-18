@@ -28,12 +28,14 @@
 			<div style = "background-image: url({{background_image}}); background-size :100% 100%; width:100%; height:100%; position:fixed;">
 			</div>
 			<div class="form_container">
-				<div class="inner">	
-					<form id="leonli" ng-submit="checkin()">		
-					    <div class="form-fields-preview" >
-					        <patient-form-directive form="form"></patient-form-directive>
-					    </div>
-					</form>
+				<div class="inner">
+					<div class="inner-field-wrapper">
+						<form id="leonli" ng-submit="submit()">		
+						    <div class="form-fields-preview" >
+						        <patient-form-directive form="form"></patient-form-directive>
+						    </div>
+						</form>
+					</div>
 				</div>
 			</div>
 			<div id = "settings">
@@ -45,11 +47,12 @@
 	    			<form ng-submit="checkin()">		
 	        			<div class="modal-body">
 							<img class="logo" src="images/logo.png">
-							<input type="password" ng-model="user.password" placeholder="Password">		
+							<h1>Admin Sign In</h1>
+							<input type="password" ng-model="user.password" placeholder="Password" style="padding-left: 8px">		
 	        			</div>
 	        			<div class="modal-footer">
 	        				<p id="error_message">{{errMessage}}</p>
-	            			<input type="submit" value="Admin Sign In">
+	            			<input type="submit" value="Admin Sign In" style="font-style: normal">
 	        			</div>
 	    			</form>
 	    		</div>
