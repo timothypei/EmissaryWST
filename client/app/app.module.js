@@ -125,13 +125,6 @@ angular.module('robobetty', appendIonic(
   function initRunCallback($rootScope, $state, appConfig) {
     $rootScope.$on('$stateChangeSuccess',
     function(event, toState, toParams, fromState, fromParams) {
-      // Routing for mobile app
-      if(appConfig.isMobile) {
-        if(toState.mobile == false) {
-          $state.go("checkin");
-        }
-      }
-
       // Routing for non-registered
       if(!appConfig.debugMode) {
         if(!$rootScope.admin_id) {
@@ -140,7 +133,12 @@ angular.module('robobetty', appendIonic(
           }
         }
       }
-
+      // Routing for mobile app
+      if(appConfig.isMobile) {
+        if(toState.mobile == false) {
+          $state.go("checkin");
+        }
+      }
     });
   }
   

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('checkin')
-  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService',
-    function($scope,$rootScope,$timeout,$location, CheckinService){
+  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService', 'appConfig',
+    function($scope,$rootScope,$timeout,$location, CheckinService, appConfig){
 
     $scope.clock = "loading clock..."; // initialize the time variable
     $scope.tickInterval = 1000; //ms
