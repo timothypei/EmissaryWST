@@ -12,7 +12,7 @@ angular.module('dashboard')
   .controller('EmployeeController', ['$scope', '$window', '$modal', 'filterFilter', '$http', '$rootScope',
     function ($scope, $window, $modal, filterFilter, $http, $rootScope) {
     // include root slecope
-	$("#toaster").hide();					// Hide toaster
+    $("#toaster").hide();                   // Hide toaster
     $scope.rowCollection = [
         {
             id: 1,
@@ -62,13 +62,13 @@ angular.module('dashboard')
             PhoneNumber: "(234) 458-2343",
             Email: "dmariano@ucsd.edu"
         },
-				{
+                {
             id: 9,
             Name: "Mandy Ngo",
             PhoneNumber: "(123) 456-789",
             Email: "mandyngo@ucsd.edu"
         },
-				{
+                {
             id: 10,
             Name: "John Smith",
             PhoneNumber: "(626) 484-0871",
@@ -116,13 +116,13 @@ angular.module('dashboard')
             PhoneNumber: "(234) 458-2343",
             Email: "jason@ucsd.edu"
         },
-				{
+                {
             id: 18,
             Name: "Connor Nicholson",
             PhoneNumber: "(123)456-789",
             Email: "Nick@ucsd.edu"
         },
-				{
+                {
             id: 19,
             Name: "Phat Huynh",
             PhoneNumber: "(257) 432-2343",
@@ -134,25 +134,25 @@ angular.module('dashboard')
             PhoneNumber: "(234) 458-2343",
             Email: "jason@ucsd.edu"
         },
-				{
+                {
             id: 21,
             Name: "John Doe",
             PhoneNumber: "(123) 456-789",
             Email: "John@ucsd.edu"
         },
-				{
+                {
             id: 22,
             Name: "Patient One",
             PhoneNumber: "(234) 458-2343",
             Email: "patient1@ucsd.edu"
         },
-				{
+                {
             id: 23,
             Name: "Patient Two",
             PhoneNumber: "(123) 456-789",
             Email: "patient2@ucsd.edu"
         }
-				
+                
     ];
 
     var id = 1;
@@ -170,12 +170,15 @@ angular.module('dashboard')
     $scope.editRowCollection = function(row) {
         $scope.editing = $scope.rowCollection.indexOf(row);
         $scope.newField = angular.copy(row);
+        var phone = row.PhoneNumber;
+        if(row.PhoneNumber.indexOf('(') == -1 )
+            row.PhoneNumber = '('+phone.substring(0,3)+') '+phone.substring(3,6)+'-'+phone.substring(6,10);
     };
     
     // cancel editing
     $scope.cancel = function(row) {
-    	$scope.rowCollection[$scope.editing] = $scope.newField;
-    	$scope.displayedCollection = $scope.rowCollection;
+        $scope.rowCollection[$scope.editing] = $scope.newField;
+        $scope.displayedCollection = $scope.rowCollection;
     };
 
     //remove employee confirmation modal
@@ -266,27 +269,27 @@ angular.module('dashboard')
 
     //open add employee form
     $scope.openModal = function(){
-    	var modalInstance = $modal.open({
-    		templateUrl: 'views/components/dashboard/employees/views/employees-modal.html',
-    		controller: 'EmployeeModalController',
-    		size: 'md',
-    		backdrop: true,
-    		resolve: {}
-    	}).
-    	result.then(function(result){
+        var modalInstance = $modal.open({
+            templateUrl: 'views/components/dashboard/employees/views/employees-modal.html',
+            controller: 'EmployeeModalController',
+            size: 'md',
+            backdrop: true,
+            resolve: {}
+        }).
+        result.then(function(result){
             var phone = result.PhoneNumber;
-    		$scope.rowCollection.unshift(result = {
+            $scope.rowCollection.unshift(result = {
                 Name:result.Name,
                 PhoneNumber:'('+phone.substring(0,3)+') '+phone.substring(3,6)+'-'+phone.substring(6,10),
                 Email:result.Email
             });
             
-			//on click show it
+            //on click show it
             $("#toaster").fadeIn();
-			//5 second then hide it
-			setTimeout(function() {
-				$("#toaster").fadeOut();
-			}, 2000);
+            //5 second then hide it
+            setTimeout(function() {
+                $("#toaster").fadeOut();
+            }, 2000);
 
             $http.post('/api/employee', 
                 {
@@ -303,8 +306,6 @@ angular.module('dashboard')
             .error(function(data, status, headers, config) {
               console.log("Employee failed to add", data, status, headers);
             });
-    	});
+        });
     };
 }]);
-	
-	

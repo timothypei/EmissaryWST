@@ -1,10 +1,14 @@
 .center{ /* format name field */
-    padding-top:.8em;
+    padding-top:.3em;
+}
+
+.center-checkbox{
+  padding-top:.8em;
 }
 
 #employees-table{
     height:37em;
-		overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 .employee{
@@ -24,8 +28,13 @@
 }
 
 .edit-input{ /* format edit field */
-	width:14em;	
+  width:14em; 
 }
+
+.fa{
+  cursor:pointer;
+}
+
 .st-sort-ascent i:before {
     content:  "\f0de";
     font-family: FontAwesome;
