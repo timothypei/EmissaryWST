@@ -1,4 +1,4 @@
-var IS_MOBILE = true;
+// var IS_MOBILE = true;
 
 angular.module("robobetty")
     .constant("appConfig", {
