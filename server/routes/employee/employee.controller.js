@@ -8,12 +8,6 @@ var express = require('express');
 var router = express.Router();
 var exports = module.exports;
 
-/* need this to enable cross origin resource sharing.If disabled, we might
- * not need this later. This is just to get the example to work
- * when front end is served from a something other than our app server.
- */
-var cors = require('cors');
-
 var Employee = require('../../models/Employee');
 
 exports.getAllEmployees = function(req, res) {

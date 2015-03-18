@@ -5,6 +5,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var cors = require('cors');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
@@ -49,7 +50,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../dist')));
 
-
+app.use(cors());
 require('./routes')(app);
 
 /*
