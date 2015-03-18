@@ -14,6 +14,10 @@ input {
 	margin-top: 20px;
 }
 
+textarea {
+	color: black;
+}
+
 .require-radio {
 	width: 13px;
 	height: 13px;
@@ -35,7 +39,10 @@ label {
    float:center;
 }
 #tyLogo{
-    padding-left: 29%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 217px;
 }
 #tyText{
     text-align: center;
@@ -43,4 +50,19 @@ label {
 }
 #tyDiv{
     margin: auto;   
+}
+
+.required-error {
+  	display: inline;
+  	color: red;
+  	font-size: smaller;
+}
+
+.span4 input {
+	display: inline;
+	padding-left: 8px;
+}
+
+.span2 {
+	margin-bottom: 0 !important;
 }
