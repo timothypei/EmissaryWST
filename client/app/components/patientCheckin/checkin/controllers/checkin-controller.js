@@ -3,7 +3,7 @@
 angular.module('checkin')
   .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService', 'appConfig',
     function($scope,$rootScope,$timeout,$location, CheckinService, appConfig){
-
+    $scope.appConfig = appConfig;
     $scope.clock = "loading clock..."; // initialize the time variable
     $scope.tickInterval = 1000; //ms
       

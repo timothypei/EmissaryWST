@@ -5,8 +5,6 @@ angular.module('robobetty')
 .factory('middleware', function(appConfig, BACKEND_NAMESPACE) {
 	return {
 		request: function(config) {
-			
-			console.log("reachd interceptors");
 			if(appConfig.isMobile) {
 		            // Check if config url starts with views namespace
 		        var shouldAppend = false;
@@ -17,7 +15,7 @@ angular.module('robobetty')
 		        }
 		        for(var i = 0; i < BACKEND_NAMESPACE.length; i++) {
 		        	if(config.url.indexOf(BACKEND_NAMESPACE[i]) == 0) {
-		        		console.log(BACKEND_NAMESPACE[i] + " " +  config.url);
+		        		if(appConfig.debugMode) console.log(BACKEND_NAMESPACE[i] + " " +  config.url);
 		        		shouldAppend = true;
 		        	}
 		        }
