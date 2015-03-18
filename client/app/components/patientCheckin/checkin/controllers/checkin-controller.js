@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('checkin')
-  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService',
-    function($scope,$rootScope,$timeout,$location, CheckinService){
-
+  .controller('CheckinController', ['$scope', '$rootScope','$timeout', '$location', 'CheckinService', 'appConfig',
+    function($scope,$rootScope,$timeout,$location, CheckinService, appConfig){
+    $scope.appConfig = appConfig;
     $scope.clock = "loading clock..."; // initialize the time variable
     $scope.tickInterval = 1000; //ms
       
@@ -22,7 +22,7 @@ angular.module('checkin')
         CheckinService.getTheme($rootScope.admin_id)
         .success(function(data){
           if(data=="null"||data.background_img=="default"){
-            $scope.background_image="../images/themes/city0.jpg";
+            $scope.background_image="images/themes/city0.jpg";
           }
           else{
             $scope.background_image=data.background_img;

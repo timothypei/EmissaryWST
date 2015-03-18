@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div id = "settings">
-                <button type="button" id='toDashboard' ng-click="open()"> Admin Sign In </button>
+                <button type="button" id='toDashboard' ng-show="!appConfig.isMobile" ng-click="open()"> Admin Sign In </button>
 				<div id="clock-container"><h1 id="clock">{{clock | date: 'hh:mm:ss a'}}</h1></div>
 			</div>
 	    	<script type="text/ng-template" id="myModalContent.html">
