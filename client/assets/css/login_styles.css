@@ -7,14 +7,15 @@
 
 /* Selections */
 
-::selection {
- 	color: #fff;
+::selection { 
+	color: #222;
  	text-shadow: none;
- 	background: #fff;
+ 	background: #FFCC89;
 }
 
 ::-moz-selection {
- 	color: #fff;
+	color: #222;
+ 	background: #FFCC89;
  	text-shadow: none;
 }
 

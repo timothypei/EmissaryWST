@@ -13,7 +13,10 @@ angular.module('dashboard')
   				{doctor:'Soe'},
 					{doctor:'Pepper'},
   				{doctor:'Kanye'},
-  				{doctor:'West'}
+  				{doctor:'Ly'},
+          {doctor:'Douglas'},
+  				{doctor:'Chen'},
+  				{doctor:'West'},
   			];
 
       this.getAllDoctors = function() {

@@ -45,12 +45,7 @@ angular.module('checkin')
           });
       }
 
-    //after user has finished check-in, go to a thank you page
-    $scope.checkin = function(){
-	    $location.path('/thankyouCheckIn');
-    }
     // Start the timer
-
     $timeout(tick, $scope.tickInterval);
   }]);
 
