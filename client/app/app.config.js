@@ -3,6 +3,6 @@
 angular.module("robobetty")
     .constant("appConfig", {
         isMobile: IS_MOBILE || false, 
-        baseUrl: "http://blue-jay-dev.herokuapp.com/",
+        baseUrl: "https://blue-jay.herokuapp.com/",
         debugMode: false
     });
