@@ -1,10 +1,10 @@
-# robo_betty_alpha [![Build Status](https://travis-ci.org/bluejay112/robo_betty_alpha.svg?branch=master)](https://travis-ci.org/bluejay112/robo_betty_alpha)
-
+# robo_betty_alpha [![Build Status](https://travis-ci.org/bluejay112/robo_betty_alpha.svg?branch=development)](https://travis-ci.org/bluejay112/robo_betty_alpha)
 
 # How to install
 1. `npm install -g gulp bower foreman`
 2. make sure you are in the robo_betty_alpha repo dir
 3. `npm install`
+4. If npm install fails, try to remove the `node_modules` dir and `client/bower_components` dir
 
 
 # You will need a .env file. Ask team leads about this
@@ -20,12 +20,15 @@ This server will solely serve your angular files. This will not run our backend.
 This server will also be updated when you changed one of the source files.
 
 # How to run backend portion only
-2. `gulp clean`
-1. `nf start web`
+1. `gulp backend`
 
 This will only start up the backend. You can use this to quickly test API
 routes.
 
 # How To run entire app with our backend
-1. `gulp build`
+1. `gulp build:dev`
 2. `nf start web`
+
+# If you want to run our backend while watching for changes to the frontend
+1. Run our entire app with our backend with the steps above
+2. In a separate terminal run `gulp frontend:combined`
