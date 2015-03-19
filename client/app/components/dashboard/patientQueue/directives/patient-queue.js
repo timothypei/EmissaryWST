@@ -59,8 +59,8 @@ angular.module('dashboard')
           id: data.patients[i]._id,
           Name: data.patients[i].name,
           Doctor: DoctorService.getRandomDoctor(),
-          Time: new Date(new Date(data.patients[i].checkin_time).valueOf()-(MINUTE_VAL * 31)).toLocaleTimeString().replace(/:\d+ /, ' '),
-          TimeValue: new Date(new Date(data.patients[i].checkin_time).valueOf()-(MINUTE_VAL * 31)).valueOf()
+          Time: new Date(new Date(data.patients[i].checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' '),
+          TimeValue: new Date(data.patients[i].checkin_time).valueOf()
         });
       }
       console.log("rowCollection",$scope.rowCollection);
