@@ -1,21 +1,16 @@
 language: node_js
-
 node_js:
-  - '0.10'
-
+- '0.10'
 services:
-  - mongodb
-
+- mongodb
 deploy:
   provider: heroku
   api_key:
-    secure: g87qWDXm7YqnF4Uc2yEl4Ln3ts3st54OOoHo7EDHupiaARZrXzfP7R2M2GAv/BV6ZQOH8Op5ie6G8MF7v9SJYlGLAxoqLYH/yHuB/oWZSrCa5CCIPCijm42XJB9ntUQVo4E6WU6v+gDvIxpFerno/mR+RAcwVr0IXqXQsdvNGG0=
+    secure: pcti8CjFZjbz0mNgf8T//yEqRBUMLlLybo3C6dox9hoBZaEq5ESfOzXzHbVkerVEWqOk2UXRCN8P2A5KqCn4jEEhYEi7t1uvFBFYIUmFpyILDil/fk+9qy+DPzE1U+tfLiTPeYjKEAbljszRX/22mtOdoB4hntQ577ycPlFDBZQ=
   app:
-    master: blue-jay
-    development: blue-jay-dev
+    master: cse112bluejay
   on:
     repo: bluejay112/robo_betty_alpha
-
 notifications:
   email: false
   slack:
