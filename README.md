@@ -1,5 +1,8 @@
 # robo_betty_alpha [![Build Status](https://travis-ci.org/bluejay112/robo_betty_alpha.svg?branch=development)](https://travis-ci.org/bluejay112/robo_betty_alpha)
 
+# Update 1/12/16 for CSE112 Winter 2016 Students
+Use https://cse112bluejay.herokuapp.com/ to access last years version of the app. Happy Refactoring!
+
 # How to install
 1. `npm install -g gulp bower foreman`
 2. make sure you are in the robo_betty_alpha repo dir
