@@ -10,7 +10,7 @@ deploy:
   app:
     master: cse112bluejay
   on:
-    repo: bluejay112/robo_betty_alpha
+    repo: thiefjack/WebStormTroopers
 notifications:
   email: false
   slack:
