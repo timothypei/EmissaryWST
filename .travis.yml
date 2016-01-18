@@ -6,7 +6,7 @@ services:
 deploy:
   provider: heroku
   api_key:
-    secure: pcti8CjFZjbz0mNgf8T//yEqRBUMLlLybo3C6dox9hoBZaEq5ESfOzXzHbVkerVEWqOk2UXRCN8P2A5KqCn4jEEhYEi7t1uvFBFYIUmFpyILDil/fk+9qy+DPzE1U+tfLiTPeYjKEAbljszRX/22mtOdoB4hntQ577ycPlFDBZQ=
+    secure: FAKE_API_KEY
   app:
     master: cse112bluejay
   on:
@@ -14,4 +14,4 @@ deploy:
 notifications:
   email: false
   slack:
-    secure: TKgtzE3PEhWb2cqlQPZEzr/nhyZrftui3Z+G70bXW50NbOMiqD8oOvifQpDzT/a6QxgEMybfmbTz76W7VKmC9PlWW77w/h4lh7A6lBriFRJv72n01c70oTofoRuhI7kqt6S8vIz1wGmiLFPufznaCzMpLuNukqGiJ05PJFap7cI=
+    secure: FAKE_SLACK_KEY
