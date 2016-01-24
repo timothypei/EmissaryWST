@@ -32,9 +32,13 @@ app.use(morgan('dev', {"stream": winstonConfig.stream}));
 /*
  * Connect to MongoDB.
  */
-mongoose.connect(process.env.MONGOLAB_URI, function (error) {
-    if (error) console.error(error);
-    else console.log('mongo connected');
+mongoose.connect(config.mongoDBUrl);
+mongoose.connection.on('connected', function() {
+  console.log('MongoDB connected succesfully at: ' + config.mongoDBUrl);
+});
+
+mongoose.connection.on('error', function() {
+  console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
 });
 
 /*
