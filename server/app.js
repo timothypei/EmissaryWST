@@ -64,9 +64,7 @@ var auth = require('./routes/auth');
 /*
  * Disable api auth if were are in dev mode
  */
-if(app.get('env') !== 'development') {
   app.use('/api/*', validate);
-}
 
 app.use('/auth', auth);
 app.use('/api', user);
