@@ -32,8 +32,11 @@ app.use(morgan('dev', {"stream": winstonConfig.stream}));
 /*
  * Connect to MongoDB.
  */
-mongoose.connect(config.mongoDBUrl);
-mongoose.connection.on('connected', function() {
+
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
+mongoose.connect(config.mongoDBUrl, options);
+mongoose.connection.on('open', function() {
   console.log('MongoDB connected succesfully at: ' + config.mongoDBUrl);
 });
 
