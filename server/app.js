@@ -35,13 +35,16 @@ app.use(morgan('dev', {"stream": winstonConfig.stream}));
 
 var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
   replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
-mongoose.connect(config.mongoDBUrl, options);
-mongoose.connection.on('open', function() {
-  console.log('MongoDB connected succesfully at: ' + config.mongoDBUrl);
-});
-
-mongoose.connection.on('error', function() {
-  console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
+var uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/HelloMongoose';
+mongoose.connect(uristring, function (err, res) {
+    if (err) {
+        console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+    } else {
+        console.log ('Succeeded connected to: ' + uristring);
+    }
 });
 
 /*
