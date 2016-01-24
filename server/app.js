@@ -13,6 +13,7 @@ var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
 var socketIO = require('./socket/socket');
+var uriUtil = require('mongodb-uri');
 
 /*
  * App configs
@@ -32,11 +33,14 @@ app.use(morgan('dev', {"stream": winstonConfig.stream}));
 /*
  * Connect to MongoDB.
  */
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+    replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
+var mongodbUri ='mongodb://localhost/test';
+var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 var uristring =
     process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://localhost/HelloMongoose';
-mongoose.connect(uristring);
+    mongooseUri;
+mongoose.connect(uristring, options);
 mongoose.connection.on('connected', function() {
   console.log('MongoDB connected succesfully at: ' + config.mongoDBUrl);
 });
