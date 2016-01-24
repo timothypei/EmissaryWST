@@ -33,12 +33,10 @@ app.use(morgan('dev', {"stream": winstonConfig.stream}));
  * Connect to MongoDB.
  */
 mongoose.connect(config.mongoDBUrl);
-mongoose.connection.on('connected', function() {
-  console.log('MongoDB connected succesfully at: ' + config.mongoDBUrl);
-});
-
-mongoose.connection.on('error', function() {
-  console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+    console.log("Connected to mongolab");
 });
 
 /*
