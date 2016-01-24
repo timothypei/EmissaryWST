@@ -37,16 +37,12 @@ var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000
     replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
 var mongodbUri ='mongodb://localhost/test';
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
-var uristring =
-    process.env.MONGOLAB_URI ||
-    mongooseUri;
-mongoose.connect(uristring, options);
-mongoose.connection.on('connected', function() {
-  console.log('MongoDB connected succesfully at: ' + config.mongoDBUrl);
-});
+mongoose.connect(process.env.MONGOLAB_URI || mongooseUri, options);
+var db = mongoose.connection;
 
-mongoose.connection.on('error', function() {
-  console.error('MongoDB Connection Error. Please make sure that MongoDB is running.');
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+    console.log("Connected to mongolab");
 });
 
 /*
