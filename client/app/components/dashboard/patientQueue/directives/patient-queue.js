@@ -1,14 +1,31 @@
 'use strict';
 
 angular.module('dashboard')
-  .controller('PatientQueueCtrl', ['$scope', '$modal', '$rootScope', 'socket', 'DoctorService',
-   function ($scope, $modal, $rootScope, socket, DoctorService) {
-    var d = new Date();
+  .controller('PatientQueueController', ['$scope', '$modal', '$rootScope', 'socket', 'DoctorService', '$http',
+   function ($scope, $modal, $rootScope, $http, socket, DoctorService) {
+       var d = new Date();
 
-    //How many milliseconds in a minute
-    var MINUTE_VAL = 60000;
-    $scope.rowCollection = new Array();
-    $scope.patientqueue;
+       //How many milliseconds in a minute
+       var MINUTE_VAL = 60000;
+       $scope.rowCollection = new Array();
+       console.log("Patient Queue");
+       $scope.patientqueue;
+       $scope.getPatients = function() {
+           $http.get('/api/getPatients' + $rootScope.admin_id).success(function (data) {
+               if (data === null) {
+                   return [];
+               }
+               data.forEach(function (patient) {
+                   console.log(data);
+                   $scope.rowCollection.push({id: patient._id, Name: patient.name, CheckinTime: patient.checking_time});
+               });
+               return data;
+           }).error(function (data) {
+                   console.log(data);
+
+           })
+       }
+       $scope.getPatients();
 
     //The maximum number of minutes patients should wait before warning notification pops up on queue
     var EXPECTED_WAITING_TIME = 20;
@@ -39,7 +56,7 @@ angular.module('dashboard')
       $scope.displayedCollection = $scope.rowCollection;
     }); */
 
-    socket.on('queue_updated', function(data) { 
+    socket.on('queue_updated', function(data) {
      console.log("queue updated received", data);
        //console.log("patient length", data.patient.length);
       $scope.rowCollection = [];
