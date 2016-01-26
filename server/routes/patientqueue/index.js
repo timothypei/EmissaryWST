@@ -9,6 +9,6 @@ var bodyparser = require('body-parser');
 var urlparser = bodyparser.urlencoded({extended: false});
 
 router.post("/checkin", controller.checkin);
-router.get("/api/getPatients", controller.getPatientQueue);
+router.get("/getPatients/:auth_id", controller.getPatientQueue);
 
 module.exports = router;

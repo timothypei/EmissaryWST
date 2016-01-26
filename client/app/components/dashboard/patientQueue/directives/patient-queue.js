@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('dashboard')
-  .controller('PatientQueueController', ['$scope', '$modal', '$rootScope', 'socket', 'DoctorService', '$http',
-   function ($scope, $modal, $rootScope, $http, socket, DoctorService) {
+  .controller('PatientQueueController', ['$http','$scope', '$modal', '$rootScope', 'socket', 'DoctorService',
+   function ($http, $scope, $modal, $rootScope, socket, DoctorService) {
        var d = new Date();
 
        //How many milliseconds in a minute
@@ -11,13 +11,17 @@ angular.module('dashboard')
        console.log("Patient Queue");
        $scope.patientqueue;
        $scope.getPatients = function() {
-           $http.get('/api/getPatients' + $rootScope.admin_id).success(function (data) {
+           $http.get('/api/patient/getPatients/' + $rootScope.admin_id).success(function (data) {
+               console.log(data);
                if (data === null) {
                    return [];
                }
-               data.forEach(function (patient) {
-                   console.log(data);
-                   $scope.rowCollection.push({id: patient._id, Name: patient.name, CheckinTime: patient.checking_time});
+               data.forEach(function (patient){
+                   $scope.rowCollection.push({id: patient._id,
+                       Doctor: DoctorService.getRandomDoctor(),
+                       Name: patient.name,
+                       Time: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' ')
+                   });
                });
                return data;
            }).error(function (data) {

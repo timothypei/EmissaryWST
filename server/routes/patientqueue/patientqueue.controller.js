@@ -15,11 +15,12 @@ var Employee = require('../../models/Employee');
 
 // This route will be called when the patient checks in
 exports.getPatientQueue = function(req, res){
-    if(!(req.params._admin_id))
+    var auth_id=req.params.auth_id;
+    if(!(auth_id))
         return res.status(400).json({error: "Please send _admin_id and name."});
-    PatientQueue.findOne({_admin_id: req.params._admin_id}, function(err, queue){
+    PatientQueue.findOne({_admin_id: auth_id}, function(err, queue){
         if(err) return res.status(400).json({error: "getting queue"});
-        return res.status(200).json(queue);
+        return res.status(200).json(queue.patients);
     });
 }
 exports.checkin = function(req, res) {
