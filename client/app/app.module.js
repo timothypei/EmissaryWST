@@ -128,7 +128,7 @@ angular.module('robobetty', appendIonic(
       // Routing for non-registered
       if(!appConfig.debugMode) {
         if(!$rootScope.admin_id) {
-          if(toState.name != 'signin' && toState.name != 'register') {
+          if(toState.name != 'signin' && toState.name != 'register' && toState.name != 'recovery') {
             $state.go("signin");
           }
         }
