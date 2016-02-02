@@ -17,7 +17,8 @@ angular.module('dashboard')
                    return [];
                }
                data.forEach(function (patient){
-                   $scope.rowCollection.push({id: patient._id,
+                   $scope.rowCollection.push({
+                       id: patient._id,
                        Doctor: DoctorService.getRandomDoctor(),
                        Name: patient.name,
                        Time: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' ')
@@ -25,7 +26,6 @@ angular.module('dashboard')
                });
                return data;
            }).error(function (data) {
-                   console.log(data);
 
            })
        }
@@ -120,8 +120,9 @@ angular.module('dashboard')
         $scope.row = result;
         var index = $scope.rowCollection.indexOf($scope.row);
         if (index !== -1) {
-          var patientName = $scope.rowCollection[index].Name;
-          console.log(patientName);
+            var patientId = $scope.rowCollection[index].id;
+          console.log(patientId);
+            console.log("YES");
           $scope.rowCollection.splice(index, 1);
 
           var newQueue = [];
@@ -138,8 +139,16 @@ angular.module('dashboard')
             );
           }
         }
-        $scope.patientqueue.patients = newQueue;
-        socket.emit('patient_removed', {queue: $scope.patientqueue, patientName: patientName});
+          $http.post('/api/patient/delete',
+              {
+                  authId: $rootScope.admin_id,
+                  patientId: patientId,
+              })
+              .success(function (data) {
+
+          }).error(function (data) {
+
+          })
       });
     };
 }]);

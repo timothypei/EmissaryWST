@@ -7,7 +7,7 @@ describe('Authentication Test', function() {
   var url = "localhost:" + config.port;
   var token;
   var admin;
-  var email = "test@test.edu";
+  var email = "test3@test.edu";
   var password = "test";
 
   var mynewemail = "test2@test.edu";

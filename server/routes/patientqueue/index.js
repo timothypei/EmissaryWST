@@ -10,5 +10,6 @@ var urlparser = bodyparser.urlencoded({extended: false});
 
 router.post("/checkin", controller.checkin);
 router.get("/getPatients/:auth_id", controller.getPatientQueue);
+router.post("/delete", controller.deletePatient);
 
 module.exports = router;

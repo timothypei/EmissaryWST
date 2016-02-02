@@ -55,30 +55,11 @@ exports.createServer = function(io_in) {
         });
 
         socket.on('patient_removed', function(data) {
+            console.log("adminID: "+admindID );
+            console.log("patientId: "+data.patientId);
             if(adminID == null) socket.emit('request_id');
-            console.log(data.patientName);
-            if(!data.patientName) return;
-            console.log("remove name",data.patientName);
-            var patient = {
-                _admin_id: adminID,
-                name: data.patientName
-            };
-            var queue = {
-                _admin_id: adminID,
-                $pull: {"patients": patient}
-            };
-            PatientQueue.findOneAndUpdate(
-                {_admin_id: adminID},
-                queue,
-                {safe: true, upsert: true},
-                function(err, q) {
-                    if(err)
-                        throw(err)
-
-                }
-            );
+            if(!data.patientId) return;
             io.to(adminID).emit('queue_updated', data.queue);
-
         });
 
         socket.on('patient_added', function(patient) {

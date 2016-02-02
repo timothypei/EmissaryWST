@@ -13,16 +13,29 @@ var Socket = require('../../socket/socket');
 var PatientQueue = require('../../models/PatientQueue');
 var Employee = require('../../models/Employee');
 
-// This route will be called when the patient checks in
 exports.getPatientQueue = function(req, res){
     var auth_id=req.params.auth_id;
-    if(!(auth_id))
-        return res.status(400).json({error: "Please send _admin_id and name."});
+    if(!auth_id)
+        return res.status(400).json({error: "Please send admin id."});
     PatientQueue.findOne({_admin_id: auth_id}, function(err, queue){
         if(err) return res.status(400).json({error: "getting queue"});
         return res.status(200).json(queue.patients);
     });
 }
+
+exports.deletePatient = function(req, res){
+    var patientId=req.body.patientId;
+    var authId=req.body.authId;
+    if(!authId)
+        return res.status(400).json({error: "Please send admin id."});
+    if(!patientId)
+        return res.status(400).json({error: "Please send patient id."});
+    PatientQueue.findOneAndUpdate({_admin_id: authId}, {$pull: {patients:{_id:patientId}}}, function(err, data){
+        if(err) return res.status(400).json({error: err});
+        return res.status(200).json(data.patients);
+    });
+}
+// This route will be called when the patient checks in
 exports.checkin = function(req, res) {
     if(!(req.body._admin_id && req.body.name))
         return res.status(400).json({error: "Please send _admin_id and name."});
