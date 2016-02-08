@@ -8,7 +8,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: [‘webstormtroopers’],
+  app_name: ['webstormtroopers'],
   /**
    * Your New Relic license key.
    */
