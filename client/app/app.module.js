@@ -129,7 +129,7 @@ angular.module('robobetty', appendIonic(
       if(!appConfig.debugMode) {
         if(!$rootScope.admin_id) {
           if(toState.name != 'signin' && toState.name != 'register' && toState.name != 'recovery') {
-            $state.go("signin");
+            $state.go("home");
           }
         }
       }

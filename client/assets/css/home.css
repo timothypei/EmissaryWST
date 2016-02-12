@@ -1,0 +1,74 @@
+.check-in-text {
+    -webkit-font-smoothing: antialiased;
+    color: #FFFFFF;
+    font-weight: 100;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 110px;
+    margin: 70px 0px 100px;
+    padding: 40px;
+    text-align: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.5;
+    background-color: #080808;
+    z-index: 0;
+}
+
+.sign-up {
+    list-style: none;
+    color: white;
+    margin: 20px;
+    font-size: 25px;
+    float: right;
+}
+
+.navbar {
+    background-color: black;
+    border-bottom-color: black;
+}
+
+body {
+    background-image: url("../images/office.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: inherit;
+}
+
+.info-title {
+    font-weight: bold;
+    font-size: 23px;
+    text-align: center;
+}
+
+.info-text {
+    font-size: 22px;
+    text-align: center;
+}
+
+.grey-box {
+    background-color: white;
+    opacity: .7;
+    padding: 50px 60px;
+    width: 59vmin;
+    margin: 0px 0px 0px 16%;
+}
+
+.btn-sign-up {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    width: 330px;
+    margin: 85px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 45px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
