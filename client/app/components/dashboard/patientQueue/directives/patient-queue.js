@@ -21,7 +21,9 @@ angular.module('dashboard')
                        id: patient._id,
                        Doctor: DoctorService.getRandomDoctor(),
                        Name: patient.name,
-                       Time: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' ')
+                       Time: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' '),
+                       Appointment: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' ')
+
                    });
                });
                return data;
@@ -36,6 +38,7 @@ angular.module('dashboard')
 
     // add hardcoded patient
     socket.emit("request_queue", $rootScope.admin_id);
+
 
     socket.on('request_id', function(){
       console.log("on request_id", $rootScope.admin_id);
@@ -60,6 +63,8 @@ angular.module('dashboard')
       $scope.displayedCollection = $scope.rowCollection;
     }); */
 
+    //Client receiving event
+       // If a patient gets updated it sends a new list.
     socket.on('queue_updated', function(data) {
      console.log("queue updated received", data);
        //console.log("patient length", data.patient.length);
@@ -81,7 +86,9 @@ angular.module('dashboard')
           Name: data.patients[i].name,
           Doctor: DoctorService.getRandomDoctor(),
           Time: new Date(new Date(data.patients[i].checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' '),
-          TimeValue: new Date(data.patients[i].checkin_time).valueOf()
+          TimeValue: new Date(data.patients[i].checkin_time).valueOf(),
+          Appointment: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' ')
+
         });
       }
       console.log("rowCollection",$scope.rowCollection);

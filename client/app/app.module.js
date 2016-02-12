@@ -126,13 +126,13 @@ angular.module('robobetty', appendIonic(
     $rootScope.$on('$stateChangeSuccess',
     function(event, toState, toParams, fromState, fromParams) {
       // Routing for non-registered
-      if(!appConfig.debugMode) {
+      /*if(!appConfig.debugMode) {
         if(!$rootScope.admin_id) {
           if(toState.name != 'signin' && toState.name != 'register' && toState.name != 'recovery') {
             $state.go("signin");
           }
         }
-      }
+      }*/
       // Routing for mobile app
       if(appConfig.isMobile) {
         if(toState.mobile == false) {

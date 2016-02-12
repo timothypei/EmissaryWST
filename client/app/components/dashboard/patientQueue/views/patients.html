@@ -24,7 +24,8 @@
                 </tr>
                 <tr>
                     <th st-sort="Name">Name <i st-sort="Name" class="fa fa-sort"></i></th>
-                    <th st-sort="Doctor">Doctor <i st-sort="Doctor" class="fa fa-sort"></i></th>
+                    <!--<th st-sort="Doctor">Doctor <i st-sort="Doctor" class="fa fa-sort"></i></th>-->
+                    <th st-sort="Appointment">Appointment Time<i st-sort="time" class="fa fa-sort"></i></th>
                     <th st-sort="Time">Check-in Time <i st-sort="Time" class="fa fa-sort"></i></th>
                 </tr>
             </thead>
@@ -40,7 +41,8 @@
                 </button> -->
                 </td>
                 <td class="patient-queue-text"> {{row.Name}}</td>
-                <td class="patient-queue-text"> {{row.Doctor}}</td>
+                <!--<td class="patient-queue-text"> {{row.Doctor}}</td>-->
+                <td class="patient-queue-text"> {{row.Appointment}}</td>
                 <td class="patient-queue-text"><span ng-show="checkIfLongWait(row.TimeValue)" tooltip="Patient Needs Attending To!" class="text-danger"><i ng-show="checkIfLongWait(row.TimeValue)" class="fa fa-warning"></i></span> {{(row.Time)}}</td>
             </tr>
             </tbody>

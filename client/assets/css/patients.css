@@ -21,6 +21,7 @@
 }
 
 .st-sort-ascent i:before {
+    margin-left: 6px !important;
     content:  "\f0de";
     font-family: FontAwesome;
     font-style: normal;
@@ -28,6 +29,7 @@
     text-decoration: inherit;
 }
 .st-sort-descent i:before {
+    margin-left: 6px !important;
     content:  "\f0dd";
     font-family: FontAwesome;
     font-style: normal;
