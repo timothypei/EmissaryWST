@@ -1,4 +1,27 @@
-#page-wrapper:not(.open) ul.sidebar .sidebar-title.separator, .sidebar-footer, ul.sidebar .sidebar-list a:hover, ul.sidebar .sidebar-main a {
+nav#nav-controls{
+	position: fixed;
+	margin-top: 65px;
+	width: 100%;
+	height: 35px;
+	background-color: #434343;
+
+}
+ul#nav-links{
+	list-style-type: none;
+	line-height: 35px;
+
+}
+ul#nav-links a{
+	font-family: "Myriad Pro Regular";
+	color:#f7f7f7;
+}
+
+li.nav-item{
+	padding: 0 5px;
+	display: inline;
+}
+
+/*#page-wrapper:not(.open) ul.sidebar .sidebar-title.separator, .sidebar-footer, ul.sidebar .sidebar-list a:hover, ul.sidebar .sidebar-main a {
 	background:#434343;
 }
 
@@ -8,7 +31,7 @@
 }
 
 /* Removing forced scrollbar by rdash */
-html {
+/*html {
 	overflow-y: auto;
 }
 
@@ -31,7 +54,7 @@ ul.sidebar .sidebar-list a{
 }
 
 /*Adding padding above*/
-.main-content {
+/*.main-content {
 	padding-top: 68px;
 	padding-left: 30px;
 	padding-right: 30px;
@@ -51,7 +74,7 @@ ul.sidebar .sidebar-list a{
 }
 
 /*Adding Arrows to the page*/
-ul.sidebar .sidebar-list a:hover .menu-icon.enabled {
+/*ul.sidebar .sidebar-list a:hover .menu-icon.enabled {
 	width: 60px;
 }
 
@@ -70,7 +93,7 @@ ul.sidebar .sidebar-list a:hover .arrow-left {
 }
 
 /* Bottom Profile Page */
-ul.sidebar .sidebar-profile .sidebar-profile-img {
+/*ul.sidebar .sidebar-profile .sidebar-profile-img {
 	width: 50px;
 	height: 100%;
 	position: relative;

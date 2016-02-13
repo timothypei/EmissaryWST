@@ -1,16 +1,18 @@
 /* Created by: Mandy , Delia
  * Navigation bar stylesheet
  */
+
+#nav-wrapper{
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+}
  #navigation{
   background:#434343;
   border-radius:0%;
   border:0px;
   margin-bottom:0;
-  max-height: 50px;
-}
-
-/*Making navbar fixed position*/
-#navigation {
+  height: 65px;
   border-bottom: 5px solid #e99d1a;
   position:fixed;
   top: 0;
@@ -24,28 +26,30 @@ div.topbar-left {
   margin-left: 9px;
 }
 
-ul.topbar-right {
+div.topbar-right {
   float:right;
   display:inline-block;
   padding:0px;
   height:50px;
 }
 
-ul.topbar-right li {
+div.topbar-right .text-center {
   color:#f7f7f7;
   text-decoration: none;
   list-style-type: none;
   padding-left:20px;
   padding-right:20px;
-   /*border-bottom: 14px solid #ef8e48;*/
+    margin-right: 10px;
+
+    /*border-bottom: 14px solid #ef8e48;*/
 }
 
-ul.topbar-right li a{
-  padding: 5 0 5 0;
+div.topbar-right .text-center a{
+  padding: 5px 5px 5px 5px;
   color:#f7f7f7;
   text-decoration: none;
   list-style-type:none;
-  line-height: 50px;
+  line-height: 60px;
   height: 50px;
 }
 
@@ -63,23 +67,21 @@ ul.topbar-right li a{
   background-image: url("../../../../images/logo.png");
   background-size: 100%;
   margin-top:3px;
-/*
-	width:100px;
-	height:90px*/
+
 }
 
 .patientbutton{
-  background-color: #6c9fd5;
-  border: 1px solid #6c9fd5;
-  border-radius:3px;
-  padding: 6px 4px 6px;
+    background-color: #3D8CD5;
+    border: 1px solid #3D8CD5;
+
+  border-radius:2px;
   text-align: center;
   width: 150px;
-  height: 45px;
 }
 .patientbutton:hover {
-    background: #3D8CD5;
-    border: 1px solid #3D8CD5;
+    background-color: #6c9fd5;
+    border: 1px solid #6c9fd5;
+
     cursor: pointer; }
 
 /******************************************

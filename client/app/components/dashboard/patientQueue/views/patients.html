@@ -1,4 +1,4 @@
-<div ng-controller="PatientQueueController" class="patient-queue-container" >
+<div ng-controller="PatientQueueController" class="patient-queue-container main-container" >
     <!-- <form class="form-inline">
       <div class="form-group">
         <label for="exampleInputName2">Name</label>
@@ -34,6 +34,26 @@
             <h4 style="color:red" ng-show="checkIfEmptyTable()" class="empty-block">
                     No patients fitting search criteria found!
             </h4>
+
+            <tr>
+                <!-- <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
+                  <i class="glyphicon glyphicon-remove-circle">
+                  </i>
+              </button> -->
+                </td>
+                <td class="patient-queue-text"> Daniel</td>
+                <!--<td class="patient-queue-text"> {{row.Doctor}}</td>-->
+                <td class="patient-queue-text"> 2:30 </td>
+                <td class="patient-queue-text">
+                    <span ng-show="checkIfLongWait(row.TimeValue)" tooltip="Patient Needs Attending To!" class="text-danger"><i ng-show="checkIfLongWait(row.TimeValue)" class="fa fa-warning"></i></span>2:00
+                    <div class="queue-icons">
+                        <span> <i class="fa fa-eye" ng-click="openModal(row)"></i> </span>
+                        <span> <i class="fa fa-check" ng-click="removeItem(row,'patient-checkin.html')"></i> </span>
+                        <span> <i class="fa fa-times" ng-click="removeItem(row,'patient-remove.html')"></i> </span>
+                    </div>
+
+                </td>
+            </tr>
             <tr ng-repeat="row in displayedCollection" ng-click="removeItem(row)">
                   <!-- <button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">
                     <i class="glyphicon glyphicon-remove-circle">
@@ -44,10 +64,21 @@
                 <!--<td class="patient-queue-text"> {{row.Doctor}}</td>-->
                 <td class="patient-queue-text"> {{row.Appointment}}</td>
                 <td class="patient-queue-text"><span ng-show="checkIfLongWait(row.TimeValue)" tooltip="Patient Needs Attending To!" class="text-danger"><i ng-show="checkIfLongWait(row.TimeValue)" class="fa fa-warning"></i></span> {{(row.Time)}}</td>
+                <div class = "tool-wrapper">
+                    <div class="view-patient">
+
+                    </div>
+                    <div class = "attend-patient">
+
+                    </div>
+                    <div class = "remove-patient">
+
+                    </div>
+                </div>
             </tr>
             </tbody>
         </table>
-        
+
     </div>
     <!--
     <div class='pull-left'>

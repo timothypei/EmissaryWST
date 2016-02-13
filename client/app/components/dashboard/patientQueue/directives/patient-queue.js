@@ -9,7 +9,7 @@ angular.module('dashboard')
        var MINUTE_VAL = 60000;
        $scope.rowCollection = new Array();
        console.log("Patient Queue");
-       $scope.patientqueue;
+       //$scope.patientqueue;
        $scope.getPatients = function() {
            $http.get('/api/patient/getPatients/' + $rootScope.admin_id).success(function (data) {
                console.log(data);
@@ -109,11 +109,19 @@ angular.module('dashboard')
     $scope.checkIfEmptyTable = function(){
         return ($scope.displayedCollection.length === 0);
     };
+
+       $scope.openModal = function(row){
+           var modalInstance = $modal.open({
+               templateUrl: 'views/components/dashboard/patientQueue/views/patient-modal.html',
+               controller: 'PatientRemoveController',
+               size: 'md'
+           });
+       }
     
     //remove to the real data holder modal
-    $scope.removeItem = function(row){
+    $scope.removeItem = function(row,url){
       var modalInstance = $modal.open({
-        templateUrl: 'views/components/dashboard/patientQueue/views/patient-remove.html',
+        templateUrl: 'views/components/dashboard/patientQueue/views/' + url,
         controller: 'PatientRemoveController',
         size: 'md',
         backdrop: true,
