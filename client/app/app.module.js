@@ -18,7 +18,7 @@ angular.module('robobetty', appendIonic(
     'themes'
    ]))
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/patientQueue');
+    $urlRouterProvider.otherwise('/home');
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',
@@ -129,7 +129,7 @@ angular.module('robobetty', appendIonic(
       if(!appConfig.debugMode) {
         if(!$rootScope.admin_id) {
           if(toState.name != 'signin' && toState.name != 'register' && toState.name != 'recovery') {
-            $state.go("home");
+            //$state.go("home");
           }
         }
       }
