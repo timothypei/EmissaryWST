@@ -9,6 +9,7 @@ angular.module('robobetty', appendIonic(
     'ui.bootstrap',
     'signin',
     'register',
+    'signup',
     'thankyou',
     'DashboardFormBuilderModule',
     'checkin',
@@ -118,6 +119,23 @@ angular.module('robobetty', appendIonic(
         title: 'Settings',
         templateUrl: 'views/components/dashboard/settings/views/settings.html',
         mobile: false
+      })
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'views/components/receptionistPortal/signup/views/signup.html',
+        controller: 'signupController'
+      })
+      .state('signup.profile', {
+        url: '/profile',
+        templateUrl: 'views/components/receptionistPortal/signup/views/signup-profile.html'
+      })
+      .state('signup.images', {
+        url: '/images',
+        templateUrl: 'views/components/receptionistPortal/signup/views/signup-images.html'
+      })
+      .state('signup.payment', {
+        url: '/payment',
+        templateUrl: 'views/components/receptionistPortal/signup/views/signup-payment.html'
       });
   })
   ionicCallback(IS_MOBILE);
@@ -128,7 +146,9 @@ angular.module('robobetty', appendIonic(
       // Routing for non-registered
       if(!appConfig.debugMode) {
         if(!$rootScope.admin_id) {
-          if(toState.name != 'signin' && toState.name != 'register' && toState.name != 'recovery') {
+          //DEBUG
+          console.log("toState name: " + toState.name);
+          if(toState.name != 'signin' && toState.name != 'register' && !toState.name.startsWith('signup') && toState.name != 'recovery') {
             $state.go("signin");
           }
         }
