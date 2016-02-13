@@ -1,11 +1,44 @@
 /* style.css */
 /* BASIC STYLINGS
 ============================================================================= */
-body                            { padding-top:20px; }
+body { 
+    padding-top:20px; 
+    background-image: url("../images/office.jpeg");
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1500px;
+    opacity: 0.5;
+    background-color: #080808;
+    z-index: 0;
+}
+
+pre {
+    width: 65%;
+    margin: 0 auto;
+}
 
 /* form styling */
-#form-container                { background:#FFFFFF; margin-bottom:20px;
-    border-radius:5px; }
+#form-container { 
+    background:#FFFFFF; 
+    margin-bottom:20px;
+    border-radius:5px; 
+    width: 65%;   
+    margin: 100px auto;
+}
 #form-container .page-header   { background:#FFFFFF; margin:0; padding:30px;
     border-top-left-radius:5px; border-top-right-radius:5px; }
 
@@ -31,8 +64,22 @@ body                            { padding-top:20px; }
 /* signup.css */
 /* ANIMATION STYLINGS
 ============================================================================= */
-#signup-form            { position:relative; min-height:300px; overflow:hidden; padding:30px; }
-#form-views             { width:auto; }
+#signup-form { 
+    position:relative; 
+    min-height:300px; 
+    overflow:hidden; 
+    padding:30px; 
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.pw {
+    margin-bottom: -10px;
+}
+
+#form-views             { width: 40vmin; margin: 0 auto; }
 
 /* basic styling for entering and leaving */
 /* left and right added to ensure full width */
@@ -58,7 +105,7 @@ body                            { padding-top:20px; }
 /* ANIMATION STYLINGS
 ============================================================================= */
 #signup-form            { position:relative; min-height:300px; overflow:hidden; padding:30px; }
-#form-views             { width:auto; }
+#form-views             { width: 40vmin; margin: 0 auto; }
 
 /* basic styling for entering and leaving */
 /* left and right added to ensure full width */
