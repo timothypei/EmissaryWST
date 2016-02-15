@@ -113,11 +113,17 @@ angular.module('dashboard')
        $scope.openModal = function(row){
            var modalInstance = $modal.open({
                templateUrl: 'views/components/dashboard/patientQueue/views/patient-modal.html',
-               controller: 'PatientRemoveController',
-               size: 'md'
+               controller: 'PatientModalController',
+               size: 'md',
+               backdrop:true,
+               resolve:{
+                   item:function(){
+                       $scope.selectedPatient = row;
+                       return $scope.selectedPatient;
+                   }
+               }
            });
        }
-    
     //remove to the real data holder modal
     $scope.removeItem = function(row,url){
       var modalInstance = $modal.open({
