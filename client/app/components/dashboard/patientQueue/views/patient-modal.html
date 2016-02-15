@@ -1,32 +1,26 @@
 <div>
 	<div class="modal-header">
-		<h3 class="modal-title" align="center">Edit Patient</h3>
+		<h1 class="modal-title" align="center">Information</h1>
 	</div>
 	<div class="modal-body">
+		<div class="modal-info">
+			<div class = "left-modal">
+				<h5>Name: <span>Daniel Kong</span></h5>
+				<h5>Doctor: <span> Powell</span></h5>
+				<h5>Appointment Time: <span>2:15</span></h5>
+			</div>
 
-		<form class="form-horizontal">
-			<div class="form-group">
-				<label for="patientName" class="col-sm-2 control-label">Name</label>
-				<div class="col-sm-10">
-					<input class="form-control" id="patientName" ng-model="name" placeholder="{{selectedPatient.Name}}">
-				</div>
+			<div class = "right-modal">
+				<h5>Check-In Time: <span>2:13</span></h5>
+				<h5>Phone Number: <span>(310)-985-1473</span></h5>
+				<h5>Email: <span>dakong94@gmail.com</span></h5>
 			</div>
-			<div class="form-group">
-				<label for="patientDoctor" class="col-sm-2 control-label">Doctor</label>
-				<div class="col-sm-10">
-				<input class="form-control" id="patientDoctor" ng-model="doctor" placeholder="{{selectedPatient.Doctor}}">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Time</label>
-				<div style="display:vertical-align:middle">
-				<h4 class="col-sm-10" >{{selectedPatient.Time}}</h4>
-				</div>
-			</div>
-		</form>
+		</div>
+
+		<div class="modal-footer">
+			<button class="btn btn-primary" style="background-color:green" ng-click="ok()">Ok</button>
+		</div>
 	</div>
-	<div class="modal-footer">
-		<button class="btn btn-primary" style="background-color:green" ng-click="ok()">Ok</button>
-		<button class="btn btn-warning" style="background-color:red" ng-click="cancel()">Cancel</button>
-	</div>
+
 </div>
+

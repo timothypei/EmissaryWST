@@ -1,53 +1,74 @@
 /* Created by: Mandy , Delia
  * Navigation bar stylesheet
  */
- #navigation{
-  background:#434343;
-  border-radius:0%;
-  border:0px;
-  margin-bottom:0;
-  max-height: 50px;
-}
 
-/*Making navbar fixed position*/
-#navigation {
-  border-bottom: 5px solid #e99d1a;
-  position:fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1;
+#nav-wrapper{
+   margin-left: auto;
+   margin-right: auto;
+   width: 95%;
+}
+#navigation{
+   background:#434343;
+   border-radius:0%;
+   border:0px;
+   margin-bottom:0;
+   height: 65px;
+   border-bottom: 5px solid #e99d1a;
+   position:fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   z-index: 1;
 }
 
 div.topbar-left {
-  display:inline-block;
-  margin-left: 9px;
+   display:inline-block;
+   margin-left: 9px;
 }
 
-ul.topbar-right {
-  float:right;
-  display:inline-block;
-  padding:0px;
-  height:50px;
+
+div.topbar-right {
+   float:right;
+   display: flex;
+   height:65px;
 }
 
-ul.topbar-right li {
-  color:#f7f7f7;
-  text-decoration: none;
-  list-style-type: none;
-  padding-left:20px;
-  padding-right:20px;
-   /*border-bottom: 14px solid #ef8e48;*/
+.patient-button{
+   background-color: #3D8CD5;
+   width: 100px;
+
 }
 
-ul.topbar-right li a{
-  padding: 5 0 5 0;
-  color:#f7f7f7;
-  text-decoration: none;
-  list-style-type:none;
-  line-height: 50px;
-  height: 50px;
+.patient-button:hover {
+   background-color: #2975bc;
+   cursor: pointer;
 }
+.nav-button{
+   text-align: center;
+   align-self: center;
+   height: 30px;
+   border-radius:2px;
+}
+.nav-button > a{
+   font-size: 14px;
+   line-height: 30px;
+   color: white;
+   text-decoration: none;
+
+}
+
+.logout-button{
+   margin-left: 10px;
+   width: 60px;
+   background-color: #a6a6a6;
+}
+
+.logout-button:hover{
+   background-color: #8c8c8c;
+   cursor: pointer;
+}
+
+
 
 /*ul.topbar-right li:hover {
   color:#f7f7f7;
@@ -58,70 +79,56 @@ ul.topbar-right li a{
 }*/
 
 .navbar-icon{
-  width:56px;
-  height:50px;
-  background-image: url("../../../../images/logo.png");
-  background-size: 100%;
-  margin-top:3px;
-/*
-	width:100px;
-	height:90px*/
+   width:56px;
+   height:50px;
+   background-image: url("../../../../images/logo.png");
+   background-size: 100%;
+   margin-top:3px;
+
 }
 
-.patientbutton{
-  background-color: #6c9fd5;
-  border: 1px solid #6c9fd5;
-  border-radius:3px;
-  padding: 6px 4px 6px;
-  text-align: center;
-  width: 150px;
-  height: 45px;
-}
-.patientbutton:hover {
-    background: #3D8CD5;
-    border: 1px solid #3D8CD5;
-    cursor: pointer; }
+
 
 /******************************************
 **************** Nav Bar ******************
 ******************************************/
 #nav-top{
-  height:150px;
-  background:#434343;
-  width:100%;
-  position:relative;
+   height:150px;
+   background:#434343;
+   width:100%;
+   position:relative;
 }
 
 .nav-right{
-  float:right;
-  width:80%;
-  margin-top:30px;
+   float:right;
+   width:80%;
+   margin-top:30px;
 }
 
 .nav-icon{
-  float:right;
-  display:block;
-  margin-right:7%;
-  font-size:xx-large; 
+   float:right;
+   display:block;
+   margin-right:7%;
+   font-size:xx-large;
 }
 
 .orange{
-  width:100%;
-  position:absolute;
-  background:#ef8e48;
-  padding:15px;
-  bottom:0px;
+   width:100%;
+   position:absolute;
+   background:#ef8e48;
+   padding:15px;
+   bottom:0px;
 }
 
-#triangle-up { 
-  width: 0; 
-  height: 0; 
-  border-left: 30px solid transparent; 
-  border-right: 30px solid transparent; 
-  border-bottom: 30px solid #ef8e48; 
-  position:absolute;
-  left:26%;
-  bottom:30px;
+#triangle-up {
+   width: 0;
+   height: 0;
+   border-left: 30px solid transparent;
+   border-right: 30px solid transparent;
+   border-bottom: 30px solid #ef8e48;
+   position:absolute;
+   left:26%;
+   bottom:30px;
 }
 
 
