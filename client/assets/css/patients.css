@@ -45,6 +45,12 @@
     margin-right:2px;
     margin-left: 2px;
 }
+tr .queue-icons{
+    display:none;
+}
+tr:hover .queue-icons{
+    display: block;
+}
 
 .queue-icons > span > .fa-check{
     color: green;
@@ -57,3 +63,5 @@
 .queue-icons > span > .fa-eye{
     color: slategray;
 }
+
+

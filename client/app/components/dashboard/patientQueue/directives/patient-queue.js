@@ -124,6 +124,13 @@ angular.module('dashboard')
                }
            });
        }
+      /*$scope.showOptions = function(){
+         this.mouseOverVisible = true;
+      };
+      $scope.hideOptions = function(){
+         this.mouseOverVisible = false;
+      }; */
+
     //remove to the real data holder modal
     $scope.removeItem = function(row,url){
       var modalInstance = $modal.open({
