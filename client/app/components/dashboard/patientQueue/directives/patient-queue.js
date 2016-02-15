@@ -145,7 +145,7 @@ angular.module('dashboard')
                   patientId: patientId,
               })
               .success(function (data) {
-
+              
           }).error(function (data) {
 
           })
