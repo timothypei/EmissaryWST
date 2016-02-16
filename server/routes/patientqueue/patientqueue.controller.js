@@ -30,7 +30,7 @@ exports.deletePatient = function(req, res){
         return res.status(400).json({error: "Please send admin id."});
     if(!patientId)
         return res.status(400).json({error: "Please send patient id."});
-    PatientQueue.findOneAndUpdate({_admin_id: authId}, {$pull: {patients:{_id:patientId}}}, function(err, data){
+    PatientQueue.findOneAndUpdate({_admin_id: authId}, {$pull: {patients:{_id:patientId}}}, {safe: true, upsert: true, new:true}, function(err, data){
         if(err) return res.status(400).json({error: err});
         return res.status(200).json(data.patients);
     });
