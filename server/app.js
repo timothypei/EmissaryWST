@@ -13,6 +13,8 @@ var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
 var socketIO = require('./socket/socket');
+//var newrelic = require('newrelic');
+
 /*
  * App configs
  */

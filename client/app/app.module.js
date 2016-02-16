@@ -19,7 +19,7 @@ angular.module('robobetty', appendIonic(
     'themes'
    ]))
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/patientQueue');
+    $urlRouterProvider.otherwise('/home');
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',
