@@ -1,4 +1,17 @@
- <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
+<nav id = "nav-controls">
+  <ul id = "nav-links">
+    <li ng-repeat="option in options" class="nav-item">
+      <a href="#/{{option.link}}">
+        {{option.option}}
+      </a>
+    </li>
+  </ul>
+</nav>
+
+
+<!--
+
+<div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
   <div id="sidebar-wrapper">
     <ul class="sidebar">
       <li class="sidebar-main">
@@ -7,13 +20,7 @@
           <span class="menu-icon glyphicon glyphicon-transfer"></span>
         </a>
       </li>
-      <li ng-repeat="option in options" class="sidebar-list">
-        <a href="#/{{option.link}}">
-          {{option.option}}
-          <span ng-show="toggle" class="arrow-left"></span>
-          <span class="{{option.icon}}" ng-class="{enabled: toggle, disabled: !toggle}"></span>
-        </a>
-      </li>
+
       <li class="sidebar-profile">
         <img class="sidebar-profile-img" src="https://lh3.googleusercontent.com/-tgoExjOkcX0/AAAAAAAAAAI/AAAAAAAAAAA/wEyTqkqK-T8/photo.jpg"></img>
         <a href="#">
@@ -24,6 +31,7 @@
       
     </ul>
   </div>
+  -->
 <!-- </div> -->
 
 
