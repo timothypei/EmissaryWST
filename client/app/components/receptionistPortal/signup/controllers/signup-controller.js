@@ -3,10 +3,17 @@
  */
 angular.module('signup').controller('signupController', ['$scope', '$rootScope', '$location', 'AuthService', function($scope, $rootScope, $location, AuthService) {
 
-    $scope.user = {email: '', password: '', company_name: '', company_phone_number: ''};
+    $scope.user = {email: '', password: '', company_name: '', company_phone_number: '', credit_card: ''};
     // NOTE: Not sure why I need this misc object but doing plain $scope.property is not allowing complete data binding
     //       Perhaps a namespace issue?
     $scope.misc = {number: '', pass: '', err: false, check: false, errorMessage: ''};
+
+    $scope.imgs = ['images/themes/pink_trees.jpg',
+        'images/themes/city0.jpg',
+        'images/themes/city1.jpg'];
+
+    $scope.selectedImg = { value: '' };
+    //TODO: Pass the selected image to the rootScope
 
 
     //NOTE: These properties are not being updated in the view in real-time

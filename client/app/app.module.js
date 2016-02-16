@@ -129,9 +129,9 @@ angular.module('robobetty', appendIonic(
         url: '/profile',
         templateUrl: 'views/components/receptionistPortal/signup/views/signup-profile.html'
       })
-      .state('signup.images', {
-        url: '/images',
-        templateUrl: 'views/components/receptionistPortal/signup/views/signup-images.html'
+      .state('signup.theme', {
+        url: '/theme',
+        templateUrl: 'views/components/receptionistPortal/signup/views/signup-theme.html'
       })
       .state('signup.payment', {
         url: '/payment',

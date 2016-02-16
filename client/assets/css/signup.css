@@ -1,8 +1,8 @@
 /* style.css */
 /* BASIC STYLINGS
 ============================================================================= */
-body { 
-    padding-top:20px; 
+body {
+    padding-top:20px;
     background-image: url("../images/office.jpeg");
     background-repeat: no-repeat;
     position: absolute;
@@ -32,11 +32,11 @@ pre {
 }
 
 /* form styling */
-#form-container { 
-    background:#FFFFFF; 
+#form-container {
+    background:#FFFFFF;
     margin-bottom:20px;
-    border-radius:5px; 
-    width: 65%;   
+    border-radius:5px;
+    width: 65%;
     margin: 100px auto;
 }
 #form-container .page-header   { background:#FFFFFF; margin:0; padding:30px;
@@ -64,11 +64,11 @@ pre {
 /* signup.css */
 /* ANIMATION STYLINGS
 ============================================================================= */
-#signup-form { 
-    position:relative; 
-    min-height:300px; 
-    overflow:hidden; 
-    padding:30px; 
+#signup-form {
+    position:relative;
+    min-height:300px;
+    overflow:hidden;
+    padding:30px;
 }
 
 .form-group {
