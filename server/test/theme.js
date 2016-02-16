@@ -62,7 +62,7 @@ describe('Theme Settings Model', function() {
         });
     });
 
-    it('should remove(DELETE) theme setting', function(done) {
+    /*it('should remove(DELETE) theme setting', function(done) {
         Theme.remove({
             user_id: "test"
         }, function(err, theme) {
@@ -70,7 +70,7 @@ describe('Theme Settings Model', function() {
             theme.should.equal(1);
             done();
         });
-    });
+    });*/
 
 });
 
@@ -210,9 +210,9 @@ describe("Themes Route Test", function() {
                 request(url)
                     .delete('/api/' + user_id + '/theme')
                     .query({email: credentials.email, token: credentials.token})
+                    .expect(200)
                     .end(function(err, res) {
-                        console.log(res.body);
-                        res.body.should.equal(1);
+                        res.body.should.have.property("msg");
                         done();
                     });
             });

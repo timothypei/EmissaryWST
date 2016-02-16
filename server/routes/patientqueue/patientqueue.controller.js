@@ -53,7 +53,7 @@ exports.checkin = function(req, res) {
     PatientQueue.findOneAndUpdate(
         {_admin_id: req.body._admin_id},
         queue,
-        {safe: true, upsert: true}, 
+        {safe: true, upsert: true, new:true},
         function(err, queue) {
             if(err)
                 res.status(400).json({error: "an error occured while checking in"});

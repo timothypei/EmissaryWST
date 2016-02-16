@@ -95,7 +95,7 @@ module.exports.template.delete = function(req, res) {
         if (err)
             res.status(400).send(err);
 
-        res.status(200).json(theme);
+        res.status(200).json({msg: "OK"});
     });
 
 
