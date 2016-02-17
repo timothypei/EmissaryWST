@@ -9,7 +9,7 @@ angular.module('dashboard')
        var MINUTE_VAL = 60000;
        $scope.rowCollection = new Array();
        console.log("Patient Queue");
-       $scope.patientqueue;
+       //$scope.patientqueue;
        $scope.getPatients = function() {
            $http.get('/api/patient/getPatients/' + $rootScope.admin_id).success(function (data) {
                console.log(data);
@@ -21,7 +21,9 @@ angular.module('dashboard')
                        id: patient._id,
                        Doctor: DoctorService.getRandomDoctor(),
                        Name: patient.name,
-                       Time: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' ')
+                       Time: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' '),
+                       Appointment: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' ')
+
                    });
                });
                return data;
@@ -36,6 +38,7 @@ angular.module('dashboard')
 
     // add hardcoded patient
     socket.emit("request_queue", $rootScope.admin_id);
+
 
     socket.on('request_id', function(){
       console.log("on request_id", $rootScope.admin_id);
@@ -60,6 +63,8 @@ angular.module('dashboard')
       $scope.displayedCollection = $scope.rowCollection;
     }); */
 
+    //Client receiving event
+       // If a patient gets updated it sends a new list.
     socket.on('queue_updated', function(data) {
      console.log("queue updated received", data);
        //console.log("patient length", data.patient.length);
@@ -81,7 +86,9 @@ angular.module('dashboard')
           Name: data.patients[i].name,
           Doctor: DoctorService.getRandomDoctor(),
           Time: new Date(new Date(data.patients[i].checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' '),
-          TimeValue: new Date(data.patients[i].checkin_time).valueOf()
+          TimeValue: new Date(data.patients[i].checkin_time).valueOf(),
+          Appointment: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' ')
+
         });
       }
       console.log("rowCollection",$scope.rowCollection);
@@ -102,11 +109,32 @@ angular.module('dashboard')
     $scope.checkIfEmptyTable = function(){
         return ($scope.displayedCollection.length === 0);
     };
-    
+
+       $scope.openModal = function(row){
+           var modalInstance = $modal.open({
+               templateUrl: 'views/components/dashboard/patientQueue/views/patient-modal.html',
+               controller: 'PatientModalController',
+               size: 'md',
+               backdrop:true,
+               resolve:{
+                   item:function(){
+                       $scope.selectedPatient = row;
+                       return $scope.selectedPatient;
+                   }
+               }
+           });
+       }
+      /*$scope.showOptions = function(){
+         this.mouseOverVisible = true;
+      };
+      $scope.hideOptions = function(){
+         this.mouseOverVisible = false;
+      }; */
+
     //remove to the real data holder modal
-    $scope.removeItem = function(row){
+    $scope.removeItem = function(row,url){
       var modalInstance = $modal.open({
-        templateUrl: 'views/components/dashboard/patientQueue/views/patient-remove.html',
+        templateUrl: 'views/components/dashboard/patientQueue/views/' + url,
         controller: 'PatientRemoveController',
         size: 'md',
         backdrop: true,

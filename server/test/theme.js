@@ -23,7 +23,7 @@ describe('Theme Settings Model', function() {
         });
     });
 
-    it('should GET theme setting', function(done) {
+    /*it('should GET theme setting', function(done) {
         Theme.findOne({
             user_id: "test"
         }, function(err, theme) {
@@ -36,7 +36,7 @@ describe('Theme Settings Model', function() {
             theme.additionalComments.should.equal(false);
             done();
         });
-    });
+    });*/
 
     it('should update(PUT) theme setting', function(done) {
         Theme.findOne({

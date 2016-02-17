@@ -12,8 +12,8 @@ angular.module('register')
       $scope.check = false;
       $scope.errorMessage='';
       
-        //function that is called when user clicks submit that stores information in the backend
-  		$scope.reg = function(){ 
+      //function that is called when user clicks submit that stores information in the backend
+      $scope.reg = function(){
         $scope.user.company_phone_number = '';    
             
         //making sure the number is not null before calling toString method

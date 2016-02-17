@@ -1,0 +1,53 @@
+<!-- form.html -->
+<head>
+    <link href="css/signup.css" rel="stylesheet" />
+    <title>Register an Account</title>
+</head>
+<div class= "overlay"></div>
+<body ng-app="signup">
+    <div ng-controller="signupController as signupCTRL">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+
+                <div id="form-container">
+
+                    <div class="page-header text-center">
+                        <h2>Sign Up</h2>
+
+                        <!-- the links to our nested states using relative paths -->
+                        <!-- add the active class if the state matches our ui-sref -->
+                        <div id="status-buttons" class="text-center">
+                            <a ui-sref-active="active" ui-sref=".profile"><span>1</span> Profile</a>
+                            <a ui-sref-active="active" ui-sref=".theme"><span>2</span> Theme</a>
+                            <a ui-sref-active="active" ui-sref=".payment"><span>3</span> Payment</a>
+                        </div>
+                    </div>
+
+                    <!-- use ng-submit to catch the form submission and use our Angular function -->
+                    <form id="signup-form" ng-submit="reg()">
+
+                        <!-- our nested state views will be injected here -->
+                        <div id="form-views" ui-view></div>
+                    </form>
+
+                </div>
+
+            <!-- DEBUG: show our formData as it is being typed -->
+            <!--
+            <pre>
+                {{ formData }}
+                {{ user }}
+                Number: {{ misc.number }}
+                Pass: {{ misc.pass }}
+                Error? {{ misc.err }}
+                Check: {{ misc.check }}
+                SelectedImg: {{selectedImg.value}}
+                Error Message: {{ misc.errorMessage }}
+            </pre>
+            -->
+
+
+            </div>
+        </div>
+    </div>
+</body>
