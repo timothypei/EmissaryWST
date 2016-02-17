@@ -9,6 +9,7 @@ angular.module('robobetty', appendIonic(
     'ui.bootstrap',
     'signin',
     'register',
+    'signup',
     'thankyou',
     'DashboardFormBuilderModule',
     'checkin',
@@ -18,7 +19,7 @@ angular.module('robobetty', appendIonic(
     'themes'
    ]))
   .config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/patientQueue');
+    $urlRouterProvider.otherwise('/home');
     $stateProvider
       .state('common',{
         templateUrl: 'views/components/dashboard/main/views/dashboard.html',
@@ -118,6 +119,23 @@ angular.module('robobetty', appendIonic(
         title: 'Settings',
         templateUrl: 'views/components/dashboard/settings/views/settings.html',
         mobile: false
+      })
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'views/components/receptionistPortal/signup/views/signup.html',
+        controller: 'signupController'
+      })
+      .state('signup.profile', {
+        url: '/profile',
+        templateUrl: 'views/components/receptionistPortal/signup/views/signup-profile.html'
+      })
+      .state('signup.theme', {
+        url: '/theme',
+        templateUrl: 'views/components/receptionistPortal/signup/views/signup-theme.html'
+      })
+      .state('signup.payment', {
+        url: '/payment',
+        templateUrl: 'views/components/receptionistPortal/signup/views/signup-payment.html'
       });
   })
   ionicCallback(IS_MOBILE);
@@ -126,13 +144,15 @@ angular.module('robobetty', appendIonic(
     $rootScope.$on('$stateChangeSuccess',
     function(event, toState, toParams, fromState, fromParams) {
       // Routing for non-registered
-      if(!appConfig.debugMode) {
+      /*if(!appConfig.debugMode) {
         if(!$rootScope.admin_id) {
-          if(toState.name != 'signin' && toState.name != 'register' && toState.name != 'recovery') {
+          //DEBUG
+          console.log("toState name: " + toState.name);
+          if(toState.name != 'signin' && toState.name != 'register' && !toState.name.startsWith('signup') && toState.name != 'recovery') {
             $state.go("signin");
           }
         }
-      }
+      }*/
       // Routing for mobile app
       if(appConfig.isMobile) {
         if(toState.mobile == false) {
