@@ -1,4 +1,4 @@
-# robo_betty_alpha [![Build Status](http://52.53.230.212/app/rest/builds/buildType:(WebStormTroopers_TestBuild)/statusIcon)](http://52.53.230.212/app/rest/builds/buildType:(WebStormTroopers_TestBuild)/statusIcon) [![Issue Count](https://codeclimate.com/repos/569c2b0f94fc544cff000d1e/badges/3c82fb1515f0966eb37e/issue_count.svg)](https://codeclimate.com/repos/569c2b0f94fc544cff000d1e/feed)
+# robo_betty_alpha [ ![Codeship Status for thiefjack/WebStormTroopers](https://codeship.com/projects/9a9a88f0-acd5-0133-a664-0af8633f2b2a/status?branch=master)](https://codeship.com/projects/131811)
 
 # Update 1/12/16 for CSE112 Winter 2016 Students
 Use https://cse112bluejay.herokuapp.com/ to access last years version of the app. Happy Refactoring!
