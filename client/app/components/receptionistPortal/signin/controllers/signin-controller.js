@@ -31,7 +31,8 @@ angular.module('signin')
            $rootScope.admin_id = data.admin_id;
            $rootScope.email = $scope.user.email;
            socket.emit('_admin_id', {_admin_id:$rootScope.admin_id});
-        	 $location.path('../../../dashboard/views/dashboard.html');
+        	 //$location.path('../../../dashboard/views/dashboard.html');
+             $location.path('/patientQueue');
         	 return data;
           }
       	 })
