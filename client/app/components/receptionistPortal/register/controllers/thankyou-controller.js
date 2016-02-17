@@ -6,6 +6,6 @@ angular.module('thankyou')
     $timeout(redirectToSignin, 3000);
     
     function redirectToSignin() {
-      $location.path('../../../dashboard/views/dashboard.html')
+      $location.path('/patientQueue')
     }
 }]);

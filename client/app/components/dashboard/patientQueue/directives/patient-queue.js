@@ -66,7 +66,7 @@ angular.module('dashboard')
     //Client receiving event
        // If a patient gets updated it sends a new list.
     socket.on('queue_updated', function(data) {
-     console.log("queue updated received", data);
+        console.log("queue updated received", data);
        //console.log("patient length", data.patient.length);
       $scope.rowCollection = [];
       $scope.patientqueue = data;
@@ -82,12 +82,12 @@ angular.module('dashboard')
       for(i = 0;i<patientLength;i++){
         $scope.rowCollection.push(
         {
-          id: data.patients[i]._id,
-          Name: data.patients[i].name,
-          Doctor: DoctorService.getRandomDoctor(),
-          Time: new Date(new Date(data.patients[i].checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' '),
-          TimeValue: new Date(data.patients[i].checkin_time).valueOf(),
-          Appointment: new Date(new Date(patient.checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' ')
+            id: data.patients[i]._id,
+            Name: data.patients[i].name,
+            Doctor: DoctorService.getRandomDoctor(),
+            Time: new Date(new Date(data.patients[i].checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' '),
+            TimeValue: new Date(data.patients[i].checkin_time).valueOf(),
+            Appointment: new Date(new Date(data.patients[i].checkin_time).valueOf()).toLocaleTimeString().replace(/:\d+ /, ' ')
 
         });
       }
