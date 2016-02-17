@@ -3,15 +3,66 @@
     color: #FFFFFF;
     font-weight: bold;
     font-family: 'Lato', sans-serif;
-    font-size: 11vmin;
+    font-size: 4vh;
     margin: 0px 0px 100px;
-    padding: 40px;
+    padding: 10px;
     text-align: center;
 }
 
+@media(min-width: 1750px) {
+    .landing {
+        padding: 0 20%;
+    }
+}
+
+@media(max-width:700px) {
+    .check-in-text {
+        font-size: 45px;
+    }
+}
+
+@media(max-width: 900px) {
+    .btn-sign-up {
+        margin: 50px auto;
+        display: block !important;
+    }
+    .grey-box {
+        display: inline-block;
+        margin: 0 auto;
+        float: none;
+    }
+}
+
+@media(min-width: 900px) {
+    .landing-features {
+        display: flex;
+        padding: 0 0 0 20% !important;
+    }
+    .btn-area {
+        padding: 55px 25px;
+    }
+}
+
+@media(min-width: 1000px) {
+    .landing-features {
+        display: flex;
+        padding: 0 20% !important;
+    }
+}
+
+@media( min-width:1200px ) {
+    .landing-features {
+        display: flex;
+        padding: 0 25% !important;
+    }
+
+    .btn-sign-up {
+        width: 380px;
+    }
+}
+
 .landing-features {
-    display: flex;
-    padding: 0 25%;
+    padding: 0 20%;
 }
 
 .check-in, .btn-area, .grey-box {
@@ -37,7 +88,7 @@
     list-style: none;
     color: white;
     margin: 50px 0px;
-    font-size: 30px;
+    font-size: 25px;
     float: right;
     font-family: 'Lato', sans-serif;
     font-weight: bolder;
@@ -63,19 +114,19 @@
 
 .info-title {
     font-weight: bold;
-    font-size: 23px;
+    font-size: 16px;
     text-align: center;
 }
 
 .info-text {
-    font-size: 22px;
+    font-size: 14px;
     text-align: center;
 }
 
 .grey-box {
     background-color: white;
     opacity: .7;
-    padding: 50px 60px;
+    padding: 15px 20px;
     width: 59vmin;
 }
 
@@ -86,18 +137,17 @@
     border: none;
     color: white;
     padding: 15px 32px;
-    width: 400px;
-    margin: 85px;
+    width: 200px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 50px;
+    font-size: 25px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .btn-sign-in {
     background: rgba(0,0,0,0);
-    width: 190px;
+    width: 100px;
     moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border: 2px solid white;
@@ -106,9 +156,9 @@
     position: relative;
     z-index: 10;
     float: right;
-    margin: 60px 170px;
-    height: 50px;
-    font-size: 25px;
+    margin: 35px 50px;
+    height: 30px;
+    font-size: 18px;
     font-family: 'Lato', sans-serif;
     font-weight: bold;
 }
