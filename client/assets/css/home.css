@@ -27,7 +27,7 @@
         display: block !important;
     }
     .grey-box {
-        display: block;
+        display: inline-block;
         margin: 0 auto;
         float: none;
     }
