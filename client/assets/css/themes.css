@@ -30,3 +30,7 @@
 #clear-theme-selection:focus {
 	color: #3D8CC4;
 }
+
+.themes-container{
+	margin-top: 150px;
+}
