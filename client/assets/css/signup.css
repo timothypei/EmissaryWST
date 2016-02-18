@@ -16,11 +16,12 @@ body {
 
 .overlay {
     position: absolute;
+    width: inherit;
+    height: inherit ;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 0px;
     opacity: 0.5;
     background-color: #080808;
     z-index: 0;
@@ -105,7 +106,7 @@ pre {
 /* ANIMATION STYLINGS
 ============================================================================= */
 #signup-form            { position:relative; min-height:300px; overflow:hidden; padding:30px; }
-#form-views             { width: 40vmin; margin: 0 auto; }
+#form-views             { width: 80%; margin: 0 auto; }
 
 /* basic styling for entering and leaving */
 /* left and right added to ensure full width */
