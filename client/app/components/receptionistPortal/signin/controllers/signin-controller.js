@@ -15,7 +15,7 @@ angular.module('signin')
         
       else{
   		  var account = this;
-          
+          console.log("calling signin");
           //calls the API to login, have to pass in user object that contains the email and password
   		  AuthService.signin($scope.user)
       	 .success(function(data){
@@ -25,14 +25,15 @@ angular.module('signin')
           }
             //redirects to the person's home page when a success
           else{ 
-           $rootScope.token = data.token;
-           $rootScope.number = data.company_phone_number;
-           $rootScope.company_name = data.company_name;
-           $rootScope.admin_id = data.admin_id;
-           $rootScope.email = $scope.user.email;
-           socket.emit('_admin_id', {_admin_id:$rootScope.admin_id});
-        	 $location.path('../../../dashboard/views/dashboard.html');
-        	 return data;
+              $rootScope.token = data.token;
+              $rootScope.number = data.company_phone_number;
+              $rootScope.company_name = data.company_name;
+              $rootScope.admin_id = data.admin_id;
+              $rootScope.email = $scope.user.email;
+              socket.emit('_admin_id', {_admin_id:$rootScope.admin_id});
+              //$location.path('../../../dashboard/views/dashboard.html');
+              $location.path('/patientQueue');
+              return data;
           }
       	 })
           

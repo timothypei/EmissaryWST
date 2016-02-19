@@ -8,12 +8,14 @@
    width: 95%;
 }
 #navigation{
-   background:#434343;
+   /*background:#434343;*/
+   background: #E6E6E6;
    border-radius:0%;
    border:0px;
    margin-bottom:0;
    height: 65px;
-   border-bottom: 5px solid #e99d1a;
+   border-bottom: 2px solid #3D8CD5;
+   /*border-bottom: 2px solid #e99d1a;*/
    position:fixed;
    top: 0;
    left: 0;

@@ -18,6 +18,10 @@ angular.module('dashboard')
             $scope.getWidth = function() {
                 return window.innerWidth;
             };
+/*
+          var test = SidebarService.getSidebarOptions();
+           console.log(test);
+           console.log($scope.title);*/
 
             $scope.$watch($scope.getWidth, function(newValue, oldValue) {
                 if (newValue >= mobileView) {

@@ -1,7 +1,7 @@
 #patient-queue{
     height:37em;
     font-size: 14px;
-	overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 #patient-queue td{
@@ -10,7 +10,7 @@
 	max-width:10em;
 }
 
-#patient-queue .table-striped > tbody > tr:hover:nth-of-type(odd) {
+/*#patient-queue .table-striped > tbody > tr:hover:nth-of-type(odd) {
   background-color: #E6E6E6;
   cursor: pointer;
 }
@@ -18,8 +18,17 @@
 #patient-queue .table-striped > tbody > tr:hover:nth-of-type(even) {
   background-color: #E6E6E6;
  	cursor: pointer;
+}*/
+
+#patient-queue .table > tbody > tr{
+    background-color: #fff;
 }
 
+#patient-queue .table > tbody > tr:hover{
+    background-color: #E6E6E6;
+    cursor: pointer;
+}
+/*
 .st-sort-ascent i:before {
     margin-left: 6px !important;
     content:  "\f0de";
@@ -35,6 +44,10 @@
     font-style: normal;
     font-weight: normal;
     text-decoration: inherit;
+}*/
+
+.fa-sort{
+    margin-left: 8px;
 }
 .queue-icons{
     float:right;
@@ -64,4 +77,45 @@ tr:hover .queue-icons{
     color: slategray;
 }
 
+.form-control{
+    width: 150px;
+    position: absolute;
+    right: 0;
+    margin-right: 7.5%;
+    font-size: 12px;
+    height: 24px;
+    display: inline-block;
 
+}
+
+#patient-queue table tr td.patient-queue-text {
+    vertical-align: middle;
+}
+
+.patient-queue-container {
+    font-family: 'Myriad Pro Regular';
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+}
+
+.patient-table-header{
+    margin-top: 25px;
+    margin-bottom: 15px;
+    height: 50px;
+    display: inline-block;
+}
+
+.table-header-text{
+    position: absolute;
+
+}
+
+.table-header-text > h4{
+    display: inline-block;
+}
+#patient-empty{
+    color:red;
+}
+
+#patient-queue > thead

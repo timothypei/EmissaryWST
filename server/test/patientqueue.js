@@ -33,15 +33,11 @@ describe("PatientQueue", function() {
           em.email = ""; // Add YOUR email to test
           em.phone_number = ""; // Add YOUR phone number here to test
           _doctor_id = employeeCredentials._id;
-          Employee.remove({},function(err) {
-            if(err)
-              throw(err);
             em.save(function(err, employ) {
-              console.log(err);
-              console.log("CREATED EMPLOYEE", employ);
-              done();
+                console.log(err);
+                console.log("CREATED EMPLOYEE", employ);
+                done();
             });
-          });
         });
       }
       

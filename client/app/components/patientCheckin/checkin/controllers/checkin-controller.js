@@ -79,7 +79,7 @@ angular.module('checkin')
             $rootScope.token = data.token;
             $rootScope.email = $scope.user.email;
             CheckinService.closeModal();  // close the checkin modal
-            $location.path('../../../dashboard/views/dashboard.html');
+            $location.path('/patientQueue');
             return data;
           }
          })
