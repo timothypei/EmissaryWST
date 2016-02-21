@@ -10,6 +10,17 @@ var exports = module.exports;
 
 var Employee = require('../../models/Employee');
 
+exports.login = function(req, res) {
+  Employee.findOne({email:req.body.email}, function(err, e) {
+    if(err){
+      return res.status(400).send({error: "Can not Find"});
+    }
+    if(!e.validPassword(req.body.password))
+      return res.status(400).send({error: "Incorrect Credentials"});
+    return res.status(200).json(e);
+  });
+};
+
 exports.getAllEmployees = function(req, res) {
   Employee.find({_admin_id : req.params.id}, function(err, result) {
     if(err){
@@ -30,22 +41,20 @@ exports.getById = function(req, res) {
 };
 
 exports.insert = function(req, res) {
-  var employee;
-  if(!req.body.name || !req.body.email || !req.body.phone_number || !req.body._admin_id)
-    return res.status(400).json({error: "Please specify name, email, phone_number, and _admin_id"});
-  employee = new Employee({
-    name: req.body.name,
-    email: req.body.email,
-    phone_number: req.body.phone_number,
-    _admin_id: req.body._admin_id,
-    role: req.body.role
-  });
+    var employee;
+    employee = new Employee();
+    employee.name = req.body.name;
+    employee.email = req.body.email,
+    employee.phone_number  = req.body.phone_number,
+    employee._admin_id = req.body._admin_id,
+    employee.password = employee.generateHash(req.body.password),
+    employee.role =  req.body.role
 
-  employee.save(function(err) {
+    employee.save(function(err, e) {
     if(err) {
       return res.status(400).json({error: "Can not Save"});
     }
-    return res.status(200).send(employee);
+    return res.status(200).send(e);
   });
 };
 

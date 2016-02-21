@@ -40,7 +40,8 @@ describe("Employee", function() {
                             name: "John",
                             email: "jt@tomcruise.com",
                             phone_number: "123456789",
-                            role: "c_admin"
+                            role: "c_admin",
+                            password: "test"
                         })
                         .end(function(err, res){
                             if(err)
@@ -52,6 +53,38 @@ describe("Employee", function() {
                             res.body.should.have.property('email').and.be.equal("jt@tomcruise.com");
 
                             returnedId = res.body._id;
+                            done();
+                        });
+                });
+            });
+            describe('Login', function(){
+                it('Should login with employee data', function(done){
+                        request(url)
+                        .post('/api/employee/login')
+                            .send(
+                                {
+                                    email:"jt@tomcruise.com",
+                                    password: "test"
+                                }
+                            )
+                            .end(function(err, res){
+                                if(err) throw (err);
+                                res.body.should.have.property('_id');
+                                done();
+                            });
+                });
+                it('Should not login with employee data', function(done){
+                    request(url)
+                        .post('/api/employee/login')
+                        .send(
+                            {
+                                email:"jt@tomcruise.com",
+                                password: "incorrect"
+                            }
+                        )
+                        .end(function(err, res){
+                            if(err) throw (err);
+                            res.body.should.have.property('error');
                             done();
                         });
                 });
@@ -142,7 +175,6 @@ describe("Employee", function() {
 
 
         after(function(done) {
-            // give cleanupAuth the email of the admin user it created earlier.
             ConfigureAuth.cleanupAuth(credentials.email, done);
         });
     }

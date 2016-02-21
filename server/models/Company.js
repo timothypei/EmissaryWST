@@ -16,17 +16,5 @@ var companySchema = mongoose.Schema({
     paid_time: { type: Date, required: true}
 });
 
-// methods ======================
-
-
-// checking if password is valid
-companySchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.password);
-};
-// generating a hash
-companySchema.methods.generateHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
-
 // create the model for users and expose it to our app
 module.exports = mongoose.model('Company', companySchema);

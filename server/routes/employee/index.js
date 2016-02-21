@@ -8,10 +8,11 @@ var router = express.Router();
 var bodyparser = require('body-parser');
 var urlparser = bodyparser.urlencoded({extended: false});
 
-router.get('/admin/:id', controller.getAllEmployees);
-router.get('/:id', controller.getById);
-router.post('/', controller.insert);
-router.put("/:id", controller.update);
-router.delete("/:id", controller.delete);
+router.get('/admin/:id',    controller.getAllEmployees);
+router.get('/:id',          controller.getById);
+router.post('/',            controller.insert);
+router.put("/:id",          controller.update);
+router.delete("/:id",       controller.delete);
+router.post("/login",       controller.login);
 
 module.exports = router;
