@@ -13,7 +13,7 @@ angular.module('dashboard')
     function ($scope, $window, $modal, filterFilter, $http, $rootScope) {
     $scope.rowCollection = [];
     $scope.getEmployees = function(){
-        $http.get('/api/employee/admin/'+$rootScope.admin_id).success(function(data){
+        $http.get('/api/employees/admin/'+$rootScope.admin_id).success(function(data){
             if(data === null){
                 return [];
             }
@@ -106,19 +106,19 @@ angular.module('dashboard')
     $scope.removeMultipleFinal = function(row){
         $scope.rowCollection = filterFilter($scope.rowCollection, function(row){
             if(row.selected){
-                $http.delete('/api/employee/' + row.id)
+                $http.delete('/api/employees/' + row.id)
                     .success(function(data, status, headers, config) {
                         console.log("Removed id", data);
                     })
                     .error(function(data, status, headers, config) {
                         console.log("Could not remove employee id.", data);
                         console.log("Trying to remove from database by email");
-                        $http.get('/api/employee/admin/' + $rootScope.admin_id)
+                        $http.get('/api/employees/admin/' + $rootScope.admin_id)
                             .success(function(data, status, headers, config) {
                                 for(var j=0; j<data.length; j++){
                                     if(row.Email == data[j].email){
                                         console.log("Found! Removing ", row.Email);
-                                        $http.delete('/api/employee/' + data[j]._id)
+                                        $http.delete('/api/employees/' + data[j]._id)
                                         .success(function(data, status, headers, config) {
                                             console.log("Removed id", data);
                                         })
@@ -169,7 +169,7 @@ angular.module('dashboard')
                 $("#toaster").fadeOut();
             }, 2000);
 
-            $http.post('/api/employee', 
+            $http.post('/api/employees',
                 {
                 _admin_id: $rootScope.admin_id,
                 name: result.Name,

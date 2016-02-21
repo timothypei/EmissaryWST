@@ -14,10 +14,6 @@
  */
 
 
-var express = require('express');
-var config = require('../../config/config');
-var router = express.Router();
-
 /* need this to enable cross origin resource sharing.If disabled, we might
  * not need this later. This is just to get the example to work
  * when front end is served from a something other than our app server.

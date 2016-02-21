@@ -9,7 +9,7 @@ module.exports = function(app) {
     app.use(r('./routes/home'));
     app.use('/api/form'         , r('./routes/form'));
     app.use('/api'              , r('./routes/theme'));
-    app.use('/api/employee'     , r('./routes/employee'));
+    app.use('/api/employees'     , r('./routes/employee'));
     app.use('/api/patient'      , r('./routes/patientqueue'));
     app.use('/api/companies'    , r('./routes/company'));
     app.use('/api/appointments'  , r('./routes/appointment'));

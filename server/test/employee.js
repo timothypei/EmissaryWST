@@ -29,14 +29,13 @@ describe("Employee", function() {
         describe("Employee Testing", function() {
 
             // TEST POST
-            describe('POST /api/employee', function(){
+            describe('POST /api/employees', function(){
                 it('should save submitted employee', function(done){
                     request(url)
-                        .post('/api/employee')
+                        .post('/api/employees')
                         .query({email: credentials.email, token: credentials.token})
                         .send({
                             _admin_id: credentials.admin._id,
-                            //form: submittedForm,
                             name: "John",
                             email: "jt@tomcruise.com",
                             phone_number: "123456789",
@@ -60,7 +59,7 @@ describe("Employee", function() {
             describe('Login', function(){
                 it('Should login with employee data', function(done){
                         request(url)
-                        .post('/api/employee/login')
+                        .post('/api/employees/login')
                             .send(
                                 {
                                     email:"jt@tomcruise.com",
@@ -75,7 +74,7 @@ describe("Employee", function() {
                 });
                 it('Should not login with employee data', function(done){
                     request(url)
-                        .post('/api/employee/login')
+                        .post('/api/employees/login')
                         .send(
                             {
                                 email:"jt@tomcruise.com",
@@ -94,7 +93,7 @@ describe("Employee", function() {
             describe('PUT /api/employee/:id', function(){
                 it('Should update the employee data', function(done){
                     request(url)
-                        .put('/api/employee/' + returnedId)
+                        .put('/api/employees/' + returnedId)
                         .query({email: credentials.email, token: credentials.token})
                         .send({
                             _admin_id: credentials.admin._id,
@@ -113,11 +112,11 @@ describe("Employee", function() {
             });
 
             // TEST GET ALL EMPLOYEES
-            describe('GET /api/employee/admin/:id', function(){
+            describe('GET /api/employees/admin/:id', function(){
                 it("should return all employees", function(done){
 
                     request(url)
-                        .get('/api/employee/admin/'+credentials.admin._id)
+                        .get('/api/employees/admin/'+credentials.admin._id)
                         .query({email: credentials.email, token: credentials.token})
                         .send({
                             _admin_id: credentials.admin._id
@@ -139,10 +138,10 @@ describe("Employee", function() {
             });
 
             // TEST GET A SPECIFIC EMPLOYEE
-            describe('GET /api/employee/:id', function(){
+            describe('GET /api/employees/:id', function(){
                 it("should return a specific employee", function(done){
                     request(url)
-                        .get('/api/employee/' + returnedId)
+                        .get('/api/employees/' + returnedId)
                         .query({email: credentials.email, token: credentials.token})
                         .end(function(err, res){
 
@@ -160,10 +159,10 @@ describe("Employee", function() {
             });
 
             // TEST DELETE
-            describe('DELETE /api/employee/:id', function(){
+            describe('DELETE /api/employees/:id', function(){
                 it('Should delete the employee data', function(done){
                     request(url)
-                        .delete('/api/employee/' + returnedId)
+                        .delete('/api/employees/' + returnedId)
                         .query({email: credentials.email, token: credentials.token})
                         .end(function(err, res){
                             res.body.should.have.property('_id');

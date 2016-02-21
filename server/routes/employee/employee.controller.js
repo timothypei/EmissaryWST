@@ -4,21 +4,19 @@
  * This module is meant to house all of the API
  * routes that pertain to users
  */
-var express = require('express');
-var router = express.Router();
 var exports = module.exports;
 
 var Employee = require('../../models/Employee');
 
 exports.login = function(req, res) {
-  Employee.findOne({email:req.body.email}, function(err, e) {
-    if(err){
-      return res.status(400).send({error: "Can not Find"});
-    }
-    if(!e.validPassword(req.body.password))
-      return res.status(400).send({error: "Incorrect Credentials"});
-    return res.status(200).json(e);
-  });
+    Employee.findOne({email:req.body.email}, function(err, e) {
+        if(err || !e){
+          return res.status(400).send({error: "Can not Find"});
+        }
+        if(!e.validPassword(req.body.password))
+          return res.status(400).send({error: "Incorrect Credentials"});
+        return res.status(200).json(e);
+    });
 };
 
 exports.getAllEmployees = function(req, res) {
@@ -41,8 +39,7 @@ exports.getById = function(req, res) {
 };
 
 exports.insert = function(req, res) {
-    var employee;
-    employee = new Employee();
+    var employee = new Employee();
     employee.name = req.body.name;
     employee.email = req.body.email,
     employee.phone_number  = req.body.phone_number,
