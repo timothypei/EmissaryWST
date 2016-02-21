@@ -50,7 +50,7 @@ angular.module('auth')
       }
 
       /* Return promise to caller so they can call success and error too */
-      return $http.post('/auth/signup', payload);
+      return $http.post('/api/companies', payload);
     };
 
   }]);

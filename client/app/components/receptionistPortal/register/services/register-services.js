@@ -5,6 +5,6 @@ angular.module('register')
   	  //Works with the registration API to post to server, takes in a user object
       //that contains a company name, password, email, and phone number
       this.reg = function(user) {
-        return $http.post('/api/company/signup', user);
+        return $http.post('/api/companies', user);
       };
   }]);

@@ -11,9 +11,7 @@
  */
 
 
-var express = require('express');
 var config = require('../../config/config');
-var router = express.Router();
 
 /* need this to enable cross origin resource sharing.If disabled, we might
  * not need this later. This is just to get the example to work
@@ -26,74 +24,93 @@ var jwt = require('jwt-simple');
 module.exports.template = {};
 
 /**signup- Used to sign up a user.*/
-module.exports.template.signup = function(req, res) {
+module.exports.template.create = function(req, res) {
     var company = new Company();
 
     //require provided info
     company.email = req.body.email;
-    company.password = company.generateHash(req.body.password);
     company.name = req.body.name;
     company.phone_number = req.body.phone_number;
     company.expiration_date=req.body.expiration_date;
     company.credit_card_number=req.body.credit_card_number;
-
-    company.token = jwt.encode(req.body.email, config.secret);
     company.paid_time=new Date();
 
     company.save(function(err, c) {
         if(err)
-            return res.status(400).send(err);
-        return res.status(200).json(
-            {
-                token: c.token,
-                admin_id: c._id,
-                name: c.name,
-                email: c.email,
-                phone_number: c.phone_number,
-                paid_time:c.paid_time
-            });
+            return res.status(400).json({error: "Could Not Save"});
+        return res.status(200).json(showCompanyPublicInfo(c));
+    });
+};
+
+/**get All the companies*/
+module.exports.template.getAll = function(req, res) {
+    Company.find({},
+        {
+            credit_card_number:false,
+            expiration_date:false
+        }
+        , function(err, result){
+        if(err){
+            return res.status(400).json(err);
+        }
+        return res.status(200).json(result);
     });
 };
 
 /**authLogin- logs in a user*/
-module.exports.template.login = function(req, res) {
-    //Give them a token
-    // find a user whose email is the same as the forms email
-    // we are checking to see if the user trying to login already exists
-    Company.findOne({email: req.body.email}, function(err, company) {
-        // if there are any errors, return the error before anything else
-        if(err || !company)
-            return res.status(400).send(err);
-        // if the user is found but the password is wrong
-        if(!company.validPassword(req.body.password))
-            return res.status(401).send('loginMessage', 'Oops! Wrong password');
-        var newToken = jwt.encode(req.body.email, config.secret);
-        company.token = newToken;
-        company.save(function(err, c) {
-            if(err)
-                return res.status(400).json(err);
-            return res.status(200).json(
-                {
-                    token: newToken,
-                    id: c._id,
-                    name: c.name,
-                    email: c.email,
-                    phone_number: c.phone_number,
-                    paid_time: c.paid_time
-                });
+module.exports.template.get = function(req, res) {
+    Company.findOne({_id: req.params.id}, function(err, company) {
+        if(err)
+            return res.status(400).json({error: "Could Not Save"});
+        return res.status(200).json(showCompanyPublicInfo(company));
+    });
+};
+
+/* update the company info */
+module.exports.template.update = function(req, res){
+    Company.findOne({_id: req.params.id}, function (err, c) {
+        if(err || !c)
+            return res.status(401).json({error: "Could Not Find"});
+
+        //update email
+        if (req.body.email !== undefined)
+            c.email = req.body.email;
+
+        //update company name
+        if (req.body.name !== undefined)
+            c.name = req.body.name;
+
+        //update company's phone number
+        if (req.body.phone_number !== undefined)
+            c.phone_number = req.body.phone_number;
+
+        if (req.body.credit_card_number !== undefined)
+            c.credit_card_number = req.body.credit_card_number;
+
+        if (req.body.expiration_date !== undefined)
+            c.expiration_date = req.body.expiration_date;
+
+        c.save(function(err) {
+            if(err) {
+                return res.status(400).json({error: "Could Not Save"});
+            }
+            return res.status(200).json(showCompanyPublicInfo(c));
         });
     });
 };
 
-module.exports.template.updatePaidTime = function(req, res){
-    var currTime=new Date();
-    var query = { _id: req.params.id };
-    var update = { paid_time: currTime };
-    var options = { multi: false };
-    Company.update(query, update, options, function(err){
-        if(err) return res.status(401).json(err);
-        var jsonRes = { paid_time: currTime };
-        return res.status(200).json(jsonRes);
+/* delete company */
+module.exports.template.delete = function(req, res){
+    Company.findById(req.params.id, function(err, c) {
+        if(err)
+            res.status(400).json({error: "Could Not Find"});
+        c.remove(function(err) {
+            if(err) {
+                res.status(400).json({error: "Could Not Save"});
+            } else {
+                return res.status(200).json(showCompanyPublicInfo(c));
+            }
+        });
     });
 };
 
@@ -101,12 +118,12 @@ module.exports.template.updatePaidTime = function(req, res){
 module.exports.template.resetCredentials = function(req, res) {
     Company.findOne({email: req.params.user}, function (err, c) {
         if(err || !c)
-            return res.status(401).json(err);
+            return res.status(400).json({error: "Could Not Find"});
 
 
         // if the user is found but the password is wrong
         if(!c.validPassword(req.body.password))
-            return res.status(401).send('loginMessage', 'Oops! Wrong password');
+            return res.status(400).send('loginMessage', 'Oops! Wrong password');
         //update password
 
         //upadate password
@@ -127,9 +144,21 @@ module.exports.template.resetCredentials = function(req, res) {
 
         c.save(function(err) {
             if(err) {
-                res.status(400).send(err);
+                res.status(400).send({error: "Could Not Save"});
             }
         });
-        return res.status(200).json(c);
+        return res.status(200).json(showCompanyPublicInfo(c));
     });
 };
+
+function showCompanyPublicInfo(c){
+    return {
+        _id: c._id,
+        token: c.token,
+        admin_id: c._id,
+        name: c.name,
+        email: c.email,
+        phone_number: c.phone_number,
+        paid_time: c.paid_time
+    }
+}
