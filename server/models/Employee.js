@@ -11,9 +11,10 @@ var bcrypt = require('bcrypt-nodejs');
 var employeeSchema = mongoose.Schema({
   name: String,
   email: {type: String, unique: true, index: true, required: true},
-  //password: String, // Employee login feature
+  password: String, // Employee login feature
   phone_number: String,
-  _admin_id: { type: Schema.Types.ObjectId, ref: 'Admin', required: true },
+  role: {type: String, required: true},
+  _admin_id: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
   token: String
 });
 

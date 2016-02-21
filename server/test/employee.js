@@ -40,6 +40,7 @@ describe("Employee", function() {
                             name: "John",
                             email: "jt@tomcruise.com",
                             phone_number: "123456789",
+                            role: "c_admin"
                         })
                         .end(function(err, res){
                             if(err)
@@ -132,14 +133,11 @@ describe("Employee", function() {
                         .delete('/api/employee/' + returnedId)
                         .query({email: credentials.email, token: credentials.token})
                         .end(function(err, res){
-                            res.text.should.equal('deleted ' + returnedId);
+                            res.body.should.have.property('_id');
                             done();
                         });
                 });
             });
-
-
-
         });
 
 

@@ -1,7 +1,6 @@
 /**
  * Created by kevingu on 2/12/16.
  */
-// /models/Authmodel.js
 // load the things we need
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
@@ -9,7 +8,6 @@ var bcrypt = require('bcrypt-nodejs');
 // define the schema for our user model
 var companySchema = mongoose.Schema({
     email: {type: String, unique: true, index: true, required: true},
-    password: {type: String, required: true},
     token: String,
     name:  {type: String, required: true },
     phone_number: { type: String, required: true },

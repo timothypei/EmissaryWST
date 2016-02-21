@@ -1,19 +1,20 @@
 /**
+ * Created by kevingu on 2/21/16.
+ */
+/**
  * Created by kevingu on 2/12/16.
  */
 'use strict';
 
 var express = require('express');
-var controller = require('./company.controller');
+var controller = require('./appointment.controller');
 
 var router = express.Router();
 
 router.post('/', 			controller.template.create);
 router.get('/:id', 			controller.template.get);
-router.get('/', 			controller.template.getAll);
+router.get('/company/:id', 	controller.template.getAll);
 router.put('/:id',          controller.template.update);
 router.delete('/:id',       controller.template.delete);
-
-router.put("/setting/:user", 	controller.template.resetCredentials);
 
 module.exports = router;

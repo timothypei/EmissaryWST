@@ -15,7 +15,7 @@ function setupAdmin(done) {
 }
 
 function setupUser(done, isEmployee) {
-  var path = isEmployee ? '/employee' : '/api/company';
+  var path = isEmployee ? '/employee' : '/api/companies';
   var UserModel = isEmployee ? Employee : AdminUser;
 
   var token;
@@ -32,7 +32,7 @@ function setupUser(done, isEmployee) {
 
   var url = "localhost:" + config.port;
   request(url)
-      .post(path+'/signup')
+      .post(path)
       .send({
         email: email,
         password: password,
@@ -42,25 +42,20 @@ function setupUser(done, isEmployee) {
         phone_number:phone_number
       })
       .expect(200)
-      .end(function(err){
-        if(err)
-          throw(err);
-        login();
+      .end(function(err, res){
+          if(err)
+            throw(err);
+          res.body.should.have.property('_id');
+          login(res.body._id);
       });
 
-  function login() {
+  function login(id) {
     request(url)
-        .post(path+'/login')
-        .send({
-          email: email,
-          password: password
-        })
+        .get(path+'/'+id)
         .expect(200)
         .end(function(err,res){
           if(err)
             throw(err);
-          res.body.should.have.property('token');
-          token = res.body.token;
           retrieveAdmin();
         });
   }

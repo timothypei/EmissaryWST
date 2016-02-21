@@ -13,7 +13,9 @@ var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
 var socketIO = require('./socket/socket');
+//var oauthserver = require('oauth2-server');
 //var newrelic = require('newrelic');
+
 
 /*
  * App configs
@@ -29,6 +31,21 @@ var app = express();
 
 app.use(morgan('dev', {"stream": winstonConfig.stream}));
 
+/*
+ * setting up oath
+ */
+/*app.oauth = oauthserver({
+    model: require('./models/Employee'),
+    grants: ['password'],
+    debug: true
+});
+
+app.all('/oauth/token', app.oauth.grant());
+app.get('/secret', app.oauth.authorise(), function (req, res) {
+    res.send('Secret area');
+});
+app.use(app.oauth.errorHandler());
+*/
 
 /*
  * Connect to MongoDB.
@@ -53,23 +70,11 @@ app.use(cors());
 require('./routes')(app);
 
 /*
- * DEPRECATED. Please move these routes to routes.js
- * and modify the ./routes files accordingly
- */
-var user = require('./routes/user');
-var product = require('./routes/product');
-var auth = require('./routes/auth');
-
-/*
  * Disable api auth if were are in dev mode
  */
 if(app.get('env') !== 'development') {
   app.use('/api/*', validate);
 }
-
-app.use('/auth', auth);
-app.use('/api', user);
-app.use('/api', product);
 
 /*
  * Error Handler.

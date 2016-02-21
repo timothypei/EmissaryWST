@@ -13,7 +13,7 @@ var Employee = require('../../models/Employee');
 exports.getAllEmployees = function(req, res) {
   Employee.find({_admin_id : req.params.id}, function(err, result) {
     if(err){
-      return res.status(400).send('There was a problem fetching all of the users');
+      return res.status(400).send({error: "Can not Find"});
     }
     return res.status(200).json(result);
   });
@@ -22,7 +22,7 @@ exports.getAllEmployees = function(req, res) {
 exports.getById = function(req, res) {
    Employee.findById(req.params.id, function(err, employee) {
       if(err) {
-        return res.status(400).json(err);
+        return res.status(400).json({error: "Can not Find"});
       } else {
         return res.status(200).json(employee);
       }
@@ -37,12 +37,13 @@ exports.insert = function(req, res) {
     name: req.body.name,
     email: req.body.email,
     phone_number: req.body.phone_number,
-    _admin_id: req.body._admin_id
+    _admin_id: req.body._admin_id,
+    role: req.body.role
   });
 
   employee.save(function(err) {
     if(err) {
-      return res.status(400).json(err);
+      return res.status(400).json({error: "Can not Save"});
     }
     return res.status(200).send(employee);
   });
@@ -51,7 +52,7 @@ exports.insert = function(req, res) {
 exports.update = function(req, res) {
     Employee.findById(req.params.id, function (err, employee) {
       if(err)
-         return res.status(400).json(err);
+         return res.status(400).json({error: "Can not Update"});
  
       employee.name = req.body.name || employee.name;
       employee.email = req.body.email || employee.email;
@@ -60,19 +61,19 @@ exports.update = function(req, res) {
 
       employee.save(function(err) {
         if(err)
-          return res.status(400).json(err);
+          return res.status(400).json({error: "Can not Save"});
+        return res.status(200).send(employee);
       });
-      return res.status(200).send(employee);
    });
 };
 
 exports.delete = function(req, res) {
-  return Employee.findById(req.params.id, function(err, employee) {
+  Employee.findById(req.params.id, function(err, employee) {
     return employee.remove(function(err) {
       if(err) {
-        res.status(400).json(err);
+        res.status(400).json({error: "Can not Find"});
       } else {
-        return res.status(200).send('deleted ' + req.params.id);
+        return res.status(200).send(employee);
       }
     });
   });
