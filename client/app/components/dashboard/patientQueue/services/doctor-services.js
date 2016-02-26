@@ -1,8 +1,8 @@
 'use strict';
 
 /* TODO:
- * 	Eventually have patient choose from a list of doctors. 
- *	But for now assign a random doctor to a patient.
+ * 	Eventually have visitorList choose from a list of doctors.
+ *	But for now assign a random doctor to a visitorList.
 */
 angular.module('dashboard')
   .service('DoctorService', [function() {

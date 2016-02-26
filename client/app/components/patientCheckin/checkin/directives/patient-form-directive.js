@@ -28,7 +28,7 @@ angular.module('checkin')
               CheckinService.formData.submitted = true;
               //console.log($scope.form.form_fields);
 
-           // console.log("YAY patient directive" );
+           // console.log("YAY visitorList directive" );
               CheckinService.submitForm(CheckinService.formData);
               CheckinService.checkinPatient($scope.form.form_fields[0].field_value);
               

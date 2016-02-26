@@ -35,7 +35,7 @@ describe("Employee", function() {
                         .post('/api/employees')
                         .query({email: credentials.email, token: credentials.token})
                         .send({
-                            _admin_id: credentials.admin._id,
+                            company_id: credentials.admin._id,
                             name: "John",
                             email: "jt@tomcruise.com",
                             phone_number: "123456789",
@@ -112,12 +112,11 @@ describe("Employee", function() {
             });
 
             // TEST GET ALL EMPLOYEES
-            describe('GET /api/employees/admin/:id', function(){
+            describe('GET /api/employees/company/:id', function(){
                 it("should return all employees", function(done){
 
                     request(url)
-                        .get('/api/employees/admin/'+credentials.admin._id)
-                        .query({email: credentials.email, token: credentials.token})
+                        .get('/api/employees/company/'+credentials.admin._id)
                         .send({
                             _admin_id: credentials.admin._id
                         })

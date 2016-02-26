@@ -8,10 +8,8 @@ angular.module('dashboard')
        //How many milliseconds in a minute
        var MINUTE_VAL = 60000;
        $scope.rowCollection = new Array();
-       console.log("Patient Queue");
-       //$scope.patientqueue;
        $scope.getPatients = function() {
-           $http.get('/api/patient/getPatients/' + $rootScope.admin_id).success(function (data) {
+           $http.get('/api/visitorList/getPatients/' + $rootScope.admin_id).success(function (data) {
                console.log(data);
                if (data === null) {
                    return [];
@@ -36,7 +34,7 @@ angular.module('dashboard')
     //The maximum number of minutes patients should wait before warning notification pops up on queue
     var EXPECTED_WAITING_TIME = 20;
 
-    // add hardcoded patient
+    // add hardcoded visitorList
     socket.emit("request_queue", $rootScope.admin_id);
 
 
@@ -44,14 +42,14 @@ angular.module('dashboard')
       console.log("on request_id", $rootScope.admin_id);
       if($rootScope.admin_id){
         console.log($rootScope.admin_id);
-        socket.emit('_admin_id', {_admin_id:$rootScope.admin_id});
+        socket.emit('company_id', {_admin_id:$rootScope.admin_id});
       }else{
         console.log("Socket cannot connect. No AdminId Found.");
       }
     });
 
    /* socket.on('patient_added', function(data) { 
-      console.log("patient addeeed", data);
+      console.log("visitorList addeeed", data);
       console.log("roww collection", $scope.rowCollection);
       var newDoctor = DoctorService.getRandomDoctor();
       $scope.rowCollection.push({
@@ -64,10 +62,10 @@ angular.module('dashboard')
     }); */
 
     //Client receiving event
-       // If a patient gets updated it sends a new list.
+       // If a visitorList gets updated it sends a new list.
     socket.on('queue_updated', function(data) {
         console.log("queue updated received", data);
-       //console.log("patient length", data.patient.length);
+       //console.log("visitorList length", data.visitorList.length);
       $scope.rowCollection = [];
       $scope.patientqueue = data;
       var patientLength = 0;
@@ -77,7 +75,6 @@ angular.module('dashboard')
       else{
         patientLength = data.patients.length;   
       }
-      console.log("patient length",patientLength);
       var i =0;
       for(i = 0;i<patientLength;i++){
         $scope.rowCollection.push(
@@ -112,7 +109,7 @@ angular.module('dashboard')
 
        $scope.openModal = function(row){
            var modalInstance = $modal.open({
-               templateUrl: 'views/components/dashboard/patientQueue/views/patient-modal.html',
+               templateUrl: 'views/components/dashboard/patientQueue/views/visitorList-modal.html',
                controller: 'PatientModalController',
                size: 'md',
                backdrop:true,
@@ -167,7 +164,7 @@ angular.module('dashboard')
             );
           }
         }
-          $http.post('/api/patient/delete',
+          $http.post('/api/visitorList/delete',
               {
                   authId: $rootScope.admin_id,
                   patientId: patientId,

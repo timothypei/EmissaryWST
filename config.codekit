@@ -17757,11 +17757,11 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/server\/routes\/patientqueue\/patientqueue.controller.js": {
+	"\/server\/routes\/patientqueue\/visitorList.controller.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/server\/routes\/patientqueue\/patientqueue.controller.js",
+		"inputAbbreviatedPath": "\/server\/routes\/patientqueue\/visitorList.controller.js",
 		"outputAbbreviatedPath": "\/server\/routes\/patientqueue\/min\/patientqueue.controller-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -17900,11 +17900,11 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/server\/test\/patientqueue.js": {
+	"\/server\/test\/visitorList.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/server\/test\/patientqueue.js",
+		"inputAbbreviatedPath": "\/server\/test\/visitorList.js",
 		"outputAbbreviatedPath": "\/server\/test\/min\/patientqueue-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,

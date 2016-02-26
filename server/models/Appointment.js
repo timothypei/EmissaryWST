@@ -13,6 +13,7 @@ var appointmentSchema = mongoose.Schema({
     name: {type: String, required: true},
     phone_number: {type: String, required: true},
     date: {type: Date, required: true},
+    provider_name: {type: String, required: true},
     company_id: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
 });
 

@@ -23,7 +23,6 @@ var Appointment = require('../../models/Appointment');
 /****** Company TEMPLATE ROUTES ******/
 module.exports.template = {};
 
-/**signup- Used to sign up a user.*/
 module.exports.template.create = function(req, res) {
     var appointment = new Appointment();
     var param = req.body;
@@ -33,7 +32,9 @@ module.exports.template.create = function(req, res) {
     appointment.phone_number = param.phone_number;
     appointment.date = param.date;
     appointment.company_id = param.company_id;
-    Appointment .find(
+    appointment.provider_name = param.provider_name;
+
+    Appointment.find(
         {
             company_id:param.company_id,
             date:param.date
@@ -51,7 +52,6 @@ module.exports.template.create = function(req, res) {
         });
 };
 
-/**get All the companies*/
 module.exports.template.getAll = function(req, res) {
     Appointment.find({company_id: req.params.id}, function(err, result){
             if(err){
@@ -69,7 +69,6 @@ module.exports.template.get = function(req, res) {
     });
 };
 
-/* update the company info */
 module.exports.template.update = function(req, res){
     Appointment.findOne({_id: req.params.id}, function (err, a) {
         if(err || !a)
@@ -83,7 +82,9 @@ module.exports.template.update = function(req, res){
 
         if (req.body.date!== undefined)
             a.date = req.body.date;
-
+        if (req.body.provider_name!== undefined)
+            a.provider_name = req.body.provider_name;
+        //TODO check if the date is taken already
         a.save(function(err) {
             if(err) {
                 return res.status(400).json({error: "Could Not Save"});

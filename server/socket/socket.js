@@ -3,10 +3,18 @@
 var express = require('express');
 var server;
 var io = require('socket.io')();
-var port = process.env.PORT || 3000;
 var exports = module.exports;
 
-var PatientQueue = require('../models/PatientQueue');
+//Constants for listening to Sockets
+var CONNECTION = 'connection';
+var VALIDATE_COMPANY_ID = 'validate_company_id';
+var REQUEST_COMPANY_ID = 'request_id';
+var REQUEST_VISITOR_LIST = 'request_visitor_list';
+var DISCONNECT = 'disconnect';
+
+
+//TODO: Fix this
+var VisitorList = require('../models/visitorList');
 
 /********** Socket IO Module **********/
 exports.createServer = function(io_in) {
@@ -20,29 +28,35 @@ exports.createServer = function(io_in) {
      * the '_admin_id' needs to be set so that the client can be added to the
      * room and notified when changes are being made.
      */
-    io.on('connection', function (socket) {
-        // Get the ID of the admin that has connected.
-        var adminID;
+    io.on(CONNECTION, function (socket) {
+        // Get the ID of the company that has connected.
+        var companyId;
 
-        //get was deprecated so this part was commented out
-        /*socket.get('_admin_id', function (err, _admin_id) {
-            socket.join(_admin_id);
-        });*/
-        socket.emit('request_id');
-        socket.on('_admin_id', function(data) {
-            adminID = data._admin_id;
-            console.log('user connected to ' + adminID);
-            socket.join(adminID);
-            PatientQueue.findOne({_admin_id: adminID}, function(err, q){
+        socket.emit(REQUEST_COMPANY_ID);
+        socket.on(VALIDATE_COMPANY_ID, function(data) {
+            companyId = data.company_id;
+            VisitorList.findOne({company_id: companyId}, function(err, list){
                 if(err)
                     throw(err);
-                else
-                    exports.notifyNewQueue(admin, q ? q : []);
+                else {
+                    socket.join(companyId);
+                    if(list == null){
+                        list = new VisitorList();
+                        list.visitors = [];
+                        list.company_id=companyId;
+                        list.save(function(err){
+                            exports.notifyNewQueue(companyId, q);
+                        });
+                    }else {
+                        exports.notifyNewQueue(companyId, q);
+                    }
+                }
             });
         });
 
-        socket.on('request_queue', function(data) {
-            PatientQueue.findOne({_admin_id : adminID}, function(err, q){
+        //requires the company_id to be sent
+        socket.on(REQUEST_VISITOR_LIST, function(data) {
+            PatientQueue.findOne({company_id : data.company_id}, function(err, q){
                 if(err)
                     throw(err);
                 else
@@ -50,27 +64,30 @@ exports.createServer = function(io_in) {
             });
         });
 
-        socket.on('disconnect', function() {
-            console.log('user disconnected from ' + adminID);
+        socket.on(DISCONNECT, function() {
+            console.log('user disconnected from ' + companyId);
         });
 
         socket.on('patient_removed', function(data) {
-            console.log("adminID: "+admindID );
+            console.log("adminID: "+data );
             console.log("patientId: "+data.patientId);
             if(adminID == null) socket.emit('request_id');
             if(!data.patientId) return;
+            //TODO actually delete Patient from the queue
+            //send ID of visitorList to delete
             io.to(adminID).emit('queue_updated', data.queue);
         });
 
         socket.on('patient_added', function(patient) {
             if(adminID == null) socket.emit('request_id');
+            //TODO actually delete Patient from the queue
+            //send ID of visitorList to delete
             io.to(adminID).emit('queue_updated', patient);
         });
 
     });
     return server;
 };
-
 /*
  * A function that allows you to notify all clients that
  * the queue has been updated.
@@ -80,7 +97,7 @@ exports.createServer = function(io_in) {
  * patients to reflect the changes.
  */
 exports.notifyNewQueue = function(adminID, queue) {
-    io.to(adminID).emit('queue_updated', queue);
+    io.to(adminID).emit('new_visitor_list', queue);
 };
 
 /*
@@ -88,7 +105,7 @@ exports.notifyNewQueue = function(adminID, queue) {
  * a patient has been added to the queue.
  */
 exports.notifyPatientAdded = function(adminID, patient) {
-    io.to(adminID).emit('patient_added', patient);
+    io.to(adminID).emit('added_new_visitor', patient);
 };
 
 /*
@@ -96,7 +113,7 @@ exports.notifyPatientAdded = function(adminID, patient) {
  * a patient has been removed from the queue.
  */
 exports.notifyPatientRemoved = function(adminID, patient) {
-    io.to(adminID).emit('patient_removed', patient);
+    io.to(adminID).emit('removed_new_visitor', patient);
 };
 
 /*

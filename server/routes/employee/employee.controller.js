@@ -20,7 +20,7 @@ exports.login = function(req, res) {
 };
 
 exports.getAllEmployees = function(req, res) {
-  Employee.find({_admin_id : req.params.id}, function(err, result) {
+  Employee.find({company_id : req.params.id}, function(err, result) {
     if(err){
       return res.status(400).send({error: "Can not Find"});
     }
@@ -43,7 +43,7 @@ exports.insert = function(req, res) {
     employee.name = req.body.name;
     employee.email = req.body.email,
     employee.phone_number  = req.body.phone_number,
-    employee._admin_id = req.body._admin_id,
+    employee.company_id = req.body.company_id,
     employee.password = employee.generateHash(req.body.password),
     employee.role =  req.body.role
 
@@ -57,15 +57,16 @@ exports.insert = function(req, res) {
 
 exports.update = function(req, res) {
     Employee.findById(req.params.id, function (err, employee) {
-      if(err)
-         return res.status(400).json({error: "Can not Update"});
+        if(err)
+            return res.status(400).json({error: "Can not Update"});
  
-      employee.name = req.body.name || employee.name;
-      employee.email = req.body.email || employee.email;
-      employee.phone_number = req.body.phone_number || employee.email;
-      employee._admin_id = req.body._admin_id || employee._admin_id;
+        employee.name = req.body.name || employee.name;
+        employee.email = req.body.email || employee.email;
+        employee.phone_number = req.body.phone_number || employee.phone_number;
+        employee.password = req.body.password || employee.password;
+        employee.role = req.body.role || employee.role;
 
-      employee.save(function(err) {
+        employee.save(function(err) {
         if(err)
           return res.status(400).json({error: "Can not Save"});
         return res.status(200).send(employee);

@@ -16,11 +16,13 @@ describe('Appointment Test', function() {
     var name = "test";
     var phone_number="1234567890";
     var date="2016-04-23T18:25:43.511Z";
+    var provider_name = "test test";
 
     //new appointment info
     var new_name = "test1";;
     var new_phone_number="1231267890";
     var new_date="2016-03-23T18:25:43.511Z";
+    var new_provider_name = "test1 test1";
 
     //company info
     var email = "new@test.edu";
@@ -52,7 +54,8 @@ describe('Appointment Test', function() {
                         name: name,
                         phone_number: phone_number,
                         date: date,
-                        company_id: currCompany._id
+                        company_id: currCompany._id,
+                        provider_name: provider_name
                     }
                 )
                 .expect(200)
@@ -73,7 +76,8 @@ describe('Appointment Test', function() {
                     name: new_name,
                     phone_number: new_phone_number,
                     date: new_date,
-                    company_id: currCompany._id
+                    company_id: currCompany._id,
+                    provider_name: new_provider_name
                 }
             )
             .expect(400)
@@ -122,7 +126,8 @@ describe('Appointment Test', function() {
                 {
                     name: new_name,
                     phone_number: new_phone_number,
-                    date: new_date
+                    date: new_date,
+                    provider_name: new_provider_name
                 }
             )
             .expect(200)
@@ -135,6 +140,8 @@ describe('Appointment Test', function() {
                 res.body.phone_number.should.equal(new_phone_number);
                 res.body.should.have.property('date');
                 res.body.date.should.equal(new_date);
+                res.body.should.have.property('provider_name');
+                res.body.provider_name.should.equal(new_provider_name);
                 done();
             });
     });

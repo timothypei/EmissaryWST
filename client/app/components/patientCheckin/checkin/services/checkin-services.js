@@ -28,7 +28,7 @@ angular.module('checkin')
       this.submitForm = function (form) {
            // console.log("YAYYYY submit ");
         //    console.log($rootScope);
-            return $http.post('api/form/patient/', {
+            return $http.post('api/form/visitorList/', {
                 _admin_id: $rootScope.admin_id,
                 form : form
             });
@@ -38,7 +38,7 @@ angular.module('checkin')
           //  console.log("YAYYYY checkin ");
             //console.log($rootScope);
             console.log(patient_name);
-            $http.post('/api/patient/checkin', 
+            $http.post('/api/visitorList/checkin',
               {_admin_id: $rootScope.admin_id, name: patient_name})
             .success(function(data, status, headers, config) {
               console.log("checkinsuccess", data);
