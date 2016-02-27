@@ -19,6 +19,9 @@ gulp.task('frontend',['serve:frontend'], function() {
   gulp.watch('./client/bower_components', ['copy:bower-components', 'bower']);
   gulp.watch(['./client/index.html', './client/app/**/*'], ['concat:js', 'copy:views', 'bower']);
   gulp.watch('./client/assets/**', ['copy:assets']);
+  gulp.watch('./client/js/**');
+  gulp.watch('/client/css/**');
+  gulp.watch('/client/*.html');
 });
 
 
@@ -27,4 +30,8 @@ gulp.task('frontend:combined', ['build:dev'], function() {
   gulp.watch('./client/bower_components', ['copy:bower-components', 'bower']);
   gulp.watch(['./client/index.html', './client/app/**/*'], ['concat:js', 'copy:views', 'bower']);
   gulp.watch('./client/assets/**', ['copy:assets']);
+  gulp.watch('./client/js/**', ['copy:assets']);
+  gulp.watch('./client/css/**', ['copy:assets']);
+  gulp.watch('./client/img/**', ['copy:assets']);
+  gulp.watch('/client/*.html');
 });

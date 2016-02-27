@@ -8,6 +8,22 @@ gulp.task('copy:assets', function () {
     .pipe(gulp.dest('./dist/'));
 });
 
+gulp.task('copy:js', function () {
+  return gulp.src('./client/js/*.js')
+     .pipe(gulp.dest('./dist/js'));
+});
+
+gulp.task('copy:css', function () {
+  return gulp.src('./client/css/*.css')
+     .pipe(gulp.dest('./dist/css'));
+});
+
+
+gulp.task('copy:images', function () {
+  return gulp.src('./client/img/*')
+     .pipe(gulp.dest('./dist/images'));
+});
+
 /* This will copy all our bower dependencies
  * to the dist folder
  */
@@ -20,6 +36,13 @@ gulp.task('copy:bower-components', function () {
  * to the dist folder
  */
 gulp.task('copy:views', function () {
-  return gulp.src([ './client/app/**/*.html'])
-    .pipe(gulp.dest('./dist/views/'));
+  return gulp.src([ './client/**/*.html'])
+    .pipe(gulp.dest('./dist/'));
 });
+
+
+ //gulp.task('copy:views', function () {
+ //return gulp.src([ './client/app/**/*.html'])
+  // .pipe(gulp.dest('./dist/views/'));
+//});
+ //*/
