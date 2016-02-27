@@ -3,7 +3,7 @@ body {
 }
 
 body#check-in-page{
-    /*background-color: #cf4646;*/
+    background-color: #cf4646;
     height: 100vh;
 }
 #tap-to-check{
@@ -28,6 +28,8 @@ body#check-in-page{
     color: #333;
     font-size: 32px;
 }
+
+
 .check-in{
 
     position:absolute;

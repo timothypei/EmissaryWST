@@ -71,11 +71,20 @@ body#check-in-page{
     color: #fff;
 }
 
-
-
 .submit-check-in{
-    margin-top: 25px !important;
+    position: absolute;
+    left: 50%;
+    margin-top: 75px;
+    margin-left: -75px;
+    background-color: #fff;
+    width: 150px;
+    height: 50px;
+    border-radius: 3px;
+    display: block;
+    border: none;
+    font-size: 28px;
 }
+
 
 .hide{
     display: none !important;

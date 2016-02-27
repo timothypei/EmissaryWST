@@ -26,9 +26,6 @@ $(document).ready(function(){
 
     });
 
-    document.ontouchmove = function(e) {
-        e.preventDefault();
-    };
 
 
     //Grabs elements from the check in and puts it into an object
@@ -67,6 +64,10 @@ $(document).ready(function(){
         return currentTime;
 
     }
+
+
+
+
 
 
 });

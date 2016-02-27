@@ -19,8 +19,7 @@ gulp.task('concat:js', function() {
  * in dist/assets folder
  */
 gulp.task('concat:css', function() {
-  return gulp.src(['./client/assets/**/*.css','./client/css/*.css'])
+  return gulp.src(['./client/assets/**/*.css'])
     .pipe(concat('bundle.css'))
     .pipe(gulp.dest('./dist/'));
 });
-//return gulp.src(['./client/assets/**/*.css'])
