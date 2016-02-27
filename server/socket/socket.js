@@ -6,18 +6,15 @@ var io = require('socket.io')();
 var exports = module.exports;
 
 //Constants for listening to Sockets
-var CONNECTION = 'connection';
-var VALIDATE_COMPANY_ID = 'validate_company_id';
-var REQUEST_COMPANY_ID = 'request_id';
-var REQUEST_VISITOR_LIST = 'request_visitor_list';
-var DISCONNECT = 'disconnect';
-var REMOVE_VISITOR = 'remove_visitor';
-var ADD_VISITOR = 'add_visitor';
+var CONNECTION = "connection";
+var VALIDATE_COMPANY_ID = "validate_company_id";
+var VISITOR_LIST_UPDATE = "visitor_list_update";
+var DISCONNECT = "disconnect";
+var REMOVE_VISITOR = "remove_visitor";
+var ADD_VISITOR = "add_visitor";
 
-
-//TODO: Fix this
-var VisitorList = require('../models/visitorList');
-
+var VisitorListCtr = require('../routes/visitorList/visitorList.controller');
+var Company = require('../models/Company');
 /********** Socket IO Module **********/
 exports.createServer = function(io_in) {
     io = io_in;
@@ -31,65 +28,63 @@ exports.createServer = function(io_in) {
      * room and notified when changes are being made.
      */
     io.on(CONNECTION, function (socket) {
-        // Get the ID of the company that has connected.
-        var companyId;
-        socket.emit(REQUEST_COMPANY_ID);
+
         socket.on(VALIDATE_COMPANY_ID, function(data) {
-            companyId = data.company_id;
-            Company.findOne({_id: companyId}, function(err, c){
+            var company_id = data.company_id;
+            Company.findOne({_id: company_id}, function(err, c){
                 if(err || !c)
                     throw(err);
                 else {
-                    socket.join(companyId);
-                    VisitorList.findOne({company_id:companyId}, function(err,list){
-                        if(list == null){
-                            list = new VisitorList();
-                            list.visitors = [];
-                            list.company_id=companyId;
-                            list.save(function(err){
-                                exports.notifyNewQueue(companyId, q);
-                            });
-                        }else {
-                            exports.notifyNewQueue(companyId, q);
+                    socket.join(company_id);
+                    VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
+                        if(err_msg)
+                            throw(new Error(err_msg));
+                        else {
+                            exports.notifyNewList(company_id, result);
                         }
+
                     });
                 }
             });
         });
 
         //requires the company_id to be sent
-        socket.on(REQUEST_VISITOR_LIST, function(data) {
+        socket.on(VISITOR_LIST_UPDATE, function(data) {
             var company_id = data.company_id;
-            VisitorList.getCompanyVisitorList(company_id, function(err_msg, result){
+            VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
                 if(err_msg)
                     throw(new Error(err_msg));
                 else
-                    exports.notifyNewQueue(company_id, result);
+                    exports.notifyNewList(company_id, result);
             });
         });
 
         socket.on(DISCONNECT, function() {
-            console.log('user disconnected from ' + companyId);
+            console.log('user disconnected from ' + company_id);
         });
 
         //requires the company_id and visitor_id to be sent
         socket.on(REMOVE_VISITOR, function(data) {
-            if(!data.company_id || ! data.visitor_id) return;
-            VisitorList.deleteVisitor(company_id, function(err_msg, result){
+            var company_id = data.company_id;
+            var visitor_id = data.visitor_id;
+            if(!company_id ||  !visitor_id) return;
+            VisitorListCtr.deleteVisitor(company_id, visitor_id, function(err_msg, result){
                 if(err_msg)
                     throw(new Error(err_msg));
                 else
-                    exports.notifyNewQueue(company_id, result);
+                    exports.notifyNewList(company_id, result);
             });
         });
 
         //require the params to be set with info of the visitor
         socket.on(ADD_VISITOR, function(data) {
-            VisitorList.create(data.params, function(err_msg, result){
+            var company_id = data.company_id;
+            VisitorListCtr.create(data, function(err_msg, result){
                 if(err_msg)
                     throw(new Error(err_msg));
-                else
-                    exports.notifyNewQueue(company_id, result);
+                else {
+                    exports.notifyNewList(company_id, result);
+                }
             });
         });
 
@@ -104,33 +99,18 @@ exports.createServer = function(io_in) {
  * this event is triggered, the client side can retrieve the whole queue of
  * patients to reflect the changes.
  */
-exports.notifyNewQueue = function(adminID, queue) {
-    io.to(adminID).emit(REQUEST_VISITOR_LIST, queue);
+exports.notifyNewList = function(adminID, data) {
+    io.to(adminID).emit(VISITOR_LIST_UPDATE, data);
 };
 
-/*
- * A function that allows you to notify all clients that
- * a patient has been added to the queue.
- */
-exports.notifyPatientAdded = function(adminID, patient) {
-    io.to(adminID).emit(ADD_VISITOR, patient);
-};
-
-/*
- * A function that allows you to notify all clients that
- * a patient has been removed from the queue.
- */
-exports.notifyPatientRemoved = function(adminID, patient) {
-    io.to(adminID).emit(REMOVE_VISITOR, patient);
-};
 
 /*
  * Set up a custom namespace.
  *
  * On the client side get the socket as follows to robobetty:
- *   var socket = io('/patientQueue');
+ *   var socket = io('/visitorList');
  */
-var nsp = io.of('/patientQueue');
+var nsp = io.of('/visitorList');
 
 // To be used with authorization.
 // io.set('authorization', socketioJwt.authorize({

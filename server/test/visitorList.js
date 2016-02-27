@@ -223,6 +223,7 @@ describe("VisitorList", function() {
             .expect(200)
             .end(function(err, res){
                 res.body.should.have.property('visitors');
+                res.body.visitors.should.have.length.of(0);
                 done();
             });
     });
