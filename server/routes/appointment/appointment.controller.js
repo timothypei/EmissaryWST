@@ -28,7 +28,8 @@ module.exports.template.create = function(req, res) {
     var param = req.body;
 
     //require provided info
-    appointment.name = param.name;
+    appointment.first_name = param.first_name;
+    appointment.last_name = param.last_name;
     appointment.phone_number = param.phone_number;
     appointment.date = param.date;
     appointment.company_id = param.company_id;
@@ -74,8 +75,11 @@ module.exports.template.update = function(req, res){
         if(err || !a)
             return res.status(401).json({error: "Could Not Find"});
 
-        if (req.body.name !== undefined)
-            a.name = req.body.name;
+        if (req.body.first_name !== undefined)
+            a.first_name = req.body.first_name;
+
+        if (req.body.last_name !== undefined)
+            a.last_name = req.body.last_name;
 
         if (req.body.phone_number !== undefined)
             a.phone_number  = req.body.phone_number ;

@@ -11,6 +11,8 @@ var VALIDATE_COMPANY_ID = 'validate_company_id';
 var REQUEST_COMPANY_ID = 'request_id';
 var REQUEST_VISITOR_LIST = 'request_visitor_list';
 var DISCONNECT = 'disconnect';
+var REMOVE_VISITOR = 'remove_visitor';
+var ADD_VISITOR = 'add_visitor';
 
 
 //TODO: Fix this
@@ -31,36 +33,38 @@ exports.createServer = function(io_in) {
     io.on(CONNECTION, function (socket) {
         // Get the ID of the company that has connected.
         var companyId;
-
         socket.emit(REQUEST_COMPANY_ID);
         socket.on(VALIDATE_COMPANY_ID, function(data) {
             companyId = data.company_id;
-            VisitorList.findOne({company_id: companyId}, function(err, list){
-                if(err)
+            Company.findOne({_id: companyId}, function(err, c){
+                if(err || !c)
                     throw(err);
                 else {
                     socket.join(companyId);
-                    if(list == null){
-                        list = new VisitorList();
-                        list.visitors = [];
-                        list.company_id=companyId;
-                        list.save(function(err){
+                    VisitorList.findOne({company_id:companyId}, function(err,list){
+                        if(list == null){
+                            list = new VisitorList();
+                            list.visitors = [];
+                            list.company_id=companyId;
+                            list.save(function(err){
+                                exports.notifyNewQueue(companyId, q);
+                            });
+                        }else {
                             exports.notifyNewQueue(companyId, q);
-                        });
-                    }else {
-                        exports.notifyNewQueue(companyId, q);
-                    }
+                        }
+                    });
                 }
             });
         });
 
         //requires the company_id to be sent
         socket.on(REQUEST_VISITOR_LIST, function(data) {
-            PatientQueue.findOne({company_id : data.company_id}, function(err, q){
-                if(err)
-                    throw(err);
+            var company_id = data.company_id;
+            VisitorList.getCompanyVisitorList(company_id, function(err_msg, result){
+                if(err_msg)
+                    throw(new Error(err_msg));
                 else
-                    exports.notifyNewQueue(adminID, q ? q : []);
+                    exports.notifyNewQueue(company_id, result);
             });
         });
 
@@ -68,21 +72,25 @@ exports.createServer = function(io_in) {
             console.log('user disconnected from ' + companyId);
         });
 
-        socket.on('patient_removed', function(data) {
-            console.log("adminID: "+data );
-            console.log("patientId: "+data.patientId);
-            if(adminID == null) socket.emit('request_id');
-            if(!data.patientId) return;
-            //TODO actually delete Patient from the queue
-            //send ID of visitorList to delete
-            io.to(adminID).emit('queue_updated', data.queue);
+        //requires the company_id and visitor_id to be sent
+        socket.on(REMOVE_VISITOR, function(data) {
+            if(!data.company_id || ! data.visitor_id) return;
+            VisitorList.deleteVisitor(company_id, function(err_msg, result){
+                if(err_msg)
+                    throw(new Error(err_msg));
+                else
+                    exports.notifyNewQueue(company_id, result);
+            });
         });
 
-        socket.on('patient_added', function(patient) {
-            if(adminID == null) socket.emit('request_id');
-            //TODO actually delete Patient from the queue
-            //send ID of visitorList to delete
-            io.to(adminID).emit('queue_updated', patient);
+        //require the params to be set with info of the visitor
+        socket.on(ADD_VISITOR, function(data) {
+            VisitorList.create(data.params, function(err_msg, result){
+                if(err_msg)
+                    throw(new Error(err_msg));
+                else
+                    exports.notifyNewQueue(company_id, result);
+            });
         });
 
     });
@@ -97,7 +105,7 @@ exports.createServer = function(io_in) {
  * patients to reflect the changes.
  */
 exports.notifyNewQueue = function(adminID, queue) {
-    io.to(adminID).emit('new_visitor_list', queue);
+    io.to(adminID).emit(REQUEST_VISITOR_LIST, queue);
 };
 
 /*
@@ -105,7 +113,7 @@ exports.notifyNewQueue = function(adminID, queue) {
  * a patient has been added to the queue.
  */
 exports.notifyPatientAdded = function(adminID, patient) {
-    io.to(adminID).emit('added_new_visitor', patient);
+    io.to(adminID).emit(ADD_VISITOR, patient);
 };
 
 /*
@@ -113,7 +121,7 @@ exports.notifyPatientAdded = function(adminID, patient) {
  * a patient has been removed from the queue.
  */
 exports.notifyPatientRemoved = function(adminID, patient) {
-    io.to(adminID).emit('removed_new_visitor', patient);
+    io.to(adminID).emit(REMOVE_VISITOR, patient);
 };
 
 /*

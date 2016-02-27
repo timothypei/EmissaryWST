@@ -1,7 +1,6 @@
 var request = require('supertest');
 
 var config = require('../config/config');
-var Employee = require('../models/Employee');
 var Company = require('../models/Company');
 var Appointment = require('../models/Appointment');
 var VisitorList = require('../models/VisitorList');
@@ -27,7 +26,8 @@ describe("VisitorList", function() {
 
     //info for first visitor
     var first_visitor_info = {
-        name: "test1",
+        first_name: "test1",
+        last_name: "test1",
         phone_number: "1234567890",
         checkin_time: new Date(),
         additional_info: {
@@ -37,7 +37,8 @@ describe("VisitorList", function() {
 
     //info for second visitor
     var second_visitor_info = {
-        name: "test2",
+        first_name: "test2",
+        last_name: "test2",
         phone_number: "1234567890",
         checkin_time: new Date(),
         additional_info: {
@@ -47,7 +48,8 @@ describe("VisitorList", function() {
 
     //info for visitor_one's appointment
     var first_appointment_info = {
-        name: first_visitor_info.name,
+        first_name: first_visitor_info.first_name,
+        last_name: first_visitor_info.last_name,
         phone_number: first_visitor_info.phone_number,
         date: new Date(),
         provider_name: "provider1"
@@ -55,7 +57,8 @@ describe("VisitorList", function() {
 
     //info for visitor_two's appointment
     var second_appointment_info = {
-        name: second_visitor_info.name,
+        first_name: second_visitor_info.first_name,
+        last_name: second_visitor_info.last_name,
         phone_number: second_visitor_info.phone_number,
         date: new Date(),
         provider_name: "provider2"
@@ -74,16 +77,19 @@ describe("VisitorList", function() {
             if(err) throw(err);
             currCompany = c;
             appointment1 = new Appointment();
-            appointment1.name = first_appointment_info.name;
+            appointment1.first_name = first_appointment_info.first_name;
+            appointment1.last_name = first_appointment_info.last_name;
             appointment1.phone_number = first_appointment_info.phone_number;
             appointment1.date = first_appointment_info.date;
             appointment1.company_id = c._id;
             appointment1.provider_name = first_appointment_info.provider_name;
             appointment1.save(function(err, a1){
+                console.log(err);
                 if(err) throw(err);
                 appointment1=a1;
                 appointment2 = new Appointment();
-                appointment2.name = second_appointment_info.name;
+                appointment2.first_name = second_appointment_info.first_name;
+                appointment2.last_name = second_appointment_info.last_name;
                 appointment2.phone_number = second_appointment_info.phone_number;
                 appointment2.date = second_appointment_info.date;
                 appointment2.company_id = c._id;
@@ -104,7 +110,8 @@ describe("VisitorList", function() {
         .post('/api/visitorLists')
         .send({
             company_id: currCompany._id,
-            name: first_visitor_info.name,
+            first_name: first_visitor_info.first_name,
+            last_name: first_visitor_info.last_name,
             phone_number: first_visitor_info.phone_number,
             checkin_time: first_visitor_info.checkin_time,
             additional_info: first_visitor_info.additional_info
@@ -120,7 +127,8 @@ describe("VisitorList", function() {
 
             visitor1.should.have.property('_id');
             visitor1.should.have.property('company_id');
-            visitor1.should.have.property('name');
+            visitor1.should.have.property('first_name');
+            visitor1.should.have.property('last_name');
             visitor1.should.have.property('phone_number');
             visitor1.should.have.property('checkin_time');
 
@@ -138,7 +146,8 @@ describe("VisitorList", function() {
                 .post('/api/visitorLists')
                 .send({
                     company_id: currCompany._id,
-                    name: second_visitor_info.name,
+                    first_name: second_visitor_info.first_name,
+                    last_name: second_visitor_info.last_name,
                     phone_number: second_visitor_info.phone_number,
                     checkin_time: second_visitor_info.checkin_time,
                     additional_info: second_visitor_info.additional_info
@@ -176,6 +185,7 @@ describe("VisitorList", function() {
             .send()
             .expect(404)
             .end(function(err, res){
+                console.log(res.body);
                 res.body.should.have.property('error');
                 done();
             });

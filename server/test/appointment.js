@@ -13,13 +13,15 @@ describe('Appointment Test', function() {
     var currCompany;
 
     // old appointment info
-    var name = "test";
+    var first_name = "test";
+    var last_name = "test";
     var phone_number="1234567890";
     var date="2016-04-23T18:25:43.511Z";
     var provider_name = "test test";
 
     //new appointment info
-    var new_name = "test1";;
+    var new_first_name = "test1";
+    var new_last_name = "test1";;
     var new_phone_number="1231267890";
     var new_date="2016-03-23T18:25:43.511Z";
     var new_provider_name = "test1 test1";
@@ -51,7 +53,8 @@ describe('Appointment Test', function() {
                 .post('/api/appointments')
                 .send(
                     {
-                        name: name,
+                        first_name: first_name,
+                        last_name: last_name,
                         phone_number: phone_number,
                         date: date,
                         company_id: currCompany._id,
@@ -73,7 +76,8 @@ describe('Appointment Test', function() {
             .post('/api/appointments')
             .send(
                 {
-                    name: new_name,
+                    first_name: new_first_name,
+                    last_name: new_last_name,
                     phone_number: new_phone_number,
                     date: new_date,
                     company_id: currCompany._id,
@@ -124,7 +128,8 @@ describe('Appointment Test', function() {
             .put('/api/appointments/'+currAppointment._id)
             .send(
                 {
-                    name: new_name,
+                    first_name: new_first_name,
+                    last_name: new_last_name,
                     phone_number: new_phone_number,
                     date: new_date,
                     provider_name: new_provider_name
@@ -134,8 +139,10 @@ describe('Appointment Test', function() {
             .end(function(err,res){
                 if(err)
                     throw(err);
-                res.body.should.have.property('name');
-                res.body.name.should.equal(new_name);
+                res.body.should.have.property('first_name');
+                res.body.first_name.should.equal(new_first_name);
+                res.body.should.have.property('last_name');
+                res.body.last_name.should.equal(new_last_name);
                 res.body.should.have.property('phone_number');
                 res.body.phone_number.should.equal(new_phone_number);
                 res.body.should.have.property('date');
