@@ -36,9 +36,17 @@ exports.getCompanyVisitorListReq = function(req, res){
 exports.getCompanyVisitorList = function(company_id, callback){
     if(!company_id)
         return callback({error: "Please send company id."}, null);
-    VisitorList.findOne({company_id: company_id}, function(err, result){
+    VisitorList.findOne({company_id: company_id}, function(err, list){
         if(err) return callback({error: "Getting Visitor List"}, null);
-        return callback(null, result);
+        if(list==null) {
+            list = new VisitorList();
+            list.visitors=[];
+            list.company_id = company_id;
+        }
+        list.save(function(err){
+            if(err)return callback({error: "Error in saving"}, null);
+            return callback(null, list);
+        });
     });
 }
 
@@ -54,15 +62,18 @@ exports.deleteVisitorReq = function(req, res){
 
 /* logic for deleting the visitor in the list */
 exports.deleteVisitor = function(company_id, visitor_id, callback){
+    console.log('delete Visitor');
     if(!company_id)
         return callback({error: "Please send company id."}, null);
     if(!visitor_id)
         return callback({error: "Please send visitorList id."}, null);
+    console.log(visitor_id);
     VisitorList.findOneAndUpdate(
         {company_id: company_id},
         {$pull: {visitors:{_id:visitor_id}}},
         {safe: true, upsert: true, new:true}, function(err, data){
             if(err) return callback({error: "Can't update list"}, null);
+            console.log(data);
             return callback(null, data);
         });
 }
@@ -110,10 +121,10 @@ exports.create = function(param, callback){
     // find all the appointments for this visitor
     var query=
     {
-        company_id:company_id,
+        company_id: company_id,
         first_name: first_name,
         last_name: last_name,
-        phone_number:phone_number
+        phone_number: phone_number
     };
 
     Appointment.find(query, function(err, appointments){
@@ -139,7 +150,6 @@ exports.create = function(param, callback){
                 }
                 list.visitors.push(visitor);
                 list.save(function(err){
-                    console.log(err);
                     if(err) return callback({error: "an error in saving"}, null);
                     return callback(null, list);
                     /*Employee.find({company : req.body.company_id},

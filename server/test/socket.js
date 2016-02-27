@@ -7,25 +7,30 @@ var Company = require('../models/Company');
 var Appointment = require('../models/Appointment');
 var VisitorList = require('../models/VisitorList');
 
-var socketURL = "localhost:" + config.port;
+var socketURL = "http://localhost:" + config.port;
 
 var options ={
     transports: ['websocket'],
     'force new connection': true
 };
 
-var ADD_VISITOR = 'add_visitor';
-var VALIDATE_COMPANY_ID = 'validate_company_id';
-var REQUEST_VISITOR_LIST = 'request_visitor_list';
-/*
+//Constants for listening to Sockets
+var VALIDATE_COMPANY_ID = "validate_company_id";
+var VISITOR_LIST_UPDATE = "visitor_list_update";
+var REMOVE_VISITOR = "remove_visitor";
+var ADD_VISITOR = "add_visitor";
+var DISCONNECT = "disconnect";
+
+
 describe("Visitor List Socket",function(){
-    var url = "localhost:" + config.port;
 
     var currCompany;
     var currVisitorList;
     var appointment1;
     var appointment2;
     var visitor1;
+    var client1;
+    var client2;
 
     //info for the company
     var company_info = {
@@ -39,7 +44,8 @@ describe("Visitor List Socket",function(){
 
     //info for first visitor
     var first_visitor_info = {
-        name: "test1",
+        first_name: "test1",
+        last_name: "test1",
         phone_number: "1234567890",
         checkin_time: new Date(),
         additional_info: {
@@ -49,7 +55,8 @@ describe("Visitor List Socket",function(){
 
     //info for second visitor
     var second_visitor_info = {
-        name: "test2",
+        first_name: "test2",
+        last_name: "test2",
         phone_number: "1234567890",
         checkin_time: new Date(),
         additional_info: {
@@ -59,7 +66,8 @@ describe("Visitor List Socket",function(){
 
     //info for visitor_one's appointment
     var first_appointment_info = {
-        name: first_visitor_info.name,
+        first_name: first_visitor_info.first_name,
+        last_name: first_visitor_info.last_name,
         phone_number: first_visitor_info.phone_number,
         date: new Date(),
         provider_name: "provider1"
@@ -67,12 +75,12 @@ describe("Visitor List Socket",function(){
 
     //info for visitor_two's appointment
     var second_appointment_info = {
-        name: second_visitor_info.name,
+        first_name: second_visitor_info.first_name,
+        last_name: second_visitor_info.last_name,
         phone_number: second_visitor_info.phone_number,
         date: new Date(),
         provider_name: "provider2"
     }
-
 
     before(function(done) {
         currCompany = new Company();
@@ -86,7 +94,8 @@ describe("Visitor List Socket",function(){
             if(err) throw(err);
             currCompany = c;
             appointment1 = new Appointment();
-            appointment1.name = first_appointment_info.name;
+            appointment1.first_name = first_appointment_info.first_name;
+            appointment1.last_name = first_appointment_info.last_name;
             appointment1.phone_number = first_appointment_info.phone_number;
             appointment1.date = first_appointment_info.date;
             appointment1.company_id = c._id;
@@ -95,7 +104,8 @@ describe("Visitor List Socket",function(){
                 if(err) throw(err);
                 appointment1=a1;
                 appointment2 = new Appointment();
-                appointment2.name = second_appointment_info.name;
+                appointment2.first_name = second_appointment_info.first_name;
+                appointment2.last_name = second_appointment_info.last_name;
                 appointment2.phone_number = second_appointment_info.phone_number;
                 appointment2.date = second_appointment_info.date;
                 appointment2.company_id = c._id;
@@ -109,30 +119,77 @@ describe("Visitor List Socket",function(){
         });
 
     });
+
     it('Should add visitors to List', function(done){
-        console.log("TESTING");
         var client1 = io.connect(socketURL, options);
-        client1.on('connect', function(data){
-            console.log("Client Connected");
-            client1.emit(VALIDATE_COMPANY_ID, currCompany._id);
-            data.should.have.property("_id");
-            data.should.have.property('visitors');
-            data.visitors.should.have.length.of(0);
+
+        client1.once("connect", function () {
+            client1.emit(VALIDATE_COMPANY_ID, {company_id:currCompany._id});
             var client2 = io.connect(socketURL, options);
-            client2.emit(VALIDATE_COMPANY_ID, currCompany._id);
 
-            client1.emit(ADD_VISITOR, first_visitor_info);
+            client2.once("connect", function () {
+                first_visitor_info.company_id = currCompany._id;
+                console.log('client2 connected');
+                client2.emit(VALIDATE_COMPANY_ID, {company_id:currCompany._id});
 
-            client2.on(ADD_VISITOR, function(data){
+                client2.on(VISITOR_LIST_UPDATE, function(data) {
+                    data.should.have.property("_id");
+                    client2.emit(ADD_VISITOR, first_visitor_info);
+                    client1.on(VISITOR_LIST_UPDATE, function(data) {
+                        data.should.have.property("_id");
+                        data.should.have.property('visitors');
+                        data.should.have.property('company_id');
+                        var visitors = data.visitors;
+                        visitors.should.be.an.instanceof(Array);
+                        visitors.should.have.length.of(1);
+                        visitor1 = visitors[0];
+
+                        visitor1.should.have.property('_id');
+                        visitor1.should.have.property('company_id');
+                        visitor1.should.have.property('first_name');
+                        visitor1.should.have.property('last_name');
+                        visitor1.should.have.property('phone_number');
+                        visitor1.should.have.property('checkin_time');
+
+                        visitor1.should.have.property('appointments');
+                        visitor1.appointments.should.be.an.instanceof(Array);
+                        visitor1.appointments.should.have.length.of.at.least(1);
+
+                        visitor1.should.have.property('additional_info');
+                        visitor1.additional_info.should.have.property('allergies');
+
+
+                        currVisitorList = data;
+                        client2.disconnect();
+                        client1.disconnect();
+                        done();
+                    });
+                });
+            });
+
+        });
+
+    });
+
+    it('Should get visitors from list', function(done) {
+        var client1 = io.connect(socketURL, options);
+
+        client1.once("connect", function () {
+            client1.emit(VALIDATE_COMPANY_ID, {company_id: currCompany._id});
+            client1.emit(VISITOR_LIST_UPDATE, {company_id: currCompany._id});
+            client1.on(VISITOR_LIST_UPDATE, function(data) {
                 data.should.have.property("_id");
                 data.should.have.property('visitors');
+                data.should.have.property('company_id');
                 var visitors = data.visitors;
+                visitors.should.be.an.instanceof(Array);
                 visitors.should.have.length.of.at.least(1);
                 visitor1 = visitors[0];
 
                 visitor1.should.have.property('_id');
                 visitor1.should.have.property('company_id');
-                visitor1.should.have.property('name');
+                visitor1.should.have.property('first_name');
+                visitor1.should.have.property('last_name');
                 visitor1.should.have.property('phone_number');
                 visitor1.should.have.property('checkin_time');
 
@@ -143,15 +200,33 @@ describe("Visitor List Socket",function(){
                 visitor1.should.have.property('additional_info');
                 visitor1.additional_info.should.have.property('allergies');
 
-
-                currVisitorList=data;
-                client2.disconnect();
                 client1.disconnect();
                 done();
             });
-
         });
     });
+
+    it('remove visitor from list', function(done) {
+        var client1 = io.connect(socketURL, options);
+
+        client1.once("connect", function () {
+            client1.emit(VALIDATE_COMPANY_ID, {company_id: currCompany._id});
+            client1.emit(REMOVE_VISITOR, {company_id: currCompany._id,
+                visitor_id: visitor1._id});
+            client1.on(VISITOR_LIST_UPDATE, function(data) {
+                data.should.have.property("_id");
+                data.should.have.property('visitors');
+                data.should.have.property('company_id');
+                var visitors = data.visitors;
+                visitors.should.be.an.instanceof(Array);
+                visitors.should.have.length.of(0);
+                client1.disconnect();
+                done();
+            });
+        });
+    });
+
+
     after(function(done) {
         Appointment.remove({_id:appointment1._id}, function(err, _){
             if(err) throw(err);
@@ -159,7 +234,7 @@ describe("Visitor List Socket",function(){
                 if(err) throw(err);
                 Company.remove({_id:currCompany._id}, function(err, _){
                     if(err) throw(err);
-                    done();
+                    //done();
                     VisitorList.remove({_id: currVisitorList._id}, function(err, _){
                         if(err) throw(err);
                         done();
@@ -169,4 +244,3 @@ describe("Visitor List Socket",function(){
         });
     });
 });
-*/
