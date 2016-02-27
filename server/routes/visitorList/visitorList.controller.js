@@ -62,18 +62,15 @@ exports.deleteVisitorReq = function(req, res){
 
 /* logic for deleting the visitor in the list */
 exports.deleteVisitor = function(company_id, visitor_id, callback){
-    console.log('delete Visitor');
     if(!company_id)
         return callback({error: "Please send company id."}, null);
     if(!visitor_id)
         return callback({error: "Please send visitorList id."}, null);
-    console.log(visitor_id);
     VisitorList.findOneAndUpdate(
         {company_id: company_id},
         {$pull: {visitors:{_id:visitor_id}}},
         {safe: true, upsert: true, new:true}, function(err, data){
             if(err) return callback({error: "Can't update list"}, null);
-            console.log(data);
             return callback(null, data);
         });
 }
@@ -119,12 +116,19 @@ exports.create = function(param, callback){
     var additional_info = param.additional_info;
 
     // find all the appointments for this visitor
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var tomorrow= new Date();
+    tomorrow.setDate(today.getDate()+1);
+    tomorrow.setHours(0, 0, 0, 0);
+
     var query=
     {
         company_id: company_id,
         first_name: first_name,
         last_name: last_name,
-        phone_number: phone_number
+        phone_number: phone_number,
+        date: {$gte:today, $lt: tomorrow}
     };
 
     Appointment.find(query, function(err, appointments){
