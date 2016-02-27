@@ -5,22 +5,21 @@ var gulp = require('gulp');
  */
 gulp.task('copy:assets', function () {
   return gulp.src('./client/assets/**')
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('./assets/dist'));
 });
 
 gulp.task('copy:js', function () {
-  return gulp.src('./client/js/*.js')
+  return gulp.src('./client/js/**/*.js')
      .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('copy:css', function () {
-  return gulp.src('./client/css/*.css')
+  return gulp.src('./client/css/**/*.css')
      .pipe(gulp.dest('./dist/css'));
 });
 
-
 gulp.task('copy:images', function () {
-  return gulp.src('./client/img/*')
+  return gulp.src('./client/img/**')
      .pipe(gulp.dest('./dist/images'));
 });
 
@@ -36,8 +35,8 @@ gulp.task('copy:bower-components', function () {
  * to the dist folder
  */
 gulp.task('copy:views', function () {
-  return gulp.src([ './client/**/*.html'])
-    .pipe(gulp.dest('./dist/'));
+  return gulp.src('./client/views/*.html')
+    .pipe(gulp.dest('./dist'));
 });
 
 
