@@ -1,25 +1,32 @@
 var gulp = require('gulp');
 
-/* This will copy all our assets i.e. assets folder
- * to the dist folder.
- */
+
 gulp.task('copy:assets', function () {
   return gulp.src('./client/assets/**')
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('./dist/assets'));
 });
 
-/* This will copy all our bower dependencies
- * to the dist folder
- */
+gulp.task('copy:js', function () {
+  return gulp.src('./client/assets/js/**/*.js')
+     .pipe(gulp.dest('./dist/js'));
+});
+
+gulp.task('copy:css', function () {
+  return gulp.src('./client/assets/css/**/*.css')
+     .pipe(gulp.dest('./dist/css'));
+});
+
+gulp.task('copy:images', function () {
+  return gulp.src('./client/assets/images/**/*.*')
+     .pipe(gulp.dest('./dist/images'));
+});
+
+gulp.task('copy:views', function () {
+  return gulp.src('./client/assets/views/**/*.html')
+     .pipe(gulp.dest('./dist'));
+});
+
 gulp.task('copy:bower-components', function () {
   return gulp.src('./client/bower_components/**')
     .pipe(gulp.dest('./dist/bower_components/'));
-});
-
-/* This will copy all our views
- * to the dist folder
- */
-gulp.task('copy:views', function () {
-  return gulp.src([ './client/app/**/*.html'])
-    .pipe(gulp.dest('./dist/views/'));
 });

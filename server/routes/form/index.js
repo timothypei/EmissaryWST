@@ -15,8 +15,8 @@ router.post('/template', controller.template.create);
 router.put('/template', controller.template.update);
 router.delete('/template/:template_id', controller.template.delete);
 
-router.get('/patient/:form_id', controller.submitted_form.findById);
-router.get('/patient', controller.submitted_form.findByPatientInfo);
-router.post('/patient', controller.submitted_form.create);
+router.get('/visitorList/:form_id', controller.submitted_form.findById);
+router.get('/visitorList', controller.submitted_form.findByPatientInfo);
+router.post('/visitorList', controller.submitted_form.create);
 
 module.exports = router;

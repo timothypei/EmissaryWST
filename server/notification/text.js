@@ -15,7 +15,7 @@ var authToken = '452f1f1d86c183097a96db390ca55590';
 var client = require('twilio')(accountSid, authToken); 
 var exports = module.exports;
 
-// sendText: Send text message to employees when patient is checked in.
+// sendText: Send text message to employees when visitorList is checked in.
 exports.sendText = function(patientName, employees, done) {
   if(employees === null || (employees.length <= 0)) {
     if(done) return done();
@@ -41,7 +41,7 @@ exports.sendText = function(patientName, employees, done) {
     client.messages.create({  
       to: employees[index].phone_number,
       from: "+16266711727",    
-      body:'Your patient ' + patientName + ' is ready.'
+      body:'Your visitorList ' + patientName + ' is ready.'
     }, callback(index));
   }
 };

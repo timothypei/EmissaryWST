@@ -3,11 +3,18 @@
 var express = require('express');
 var server;
 var io = require('socket.io')();
-var port = process.env.PORT || 3000;
 var exports = module.exports;
 
-var PatientQueue = require('../models/PatientQueue');
+//Constants for listening to Sockets
+var CONNECTION = "connection";
+var VALIDATE_COMPANY_ID = "validate_company_id";
+var VISITOR_LIST_UPDATE = "visitor_list_update";
+var DISCONNECT = "disconnect";
+var REMOVE_VISITOR = "remove_visitor";
+var ADD_VISITOR = "add_visitor";
 
+var VisitorListCtr = require('../routes/visitorList/visitorList.controller');
+var Company = require('../models/Company');
 /********** Socket IO Module **********/
 exports.createServer = function(io_in) {
     io = io_in;
@@ -20,57 +27,73 @@ exports.createServer = function(io_in) {
      * the '_admin_id' needs to be set so that the client can be added to the
      * room and notified when changes are being made.
      */
-    io.on('connection', function (socket) {
-        // Get the ID of the admin that has connected.
-        var adminID;
+    io.on(CONNECTION, function (socket) {
 
-        //get was deprecated so this part was commented out
-        /*socket.get('_admin_id', function (err, _admin_id) {
-            socket.join(_admin_id);
-        });*/
-        socket.emit('request_id');
-        socket.on('_admin_id', function(data) {
-            adminID = data._admin_id;
-            console.log('user connected to ' + adminID);
-            socket.join(adminID);
-            PatientQueue.findOne({_admin_id: adminID}, function(err, q){
-                if(err)
+        /* company_id is required */
+        socket.on(VALIDATE_COMPANY_ID, function(data) {
+            var company_id = data.company_id;
+            Company.findOne({_id: company_id}, function(err, c){
+                if(err || !c)
                     throw(err);
-                else
-                    exports.notifyNewQueue(admin, q ? q : []);
+                else {
+                    socket.join(company_id);
+                    VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
+                        if(err_msg)
+                            throw(new Error(err_msg));
+                        else {
+                            exports.notifyNewList(company_id, result);
+                        }
+
+                    });
+                }
             });
         });
 
-        socket.on('request_queue', function(data) {
-            PatientQueue.findOne({_admin_id : adminID}, function(err, q){
-                if(err)
-                    throw(err);
+        //requires the company_id to be sent
+        socket.on(VISITOR_LIST_UPDATE, function(data) {
+            var company_id = data.company_id;
+            VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
+                if(err_msg)
+                    throw(new Error(err_msg));
                 else
-                    exports.notifyNewQueue(adminID, q ? q : []);
+                    exports.notifyNewList(company_id, result);
             });
         });
 
-        socket.on('disconnect', function() {
-            console.log('user disconnected from ' + adminID);
+        //socket.emit(VISITOR_LIST_UPDATE,
+
+        socket.on(DISCONNECT, function() {
+            console.log('user disconnected from ' + company_id);
         });
 
-        socket.on('patient_removed', function(data) {
-            console.log("adminID: "+admindID );
-            console.log("patientId: "+data.patientId);
-            if(adminID == null) socket.emit('request_id');
-            if(!data.patientId) return;
-            io.to(adminID).emit('queue_updated', data.queue);
+        //requires the company_id and visitor_id to be sent
+        socket.on(REMOVE_VISITOR, function(data) {
+            var company_id = data.company_id;
+            var visitor_id = data.visitor_id;
+            if(!company_id ||  !visitor_id) return;
+            VisitorListCtr.deleteVisitor(company_id, visitor_id, function(err_msg, result){
+                if(err_msg)
+                    throw(new Error(err_msg));
+                else
+                    exports.notifyNewList(company_id, result);
+            });
         });
 
-        socket.on('patient_added', function(patient) {
-            if(adminID == null) socket.emit('request_id');
-            io.to(adminID).emit('queue_updated', patient);
+        //require the params to be set with info of the visitor
+        socket.on(ADD_VISITOR, function(data) {
+            var company_id = data.company_id;
+            VisitorListCtr.create(data, function(err_msg, result){
+                if(err_msg)
+                    throw(new Error(err_msg));
+                else {
+                    exports.notifyNewList(company_id, result);
+                }
+            });
         });
 
     });
     return server;
 };
-
 /*
  * A function that allows you to notify all clients that
  * the queue has been updated.
@@ -79,33 +102,18 @@ exports.createServer = function(io_in) {
  * this event is triggered, the client side can retrieve the whole queue of
  * patients to reflect the changes.
  */
-exports.notifyNewQueue = function(adminID, queue) {
-    io.to(adminID).emit('queue_updated', queue);
+exports.notifyNewList = function(adminID, data) {
+    io.to(adminID).emit(VISITOR_LIST_UPDATE, data);
 };
 
-/*
- * A function that allows you to notify all clients that
- * a patient has been added to the queue.
- */
-exports.notifyPatientAdded = function(adminID, patient) {
-    io.to(adminID).emit('patient_added', patient);
-};
-
-/*
- * A function that allows you to notify all clients that
- * a patient has been removed from the queue.
- */
-exports.notifyPatientRemoved = function(adminID, patient) {
-    io.to(adminID).emit('patient_removed', patient);
-};
 
 /*
  * Set up a custom namespace.
  *
  * On the client side get the socket as follows to robobetty:
- *   var socket = io('/patientQueue');
+ *   var socket = io('/visitorList');
  */
-var nsp = io.of('/patientQueue');
+var nsp = io.of('/visitorList');
 
 // To be used with authorization.
 // io.set('authorization', socketioJwt.authorize({

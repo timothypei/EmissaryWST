@@ -122,7 +122,7 @@ module.exports.submitted_form = {};
 module.exports.submitted_form.findById = function(req, res) {
   SubmittedForm.findOne({ '_id': req.params.form_id }, function (err, submittedForm) {
     if (err) {
-      res.status(400).json({error: "An error occured while finding patient form"});
+      res.status(400).json({error: "An error occured while finding visitorList form"});
       return;
     }
     res.status(200).json(submittedForm);
@@ -164,7 +164,7 @@ module.exports.submitted_form.findByPatientInfo = function(req, res) {
   if(req.query.mostRecent == "true") {
     SubmittedForm.findOne(query).sort('-date').exec(function (err, submittedForm) {
       if (err) {
-        res.status(400).json({error: "An error occured while finding patient form"});
+        res.status(400).json({error: "An error occured while finding visitorList form"});
         return;
       }
       res.status(200).json(submittedForm);
@@ -173,7 +173,7 @@ module.exports.submitted_form.findByPatientInfo = function(req, res) {
   else {
       SubmittedForm.findOne(query, function(err, submittedForms) {
       if (err) {
-        res.status(400).json({error: "An error occured while finding patient forms"});
+        res.status(400).json({error: "An error occured while finding visitorList forms"});
         return;
       }
       res.status(200).json(submittedForms);

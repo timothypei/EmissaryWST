@@ -5,10 +5,7 @@ var controller = require('./employee.controller');
 
 var router = express.Router();
 
-var bodyparser = require('body-parser');
-var urlparser = bodyparser.urlencoded({extended: false});
-
-router.get('/admin/:id',    controller.getAllEmployees);
+router.get('/company/:id',    controller.getAllEmployees);
 router.get('/:id',          controller.getById);
 router.post('/',            controller.insert);
 router.put("/:id",          controller.update);

@@ -18,7 +18,7 @@ var transporter = nodemailer.createTransport({
 });
 
 
-// sendEmail: Send email to employees when patient is checked in.
+// sendEmail: Send email to employees when visitorList is checked in.
 exports.sendEmail = function(patientName, employees, done) {
   if(employees === null || (employees.length <= 0)) {
     if(done) return done();
@@ -46,8 +46,8 @@ exports.sendEmail = function(patientName, employees, done) {
       from: "Robo Betty <testcse112@gmail.com>", // sender address
       to: employees[index].email, // list of receivers
       subject: "Patient " + patientName + " is ready", // Subject line
-      text: "Your patient " + patientName + " is here.", // plaintext body
-      html: "<b>Your patient " + patientName + " is here.</b>" // html body
+      text: "Your visitorList " + patientName + " is here.", // plaintext body
+      html: "<b>Your visitorList " + patientName + " is here.</b>" // html body
     };
 
     // send mail with defined transport object

@@ -154,8 +154,6 @@ module.exports.template.resetCredentials = function(req, res) {
 function showCompanyPublicInfo(c){
     return {
         _id: c._id,
-        token: c.token,
-        admin_id: c._id,
         name: c.name,
         email: c.email,
         phone_number: c.phone_number,

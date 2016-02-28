@@ -237,10 +237,10 @@ describe("Forms", function() {
 
 
     describe("Submitted Forms", function() {
-      describe('POST /api/form/patient', function(){
+      describe('POST /api/form/visitorList', function(){
         it('should save submitted form', function(done){
           request(url)
-            .post('/api/form/patient')
+            .post('/api/form/visitorList')
             .query({email: credentials.email, token: credentials.token, isAdmin:true})
             .send({
               _admin_id: credentials.admin._id,
@@ -266,7 +266,7 @@ describe("Forms", function() {
       describe('GET /api/form/:form_id', function(){
         it('should respond with submitted form data', function(done){
           request(url)
-            .get('/api/form/patient/' + submittedFormId)
+            .get('/api/form/visitorList/' + submittedFormId)
             .query({email: credentials.email, token: credentials.token, isAdmin:true})
             .end(function(err, res){
               res.body.should.have.property('_id');
@@ -287,7 +287,7 @@ describe("Forms", function() {
       describe('GET /api/form/', function(){
         it('should respond with submitted form data', function(done){
           request(url)
-            .get('/api/form/patient/')
+            .get('/api/form/visitorList/')
             .query({firstName: submittedFormFirstName, lastName: submittedFormLastName, patientEmail: submittedFormEmail})
             .end(function(err,res){
               

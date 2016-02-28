@@ -12,10 +12,9 @@ var employeeSchema = mongoose.Schema({
   name: String,
   email: {type: String, unique: true, index: true, required: true},
   password: {type: String, required: true},
-  phone_number: String,
+  phone_number: {type: String, required: true},
   role: {type: String, required: true},
-  _admin_id: { type: Schema.Types.ObjectId, ref: 'Company', required: true },
-  token: String
+  company_id: { type: Schema.Types.ObjectId, ref: 'Company', required: true }
 });
 // checking if password is valid
 employeeSchema.methods.validPassword = function(password) {
