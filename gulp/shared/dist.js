@@ -11,5 +11,8 @@ gulp.task('dist', [
   'concat:js',
   'copy:assets',
   'copy:bower-components',
-  'copy:views'
+  'copy:views',
+  'copy:css',
+  'copy:js',
+  'copy:images'
 ]);

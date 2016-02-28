@@ -9,12 +9,12 @@ gulp.task('copy:assets', function () {
 });
 
 gulp.task('copy:js', function () {
-  return gulp.src('./client/js/**/*.js')
+  return gulp.src('./client/js/**')
      .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('copy:css', function () {
-  return gulp.src('./client/css/**/*.css')
+  return gulp.src('./client/css/**')
      .pipe(gulp.dest('./dist/css'));
 });
 
