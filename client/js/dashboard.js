@@ -4,12 +4,12 @@ $(document).ready(function(){
     var socket = io(); //Initialize Socket
 
     //Socket variables
-    //var CONNECTION = "connection";
+
     var VALIDATE_COMPANY_ID = "validate_company_id";
     var VISITOR_LIST_UPDATE = "visitor_list_update";
-    var DISCONNECT = "disconnect";
-    var REMOVE_VISITOR = "remove_visitor";
-    var ADD_VISITOR = "add_visitor";
+
+    var VISITOR_QUEUE = [];
+
     /***
      * Compile all the Handle Bar Templates
      */
@@ -26,8 +26,8 @@ $(document).ready(function(){
     //Update Patient List
     socket.on(VALIDATE_COMPANY_ID, function(io) {
        io.on(VISITOR_LIST_UPDATE, function (data) {
-          console.log("[server] visitor list update");
-          var compiledHtml = template(data);
+          VISITOR_QUEUE = data;
+          var compiledHtml = template(VISITOR_QUEUE);
           $('#visitor-list').html(compiledHtml);
        });
     });
@@ -38,14 +38,10 @@ $(document).ready(function(){
     */
    $(document).on('click','.patient-check-out',function(){
        var uniqueId = $(this).attr('value');
+       var visitor = findVisitor(uniqueId);
+       var compiledTemplate = modalTemplate(visitor);
+       $('.modal-dialog').html(compiledTemplate);
 
-      socket.on(VALIDATE_COMPANY_ID, function(io) {
-         io.emit('send Id', uniqueId);
-         io.on('send visitorData', function (data) {
-            var compiledTemplate = modalTemplate(data);
-            $('.modal-dialog').html(compiledTemplate);
-         });
-      });
 
     });
 
@@ -53,10 +49,20 @@ $(document).ready(function(){
        var id = $(this).closest('.modal-content').find('.phone-number').attr('value');
 
        socket.on(VALIDATE_COMPANY_ID, function(io) {
-          io.emit('check-in-patient', id);
+          io.emit(VISITOR_LIST_UPDATE, id);
        });
 
-    });
+    })
+
+    function findVisitor(id){
+       for(var visitor in VISITOR_QUEUE) {
+          if(VISITOR_QUEUE.hasOwnProperty(visitor)){
+             if(VISITOR_QUEUE[visitor].id === id){
+                return visitor;
+             }
+          }
+       }
+    }
 
 
 
