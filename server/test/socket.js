@@ -29,8 +29,10 @@ describe("Visitor List Socket",function(){
     var appointment1;
     var appointment2;
     var visitor1;
-    var client1;
-    var client2;
+
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var tomorrow = today.setDate(today.getDate()+1);
 
     //info for the company
     var company_info = {
@@ -78,7 +80,7 @@ describe("Visitor List Socket",function(){
         first_name: second_visitor_info.first_name,
         last_name: second_visitor_info.last_name,
         phone_number: second_visitor_info.phone_number,
-        date: new Date(),
+        date: tomorrow,
         provider_name: "provider2"
     }
 
@@ -129,10 +131,10 @@ describe("Visitor List Socket",function(){
 
             client2.once("connect", function () {
                 first_visitor_info.company_id = currCompany._id;
-                console.log('client2 connected');
                 client2.emit(VALIDATE_COMPANY_ID, {company_id:currCompany._id});
 
                 client2.on(VISITOR_LIST_UPDATE, function(data) {
+                    console.log('client2 updated');
                     data.should.have.property("_id");
                     client2.emit(ADD_VISITOR, first_visitor_info);
                     client1.on(VISITOR_LIST_UPDATE, function(data) {
@@ -183,7 +185,7 @@ describe("Visitor List Socket",function(){
                 data.should.have.property('company_id');
                 var visitors = data.visitors;
                 visitors.should.be.an.instanceof(Array);
-                visitors.should.have.length.of.at.least(1);
+                visitors.should.have.length.of(1);
                 visitor1 = visitors[0];
 
                 visitor1.should.have.property('_id');
@@ -195,7 +197,7 @@ describe("Visitor List Socket",function(){
 
                 visitor1.should.have.property('appointments');
                 visitor1.appointments.should.be.an.instanceof(Array);
-                visitor1.appointments.should.have.length.of.at.least(1);
+                visitor1.appointments.should.have.length.of(1);
 
                 visitor1.should.have.property('additional_info');
                 visitor1.additional_info.should.have.property('allergies');
@@ -226,7 +228,6 @@ describe("Visitor List Socket",function(){
         });
     });
 
-
     after(function(done) {
         Appointment.remove({_id:appointment1._id}, function(err, _){
             if(err) throw(err);
@@ -234,7 +235,6 @@ describe("Visitor List Socket",function(){
                 if(err) throw(err);
                 Company.remove({_id:currCompany._id}, function(err, _){
                     if(err) throw(err);
-                    //done();
                     VisitorList.remove({_id: currVisitorList._id}, function(err, _){
                         if(err) throw(err);
                         done();

@@ -14,6 +14,11 @@ describe("VisitorList", function() {
     var appointment2;
     var visitor1;
 
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var tomorrow = new Date();
+    var tomorrow = tomorrow.setDate(today.getDate()+2);
+
     //info for the company
     var company_info = {
         email: "test@test.edu",
@@ -60,7 +65,7 @@ describe("VisitorList", function() {
         first_name: second_visitor_info.first_name,
         last_name: second_visitor_info.last_name,
         phone_number: second_visitor_info.phone_number,
-        date: new Date(),
+        date: tomorrow,
         provider_name: "provider2"
     }
 
@@ -122,7 +127,7 @@ describe("VisitorList", function() {
             res.body.should.have.property("_id");
             res.body.should.have.property('visitors');
             var visitors = res.body.visitors;
-            visitors.should.have.length.of.at.least(1);
+            visitors.should.have.length.of(1);
             visitor1 = visitors[0];
 
             visitor1.should.have.property('_id');
@@ -134,7 +139,7 @@ describe("VisitorList", function() {
 
             visitor1.should.have.property('appointments');
             visitor1.appointments.should.be.an.instanceof(Array);
-            visitor1.appointments.should.have.length.of.at.least(1);
+            visitor1.appointments.should.have.length.of(1);
 
             visitor1.should.have.property('additional_info');
             visitor1.additional_info.should.have.property('allergies');
@@ -155,12 +160,15 @@ describe("VisitorList", function() {
                 .expect(200)
                 .end(function(err, res){
                     if(err) throw(err);
+                    var visitors = res.body.visitors;
+                    visitors.should.have.length.of(2);
+                    var visitor2 = visitors[0];
+                    visitor2.should.have.property('appointments');
+                    visitor2.appointments.should.be.an.instanceof(Array);
+                    visitor2.appointments.should.have.length.of(1);
                     done();
                 });
         });
-
-
-
     });
 
 
@@ -173,7 +181,7 @@ describe("VisitorList", function() {
             .end(function(err, res){
                 should.exist(res.body.visitors);
                 res.body.visitors.should.be.an.instanceof(Array);
-                res.body.visitors.should.have.length.of.at.least(1);
+                res.body.visitors.should.have.length.of(2);
                 done();
             });
     });
@@ -237,6 +245,7 @@ describe("VisitorList", function() {
                 if(err) throw(err);
                 Company.remove({_id:currCompany._id}, function(err, _){
                     if(err) throw(err);
+                    //done();
                     VisitorList.remove({_id: currVisitorList._id}, function(err, _){
                         if(err) throw(err);
                         done();

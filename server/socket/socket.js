@@ -29,6 +29,7 @@ exports.createServer = function(io_in) {
      */
     io.on(CONNECTION, function (socket) {
 
+        /* company_id is required */
         socket.on(VALIDATE_COMPANY_ID, function(data) {
             var company_id = data.company_id;
             Company.findOne({_id: company_id}, function(err, c){
