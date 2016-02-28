@@ -5,12 +5,12 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Neon Admin Panel" />
+	<meta name="description" content="Patient Queue" />
 	<meta name="author" content="" />
 
 	<link rel="icon" href="images/favicon.ico">
 
-	<title>Neon | Dashboard 3</title>
+	<title>Employees</title>
 
 	<link rel="stylesheet" href="js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 	<link rel="stylesheet" href="css/font-icons/entypo/css/entypo.css">
@@ -20,7 +20,6 @@
 	<link rel="stylesheet" href="css/neon-theme.css">
 	<link rel="stylesheet" href="css/neon-forms.css">
 	<link rel="stylesheet" href="css/custom.css">
-	<link rel="stylesheet" href="css/patient-queue.css">
 
 	<script src="js/jquery-1.11.3.min.js"></script>
 
@@ -34,7 +33,7 @@
 
 
 </head>
-<body class="page-body gray" data-url="http://neon.dev">
+<body class="page-body  gray" data-url="http://neon.dev">
 
 <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
 
@@ -76,7 +75,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="/employees.html">
+					<a href="#">
 						<i class="entypo-user"></i>
 						<span class="title">Employees</span>
 					</a>
@@ -116,7 +115,7 @@
 							Super Duper Cool HardCoded Company
 						</a>
 
-
+						
 					</li>
 
 				</ul>
@@ -129,7 +128,7 @@
 
 				<ul class="list-inline links-list pull-right">
 
-
+					
 
 					<li>
 						<a href="extra-login.html">
@@ -142,12 +141,14 @@
 
 		</div>
 
-
 		<hr />
 		<div class="visitor-container" >
-        <div id="visitor-queue">
+    <div id="visitor-queue">
         <div class = "patient-table-header">
-            <h3>Click on a visitor for check-out.</h3>
+        	<button type="button" class="btn btn-success"><i class="entypo-plus"></i>Add Employee</button>
+            <div class = "table-header-text">
+                <h3>Click on an Employee to Edit</h3>
+            </div>
             <input class="form-control" placeholder="Search ..." type="text"/>
         </div>
 
@@ -155,61 +156,27 @@
             <thead>
                 <tr>
                     <th st-sort="Name">First <i st-sort="Name" class="fa fa-sort"></i></th>
-                    <th st-sort="Appointment">Last<i st-sort="time" class="fa fa-sort"></i></th>
-                    <th st-sort="Appointment">Appointment Time<i st-sort="time" class="fa fa-sort"></i></th>
-                    <th st-sort="Time">Check-in Time <i st-sort="Time" class="fa fa-sort"></i></th>
+                    <th st-sort="Appointment">Phone Number<i st-sort="time" class="fa fa-sort"></i></th>
+                    <th st-sort="Appointment">Email<i st-sort="time" class="fa fa-sort"></i></th>
                 </tr>
             </thead>
 
             <tbody id= "visitor-list">
-                <!-- PATIENT QUEUE TEMPLATE GOES HERE -->
 
-                <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog"><!-- MODAL TEMPLATE GOES HERE--></div>
-                </div>
+                <script type = "text/x-handlebars-template" id = "visitor-list-template">
+                {{#each []}}
+                <tr>
+                    <td class="patient-queue-text">{{this.firstName}}</td>
+                    <td class="patient-queue-text">{{this.lastName}}</td>
+                    <td class="patient-queue-text">{{this.appointment}}</td>
+                </tr>
+                {{/each}}
 
+            </script>
             </tbody>
         </table>
-        </div>
-        </div>
-        <!-- HANDLE BAR TEMPLATES -->
-        <script type = "text/x-handlebars-template" id = "visitor-list-template">
-            {{#each []}}
-            <tr class="patient-check-out" data-toggle="modal" data-target="#myModal" value = "{{this.phoneNumber}}">
-                <td class="patient-queue-text">{{this.firstName}}</td>
-                <td class="patient-queue-text">{{this.lastName}}</td>
-                <td class="patient-queue-text">{{this.appointment}}</td>
-
-                <td class="patient-queue-text">
-                            <span class="text-danger">
-                                <i class="fa fa-warning"></i>
-                            </span>{{this.checkin}}
-                </td>
-                <!-- Modal -->
-            </tr>
-            {{/each}}
-        </script>
-
-        <script type = "text/x-handlebars-template" id="visitor-info-template">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Check In Patient</h4>
-                </div>
-                <div class="modal-body">
-                    <p>First: {{this.firstName}}</p>
-                    <p>Last: {{this.lastName}}</p>
-                    <p>Appointment Time: {{this.appointment}}</p>
-                    <p>Check-In Time: {{this.checkin}}</p>
-                    <p class = "phone-number" value = "{{this.phoneNumber}}">Phone Number: {{this.phoneNumber}}</p>
-                    <p>E-Mail: {{this.email}}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="check-in-btn btn btn-default" data-dismiss="modal">Check in</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </script>
+    </div>
+</div>
 
 
 

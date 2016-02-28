@@ -59,6 +59,8 @@ exports.createServer = function(io_in) {
             });
         });
 
+        //socket.emit(VISITOR_LIST_UPDATE,
+
         socket.on(DISCONNECT, function() {
             console.log('user disconnected from ' + company_id);
         });

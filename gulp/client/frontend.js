@@ -21,7 +21,7 @@ gulp.task('frontend',['serve:frontend'], function() {
   gulp.watch('./client/assets/**', ['copy:assets']);
   gulp.watch('./client/js/**',['copy:js']);
   gulp.watch('./client/css/**',['copy:css']);
-  gulp.watch('./client/views/**',['copy:views']);
+  gulp.watch('./client/views/*.html',['copy:views']);
 });
 
 
@@ -33,5 +33,5 @@ gulp.task('frontend:combined', ['build:dev'], function() {
   gulp.watch('./client/js/**', ['copy:js']);
   gulp.watch('./client/css/**', ['copy:css']);
   gulp.watch('./client/img/**', ['copy:images']);
-  gulp.watch('./client/views/**',['copy:views']);
+  gulp.watch('./client/views/*.html',['copy:views']);
 });

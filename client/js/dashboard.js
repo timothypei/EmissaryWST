@@ -3,6 +3,13 @@ $(document).ready(function(){
 
     var socket = io(); //Initialize Socket
 
+    //Socket variables
+    //var CONNECTION = "connection";
+    var VALIDATE_COMPANY_ID = "validate_company_id";
+    var VISITOR_LIST_UPDATE = "visitor_list_update";
+    var DISCONNECT = "disconnect";
+    var REMOVE_VISITOR = "remove_visitor";
+    var ADD_VISITOR = "add_visitor";
     /***
      * Compile all the Handle Bar Templates
      */
@@ -17,9 +24,12 @@ $(document).ready(function(){
 
 
     //Update Patient List
-    socket.on('send list', function (data) {
-        var compiledHtml = template(data);
-        $('#visitor-list').html(compiledHtml);
+    socket.on(VALIDATE_COMPANY_ID, function(io) {
+       io.on(VISITOR_LIST_UPDATE, function (data) {
+          console.log("[server] visitor list update");
+          var compiledHtml = template(data);
+          $('#visitor-list').html(compiledHtml);
+       });
     });
 
 
@@ -28,19 +38,25 @@ $(document).ready(function(){
     */
    $(document).on('click','.patient-check-out',function(){
        var uniqueId = $(this).attr('value');
-       socket.emit('send Id',uniqueId);
-       socket.on('send visitorData',function(data){
-          var compiledTemplate = modalTemplate(data);
-           $('.modal-dialog').html(compiledTemplate);
-       });
+
+      socket.on(VALIDATE_COMPANY_ID, function(io) {
+         io.emit('send Id', uniqueId);
+         io.on('send visitorData', function (data) {
+            var compiledTemplate = modalTemplate(data);
+            $('.modal-dialog').html(compiledTemplate);
+         });
+      });
+
     });
 
     $(document).on('click','.check-in-btn',function(){
-        var id = $(this).closest('.modal-content').find('.phone-number').attr('value');
-        socket.emit('check-in-patient',id);
+       var id = $(this).closest('.modal-content').find('.phone-number').attr('value');
+
+       socket.on(VALIDATE_COMPANY_ID, function(io) {
+          io.emit('check-in-patient', id);
+       });
 
     });
-
 
 
 
