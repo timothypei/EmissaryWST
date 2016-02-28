@@ -31,9 +31,10 @@ exports.createServer = function(io_in) {
 
         /* company_id is required */
 
-        socket.on(VALIDATE_COMPANY_ID, function(data) {
+        socket.on(VALIDATE_COMPANY_ID, function(data){
             //console.log(VALIDATE_COMPANY_ID);
-            var company_id = data.company_id;
+            //var company_id = data.company_id;
+            var company_id = data;
             Company.findOne({_id: company_id}, function(err, c){
                 if(err || !c)
                     throw(err);
@@ -61,8 +62,6 @@ exports.createServer = function(io_in) {
                     exports.notifyNewList(company_id, result);
             });
         });
-
-        //socket.emit(VISITOR_LIST_UPDATE,
 
         socket.on(DISCONNECT, function() {
             console.log('user disconnected from ' + company_id);
@@ -107,7 +106,6 @@ exports.createServer = function(io_in) {
 exports.notifyNewList = function(adminID, data) {
     io.to(adminID).emit(VISITOR_LIST_UPDATE, data);
 };
-
 
 /*
  * Set up a custom namespace.
