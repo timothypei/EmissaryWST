@@ -1,7 +1,3 @@
-/**
- * Created by xxvii27 and DylanMoz(Dylan Mozlowski) on 2/27/15.
- */
-
 'use strict';
 
 //Import Resources and Libs
