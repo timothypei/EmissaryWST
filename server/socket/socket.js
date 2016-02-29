@@ -32,9 +32,9 @@ exports.createServer = function(io_in) {
         /* company_id is required */
 
         socket.on(VALIDATE_COMPANY_ID, function(data){
-            //console.log(VALIDATE_COMPANY_ID);
-            //var company_id = data.company_id;
-            var company_id = data;
+            console.log(VALIDATE_COMPANY_ID);
+            var company_id = data.company_id;
+            //var company_id = data;
             Company.findOne({_id: company_id}, function(err, c){
                 if(err || !c)
                     throw(err);

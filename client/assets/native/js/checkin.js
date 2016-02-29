@@ -9,24 +9,12 @@ $(document).ready(function(){
         e.preventDefault();
     };
 
-    socket.emit(VALIDATE_COMPANY_ID, 'uniqueId');
+    var companyId = getCookie('company_id');
+    socket.emit(VALIDATE_COMPANY_ID, companyId);
 
     //Bind Listeners
     $('#tap-to-check').on('click', startCheckIn);
-    $('.check-in').on('submit',function(event){
-        event.preventDefault();
-        var data = grabFormElements();
-        console.log("data: " + data);
-        socket.emit('ADD_VISITOR', {room: 'uniqueId'}, data);
-
-        $(this).animate({
-            top:'35%',
-            opacity:'0'
-        },0);
-
-
-
-    });
+    $('.check-in').on('submit', submitForm);
 
     //When a user starts their check in
     function startCheckIn(){
@@ -43,7 +31,7 @@ $(document).ready(function(){
     //When a patient submits their form
     function submitForm(){
         var data = grabFormElements();
-        console.log("data: " + data);
+        console.log(data);
         io.to('uniqueId').emit('ADD_VISITOR', data);
 
         $(this).animate({
@@ -90,6 +78,7 @@ $(document).ready(function(){
 
     }
 
+
     //CLOCK
     function updateClock () {
         var currentTime = new Date ( );
@@ -100,7 +89,6 @@ $(document).ready(function(){
         // Pad the minutes and seconds with leading zeros, if required
         currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
         //currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
-
 
         // Convert the hours component to 12-hour format if needed
         currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
@@ -115,6 +103,25 @@ $(document).ready(function(){
     }
     updateClock();
     setInterval(updateClock, 60 * 1000);
+
+    /***
+     * Find a specific cookie name
+     * @param cname
+     * @returns {string|*}
+     */
+    function getCookie(cName) {
+        var name = cName + '=';
+        var cookieArray = document.cookie.split(';');
+
+        for (var i = 0, len = cookieArray.length; i < len; i++) {
+            var cookie = cookieArray[i];
+            while (cookie.charAt(0) == ' ')
+                cookie.substring(1);
+            if (cookie.indexOf(name) == 0)
+                return cookie.substring(name.length, cookie.length);
+        }
+
+    }
 
 
 });

@@ -2,8 +2,16 @@ body {
     font-family: "Helvetica Neue";
 }
 
+#clock{
+    color: #f1f1f1;
+    font-size: 1250%;
+    text-align: center;
+    margin-top: 150px;
+}
+
 body#check-in-page{
-    background-color: #cf4646;
+    /*background-color: #cf4646;*/
+    background-color: #303641;
     height: 100vh;
 }
 #tap-to-check{

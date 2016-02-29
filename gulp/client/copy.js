@@ -22,7 +22,7 @@ gulp.task('copy:images', function () {
 });
 
 gulp.task('copy:views', function () {
-  return gulp.src('./client/assets/views/**/*.html')
+  return gulp.src('./client/assets/views/*.html')
      .pipe(gulp.dest('./dist'));
 });
 

@@ -8,10 +8,9 @@ $(document).ready(function(){
     var VISITOR_LIST_UPDATE = "visitor_list_update";
     var REMOVE_VISITOR = "remove_visitor";
 
-    var VISITOR_QUEUE = [];
-
     //Connect to private socket
-    socket.emit(VALIDATE_COMPANY_ID,'uniqueId');
+    var companyId = getCookie('company_id');
+    socket.emit(VALIDATE_COMPANY_ID, companyId);
 
    /***
     * Compile all the Handle Bar Templates
@@ -25,17 +24,17 @@ $(document).ready(function(){
     var modalTemplate = Handlebars.compile(modal);
 
 
-    //LISTEN FOR VISITOR QUEUE
+    //SOCKET LISTEN FOR VISITOR QUEUE
     socket.on(VISITOR_LIST_UPDATE, function (data) {
-        VISITOR_QUEUE = data;
-        var compiledHtml = template(VISITOR_QUEUE);
+        localStorage.setItem("VISITOR_QUEUE", data);
+        var compiledHtml = template(data);
         $('#visitor-list').html(compiledHtml);
     });
 
     /***
-    * Function Listener for Opening a Modal
+    * Listener for Opening a Modal
     */
-   $(document).on('click','.patient-check-out',function(){
+    $(document).on('click','.patient-check-out',function(){
 
        var uniqueId = $(this).attr('value');
        var visitorIndex = findVisitor(uniqueId);
@@ -46,10 +45,12 @@ $(document).ready(function(){
 
     });
 
+    /***
+     * Listener for Checking out a Visitor
+     */
     $(document).on('click','.check-in-btn',function(){
         var id = $(this).closest('.modal-content').find('.phone-number').attr('value');
         io.emit(REMOVE_VISITOR, {room: 'uniqueId'}, id);
-
 
     });
 
@@ -59,14 +60,35 @@ $(document).ready(function(){
      * @returns {string}
      */
     function findVisitor(id){
-       for(var visitor in VISITOR_QUEUE) {
-          if(VISITOR_QUEUE.hasOwnProperty(visitor)){
-             if(VISITOR_QUEUE[visitor].id === id){
-                 console.log(visitor);
-                 return visitor;
-             }
-          }
-       }
+        var visitorQueue = JSON.parse(localStorage.getItem('VISITOR_QUEUE'));
+
+        for(var visitor in visitorQueue) {
+           if(visitorQueue.hasOwnProperty(visitor)){
+              if(visitorQueue[visitor].id === id){
+                  console.log(visitor);
+                  return visitor;
+              }
+           }
+        }
+    }
+
+    /***
+     * Find a specific cookie name
+     * @param cname
+     * @returns {string|*}
+     */
+    function getCookie(cName) {
+        var name = cName + '=';
+        var cookieArray = document.cookie.split(';');
+
+        for (var i = 0, len = cookieArray.length; i < len; i++) {
+            var cookie = cookieArray[i];
+            while (cookie.charAt(0) == ' ')
+                cookie.substring(1);
+            if (cookie.indexOf(name) == 0)
+                return cookie.substring(name.length, cookie.length);
+        }
+
     }
 
 });
