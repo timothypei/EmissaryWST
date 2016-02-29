@@ -1,9 +1,3 @@
-/**
- * Created by kevingu on 2/21/16.
- */
-/**
- * Created by kevingu on 2/12/16.
- */
 'use strict';
 
 var express = require('express');
