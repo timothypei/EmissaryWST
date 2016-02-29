@@ -9,8 +9,8 @@ $(document).ready(function(){
     var REMOVE_VISITOR = "remove_visitor";
 
     //Connect to private socket
-    var companyId = getCookie('company_id');
-    socket.emit(VALIDATE_COMPANY_ID, companyId);
+   // var companyId = getCookie('company_id');
+    socket.emit(VALIDATE_COMPANY_ID, '');
 
    /***
     * Compile all the Handle Bar Templates
@@ -37,8 +37,7 @@ $(document).ready(function(){
     $(document).on('click','.patient-check-out',function(){
 
        var uniqueId = $(this).attr('value');
-       var visitorIndex = findVisitor(uniqueId);
-       var visitor = VISITOR_QUEUE[visitorIndex];
+       var visitor = findVisitor(uniqueId);
 
        var compiledTemplate = modalTemplate(visitor);
        $('.modal-dialog').html(compiledTemplate);
@@ -65,8 +64,8 @@ $(document).ready(function(){
         for(var visitor in visitorQueue) {
            if(visitorQueue.hasOwnProperty(visitor)){
               if(visitorQueue[visitor].id === id){
-                  console.log(visitor);
-                  return visitor;
+                  console.log(visitorQueue[visitor]);
+                  return visitorQueue[visitor];
               }
            }
         }
@@ -74,7 +73,7 @@ $(document).ready(function(){
 
     /***
      * Find a specific cookie name
-     * @param cname
+     * @param cName
      * @returns {string|*}
      */
     function getCookie(cName) {
@@ -88,6 +87,22 @@ $(document).ready(function(){
             if (cookie.indexOf(name) == 0)
                 return cookie.substring(name.length, cookie.length);
         }
+
+    }
+
+    /***
+     * TODO order the list by increasing order
+     * @param key
+     */
+    function increasingOrder(key){
+
+    }
+
+    /***
+     * TODO order the list by decreasing order
+     * @param key
+     */
+    function decreasingOrder(key){
 
     }
 

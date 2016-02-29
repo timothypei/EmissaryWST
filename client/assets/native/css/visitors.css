@@ -1,0 +1,14 @@
+.patient-table-header{
+  margin-bottom: 25px;
+}
+
+.patient-table-header > .form-control{
+   margin-top: 15px;
+   width: 150px;
+   float: right;
+
+}
+.patient-table-header > h3{
+   display: inline-block;
+   font-size: 20px;
+}

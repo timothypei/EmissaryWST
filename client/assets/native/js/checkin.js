@@ -4,13 +4,15 @@ $(document).ready(function(){
     var VALIDATE_COMPANY_ID = "validate_company_id";
     var ADD_VISITOR = "add_visitor";
 
+    //var companyId = getCookie('company_id');
+    socket.emit(VALIDATE_COMPANY_ID, '');
+
     //Prevent users from scrolling around on iPad
     document.ontouchmove = function(e) {
         e.preventDefault();
     };
 
-    var companyId = getCookie('company_id');
-    socket.emit(VALIDATE_COMPANY_ID, companyId);
+
 
     //Bind Listeners
     $('#tap-to-check').on('click', startCheckIn);
@@ -21,7 +23,7 @@ $(document).ready(function(){
         console.log("click");
         $('.check-in').addClass('show');
         $('.check-in').animate({
-            top:'25%',
+            top:'15%',
             opacity: '1'
         }, 700);
         $(this).addClass('hide');
@@ -79,13 +81,13 @@ $(document).ready(function(){
     }
 
 
+
     //CLOCK
     function updateClock () {
         var currentTime = new Date ( );
         var currentHours = currentTime.getHours ( );
         var currentMinutes = currentTime.getMinutes ( );
         //var currentSeconds = currentTime.getSeconds ( );
-
         // Pad the minutes and seconds with leading zeros, if required
         currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
         //currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
@@ -106,7 +108,7 @@ $(document).ready(function(){
 
     /***
      * Find a specific cookie name
-     * @param cname
+     * @param cName
      * @returns {string|*}
      */
     function getCookie(cName) {

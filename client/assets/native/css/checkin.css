@@ -3,10 +3,12 @@ body {
 }
 
 #clock{
+    margin-top: 0;
+    padding-top: 150px;
     color: #f1f1f1;
     font-size: 1250%;
     text-align: center;
-    margin-top: 150px;
+
 }
 
 body#check-in-page{
@@ -18,12 +20,14 @@ body#check-in-page{
     position: absolute;
     left: 50%;
     margin-left: -137.5px;
-    background-color: #f1f1f1;
+   /* background-color: #f1f1f1; */
+    background-color: #0cb4a4;
     width: 275px;
     height: 100px;
     bottom: 20%;
     border-radius: 3px;
     display: block;
+
 }
 
 #tap-to-check:hover{
@@ -33,7 +37,8 @@ body#check-in-page{
 #tap-to-check p{
     font-family: "Helvetica Neue";
     text-align: center;
-    color: #333;
+    /*color: #333;*/
+    color: #fff;
     font-size: 32px;
 }
 .check-in{
@@ -43,7 +48,7 @@ body#check-in-page{
     margin-left: -200px;
     opacity: 0;
     width: 400px;
-    top: 15%;
+    top: 10%;
     text-align: center;
 
 
@@ -84,13 +89,15 @@ body#check-in-page{
     left: 50%;
     margin-top: 75px;
     margin-left: -75px;
-    background-color: #fff;
+    /*background-color: #fff;*/
     width: 150px;
     height: 50px;
     border-radius: 3px;
     display: block;
     border: none;
     font-size: 28px;
+    background-color: #0cb4a4;
+    color: #fff;
 }
 
 .hide{
