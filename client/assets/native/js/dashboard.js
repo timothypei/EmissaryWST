@@ -54,17 +54,22 @@ $(document).ready(function(){
         $('#visitor-list').html(compiledHtml);
     });
 
+
+    /***
+     * Key listener for search
+     */
+
+
     /***
     * Listener for Opening a Modal
     */
     $(document).on('click','.patient-check-out',function(){
+        var uniqueId = $(this).attr('value');
+        var visitor = findVisitor(uniqueId);
+        if(!visitor.email) visitor.email = "N/A";
 
-       var uniqueId = $(this).attr('value');
-       var visitor = findVisitor(uniqueId);
-
-       var compiledTemplate = modalTemplate(visitor);
-       $('.modal-dialog').html(compiledTemplate);
-
+        var compiledTemplate = modalTemplate(visitor);
+        $('.modal-dialog').html(compiledTemplate);
     });
 
     /***

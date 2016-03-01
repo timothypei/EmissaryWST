@@ -30,7 +30,7 @@ $(document).ready(function(){
     function startCheckIn(){
         $('.check-in').addClass('show');
         $('.check-in').animate({
-            top:'15%',
+            top:'10%',
             opacity: '1'
         }, 700);
         $(this).addClass('hide');
