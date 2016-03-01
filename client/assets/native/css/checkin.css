@@ -13,20 +13,26 @@ body {
 
 body#check-in-page{
     /*background-color: #cf4646;*/
-    background-color: #303641;
+   /* background-color: #303641;*/
     height: 100vh;
+    background: url(../../images/backgrounds/1.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 #tap-to-check{
     position: absolute;
     left: 50%;
     margin-left: -137.5px;
    /* background-color: #f1f1f1; */
-    background-color: #0cb4a4;
+   /* background-color: #0cb4a4;*/
     width: 275px;
     height: 100px;
     bottom: 20%;
     border-radius: 3px;
     display: block;
+    background-color:#f1f1f1;
 
 }
 
@@ -34,11 +40,11 @@ body#check-in-page{
     cursor: pointer;
 }
 
-#tap-to-check p{
+#tap-to-check > p{
     font-family: "Helvetica Neue";
     text-align: center;
-    /*color: #333;*/
-    color: #fff;
+    color: #333;
+    /*color: #fff*/
     font-size: 32px;
 }
 .check-in{
@@ -65,7 +71,8 @@ body#check-in-page{
 .check-in > input.visitor-fields{
     margin-top: 30px;
     margin-bottom: 30px;
-    background-color: #303641;
+    /*background-color: #303641;*/
+    background-color: transparent;
     border: none;
     border-bottom: 2px solid #f1f1f1;
     padding-bottom: 5px;
@@ -83,7 +90,6 @@ body#check-in-page{
 }
 
 
-
 .submit-check-in{
     position: absolute;
     left: 50%;
@@ -96,11 +102,10 @@ body#check-in-page{
     display: block;
     border: none;
     font-size: 28px;
-    background-color: #0cb4a4;
-    color: #fff;
+    background-color: #f1f1f1;
+    color: black;
 }
 
 .hide{
     display: none !important;
 }
-

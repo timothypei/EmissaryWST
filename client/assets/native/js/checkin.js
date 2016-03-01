@@ -1,18 +1,26 @@
 $(document).ready(function(){
 
-    var socket = io('/visitorList');
+    var socket = io();
+
     var VALIDATE_COMPANY_ID = "validate_company_id";
     var ADD_VISITOR = "add_visitor";
+    var companyData = {
+        company_id: "56d40a6aa6de7129d0a4b1f6",
+        name: "WST",
+        credit_card_number: "12345678912",
+        expiration_date: "2018-4-24",
+        email: "danielK@wst.com",
+        phone_number: "3109851473",
+        paid_time: "2016-04-23T18:25:43.511Z"
+    };
+    
 
     //var companyId = getCookie('company_id');
-    socket.emit(VALIDATE_COMPANY_ID, '');
-
+    socket.emit(VALIDATE_COMPANY_ID, companyData);
     //Prevent users from scrolling around on iPad
     document.ontouchmove = function(e) {
         e.preventDefault();
     };
-
-
 
     //Bind Listeners
     $('#tap-to-check').on('click', startCheckIn);
@@ -20,7 +28,6 @@ $(document).ready(function(){
 
     //When a user starts their check in
     function startCheckIn(){
-        console.log("click");
         $('.check-in').addClass('show');
         $('.check-in').animate({
             top:'15%',
@@ -34,7 +41,7 @@ $(document).ready(function(){
     function submitForm(){
         var data = grabFormElements();
         console.log(data);
-        io.to('uniqueId').emit('ADD_VISITOR', data);
+        socket.emit(ADD_VISITOR, data);
 
         $(this).animate({
             top:'35%',
@@ -42,45 +49,16 @@ $(document).ready(function(){
         },0);
 
     }
-
     //Grabs elements from the check in and puts it into an object
     function grabFormElements(){
         var newVisitor = {};
-        newVisitor.firstName= $('#visitor-first').val();
-        newVisitor.lastName = $('#visitor-last').val();
-        newVisitor.phoneNumber = $('#visitor-number').val();
-        newVisitor.checkin = getCurrentTime();
+        newVisitor.company_id = companyData.company_id;
+        newVisitor.first_name= $('#visitor-first').val();
+        newVisitor.last_name = $('#visitor-last').val();
+        newVisitor.phone_number = $('#visitor-number').val();
+        newVisitor.checkin_time = new Date();
         return newVisitor;
     }
-
-    //Function to get Current Time of Check in
-    function getCurrentTime(){
-        var currentTime;
-        var today = new Date();
-        var currentHour = today.getHours();
-        var currentMinute = today.getMinutes();
-
-        if(currentMinute < 10){
-            currentMinute = '0' + currentMinute;
-        }
-
-        if(currentHour >= 13){
-            currentHour = currentHour - 12;
-            currentTime = currentHour + ':' + currentMinute + 'PM';
-        }
-        else if(currentHour === 12){
-            currentTime = currentHour + ':' + currentMinute + 'PM';
-        }
-        else if (currentHour === 0)
-            currentTime = 1 + ':' + currentMinute + 'AM';
-        else
-            currentTime = currentHour + ':' + currentMinute + 'AM';
-
-        return currentTime;
-
-    }
-
-
 
     //CLOCK
     function updateClock () {
