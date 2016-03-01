@@ -4,9 +4,7 @@
 
 .patient-table-header > .form-control{
    width: 150px;
-   margin-top: -10px;
-   margin-bottom: 5px;
-   float:right;
+   margin-bottom: 10px;
 
 }
 .patient-table-header > h3{
@@ -36,6 +34,7 @@
 .modal-body p > span{
    color: black;
    font-weight: bold;
+   margin-right: 10px;
 }
 
 .modal-left{

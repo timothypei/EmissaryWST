@@ -32,9 +32,7 @@ exports.createServer = function(io_in) {
         /* company_id is required */
 
         socket.on(VALIDATE_COMPANY_ID, function(data){
-            console.log(VALIDATE_COMPANY_ID);
             var company_id = data.company_id;
-           // var company_id = data;
             console.log(company_id);
             Company.findOne({_id: company_id}, function(err, c){
                 if(err || !c)
@@ -55,7 +53,6 @@ exports.createServer = function(io_in) {
 
         //requires the company_id to be sent
         socket.on(VISITOR_LIST_UPDATE, function(data) {
-            console.log('VISITOR_LIST_UPDATE');
             var company_id = data.company_id;
             VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
                 if(err_msg)
@@ -71,9 +68,8 @@ exports.createServer = function(io_in) {
 
         //requires the company_id and visitor_id to be sent
         socket.on(REMOVE_VISITOR, function(data) {
-            console.log('REMOVE_VISITOR');
+
             var company_id = data.company_id;
-            //var visitor_id = data.visitor_id;
             var visitor_id = data._id;
             console.log(data);
             if(!company_id ||  !visitor_id) return;
@@ -88,16 +84,13 @@ exports.createServer = function(io_in) {
 
         //require the params to be set with info of the visitor
         socket.on(ADD_VISITOR, function(data) {
-            console.log('ADD_VISITOR');
             var company_id = data.company_id;
             console.log(data);
             VisitorListCtr.create(data, function(err_msg, result){
                 if(err_msg){
-                    console.log('err0r');
                     throw(new Error(err_msg));
                 }
                 else {
-                    console.log('exporting');
                     exports.notifyNewList(company_id, result);
                 }
             });
@@ -115,7 +108,6 @@ exports.createServer = function(io_in) {
  * patients to reflect the changes.
  */
 exports.notifyNewList = function(adminID, data) {
-    console.log("NOTIFY NEW LIST");
     io.to(adminID).emit(VISITOR_LIST_UPDATE, data);
 };
 

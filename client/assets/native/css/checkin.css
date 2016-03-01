@@ -29,11 +29,11 @@ body#check-in-page{
    /* background-color: #0cb4a4;*/
     width: 275px;
     height: 100px;
-    bottom: 20%;
+    bottom: 15%;
     border-radius: 3px;
     display: block;
-    /*background-color:#f1f1f1;*/
-    background-color: #0abcb3;
+    background-color:#f1f1f1;
+    /*background-color: #0abcb3;*/
 
 }
 
@@ -44,8 +44,8 @@ body#check-in-page{
 #tap-to-check > p{
     font-family: "Helvetica Neue";
     text-align: center;
-   /* color: #333;*/
-    color: #fff;
+    color: #333;
+    /*color: #fff;*/
     font-size: 32px;
 }
 .check-in{
@@ -103,9 +103,9 @@ body#check-in-page{
     display: block;
     border: none;
     font-size: 28px;
-    background-color: #0abcb3;
-    /*background-color: #f1f1f1;*/
-    color: white;
+    /*background-color: #0abcb3;*/
+    background-color: #f1f1f1;
+    color: #333;
 }
 
 .hide{
