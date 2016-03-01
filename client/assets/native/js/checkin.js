@@ -1,0 +1,107 @@
+$(document).ready(function(){
+
+    var socket = io();
+
+    var VALIDATE_COMPANY_ID = "validate_company_id";
+    var ADD_VISITOR = "add_visitor";
+    var companyData = {
+        company_id: "56d40a6aa6de7129d0a4b1f6",
+        name: "WST",
+        credit_card_number: "12345678912",
+        expiration_date: "2018-4-24",
+        email: "danielK@wst.com",
+        phone_number: "3109851473",
+        paid_time: "2016-04-23T18:25:43.511Z"
+    };
+    
+
+    //var companyId = getCookie('company_id');
+    socket.emit(VALIDATE_COMPANY_ID, companyData);
+    //Prevent users from scrolling around on iPad
+    document.ontouchmove = function(e) {
+        e.preventDefault();
+    };
+
+    //Bind Listeners
+    $('#tap-to-check').on('click', startCheckIn);
+    $('.check-in').on('submit', submitForm);
+
+    //When a user starts their check in
+    function startCheckIn(){
+        $('.check-in').addClass('show');
+        $('.check-in').animate({
+            top:'10%',
+            opacity: '1'
+        }, 700);
+        $(this).addClass('hide');
+        $('#clock').addClass('hide');
+    }
+
+    //When a patient submits their form
+    function submitForm(){
+        var data = grabFormElements();
+        console.log(data);
+        socket.emit(ADD_VISITOR, data);
+
+        $(this).animate({
+            top:'35%',
+            opacity:'0'
+        },0);
+
+    }
+    //Grabs elements from the check in and puts it into an object
+    function grabFormElements(){
+        var newVisitor = {};
+        newVisitor.company_id = companyData.company_id;
+        newVisitor.first_name= $('#visitor-first').val();
+        newVisitor.last_name = $('#visitor-last').val();
+        newVisitor.phone_number = $('#visitor-number').val();
+        newVisitor.checkin_time = new Date();
+        return newVisitor;
+    }
+
+    //CLOCK
+    function updateClock () {
+        var currentTime = new Date ( );
+        var currentHours = currentTime.getHours ( );
+        var currentMinutes = currentTime.getMinutes ( );
+        //var currentSeconds = currentTime.getSeconds ( );
+        // Pad the minutes and seconds with leading zeros, if required
+        currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+        //currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+
+        // Convert the hours component to 12-hour format if needed
+        currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+
+        // Convert an hours component of "0" to "12"
+        currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+
+        // Compose the string for display
+        var currentTimeString = currentHours + ":" + currentMinutes;
+
+        $("#clock").html(currentTimeString);
+    }
+    updateClock();
+    setInterval(updateClock, 60 * 1000);
+
+    /***
+     * Find a specific cookie name
+     * @param cName
+     * @returns {string|*}
+     */
+    function getCookie(cName) {
+        var name = cName + '=';
+        var cookieArray = document.cookie.split(';');
+
+        for (var i = 0, len = cookieArray.length; i < len; i++) {
+            var cookie = cookieArray[i];
+            while (cookie.charAt(0) == ' ')
+                cookie.substring(1);
+            if (cookie.indexOf(name) == 0)
+                return cookie.substring(name.length, cookie.length);
+        }
+
+    }
+
+
+});

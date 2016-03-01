@@ -1,0 +1,50 @@
+.patient-table-header{
+  margin-bottom: 25px;
+}
+
+.patient-table-header > .form-control{
+   width: 150px;
+   margin-bottom: 10px;
+
+}
+.patient-table-header > h3{
+   display: inline-block;
+   font-size: 1.8em;
+}
+
+.patient-check-out > td{
+   font-size: 1.2em;
+}
+
+.table th{
+   font-size: 1.2em;
+}
+
+.modal-body{
+   font-size: 1em;
+   overflow: auto;
+   padding: 15px 15px;
+}
+
+.modal-title{
+   font-size: 1.2em;
+}
+
+
+.modal-body p > span{
+   color: black;
+   font-weight: bold;
+   margin-right: 10px;
+}
+
+.modal-left{
+   float:left;
+   width: 50%;
+
+}
+
+.modal-right{
+   float:left;
+   width:50%;
+
+}

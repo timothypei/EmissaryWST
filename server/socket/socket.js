@@ -28,12 +28,12 @@ exports.createServer = function(io_in) {
      * room and notified when changes are being made.
      */
     io.on(CONNECTION, function (socket) {
-
+        console.log('Connected');
         /* company_id is required */
 
-        socket.on(VALIDATE_COMPANY_ID, function(data) {
-            //console.log(VALIDATE_COMPANY_ID);
+        socket.on(VALIDATE_COMPANY_ID, function(data){
             var company_id = data.company_id;
+            console.log(company_id);
             Company.findOne({_id: company_id}, function(err, c){
                 if(err || !c)
                     throw(err);
@@ -62,31 +62,34 @@ exports.createServer = function(io_in) {
             });
         });
 
-        //socket.emit(VISITOR_LIST_UPDATE,
-
         socket.on(DISCONNECT, function() {
             console.log('user disconnected from ' + company_id);
         });
 
         //requires the company_id and visitor_id to be sent
         socket.on(REMOVE_VISITOR, function(data) {
+
             var company_id = data.company_id;
-            var visitor_id = data.visitor_id;
+            var visitor_id = data._id;
+            console.log(data);
             if(!company_id ||  !visitor_id) return;
             VisitorListCtr.deleteVisitor(company_id, visitor_id, function(err_msg, result){
                 if(err_msg)
                     throw(new Error(err_msg));
                 else
                     exports.notifyNewList(company_id, result);
+
             });
         });
 
         //require the params to be set with info of the visitor
         socket.on(ADD_VISITOR, function(data) {
             var company_id = data.company_id;
+            console.log(data);
             VisitorListCtr.create(data, function(err_msg, result){
-                if(err_msg)
+                if(err_msg){
                     throw(new Error(err_msg));
+                }
                 else {
                     exports.notifyNewList(company_id, result);
                 }
@@ -107,7 +110,6 @@ exports.createServer = function(io_in) {
 exports.notifyNewList = function(adminID, data) {
     io.to(adminID).emit(VISITOR_LIST_UPDATE, data);
 };
-
 
 /*
  * Set up a custom namespace.
