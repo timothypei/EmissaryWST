@@ -29,10 +29,8 @@ exports.createServer = function(io_in) {
      */
     io.on(CONNECTION, function (socket) {
 
-        /* company_id is required */
-
-        socket.on(VALIDATE_COMPANY_ID, function(data) {
-            //console.log(VALIDATE_COMPANY_ID);
+        /* company_id is required to connect to join right socket to listen to*/
+        socket.on(VALIDATE_COMPANY_ID, function(data){
             var company_id = data.company_id;
             Company.findOne({_id: company_id}, function(err, c){
                 if(err || !c)
@@ -41,7 +39,7 @@ exports.createServer = function(io_in) {
                     socket.join(company_id);
                     VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
                         if(err_msg)
-                            throw(new Error(err_msg));
+                            exports.notifyNewList(company_id, {error: err_msg});
                         else {
                             exports.notifyNewList(company_id, result);
                         }
@@ -56,13 +54,11 @@ exports.createServer = function(io_in) {
             var company_id = data.company_id;
             VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
                 if(err_msg)
-                    throw(new Error(err_msg));
+                    exports.notifyNewList(company_id, {error: err_msg});
                 else
                     exports.notifyNewList(company_id, result);
             });
         });
-
-        //socket.emit(VISITOR_LIST_UPDATE,
 
         socket.on(DISCONNECT, function() {
             console.log('user disconnected from ' + company_id);
@@ -75,9 +71,10 @@ exports.createServer = function(io_in) {
             if(!company_id ||  !visitor_id) return;
             VisitorListCtr.deleteVisitor(company_id, visitor_id, function(err_msg, result){
                 if(err_msg)
-                    throw(new Error(err_msg));
+                    exports.notifyNewList(company_id, {error: err_msg});
                 else
                     exports.notifyNewList(company_id, result);
+
             });
         });
 
@@ -85,8 +82,9 @@ exports.createServer = function(io_in) {
         socket.on(ADD_VISITOR, function(data) {
             var company_id = data.company_id;
             VisitorListCtr.create(data, function(err_msg, result){
-                if(err_msg)
-                    throw(new Error(err_msg));
+                if(err_msg){
+                    exports.notifyNewList(company_id, {error: err_msg});
+                }
                 else {
                     exports.notifyNewList(company_id, result);
                 }
@@ -107,7 +105,6 @@ exports.createServer = function(io_in) {
 exports.notifyNewList = function(adminID, data) {
     io.to(adminID).emit(VISITOR_LIST_UPDATE, data);
 };
-
 
 /*
  * Set up a custom namespace.
