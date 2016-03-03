@@ -10,7 +10,7 @@ window.onload = function() {
             hitType: 'event',
             eventCategory: 'buttons',
             eventAction: 'click',
-            eventLabel: 'testButtonClick'
+            eventLabel: 'loginButtonClick'
         });
         //alert("Information sent to GA");
     });
