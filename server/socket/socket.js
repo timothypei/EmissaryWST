@@ -12,6 +12,7 @@ var VISITOR_LIST_UPDATE = "visitor_list_update";
 var DISCONNECT = "disconnect";
 var REMOVE_VISITOR = "remove_visitor";
 var ADD_VISITOR = "add_visitor";
+var NOTIFY_ERROR = "notify_error";
 
 var VisitorListCtr = require('../routes/visitorList/visitorList.controller');
 var Company = require('../models/Company');
@@ -34,12 +35,12 @@ exports.createServer = function(io_in) {
             var company_id = data.company_id;
             Company.findOne({_id: company_id}, function(err, c){
                 if(err || !c)
-                    throw(err);
+                    exports.notifyError(company_id, err);
                 else {
                     socket.join(company_id);
                     VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
                         if(err_msg)
-                            exports.notifyNewList(company_id, {error: err_msg});
+                            exports.notifyError(company_id, {error: err_msg});
                         else {
                             exports.notifyNewList(company_id, result);
                         }
@@ -54,7 +55,7 @@ exports.createServer = function(io_in) {
             var company_id = data.company_id;
             VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
                 if(err_msg)
-                    exports.notifyNewList(company_id, {error: err_msg});
+                    exports.notifyError(company_id, {error: err_msg});
                 else
                     exports.notifyNewList(company_id, result);
             });
@@ -71,7 +72,7 @@ exports.createServer = function(io_in) {
             if(!company_id ||  !visitor_id) return;
             VisitorListCtr.deleteVisitor(company_id, visitor_id, function(err_msg, result){
                 if(err_msg)
-                    exports.notifyNewList(company_id, {error: err_msg});
+                    exports.notifyError(company_id, {error: err_msg});
                 else
                     exports.notifyNewList(company_id, result);
 
@@ -83,7 +84,7 @@ exports.createServer = function(io_in) {
             var company_id = data.company_id;
             VisitorListCtr.create(data, function(err_msg, result){
                 if(err_msg){
-                    exports.notifyNewList(company_id, {error: err_msg});
+                    exports.notifyError(company_id, {error: err_msg});
                 }
                 else {
                     exports.notifyNewList(company_id, result);
@@ -102,8 +103,12 @@ exports.createServer = function(io_in) {
  * this event is triggered, the client side can retrieve the whole queue of
  * patients to reflect the changes.
  */
-exports.notifyNewList = function(adminID, data) {
-    io.to(adminID).emit(VISITOR_LIST_UPDATE, data);
+exports.notifyNewList = function(company_id, data) {
+    io.to(company_id).emit(VISITOR_LIST_UPDATE, data);
+};
+
+exports.notifyError = function(company_id, data) {
+    io.to(company_id).emit(NOTIFY_ERROR, data);
 };
 
 /*
