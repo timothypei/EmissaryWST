@@ -60,8 +60,8 @@ var neonLogin = neonLogin || {};
 					neonLogin.setPercentage(40 + random_pct);
 											
 					// Send data to the server
-					$.ajax({
-						url: baseurl + 'data/sample-login-form.php',
+					/*$.ajax({
+						url: baseurl + 'api/employee',
 						method: 'POST',
 						dataType: 'json',
 						data: {
@@ -109,10 +109,13 @@ var neonLogin = neonLogin || {};
 								
 							}, 1000);
 						}
-					});
+					});*/
 						
 					
 				}, 650);
+
+				window.location.href = '/visitors.html';
+
 			}
 		});
 		
@@ -358,7 +361,7 @@ var neonLogin = neonLogin || {};
 			
 			// Create Progress Circle
 			var bg = neonLogin.lockscreen_progress_canvas,
-				ctx = ctx = bg.getContext('2d'),
+				ctx = bg.getContext('2d'),
 				imd = null,
 				circ = Math.PI * 2,
 				quart = Math.PI / 2,

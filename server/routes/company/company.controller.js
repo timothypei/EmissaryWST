@@ -34,10 +34,19 @@ module.exports.template.create = function(req, res) {
     company.expiration_date=req.body.expiration_date;
     company.credit_card_number=req.body.credit_card_number;
     company.paid_time=new Date();
-
+    console.log("REQUEST");
+    console.log("request: " + req);
+    console.log(req.body.name);
+    console.log(req.body.email);
+    console.log(company.email);
+    /*company.name = req.body.name;
+    company.phone_number = req.body.phone_number;
+    company.expiration_date=req.body.expiration_date;
+    company.credit_card_number=req.body.credit_card_number;*/
     company.save(function(err, c) {
-        if(err)
+        if(err){
             return res.status(400).json({error: "Could Not Save"});
+        }
         return res.status(200).json(showCompanyPublicInfo(c));
     });
 };

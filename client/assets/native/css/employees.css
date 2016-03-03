@@ -1,0 +1,86 @@
+.modal #employee-form{
+   width: 80%;
+   margin-left: auto;
+   margin-right: auto;
+   padding-top: 15px;
+   padding-bottom: 15px;
+}
+
+.modal #employee-form > .field-wrapper{
+   width: 40%;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.modal #employee-form input.employee-fields{
+   width: 100%;
+   margin-bottom: 5px;
+   margin-top: 5px;
+
+}
+
+#employee-form input.employee-fields:focus{
+   outline: none;
+}
+
+.modal-title{
+   font-size: 24px;
+   text-align: center;
+
+}
+
+.add-button{
+   border-radius: 2px;
+   padding: 7px;
+   margin-top: 15px;
+   float: right;
+   background-color: #01b2bd;
+   color: white;
+}
+
+.add-button:hover{
+   background-color: #049099;
+   cursor: pointer;
+}
+
+.patient-table-header > .form-control{
+   width: 150px;
+   margin-bottom: 15px;
+
+}
+
+.employee-container{
+   width: 80%;
+   margin-left: auto;
+   margin-right: auto;
+   max-width: 960px;
+}
+
+.table{
+   font-size: 1.2em;
+}
+table{
+   border-radius: 4px !important;
+}
+/*
+.table > thead:first-child > tr:first-child > th{
+   border-top: 1px solid rgb(215,215,215) !important;
+   border-top-width: 1px;
+}
+*/
+.table thead > tr th{
+
+   border-color:rgb(215,215,215) !important;
+}
+.table tr td{
+   border-color:rgb(215,215,215) !important;
+
+}
+
+#visitor-list tr:nth-last-child(1){
+   border-bottom: 1px solid rgb(215,215,215) !important;
+}
+
+hr{
+   border-top: 3px solid #01b2bd !important;
+}
