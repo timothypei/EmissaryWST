@@ -1,4 +1,4 @@
-var valid = false;
+//var valid = false;
 
 // $('#inForm').validate({ // initialize the plugin
 //     rules: {
@@ -56,7 +56,6 @@ $("#table-2").on('click', '.btnSuspend', function () {
     if($(this).closest('td').children('p').length == 0) {
         $(this).closest('td').append("<p><b>Suspended.</b></p>");
         $(this).closest('td').children('a').text("Unsuspend");
-        //$(this).closest('td').("<a href='#' class='btn btn-danger btn-sm btn-icon icon-left btnSuspend'><i class='entypo-cancel'></i>Unsuspend</a>");
     }
     else {
         $(this).closest('td').children('p').remove();
