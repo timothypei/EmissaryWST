@@ -130,6 +130,8 @@ describe("Visitor List Socket",function(){
 
     });
 
+    //TODO: test wrong company_id sent
+
     it('Should add visitors to List', function(done){
         var client2 = io.connect(socketURL, options);
         client2.once("connect", function () {
