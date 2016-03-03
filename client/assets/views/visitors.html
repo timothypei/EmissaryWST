@@ -146,7 +146,7 @@
             <input class="form-control" placeholder="Search ..." type="text"/>
         </div>
 
-        <table class="table">
+        <table class="table ">
             <thead>
                 <tr>
                     <th st-sort="Name">First <i st-sort="Name" class="fa fa-sort"></i></th>
@@ -160,7 +160,7 @@
                 <!-- PATIENT QUEUE TEMPLATE GOES HERE -->
 
                 <div class="modal fade" id="myModal" role="dialog">
-                    <div class="modal-dialog"><!-- MODAL TEMPLATE GOES HERE--></div>
+                    <div class="modal-dialog"></div>
                 </div>
 
             </tbody>
@@ -176,9 +176,9 @@
                 <td class="patient-queue-text">{{this.appointment}}</td>
 
                 <td class="patient-queue-text">
-                            <span class="text-danger">
-                                <i class="fa fa-warning"></i>
-                            </span>{{this.checkin_time}}
+						 <span class="text-danger">
+							 <i class="fa fa-warning"></i>
+						 </span>{{this.checkin_time}}
                 </td>
                 <!-- Modal -->
             </tr>
@@ -209,6 +209,7 @@
                 </div>
             </div>
         </script>
+
 		</div>
 	</div>
 

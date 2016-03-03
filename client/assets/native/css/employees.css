@@ -1,0 +1,61 @@
+.modal #employee-form{
+   width: 80%;
+   margin-left: auto;
+   margin-right: auto;
+   padding-top: 15px;
+   padding-bottom: 15px;
+}
+
+.modal #employee-form > .field-wrapper{
+   width: 40%;
+   margin-left: auto;
+   margin-right: auto;
+}
+
+.modal #employee-form input.employee-fields{
+   width: 100%;
+   margin-bottom: 5px;
+   margin-top: 5px;
+
+}
+
+#employee-form input.employee-fields:focus{
+   outline: none;
+}
+
+.modal-title{
+   font-size: 24px;
+   text-align: center;
+
+}
+
+.add-button{
+   border-radius: 2px;
+   padding: 7px;
+   margin-top: 15px;
+   float: right;
+   background-color: #00a651;
+   color: white;
+}
+
+.add-button:hover{
+   background-color: #007338;
+   cursor: pointer;
+}
+
+.patient-table-header > .form-control{
+   width: 150px;
+   margin-bottom: 15px;
+
+}
+
+.employee-container{
+   width: 80%;
+   margin-left: auto;
+   margin-right: auto;
+   max-width: 960px;
+}
+
+.table{
+   font-size: 1.2em;
+}
