@@ -86,7 +86,7 @@
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3 form-box">
 
-                    <form role="form" action="" method="post" class="registration-form">
+                    <form role="form" action="api/companies" method="post" class="registration-form">
 
                         <fieldset>
                             <div class="form-top">
@@ -101,19 +101,23 @@
                             <div class="form-bottom">
                                 <div class="form-group">
                                     <label class="sr-only" for="form-company-name">Company name</label>
-                                    <input type="text" name="form-company-name" placeholder="Company name..." class="form-company-name form-control" id="form-company-name">
+                                    <input type="text" name="name" placeholder="Company Name" class="form-company-name form-control" id="form-company-name">
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-email">Email</label>
-                                    <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+                                    <input type="text" name="email" placeholder="Email" class="form-email form-control" id="form-email">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-phone">Phone Number</label>
+                                    <input type="text" name="phone_number" placeholder="Phone Number" class="form-phone form-control" id="form-phone">
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-password">Password</label>
-                                    <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+                                    <input type="password" name="form-password" placeholder="Password" class="form-password form-control" id="form-password">
                                 </div>
                                 <div class="form-group">
                                     <label class="sr-only" for="form-repeat-password">Repeat password</label>
-                                    <input type="password" name="form-repeat-password" placeholder="Repeat password..."
+                                    <input type="password" name="form-repeat-password" placeholder="Confirm Password"
                                            class="form-repeat-password form-control" id="form-repeat-password">
                                 </div>
                                 <button type="button" class="btn btn-next">Next</button>

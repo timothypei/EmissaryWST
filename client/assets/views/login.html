@@ -8,9 +8,9 @@
 	<meta name="description" content="Neon Admin Panel" />
 	<meta name="author" content="" />
 
-	<link rel="icon" href="./../assets/images/favicon.ico">
+	<link rel="icon" href="./../assets/images/logo-emissary.png">
 
-	<title>Neon | Login</title>
+	<title>Emissary | Login</title>
 
 	<link rel="stylesheet" href="./../assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 	<link rel="stylesheet" href="./../assets/css/font-icons/entypo/css/entypo.css">
@@ -48,9 +48,11 @@ var baseurl = '';
 		<div class="login-content">
 			
 			<a class="logo">
-				<img src="assets/images/logo@2x.png" width="120" alt="" />
+				<img src="assets/images/logo-transparent.png" width="200" alt="" />
 			</a>
-			
+
+			<p class="description">Dear user, log in to access the admin area</p>
+
 			<!-- progress bar indicator -->
 			<div class="login-progressbar-indicator">
 				<h3>43%</h3>
@@ -73,15 +75,12 @@ var baseurl = '';
 				<p>Enter <strong>demo</strong>/<strong>demo</strong> as login and password.</p>
 			</div>
 			
-			<form method="post" role="form" id="form_login">
-				
+			<form>
 				<div class="form-group">
-					
 					<div class="input-group">
 						<div class="input-group-addon">
 							<i class="entypo-user"></i>
 						</div>
-						
 						<input type="text" class="form-control" name="username" id="username" placeholder="Username" autocomplete="off" />
 					</div>
 					
@@ -106,24 +105,13 @@ var baseurl = '';
 					</button>
 				</div>
 				
-				<!-- Implemented in v1.1.4 -->
-				<div class="form-group">
-					<em>- or -</em>
-				</div>
-				
-				<div class="form-group">
-				
-					<button type="button" class="btn btn-default btn-lg btn-block btn-success">
-						Register Today!
-					</button>
-					
-				</div>			
+
 			</form>
 			
 			
 			<div class="login-bottom-links">
 				
-				<a href="extra-forgot-password.html" class="link">Forgot your password?</a>
+				<a href="forgot-password.html" class="link">Forgot password</a>
 				
 				<br />
 				
