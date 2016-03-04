@@ -33,6 +33,7 @@ module.exports.template.create = function(req, res) {
     company.phone_number = req.body.phone_number;
     company.paid_time=new Date();
     console.log("REQUEST");
+    console.log("request: " + req);
     console.log(req.body.name);
     console.log(req.body.email);
     console.log(company.email);
