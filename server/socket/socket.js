@@ -54,8 +54,9 @@ exports.createServer = function(io_in) {
         socket.on(VISITOR_LIST_UPDATE, function(data) {
             var company_id = data.company_id;
             VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
-                if(err_msg)
+                if(err_msg) {
                     exports.notifyError(company_id, {error: err_msg});
+                }
                 else
                     exports.notifyNewList(company_id, result);
             });
@@ -67,12 +68,16 @@ exports.createServer = function(io_in) {
 
         //requires the company_id and visitor_id to be sent
         socket.on(REMOVE_VISITOR, function(data) {
+
             var company_id = data.company_id;
             var visitor_id = data.visitor_id;
             if(!company_id ||  !visitor_id) return;
             VisitorListCtr.deleteVisitor(company_id, visitor_id, function(err_msg, result){
-                if(err_msg)
+                if(err_msg) {
+                    console.log("CATASTROPHIC ERROR");
+
                     exports.notifyError(company_id, {error: err_msg});
+                }
                 else
                     exports.notifyNewList(company_id, result);
 

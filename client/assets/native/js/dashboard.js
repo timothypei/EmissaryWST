@@ -78,6 +78,7 @@ $(document).ready(function(){
     $(document).on('click','.check-in-btn',function(){
        var id = $(this).closest('.modal-content').find('.modal-body').attr('value');
         var removeVisitor = findVisitor(id);
+        console.log(removeVisitor);
         socket.emit(REMOVE_VISITOR, removeVisitor);
 
     });
