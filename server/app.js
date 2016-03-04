@@ -14,7 +14,7 @@ var path = require('path');
 var mongoose = require('mongoose');
 var socketIO = require('./socket/socket');
 //var oauthserver = require('oauth2-server');
-//var newrelic = require('newrelic');
+var newrelic = require('newrelic');
 
 
 /*
