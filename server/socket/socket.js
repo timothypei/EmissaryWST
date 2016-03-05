@@ -35,7 +35,7 @@ exports.createServer = function(io_in) {
             var company_id = data.company_id;
             Company.findOne({_id: company_id}, function(err, c){
                 if(err || !c)
-                    exports.notifyError(company_id, err);
+                    return;
                 else {
                     socket.join(company_id);
                     VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
