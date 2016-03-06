@@ -122,6 +122,7 @@
             queryCoreReportingApi(firstProfileId);
             // Query the Event Tacker API
             queryEventReportingApi(firstProfileId);
+            queryChart(firstProfileId);
         } else {
             console.log('No views (profiles) found for this user.');
         }
@@ -156,7 +157,46 @@
                     console.log(err);
                 });
     }
+    function queryChart(profileId) {
+        // Query the Core Reporting API for the number sessions for
+        // the past seven days.
+        gapi.client.analytics.data.ga.get({
+                    'ids': 'ga:' + profileId,
+                    'start-date': '7daysAgo',
+                    'end-date': 'today',
+                    'metrics': 'ga:newUsers',
+                    'dimensions': 'ga:date'
+                })
+                .then(function(response) {
+                    var formattedJson = JSON.stringify(response.result, null, 2);
+                    // get the number of login counts
 
+                    var resultStr = "";
+                    var resultRow = response.result;
+                    resultStr = resultRow["ga:newUsers"];
+                    var arrayLength = resultRow.rows.length;
+                    var arr = [];
+                    //console.log("Array length: " + arrayLength);
+                    for (var i = 0; i < arrayLength; i++) {
+                        //console.log("Result Row: " + resultRow.rows[i][1]);
+                        var val = parseInt(resultRow.rows[i][1]);
+                        arr.push(val);
+                    }
+                    console.log(arr);
+                    $(".monthly-sales").sparkline(arr, {
+                        type: 'bar',
+                        barColor: '#485671',
+                        height: '80px',
+                        barWidth: 30,
+                        barSpacing: 2
+                    });
+
+                })
+                .then(null, function(err) {
+                    // Log any errors.
+                    console.log(err);
+                });
+    }
     function queryEventReportingApi(profileId) {
         // Query the Core Reporting API for the events
         gapi.client.analytics.data.ga.get({
