@@ -5,7 +5,7 @@ $(document).ready(function(){
     var compiledHtml = template(employees);
 
     $("#employee-list").html(compiledHtml);
-    $('.add-btn').click(submitForm);
+    $('.save-btn').click(submitForm);
 
     
    /***
@@ -58,6 +58,7 @@ $(document).ready(function(){
         console.log(d);
         updateEmployeeList(d);
         $("#employee-list").html(template(employees));
+        document.getElementById("employee-form").reset();
     }
 
     /***

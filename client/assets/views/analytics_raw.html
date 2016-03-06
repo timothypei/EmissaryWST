@@ -166,7 +166,7 @@
                     'start-date': '30daysAgo',
                     'end-date': 'today',
                     'dimensions': 'ga:eventLabel',
-                    'metrics': 'ga:eventValue'
+                    'metrics': 'ga:totalEvents'
                 })
                 .then(function(response) {
                     var formattedJson = JSON.stringify(response.result, null, 2);
