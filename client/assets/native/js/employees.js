@@ -1,13 +1,18 @@
 $(document).ready(function(){
-	var data = { employees: [
-     	{
-      		first_name: "Alicia",
-      		last_name: "Nguyen",
-      		phone_number: "(234) 345 - 5634",
-      		email: "aliciadnguyen@gmail.com"
-  		}
-    ]};
+    var employees = getEmployees();
+    var source = $("#employee-list-template").html();
+    var template = Handlebars.compile(source);
+    var compiledHtml = template(employees);
 
+    $("#employee-list").html(compiledHtml);
+    $('.add-btn').click(submitForm);
+
+    
+   /***
+     * Makes a get request to display list of employees 
+     * @param none
+     * @returns displays the employee list
+     */
     function getEmployees() {
        var json;
        $.ajax({
@@ -24,39 +29,46 @@ $(document).ready(function(){
        return json;
    }
 
-   	var employees = getEmployees();
-   	var source = $("#employee-list-template").html();
-   	var template = Handlebars.compile(source);
+   /***
+     * Makes a post request to update list of employees when adding a new employee
+     * @param none
+     * @returns updates the employee list
+     */
+   function updateEmployeeList(obj) {
+      $.ajax({
+        dataType: 'json',
+           type: 'POST',
+           data: obj,
+           async: false,
+           url: '/api/employees',
+           success: function(response) {
+               employees.push(response);
+               console.log(response);
+           }
+      });
+    }
 
-   	var compiledHtml = template(employees);
-	//$("#employee-list").html(compiledHtml);
-	$("#employee-list").html(template(data));
-
-    //HARD CODED FOR NOW
-    var companyData = {
-        company_id: "56d40a6aa6de7129d0a4b1f6",
-        name: "WST",
-        credit_card_number: "12345678912",
-        expiration_date: "2018-4-24",
-        email: "danielK@wst.com",
-        phone_number: "3109851473",
-        paid_time: "2016-04-23T18:25:43.511Z"
-    };
-
-    $('.add-btn').click(submitForm);
-
-    //When a patient submits their form
+     /***
+     * When a patient submits their form
+     * @param none
+     * @returns updates the employee list
+     */
     function submitForm(){
         var d = grabFormElements();
         console.log(d);
-        data.employees.push(d);
-        $("#employee-list").html(template(data));
+        updateEmployeeList(d);
+        $("#employee-list").html(template(employees));
     }
 
-    //Grabs elements from the check in and puts it into an object
+    /***
+     * Grabs elements from the check in and puts it into an object
+     * @param none
+     * @returns new employee object
+     */
     function grabFormElements(){
         var newEmployee = {};
         newEmployee.company_id = "56d40a6aa6de7129d0a4b1f6";
+        newEmployee.role = "c_employee",
         newEmployee.first_name= $('#employee-first').val();
         newEmployee.last_name = $('#employee-last').val();
         newEmployee.phone_number = $('#employee-number').val();
