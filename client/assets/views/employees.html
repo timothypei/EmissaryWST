@@ -140,7 +140,7 @@
 
 		<hr />
 		<div class="employee-container">
-			<div id="employee-list">
+			<div>
 				<div class = "patient-table-header">
 					<!-- <h3>Click on a visitor for check-out</h3>-->
 					<input class="form-control" placeholder="Search ..." type="text"/>
@@ -156,8 +156,9 @@
 					</tr>
 					</thead>
 
-					<tbody id= "visitor-list">
-					<tr class="employee-row">
+					<tbody id= "employee-list">
+						<!-- HANDLE BAR TEMPLATES -->
+					<!-- <tr class="employee-row">
 						<td class="employee-data">Daniel</td>
 						<td class="employe-data">Kong</td>
 						<td class="employe-data">(310) 985-1473</td>
@@ -186,9 +187,9 @@
 						<td class="employe-data">Obama</td>
 						<td class="employe-data">(123) 123-2234</td>
 						<td class="employee-data">barrack@usa.com</td>
-					</tr>
+					</tr> -->
 
-					<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal fade employee-form" id="myModal" role="dialog">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -208,7 +209,7 @@
 									</form>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="check-in-btn btn btn-default" data-dismiss="modal">Add Employee</button>
+									<button type="button" class="check-in-btn btn btn-default add-btn" data-dismiss="modal">Add Employee</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 								</div>
 							</div>
@@ -220,28 +221,17 @@
 				<div class = "add-button" data-toggle="modal" data-target="#myModal">Add Employee</div>
 			</div>
 		</div>
-		<!-- HANDLE BAR TEMPLATES -->
-		<!--<script type = "text/x-handlebars-template" id = "visitor-list-template">
-			{{#each []}}
-			<tr class="patient-check-out" data-toggle="modal" data-target="#myModal">
-				<td class="patient-queue-text">{{this.first_name}}</td>
-				<td class="patient-queue-text">{{this.last_name}}</td>
-				<td class="patient-queue-text">{{this.appointment}}</td>
 
-				<td class="patient-queue-text">
-					<span class="text-danger">
-						<i class="fa fa-warning"></i>
-					</span>{{this.checkin_time}}
-				</td>
-
+		<script type = "text/x-handlebars-template" id = "employee-list-template">
+			{{#each employees}}
+			<tr class="employee-row" data-toggle="modal" data-target="#myModal">
+				<td class="employee-data">{{this.first_name}}</td>
+				<td class="employee-data">{{this.last_name}}</td>
+				<td class="employee-data">{{this.phone_number}}</td>
+				<td class="employee-data">{{this.email}}</td>
 			</tr>
 			{{/each}}
-		</script>-->
-
-		<script type = "text/x-handlebars-template" id="visitor-info-template">
-
 		</script>
-
 	</div>
 </div>
 
@@ -270,6 +260,9 @@
 <script src="assets/js/toastr.js"></script>
 <script src="assets/js/fullcalendar/fullcalendar.min.js"></script>
 <script src="assets/js/neon-chat.js"></script>
+
+<script type = "text/javascript" src= "assets/js/handlebars-v4.0.5.js"></script>
+<script type ="text/javascript" src = "assets/native/js/employees.js"> </script>
 
 
 <!-- JavaScripts initializations and stuff -->
