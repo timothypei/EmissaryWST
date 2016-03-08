@@ -7,6 +7,13 @@ $(document).ready(function(){
     $("#employee-list").html(compiledHtml);
     $('.save-btn').click(submitForm);
 
+    /**
+      * Get Cookie of username
+      */
+    $.getScript( "/assets/native/js/auth-cookies.js", function() {
+        alert(getCookie('username'));
+    });
+
     
    /***
      * Makes a get request to display list of employees 

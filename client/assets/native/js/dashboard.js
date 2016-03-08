@@ -23,8 +23,16 @@ $(document).ready(function(){
     var visitorList;
 
     //Connect to private socket
-    // var companyId = getCookie('company_id');
+    //var companyId = getCookie('company_id');
     socket.emit(VALIDATE_COMPANY_ID, companyData);
+
+    /**
+      * Get Cookie of username
+      */
+    $.getScript( "/assets/native/js/auth-cookies.js", function() {
+        alert(getCookie('username'));
+    });
+    
 
    /***
     * Compile all the Handle Bar Templates
@@ -130,27 +138,6 @@ $(document).ready(function(){
         return currentTime;
 
     }
-
-
-    /*** NEEDS TESTING (WIP)
-     * Find a specific cookie name
-     * @param cName
-     * @returns {string|*}
-     */
-    function getCookie(cName) {
-        var name = cName + '=';
-        var cookieArray = document.cookie.split(';');
-
-        for (var i = 0, len = cookieArray.length; i < len; i++) {
-            var cookie = cookieArray[i];
-            while (cookie.charAt(0) == ' ')
-                cookie.substring(1);
-            if (cookie.indexOf(name) == 0)
-                return cookie.substring(name.length, cookie.length);
-        }
-
-    }
-
 
 
     /***
