@@ -22,6 +22,13 @@ $(document).ready(function(){
 
     var visitorList;
 
+    var curCompany = JSON.parse(localStorage.getItem('currentCompany'));
+    var curUser = JSON.parse(localStorage.getItem('currentUser'));
+    var companyName = curCompany.name;
+
+
+    $('#user-name').text(curUser.first_name + ' ' +  curUser.last_name);
+
     //Connect to private socket
     // var companyId = getCookie('company_id');
     socket.emit(VALIDATE_COMPANY_ID, companyData);
