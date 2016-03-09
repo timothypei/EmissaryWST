@@ -26,14 +26,6 @@ $(document).ready(function(){
     //var companyId = getCookie('company_id');
     socket.emit(VALIDATE_COMPANY_ID, companyData);
 
-    /**
-      * Get Cookie of username
-      */
-    $.getScript( "/assets/native/js/auth-cookies.js", function() {
-        alert(getCookie('username'));
-    });
-    
-
    /***
     * Compile all the Handle Bar Templates
     */
