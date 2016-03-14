@@ -5,6 +5,7 @@ $(document).ready(function(){
 
     var companyId;
 
+    //Listener for Initial Sign up of an Employee
     $('#submit-btn').on('click', function(){
         var employeeData = grabEmployeeData();
         console.log(employeeData);
@@ -12,12 +13,14 @@ $(document).ready(function(){
 
     });
 
+    //Listener for creating a company
     $('#submit-company-btn').on('click',function(){
         var companyData = grabCompanyData();
         console.log(companyData);
         ajaxPost('/api/companies',companyData);
     })
 
+    //Grab Company Data from form
     function grabCompanyData(){
         var company = {};
         company.name = $('#form-company-name').val();
@@ -26,6 +29,8 @@ $(document).ready(function(){
         return company;
 
     }
+
+    //Grab employee data from form
     function grabEmployeeData(){
         var employee = {};
         employee.first_name = $('#form-employee-first').val();
@@ -38,6 +43,7 @@ $(document).ready(function(){
         return employee;
     }
 
+    //Ajax function to create a POST request to server
     function ajaxPost(url, data){
         $.ajax({
             type: "POST",
@@ -56,6 +62,62 @@ $(document).ready(function(){
                 }
             }
         });
+    }
+
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
+
+    function checkPassword(form){
+
+        if(form.username.value == "") {
+          alert("Error: Username cannot be blank!");
+          form.username.focus();
+          return false;
+        }
+        var password = $('#form-password');
+        var confirmPassword = $('#form-repeat-password');
+
+        if(password.value != "" && password.value == confirmPassword.value) {
+          if(form.password.value.length < 6) {
+            console.log("Password must contain at least six characters!");
+            password.focus();
+            return false;
+          }
+         if(password.value == password.value) {
+            console.log("Error: Password must be different from Username!");
+            password.focus();
+            return false;
+          }
+          re = /[0-9]/;
+          if(!re.test(password.value)) {
+            console.log("Error: password must contain at least one number (0-9)!");
+            password.focus();
+            return false;
+          }
+          re = /[a-z]/;
+          if(!re.test(password.value)) {
+            console.log("Error: password must contain at least one lowercase letter (a-z)!");
+            password.focus();
+            return false;
+          }
+          re = /[A-Z]/;
+          if(!re.test(form.pwd1.value)) {
+            console.log("Error: password must contain at least one uppercase letter (A-Z)!");
+            password.focus();
+            return false;
+          }
+        } else {
+          console.log("Error: Please check that you've entered and confirmed your password!");
+          password.focus();
+          return false;
+        }
+        console.log("You entered a valid password: " + password.value);
+        return true;
+    }
+    function validateForm(){
+
     }
 
 

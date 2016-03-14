@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     var VALIDATE_COMPANY_ID = "validate_company_id";
     var ADD_VISITOR = "add_visitor";
-    var companyData = {
+   /* var companyData = {
         company_id: "56d40a6aa6de7129d0a4b1f6",
         name: "WST",
         credit_card_number: "12345678912",
@@ -12,8 +12,9 @@ $(document).ready(function(){
         email: "danielK@wst.com",
         phone_number: "3109851473",
         paid_time: "2016-04-23T18:25:43.511Z"
-    };
+    };*/
     
+    var compaynData = JSON.parse(localStorage.getItem("currentUser"));
 
     //var companyId = getCookie('company_id');
     socket.emit(VALIDATE_COMPANY_ID, companyData);
