@@ -14,8 +14,8 @@ $(document).ready(function(){
         paid_time: "2016-04-23T18:25:43.511Z"
     };*/
     
-    var compaynData = JSON.parse(localStorage.getItem("currentUser"));
-
+    var companyData = JSON.parse(localStorage.getItem("currentCompany"));
+    console.log(companyData);
     //var companyId = getCookie('company_id');
     socket.emit(VALIDATE_COMPANY_ID, companyData);
     //Prevent users from scrolling around on iPad
@@ -40,8 +40,9 @@ $(document).ready(function(){
 
     //When a patient submits their form
     function submitForm(){
+        //event.preventDefault();
         var data = grabFormElements();
-        console.log(data);
+        console.log(data.company_id);
         socket.emit(ADD_VISITOR, data);
 
         $(this).animate({
@@ -53,7 +54,7 @@ $(document).ready(function(){
     //Grabs elements from the check in and puts it into an object
     function grabFormElements(){
         var newVisitor = {};
-        newVisitor.company_id = companyData.company_id;
+        newVisitor.company_id = companyData._id;
         newVisitor.first_name= $('#visitor-first').val();
         newVisitor.last_name = $('#visitor-last').val();
         newVisitor.phone_number = $('#visitor-number').val();

@@ -10,7 +10,7 @@ $(document).ready(function(){
     var REMOVE_VISITOR = "remove_visitor";
 
     //HARD CODED FOR NOW
-    var companyData = {
+    /*var companyData = {
         company_id: "56d40a6aa6de7129d0a4b1f6",
         name: "WST",
         credit_card_number: "12345678912",
@@ -18,13 +18,15 @@ $(document).ready(function(){
         email: "danielK@wst.com",
         phone_number: "3109851473",
         paid_time: "2016-04-23T18:25:43.511Z"
-    };
-
+    };*/
+    var companyData = JSON.parse(localStorage.getItem("currentCompany"));
     var visitorList;
+    companyData.company_id = companyData._id;
+    console.log(companyData);
 
-    var curCompany = JSON.parse(localStorage.getItem('currentCompany'));
+    //var curCompany = JSON.parse(localStorage.getItem('currentCompany'));
     var curUser = JSON.parse(localStorage.getItem('currentUser'));
-    var companyName = curCompany.name;
+    var companyName = companyData.name;
 
 
     $('#user-name').text(curUser.first_name + ' ' +  curUser.last_name);
