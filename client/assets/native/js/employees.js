@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    var username = getCookie('username');
+    var myCompanyId = getAllcompany();
+
     var employees = getEmployees();
     var source = $("#employee-list-template").html();
     var template = Handlebars.compile(source);
@@ -6,6 +9,61 @@ $(document).ready(function(){
 
     $("#employee-list").html(compiledHtml);
     $('.save-btn').click(submitForm);
+
+    
+    /* 
+     * find My company ID within all company IDs
+     * return my compnay id if found my company ID, else ""
+     */
+    function getAllcompany() {
+      var cid = "";
+      var return_cid = "";
+       $.ajax({
+           dataType: 'json',
+           type: 'GET',
+           data: $('#response').serialize(),
+           async: false,
+           url: '/api/companies',
+           success: function(response) {
+            var company_id = "";
+            $.each(response, function (key, value) {
+                company_id = value._id;
+                cid = getMyCompanyId(company_id);
+                if(cid != "") {
+                  return_cid = cid;
+                }
+
+              });       
+            }
+       });
+       return return_cid;
+   } 
+
+   /* 
+    * find My compnay ID within all company IDs of all employees in the company
+    * return my company ID if found my company ID, else ""
+    */
+   function getMyCompanyId(company_id) {
+       var cid = "";
+       $.ajax({
+           dataType: 'json',
+           type: 'GET',
+           data: $('#response').serialize(),
+           async: false,
+           url: '/api/employees/company/' + company_id,
+           success: function(response) {
+            $.each(response, function (key, value) {
+                if(company_id == value.company_id && username == value.email) {
+                  cid = value.company_id;
+                  
+                }
+              });       
+            }
+       });
+       return cid;
+   } 
+
+
 
     
    /***
@@ -20,10 +78,10 @@ $(document).ready(function(){
            type: 'GET',
            data: $('#response').serialize(),
            async: false,
-           url: '/api/employees/company/56d40a6aa6de7129d0a4b1f6',
+           url: '/api/employees/company/' + myCompanyId,
            success: function(response) {
                json = response;
-               console.log(response);
+               //console.log(response);
            }
        });
        return json;
@@ -43,7 +101,7 @@ $(document).ready(function(){
            url: '/api/employees',
            success: function(response) {
                employees.push(response);
-               console.log(response);
+               //console.log(response);
            }
       });
     }
@@ -68,7 +126,7 @@ $(document).ready(function(){
      */
     function grabFormElements(){
         var newEmployee = {};
-        newEmployee.company_id = "56d40a6aa6de7129d0a4b1f6";
+        newEmployee.company_id = myCompanyId;
         newEmployee.role = "c_employee",
         newEmployee.first_name= $('#employee-first').val();
         newEmployee.last_name = $('#employee-last').val();
@@ -89,11 +147,25 @@ $(document).ready(function(){
         for(var employee in employeeList) {
            if(employeeList.hasOwnProperty(employee)){
               if(employeeList[employee]._id === id){
-                  if(DEBUG) console.log(employeeList[employee]);
+                  if(DEBUG) //console.log(employeeList[employee]);
                   return employeeList[employee];
               }
            }
         }
     }
+
+    function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+    
 
 });
