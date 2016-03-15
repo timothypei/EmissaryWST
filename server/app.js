@@ -13,6 +13,8 @@ var errorHandler = require('errorhandler');
 var path = require('path');
 var mongoose = require('mongoose');
 var socketIO = require('./socket/socket');
+var MY_STRIPE_TEST_KEY = 'sk_test_dqzYJJ6xWGgg6U1hgQr3hNye';
+var stripe = require ('stripe')(MY_STRIPE_TEST_KEY);
 var MY_SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
 var slack = require('slack-notify')(MY_SLACK_WEBHOOK_URL);
 //var oauthserver = require('oauth2-server');
@@ -24,14 +26,14 @@ var newrelic = require('newrelic');
  */
 var config = require('./config/config');
 var validate = require('./config/validation');
-var winstonConfig = require("./config/winston");
+//var winstonConfig = require("./config/winston");
 
 /*
  * Create Express server.
  */
 var app = express();
 
-app.use(morgan('dev', {"stream": winstonConfig.stream}));
+//app.use(morgan('dev', {"stream": winstonConfig.stream}));
 
 /*
  * setting up oath
