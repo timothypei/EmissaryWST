@@ -26,14 +26,14 @@ var newrelic = require('newrelic');
  */
 var config = require('./config/config');
 var validate = require('./config/validation');
-//var winstonConfig = require("./config/winston");
+var winstonConfig = require("./config/winston");
 
 /*
  * Create Express server.
  */
 var app = express();
 
-//app.use(morgan('dev', {"stream": winstonConfig.stream}));
+app.use(morgan('dev', {"stream": winstonConfig.stream}));
 
 /*
  * setting up oath
