@@ -17,7 +17,12 @@ $(document).ready(function(){
     $('#submit-company-btn').on('click',function(){
         var companyData = grabCompanyData();
         console.log(companyData);
-        ajaxPost('/api/companies',companyData);
+        if(validateCompany()){
+            ajaxPost('/api/companies',companyData);
+        }
+        else{
+            console.log("Please fill out required Fields");
+        }
     })
 
     //Grab Company Data from form
@@ -64,6 +69,26 @@ $(document).ready(function(){
         });
     }
 
+    function validateCompany(){
+        var companyName = $('#form-company-name').val();
+        var companyEmail = $('#form-email').val();
+        var companyNumber = $('#form-phone').val();
+
+        if(companyName == ""){
+            console.log("username cannot be blank");
+        }
+
+        if(validateEmail(companyEmail)){
+            console.log("please enter a valid email");
+        }
+
+
+    
+
+    }
+
+
+
     function validateEmail(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
@@ -71,7 +96,7 @@ $(document).ready(function(){
 
     function checkPassword(form){
 
-        if(form.username.value == "") {
+        if(form.first.value == "") {
           alert("Error: Username cannot be blank!");
           form.username.focus();
           return false;
