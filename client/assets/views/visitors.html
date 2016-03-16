@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="assets/css/custom.css">
 	<link rel="stylesheet" href="assets/css/patient-queue.css"> <!--FOR HOVER-->
 	<link rel="stylesheet" href="assets/native/css/visitors.css">
+	
 
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
 
@@ -121,10 +122,18 @@
 
 				<ul class="list-inline links-list pull-right">
 
+					<div class="dropdown">
+					    <input class="dropdown-toggle" type="image" src="assets/images/setting.png" data-toggle="dropdown">
+					    <ul class="dropdown-menu">
+					    	<li><a href="/checkin.html">Check-In</a></li>
+					    	<li><a id="logoutButton" href="/index.html">
+								Log Out <i class="entypo-logout right"></i></a>
+							</li>
+					    </ul>
+				  </div>
+
 					<li>
-						<a id="logoutButton" href="/">
-							Log Out <i class="entypo-logout right"></i>
-						</a>
+						
 					</li>
 				</ul>
 
