@@ -83,6 +83,12 @@
                </a>
             </li>
             <li>
+               <a href="/appointments.html">
+                  <i class="entypo-calendar"></i>
+                  <span class="title">Appointments</span>
+               </a>
+            </li>
+            <li>
                <a href="/form-builder.html">
                   <i class="entypo-clipboard"></i>
                   <span class="title">Forms</span>
@@ -132,11 +138,15 @@
 
 
 
-               <li>
-                  <a id="logoutButton" href="index.html">
-                     Log Out <i class="entypo-logout right"></i>
-                  </a>
-               </li>
+               <div class="dropdown">
+                   <input class="dropdown-toggle" type="image" src="assets/images/setting.png" data-toggle="dropdown">
+                   <ul class="dropdown-menu">
+                     <li><a href="/checkin.html">Check-In</a></li>
+                     <li><a id="logoutButton" href="/index.html">
+                        Log Out <i class="entypo-logout right"></i></a>
+                     </li>
+                   </ul>
+              </div>
             </ul>
 
          </div>
