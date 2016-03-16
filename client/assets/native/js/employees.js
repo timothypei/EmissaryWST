@@ -2,6 +2,9 @@ $(document).ready(function(){
     var companyData = JSON.parse(localStorage.getItem("currentCompany"));
     var myCompanyId = companyData._id;
 
+    var curUser = JSON.parse(localStorage.getItem('currentUser'));
+    $('#user-name').text(curUser.first_name + ' ' +  curUser.last_name);
+
     var employees = getEmployees();
     
     var source = $("#employee-list-template").html();
