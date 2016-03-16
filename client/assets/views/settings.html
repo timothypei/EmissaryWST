@@ -146,6 +146,17 @@
       <hr />
       <h1>SETTINGS</h1>
 
+      <form action="/payment/subscription" method="POST">
+         <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="pk_test_uSawJia2zzBWj6zvXtgMcvg8"
+          data-name="Emissary"
+          data-description="Subscription for 1 month of service"
+          data-amount="2000"
+          data-label="Sign Me Up!" >
+         </script>
+      </form>
+
       <!-- Imported styles on this page -->
       <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
       <link rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">

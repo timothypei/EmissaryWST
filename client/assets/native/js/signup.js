@@ -54,7 +54,7 @@ $(document).ready(function(){
                 console.log(response);
                 if(url == '/api/employees') {
                     localStorage.setItem('currentUser', JSON.stringify(response));
-                    location.href = '/#/visitors.html';
+                    location.href = '/visitors.html';
                 }
                 else if (url == '/api/companies') {
                     localStorage.setItem('currentCompany', JSON.stringify(response));

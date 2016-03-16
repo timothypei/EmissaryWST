@@ -192,8 +192,6 @@ var neonLogin = neonLogin || {};
 		
 		
 		
-		
-		
 		// Login Form Setup
 		neonLogin.$body = $(".login-page");
 		neonLogin.$login_progressbar_indicator = $(".login-progressbar-indicator h3");
