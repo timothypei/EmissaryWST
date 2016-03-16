@@ -1,7 +1,19 @@
 $(document).ready(function(){
 
     var socket = io();
-
+    if(localStorage.getItem("slackToken")&&localStorage.getItem("slackChannel"))
+        {
+            alert("WTF");
+             $.post("https://slack.com/api/chat.postMessage",
+             {
+                'token': localStorage.getItem("slackToken"),
+                'channel': localStorage.getItem("slackChannel"), 
+                'text': "interesting"
+                //'text': "Name: " + data['firstName'] + " " + data['lastName'] + " Appointment Time: " + data['appointment']
+             },
+             function(data, status){
+              });
+        }
     $('#tap-to-check').on('click',function(){
         console.log("click");
         //$('.check-in').addClass('show');
@@ -12,19 +24,31 @@ $(document).ready(function(){
         $(this).addClass('hide');
     });
 
-    $('.check-in').on('submit', function() {
-
+   /* $('.check-in').on('submit', function() {
+        event.preventDefault;
         console.log("data submitted");
         var data = grabFormElements();
         console.log(data);
+
         socket.emit('update list',data);
 
         $(this).animate({
             top:'35%',
             opacity:'0'
         },0);
+        if(localStorage.getItem("slackToken")&&localStorage.getItem("slackChannel"))
+        {
+             $.post("https://slack.com/api/chat.postMessage",
+             {
+                'token': localStorage.getItem("slackToken"),
+                'channel': localStorage.getItem("slackChannel"), 
+                'text': "Name: " + data['firstName'] + " " + data['lastName'] + " Appointment Time: " + data['appointment']
+             },
+             function(data, status){
+              });
+        }
 
-    });
+    });*/
 
     document.ontouchmove = function(e) {
         e.preventDefault();
