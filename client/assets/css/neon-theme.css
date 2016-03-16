@@ -3572,7 +3572,7 @@ hr + .mail-env {
   position: relative;
 }
 .login-page .login-form .form-group .input-group .input-group-addon:after {
-  position: absolute;
+ /* position: absolute;
   display: block;
   content: '';
   right: 0;
@@ -3585,7 +3585,7 @@ hr + .mail-env {
   -ms-transform: scaleY(.56);
   -o-transform: scaleY(.56);
   transform: scaleY(.56);
-}
+}*/
 .login-page .login-form .form-group .input-group .form-control {
   color: #fff;
 }

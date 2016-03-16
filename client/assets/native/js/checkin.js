@@ -4,19 +4,11 @@ $(document).ready(function(){
 
     var VALIDATE_COMPANY_ID = "validate_company_id";
     var ADD_VISITOR = "add_visitor";
-    var companyData = {
-        company_id: "56d40a6aa6de7129d0a4b1f6",
-        name: "WST",
-        credit_card_number: "12345678912",
-        expiration_date: "2018-4-24",
-        email: "danielK@wst.com",
-        phone_number: "3109851473",
-        paid_time: "2016-04-23T18:25:43.511Z"
-    };
     
-
-    //var companyId = getCookie('company_id');
+    var companyData = JSON.parse(localStorage.getItem("currentCompany"));
+    console.log(companyData);
     socket.emit(VALIDATE_COMPANY_ID, companyData);
+    
     //Prevent users from scrolling around on iPad
     document.ontouchmove = function(e) {
         e.preventDefault();
@@ -39,8 +31,9 @@ $(document).ready(function(){
 
     //When a patient submits their form
     function submitForm(){
+        //event.preventDefault();
         var data = grabFormElements();
-        console.log(data);
+        console.log(data.company_id);
         socket.emit(ADD_VISITOR, data);
 
         $(this).animate({
@@ -52,7 +45,7 @@ $(document).ready(function(){
     //Grabs elements from the check in and puts it into an object
     function grabFormElements(){
         var newVisitor = {};
-        newVisitor.company_id = companyData.company_id;
+        newVisitor.company_id = companyData._id;
         newVisitor.first_name= $('#visitor-first').val();
         newVisitor.last_name = $('#visitor-last').val();
         newVisitor.phone_number = $('#visitor-number').val();

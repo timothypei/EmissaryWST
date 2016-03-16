@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <script src = "assets/native/js/shared.js"></script>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
    <meta charset="utf-8">
@@ -82,6 +83,12 @@
                </a>
             </li>
             <li>
+               <a href="/appointments.html">
+                  <i class="entypo-calendar"></i>
+                  <span class="title">Appointments</span>
+               </a>
+            </li>
+            <li>
                <a href="/form-builder.html">
                   <i class="entypo-clipboard"></i>
                   <span class="title">Forms</span>
@@ -132,7 +139,7 @@
 
 
                <li>
-                  <a href="404.html">
+                  <a id="logoutButton" href="index.html">
                      Log Out <i class="entypo-logout right"></i>
                   </a>
                </li>
@@ -145,6 +152,17 @@
 
       <hr />
       <h1>SETTINGS</h1>
+
+      <form action="/payment/subscription" method="POST">
+         <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="pk_test_uSawJia2zzBWj6zvXtgMcvg8"
+          data-name="Emissary"
+          data-description="Subscription for 1 month of service"
+          data-amount="2000"
+          data-label="Sign Me Up!" >
+         </script>
+      </form>
 
       <!-- Imported styles on this page -->
       <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
@@ -182,6 +200,7 @@
 
       <script type = "text/javascript" src= assets/"js/handlebars-v4.0.5.js"></script>
       <script type ="text/javascript" src = "assets/js/dashboard.js"> </script>
+      <script type ="text/javascript" src="assets/native/js/login.js"></script>
 
 </body>
 </html>

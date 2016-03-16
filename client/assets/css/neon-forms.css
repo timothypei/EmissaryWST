@@ -4086,7 +4086,7 @@ hr + .mail-env {
   width: 320px;
   margin: 0 auto;
   text-align: center;
-  padding: 20px 0;
+  padding: 0;
   -moz-transition: all 550ms ease-in-out;
   -webkit-transition: all 550ms ease-in-out;
   -o-transition: all 550ms ease-in-out;
@@ -4184,7 +4184,7 @@ hr + .mail-env {
 .login-page .login-form .form-group .input-group .input-group-addon {
   position: relative;
 }
-.login-page .login-form .form-group .input-group .input-group-addon:after {
+/*.login-page .login-form .form-group .input-group .input-group-addon:after {
   position: absolute;
   display: block;
   content: '';
@@ -4198,7 +4198,7 @@ hr + .mail-env {
   -ms-transform: scaleY(.56);
   -o-transform: scaleY(.56);
   transform: scaleY(.56);
-}
+}*/
 .login-page .login-form .form-group .input-group .form-control {
   color: #fff;
 }
