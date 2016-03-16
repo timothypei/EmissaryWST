@@ -81,6 +81,7 @@ if(app.get('env') !== 'development') {
   app.use('/api/*', validate);
 }
 app.get('/checkin', function(req,res){
+  console.log("checkin");
 	var message = "Name: " + req.param("first") + " " + req.param("last") + " || Phone Number: "+ req.param("phoneNumber");
 		if(req.param("first") !== undefined)
 		{

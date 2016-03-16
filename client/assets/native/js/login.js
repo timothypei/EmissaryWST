@@ -1,14 +1,11 @@
 // with Button named loginButton
 $(function() {
     $('#loginButton').click(function () {
+        event.preventDefault();
         var userData = grabUserData();
-        //alert(userData);
         ajaxPostUser('/api/employees/login', userData);
-
-        
     });
 });
-
 
 // with Button named signin-bt
 $(function() {
@@ -26,8 +23,8 @@ function ajaxPostUser(url, data){
         dataType: 'json',
         success: function(response){
             console.log(response);
-            
             localStorage.setItem('currentUser', JSON.stringify(response));
+            localStorage.setItem('userState', 1);
             //alert(response.company_id);
             ajaxGetCompanyInfo('/api/companies/' + response.company_id);
         }

@@ -1,5 +1,10 @@
+var userState = JSON.parse(localStorage.getItem("userState"));
+  if(!userState){
+    location.href= "login.html";
+}
 
 $(document).ready(function(){
+
 
     var socket = io(); //Initialize Socket
 
