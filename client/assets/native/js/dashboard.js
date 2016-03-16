@@ -145,6 +145,10 @@ $(document).ready(function(){
 
     }
 
+    $('#logoutButton').on('click',function(){
+      localStorage.setItem('userState',0);
+    });
+
 
     /***
      * TODO order the list by increasing order

@@ -103,6 +103,9 @@ $(document).ready(function(){
         }
     }
 
-    
+    $('#logoutButton').on('click',function(){
+      localStorage.setItem('userState',0);
+    });
+
 
 });

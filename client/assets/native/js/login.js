@@ -3,10 +3,8 @@ $(function() {
    $('#loginButton').click(function () {
        var userData = grabUserData();
        //alert(userData);
-       //event.preventDefault();
+       event.preventDefault();
        ajaxPostUser('/api/employees/login', userData);
-
-
        
    });
 });
@@ -15,9 +13,9 @@ $(function() {
 // with Button named signin-bt
 $(function() {
    $('#logoutButton').click(function() {
+       localStorage.removeItem('userState');
        localStorage.removeItem('currentUser');
        localStorage.removeItem('currentCompany');
-       localStorage.removeItem('userState');
    });
 });
 
@@ -30,11 +28,16 @@ function ajaxPostUser(url, data){
        dataType: 'json',
        success: function(response){
            console.log(response);
-           localStorage.setItem('userState',1);
-           localStorage.setItem('currentUser', JSON.stringify(response));
-           //alert(response.company_id);
-           ajaxGetCompanyInfo('/api/companies/' + response.company_id);
-           location.href = '/visitors.html';
+           if(response.role == 'a_admin'){
+             localStorage.setItem('userState' , 2);
+             location.href = '/admin-dashboard.html'
+           }
+           else{
+             localStorage.setItem('userState' , 1);
+             localStorage.setItem('currentUser', JSON.stringify(response));
+             ajaxGetCompanyInfo('/api/companies/' + response.company_id);
+             location.href = '/visitors.html';
+         }
        },
        error: function() {
 
