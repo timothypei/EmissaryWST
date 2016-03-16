@@ -13,6 +13,7 @@ $(function() {
 // with Button named signin-bt
 $(function() {
    $('#logoutButton').click(function() {
+       localStorage.removeItem('userState');
        localStorage.removeItem('currentUser');
        localStorage.removeItem('currentCompany');
    });
