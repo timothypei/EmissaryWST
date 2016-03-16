@@ -71,6 +71,6 @@ function grabUserData(){
 
 function handleError()
 {
-    errorlog.innerHTML+="Not Valid Username and Password, please type valid one.";
+    errorlog.innerHTML="Not Valid Username and Password, please type valid one.";
     return true;
 }
