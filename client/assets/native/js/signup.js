@@ -17,12 +17,7 @@ $(document).ready(function(){
     $('#submit-company-btn').on('click',function(){
         var companyData = grabCompanyData();
         console.log(companyData);
-        if(validateCompany()){
-            ajaxPost('/api/companies',companyData);
-        }
-        else{
-            console.log("Please fill out required Fields");
-        }
+        ajaxPost('/api/companies',companyData);
     })
 
     //Grab Company Data from form

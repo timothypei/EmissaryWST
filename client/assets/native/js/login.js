@@ -64,7 +64,6 @@ function ajaxGetCompanyInfo(url){
    });
 }
 
-
 //Grab user data from form
 function grabUserData(){
    var user = {};
