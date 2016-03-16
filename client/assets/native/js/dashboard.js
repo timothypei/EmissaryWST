@@ -59,21 +59,22 @@ $(document).ready(function(){
         for(var i = 0, len = visitorList.length; i< len; i++){
             visitorList[i].checkin_time = formatTime(visitorList[i].checkin_time);
         }
+
+        //Parse Visitors appoitments
         for(i = 0, i < len; i++){
           var appList = visitorList[i].appointments;
           for(var j = 0, appLen = appList.length; j < appLen; j++){
-            if(appList[j]._id == visitorList[i]._id){
-              visitorList[i].appointmentTime = formatTime(appList[j].data);
+            if(compareDate(appList[j].date)){
+              visitorList[i].appointmentTime = formatTime(appList[j].date);
+              break;
             }
           }
         }
-        
+  
         visitorList.checkin_time = visitorList;
-        //localStorage.setItem("VISITOR_QUEUE", data);
         var compiledHtml = template(visitorList);
         $('#visitor-list').html(compiledHtml);
     });
-
 
 
     /***
@@ -97,6 +98,19 @@ $(document).ready(function(){
         socket.emit(REMOVE_VISITOR, removeVisitor);
 
     });
+
+    /***
+     * Compare appointment Date to today's Date
+     */
+    function compareDate(appointment){
+      var today = new Date();
+      var appointment = new Date(Date.parse(appointment));
+
+      var appointmentDate = appointment.getFullYear() + ' ' + appointment.getDate() + ' ' + appointment.getMonth();
+      var todayDate = today.getFullYear() + ' ' + today.getDate() + ' ' + today.getMonth();
+
+      return (appointmentDate == todayDate);
+    }
 
     /***
      * Find Specific Visitor Given Visitor ID within the Visitor Array
