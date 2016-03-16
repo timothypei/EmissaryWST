@@ -39,7 +39,6 @@ function ajaxPostUser(url, data){
 
             window.onerror=handleError();
             event.preventDefault();
-            return true;
             //location.href = '/login.html';
          }
     });
