@@ -54,24 +54,26 @@ $(document).ready(function(){
     //SOCKET LISTEN FOR VISITOR QUEUE
     socket.on(VISITOR_LIST_UPDATE, function (data) {
         if(DEBUG)console.log("VISITOR_LIST_UPDATE");
-
+        visitorList = data.visitors
         //Parse Visitor List to format Date
         for(var i = 0, len = visitorList.length; i< len; i++){
             visitorList[i].checkin_time = formatTime(visitorList[i].checkin_time);
         }
 
         //Parse Visitors appoitments
-        for(i = 0, i < len; i++){
+        console.log(visitorList[0].appointments);
+        for(i = 0; i < len; i++){
           var appList = visitorList[i].appointments;
           for(var j = 0, appLen = appList.length; j < appLen; j++){
+            console.log(appList[j].date.toString());
             if(compareDate(appList[j].date)){
               visitorList[i].appointmentTime = formatTime(appList[j].date);
+              console.log(visitorList[i].appointmentTime);
               break;
             }
           }
         }
-  
-        visitorList.checkin_time = visitorList;
+       //visitorList.checkin_time = visitorList;
         var compiledHtml = template(visitorList);
         $('#visitor-list').html(compiledHtml);
     });
@@ -91,11 +93,19 @@ $(document).ready(function(){
      * Listener for Checking out a Visitor
      */
     $(document).on('click','.check-in-btn',function(){
-       var id = $(this).closest('.modal-content').find('.modal-body').attr('value');
+        var id = $(this).closest('.modal-content').find('.modal-body').attr('value');
         var removeVisitor = findVisitor(id);
         console.log(removeVisitor);
         removeVisitor.visitor_id = removeVisitor._id;
         socket.emit(REMOVE_VISITOR, removeVisitor);
+    });
+
+    $(document).on('click','.checkout-btn',function(){
+        var id = $(this).closest('.patient-check-out').attr('value');
+        var removeVisitor = findVisitor(id);
+        console.log(removeVisitor);
+        //removeVisitor.visitor_id = removeVisitor._id;
+        //socket.emit(REMOVE_VISITOR, removeVisitor);
 
     });
 
@@ -104,7 +114,7 @@ $(document).ready(function(){
      */
     function compareDate(appointment){
       var today = new Date();
-      var appointment = new Date(Date.parse(appointment));
+      appointment = new Date(Date.parse(appointment));
 
       var appointmentDate = appointment.getFullYear() + ' ' + appointment.getDate() + ' ' + appointment.getMonth();
       var todayDate = today.getFullYear() + ' ' + today.getDate() + ' ' + today.getMonth();

@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="assets/css/neon-theme.css">
 	<link rel="stylesheet" href="assets/css/neon-forms.css">
 	<link rel="stylesheet" href="assets/css/custom.css">
-	<link rel="stylesheet" href="assets/css/patient-queue.css"> <!--FOR HOVER-->
+	<!--<link rel="stylesheet" href="assets/css/patient-queue.css"> FOR HOVER-->
 	<link rel="stylesheet" href="assets/native/css/visitors.css">
 
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
@@ -169,13 +169,14 @@
             <tr class="patient-check-out" data-toggle="modal" data-target="#myModal" value = "{{this._id}}">
                 <td class="patient-queue-text">{{this.first_name}}</td>
                 <td class="patient-queue-text">{{this.last_name}}</td>
-                <td class="patient-queue-text">{{this.appointment}}</td>
-
+                <td class="patient-queue-text">{{this.appointmentTime}}</td>
                 <td class="patient-queue-text">
-						 <span class="text-danger">
-							 <i class="fa fa-warning"></i>
-						 </span>{{this.checkin_time}}
+					<span class="text-danger">
+						<i class="fa fa-warning"></i>
+					</span>{{this.checkin_time}}
                 </td>
+          
+
                 <!-- Modal -->
             </tr>
             {{/each}}
@@ -194,9 +195,8 @@
 							 <p><span>Appointment Time:</span> {{this.appointmentTime}}</p>
 						 </div>
 						 <div class="modal-right">
-                    	<p><span>Check-In Time:</span> {{this.checkin_time}}</p>
-                    	<p><span>Phone Number:</span> {{this.phone_number}}</p>
-                    	<p><span>E-Mail:</span> {{this.email}}</p>
+                    		<p><span>Check-In Time:</span> {{this.checkin_time}}</p>
+                    		<p><span>Phone Number:</span> {{this.phone_number}}</p>
 						 </div>
                 </div>
                 <div class="modal-footer">
