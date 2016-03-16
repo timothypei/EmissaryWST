@@ -3,7 +3,7 @@ $(function() {
    $('#loginButton').click(function () {
        var userData = grabUserData();
        //alert(userData);
-       event.preventDefault();
+       //event.preventDefault();
        ajaxPostUser('/api/employees/login', userData);
 
 
@@ -17,6 +17,7 @@ $(function() {
    $('#logoutButton').click(function() {
        localStorage.removeItem('currentUser');
        localStorage.removeItem('currentCompany');
+       localStorage.removeItem('userState');
    });
 });
 
@@ -29,7 +30,7 @@ function ajaxPostUser(url, data){
        dataType: 'json',
        success: function(response){
            console.log(response);
-
+           localStorage.setItem('userState',1);
            localStorage.setItem('currentUser', JSON.stringify(response));
            //alert(response.company_id);
            ajaxGetCompanyInfo('/api/companies/' + response.company_id);
