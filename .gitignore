@@ -7,6 +7,7 @@ npm-debug.log
 .idea
 .DS_Store
 server/log
+newrelic_agent.log
 
 mobile/platforms/
 mobile/plugins/

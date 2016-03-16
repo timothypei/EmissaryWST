@@ -20,7 +20,7 @@ blockquote.pull-left .small {
   }
 }
 body {
-  direction: rtl;
+  /*direction: rtl;*/
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h1,
@@ -1176,8 +1176,8 @@ th {
   right: auto;
 }
 .login-page .login-form .form-group .input-group.validate-has-error .error {
-  right: auto;
-  left: 10px;
+  right: 15px;
+  left: auto;
 }
 .login-page .login-form .form-group .btn-login {
   text-align: right;
