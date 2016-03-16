@@ -8,7 +8,6 @@ $(document).ready(function(){
     var compiledHtml = template(appts);
 
     $("#appt-list").html(compiledHtml);
-    $('.save-btn').click(submitForm);
 
     
     /* 
@@ -50,12 +49,12 @@ $(document).ready(function(){
            type: 'GET',
            data: $('#response').serialize(),
            async: false,
-           url: '/api/appointments/admin/' + company_id,
+           url: '/api/appointments/company/' + company_id,
            success: function(response) {
             $.each(response, function (key, value) {
                 if(company_id == value.company_id && username == value.email) {
                   cid = value.company_id;
-                  
+                  console.log(response);
                 }
               });       
             }
@@ -78,10 +77,10 @@ $(document).ready(function(){
            type: 'GET',
            data: $('#response').serialize(),
            async: false,
-           url: '/api/appointments/admin/' + myCompanyId,
+           url: '/api/appointments/company/' + myCompanyId,
            success: function(response) {
                json = response;
-               //console.log(response);
+               console.log(response);
            }
        });
        return json;
