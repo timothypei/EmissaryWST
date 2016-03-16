@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="assets/css/custom.css">
 	<link rel="stylesheet" href="assets/css/patient-queue.css"> <!--FOR HOVER-->
 	<link rel="stylesheet" href="assets/native/css/employees.css">
+	<link rel="stylesheet" href="assets/native/css/visitors.css">
 
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
 	
@@ -110,7 +111,6 @@
 				<ul class="user-info pull-left pull-none-xsm">
 					<!-- Profile Info -->
 					<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
-
 						<a href="#" id="company-name">
 							<h1>Hello, <span id="user-name"> </span></h1>
 						</a>
@@ -136,12 +136,12 @@
 
 		<hr />
 		<div class="employee-container">
-			<div>
-				<div class = "patient-table-header">
-					<!-- <h3>Click on a visitor for check-out</h3>-->
-					<!-- <input class="form-control" placeholder="Search ..." type="text"/> -->
-					<h3>Employees</h3>
-				</div>
+		<div id="visitor-queue">
+		<div class = "patient-table-header">
+           <!-- <h3>Click on a visitor for check-out</h3>-->
+           <!-- <input class="form-control" placeholder="Search ..." type="text"/>-->
+           <h3>Employees</h3>
+        </div>
 
 				<table class="table">
 					<thead>
@@ -248,6 +248,7 @@
 					</tbody>
 				</table>
 				<div class = "add-button" data-toggle="modal" data-target="#myModal">Add Employee</div>
+			</div>
 			</div>
 		</div>
 

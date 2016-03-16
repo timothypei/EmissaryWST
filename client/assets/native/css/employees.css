@@ -27,6 +27,11 @@
 
 }
 
+.patient-table-header > h3{
+   display: inline-block;
+   font-size: 1.8em;
+}
+
 .employee-container{
    width: 80%;
    margin-left: auto;
@@ -34,11 +39,13 @@
    max-width: 960px;
 }
 
-.table{
-   font-size: 1.2em;
-}
+
 table{
    border-radius: 4px !important;
+}
+
+.table th{
+   font-size: 1.2em;
 }
 /*
 .table > thead:first-child > tr:first-child > th{
