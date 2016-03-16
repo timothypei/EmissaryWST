@@ -1,6 +1,9 @@
 $(document).ready(function(){
-    var username = getCookie('username');
-    var myCompanyId = getAllcompany();
+    var companyData = JSON.parse(localStorage.getItem("currentCompany"));
+    var myCompanyId = companyData._id;
+
+    var curUser = JSON.parse(localStorage.getItem('currentUser'));
+    $('#user-name').text(curUser.first_name + ' ' +  curUser.last_name);
 
     var appts = getAppts();
     var source = $("#appt-list-template").html();
@@ -8,67 +11,12 @@ $(document).ready(function(){
     var compiledHtml = template(appts);
 
     $("#appt-list").html(compiledHtml);
-
-    
-    /* 
-     * find My company ID within all company IDs
-     * return my compnay id if found my company ID, else ""
-     */
-    function getAllcompany() {
-      var cid = "";
-      var return_cid = "";
-       $.ajax({
-           dataType: 'json',
-           type: 'GET',
-           data: $('#response').serialize(),
-           async: false,
-           url: '/api/companies',
-           success: function(response) {
-            var company_id = "";
-            $.each(response, function (key, value) {
-                company_id = value._id;
-                cid = getMyCompanyId(company_id);
-                if(cid != "") {
-                  return_cid = cid;
-                }
-
-              });       
-            }
-       });
-       return return_cid;
-   } 
-
-   /* 
-    * find My compnay ID within all company IDs of all employees in the company
-    * return my company ID if found my company ID, else ""
-    */
-   function getMyCompanyId(company_id) {
-       var cid = "";
-       $.ajax({
-           dataType: 'json',
-           type: 'GET',
-           data: $('#response').serialize(),
-           async: false,
-           url: '/api/appointments/company/' + company_id,
-           success: function(response) {
-            $.each(response, function (key, value) {
-                if(company_id == value.company_id && username == value.email) {
-                  cid = value.company_id;
-                  console.log(response);
-                }
-              });       
-            }
-       });
-       return cid;
-   } 
-
-
-
+    $('.save-btn').click(submitForm);
     
    /***
      * Makes a get request to display list of appts
      * @param none
-     * @returns displays the employee list
+     * @returns displays the appt list
      */
     function getAppts() {
        var json;
@@ -86,19 +34,52 @@ $(document).ready(function(){
        return json;
    }
 
-
-    function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0; i<ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1);
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
+   /***
+     * When a patient submits their form
+     * @param none
+     * @returns updates the appt list
+     */
+    function submitForm(){
+        var d = grabFormElements();
+        console.log(d);
+        updateApptList(d);
+        $("#appt-list").html(template(appts));
+        document.getElementById("appt-form").reset();
     }
-    return "";
-}
-    
+
+    /***
+     * Makes a post request to update list of appts when adding a new employee
+     * @param none
+     * @returns updates the appt list
+     */
+   function updateApptList(obj) {
+      $.ajax({
+        dataType: 'json',
+           type: 'POST',
+           data: obj,
+           async: false,
+           url: '/api/appointments/',
+           success: function(response) {
+                appts.push(response);
+                console.log(response);
+           }
+      });
+    }
+
+    /***
+     * Grabs elements from the check in and puts it into an object
+     * @param none
+     * @returns new appt object
+     */
+    function grabFormElements(){
+        var newAppt = {};
+        newAppt.company_id = myCompanyId;
+        newAppt.first_name= $('#appt-first').val();
+        newAppt.last_name = $('#appt-last').val();
+        newAppt.phone_number = $('#appt-number').val();
+        newAppt.provider_name = $('#appt-provider').val();
+        newAppt.date = $('#appt-date').val();
+        return newAppt;
+    }    
 
 });

@@ -2,6 +2,8 @@ $(document).ready(function(){
     var companyData = JSON.parse(localStorage.getItem("currentCompany"));
     var myCompanyId = companyData._id;
 
+    console.log(myCompanyId);
+
     var curUser = JSON.parse(localStorage.getItem('currentUser'));
     $('#user-name').text(curUser.first_name + ' ' +  curUser.last_name);
 
