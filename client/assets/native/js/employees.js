@@ -1,9 +1,12 @@
 $(document).ready(function(){
-    var employees = getEmployees();
-
     var companyData = JSON.parse(localStorage.getItem("currentCompany"));
     var myCompanyId = companyData._id;
 
+    var curUser = JSON.parse(localStorage.getItem('currentUser'));
+    $('#user-name').text(curUser.first_name + ' ' +  curUser.last_name);
+
+    var employees = getEmployees();
+    
     var source = $("#employee-list-template").html();
     var template = Handlebars.compile(source);
     var compiledHtml = template(employees);
