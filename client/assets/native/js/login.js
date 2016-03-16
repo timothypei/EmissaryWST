@@ -14,8 +14,9 @@ $(function() {
 
 // with Button named signin-bt
 $(function() {
-    $('#logout-bt').click(function() {
-        
+    $('#logoutButton').click(function() {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('currentCompany');
     });
 });
 
@@ -32,11 +33,13 @@ function ajaxPostUser(url, data){
             localStorage.setItem('currentUser', JSON.stringify(response));
             //alert(response.company_id);
             ajaxGetCompanyInfo('/api/companies/' + response.company_id);
+            location.href = '/visitors.html';
         },
         error: function() {
 
             window.onerror=handleError();
             event.preventDefault();
+            return true;
             //location.href = '/login.html';
          }
     });
