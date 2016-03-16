@@ -5,8 +5,6 @@ $(function() {
        //alert(userData);
        event.preventDefault();
        ajaxPostUser('/api/employees/login', userData);
-
-
        
    });
 });
@@ -29,11 +27,16 @@ function ajaxPostUser(url, data){
        dataType: 'json',
        success: function(response){
            console.log(response);
-
-           localStorage.setItem('currentUser', JSON.stringify(response));
-           //alert(response.company_id);
-           ajaxGetCompanyInfo('/api/companies/' + response.company_id);
-           location.href = '/visitors.html';
+           if(response.role == 'a_admin'){
+             localStorage.setItem('userState' , 2);
+             location.href = '/admin-dashboard.html'
+           }
+           else{
+             localStorage.setItem('userState' , 1);
+             localStorage.setItem('currentUser', JSON.stringify(response));
+             ajaxGetCompanyInfo('/api/companies/' + response.company_id);
+             location.href = '/visitors.html';
+         }
        },
        error: function() {
 
