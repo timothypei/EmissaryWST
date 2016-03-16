@@ -22,9 +22,9 @@
 	<link rel="stylesheet" href="assets/css/neon-rtl.css">
 	<link rel="stylesheet" href="assets/css/custom.css">
 
+	<link rel="stylesheet" href="assets/css/style.css">
+
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
-	<script src="assets/js/js.cookie.js"></script>
-    <script src="assets/native/js/auth-cookies.js"></script>
 
 	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 	
@@ -56,6 +56,7 @@ var baseurl = '';
 			
 			<p class="description">Dear user, log in to access the admin area</p>
 
+			
 			<!-- progress bar indicator -->
 			<div class="login-progressbar-indicator">
 				<h3>43%</h3>
@@ -110,9 +111,13 @@ var baseurl = '';
 					</button>
 				</div>
 			</form>
+
+			<div id="errorlog" class="error"></div>
 			
 			
 			<div class="login-bottom-links">
+
+				
 				
 
 				<a href="forgot-password.html" class="link">Forgot password</a>
@@ -157,6 +162,7 @@ var baseurl = '';
 		ga('send', 'pageview');
 	</script>
 	<script src="./../assets/js/googleAnalytics.js"></script>
+	<script type ="text/javascript" src="assets/native/js/login.js"></script>
 
 </body>
 </html>

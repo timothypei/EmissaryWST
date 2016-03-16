@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script src = "assets/native/js/shared.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<meta charset="utf-8">
@@ -22,11 +23,10 @@
 	<link rel="stylesheet" href="assets/css/custom.css">
 	<link rel="stylesheet" href="assets/css/patient-queue.css"> <!--FOR HOVER-->
 	<link rel="stylesheet" href="assets/native/css/employees.css">
+	<link rel="stylesheet" href="assets/native/css/visitors.css">
 
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
-	<script src="assets/js/js.cookie.js"></script>
-    <script src="assets/native/js/auth-cookies.js"></script>
-
+	
 	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -115,19 +115,13 @@
 			<div class="col-md-6 col-sm-8 clearfix">
 
 				<ul class="user-info pull-left pull-none-xsm">
-
 					<!-- Profile Info -->
 					<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
-
-						<a href="#" >
-							<img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-							Demo Company
+						<a href="#" id="company-name">
+							<h1>Hello, <span id="user-name"> </span></h1>
 						</a>
-
 					</li>
-
 				</ul>
-
 			</div>
 
 			<!-- Raw Links -->
@@ -136,7 +130,7 @@
 				<ul class="list-inline links-list pull-right">
 
 					<li>
-						<a href="404.html">
+						<a id="logoutButton" href="/">
 							Log Out <i class="entypo-logout right"></i>
 						</a>
 					</li>
@@ -148,11 +142,12 @@
 
 		<hr />
 		<div class="employee-container">
-			<div>
-				<div class = "patient-table-header">
-					<!-- <h3>Click on a visitor for check-out</h3>-->
-					<input class="form-control" placeholder="Search ..." type="text"/>
-				</div>
+		<div id="visitor-queue">
+		<div class = "patient-table-header">
+           <!-- <h3>Click on a visitor for check-out</h3>-->
+           <!-- <input class="form-control" placeholder="Search ..." type="text"/>-->
+           <h3>Employees</h3>
+        </div>
 
 				<table class="table">
 					<thead>
@@ -260,6 +255,7 @@
 				</table>
 				<div class = "add-button" data-toggle="modal" data-target="#myModal">Add Employee</div>
 			</div>
+			</div>
 		</div>
 
 		<script type = "text/x-handlebars-template" id = "employee-list-template">
@@ -300,9 +296,11 @@
 <script src="assets/js/toastr.js"></script>
 <script src="assets/js/fullcalendar/fullcalendar.min.js"></script>
 <script src="assets/js/neon-chat.js"></script>
+<script src="assets/native/js/shared.js"></script>
 
 <script type = "text/javascript" src= "assets/js/handlebars-v4.0.5.js"></script>
 <script type ="text/javascript" src = "assets/native/js/employees.js"> </script>
+<script type ="text/javascript" src="assets/native/js/login.js"></script>
 
 
 <!-- JavaScripts initializations and stuff -->
