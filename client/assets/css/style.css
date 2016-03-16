@@ -235,3 +235,11 @@ only screen and (                min-resolution: 2dppx) {
     }
 	
 }
+
+
+#errorlog
+{
+	color: red;
+	font-size: 10pt;
+	font-family: Arial;
+}
