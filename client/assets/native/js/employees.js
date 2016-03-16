@@ -1,4 +1,17 @@
 $(document).ready(function(){
+
+  var companyData = JSON.parse(localStorage.getItem("currentCompany"));
+    var visitorList;
+    companyData.company_id = companyData._id;
+    console.log(companyData);
+
+    //var curCompany = JSON.parse(localStorage.getItem('currentCompany'));
+    var curUser = JSON.parse(localStorage.getItem('currentUser'));
+    var companyName = companyData.name;
+
+
+    $('#user-name').text(curUser.first_name + ' ' +  curUser.last_name);
+    
     var username = getCookie('username');
     var myCompanyId = getAllcompany();
 
