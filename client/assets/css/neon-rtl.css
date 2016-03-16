@@ -20,7 +20,7 @@ blockquote.pull-left .small {
   }
 }
 body {
-  direction: rtl;
+  /*direction: rtl;*/
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 h1,

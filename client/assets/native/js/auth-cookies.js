@@ -1,4 +1,28 @@
-var usernameVal = '';
+$('#loginButton').on('click', function(){
+    var data = grabLoginInfo();
+    $.ajax({
+        type: "POST",
+        url: '/api/employees/login',
+        data: data,
+        dataType: 'json',
+        succeess: function(response){
+            console.log(response);
+            //localStorage.setItem('currentUser',JSON.stringify(response));
+            //location.href = '/visitors.html';
+        }
+
+    });
+});
+
+function grabLoginInfo(){
+    var employee;
+    employee.email = $('#username').val();
+    employee.password = $('#password').val();
+    return employee;
+
+}
+
+/*var usernameVal = '';
 
 function setCookie(cname,cvalue,exdays) {
     var d = new Date();
@@ -18,8 +42,10 @@ function getCookie(cname) {
         }
     }
     return "";
-}
+}*/
 
+
+/*
 function checkLoginCookie() {
     var username = getCookie("username");
 
@@ -59,3 +85,4 @@ $(function() {
         checkLogoutCookie();
     });
 });
+*/
