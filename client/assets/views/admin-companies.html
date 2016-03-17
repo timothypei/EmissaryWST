@@ -27,7 +27,8 @@
 	<link rel="stylesheet" href="./../assets/css/custom.css">
 
 	<script src="./../assets/js/jquery-1.11.3.min.js"></script>
-
+	<script type = "text/javascript" src= "assets/js/handlebars-v4.0.5.js"></script>
+	<script src="./../assets/js/adminpanel.js"></script>
 	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 	
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -192,188 +193,25 @@
 				<tr>
 					<th>Company Name</th>
 					<th>Email</th>
-					<th>Actions</th>
+					<th>Phone Number</th>
 				</tr>
 			</thead>
 			
-			<tbody>
+			<tbody id = "company-list">
 			
-				<tr>
-					<td>Kaiser Permanete</td>
-					<td>kaiser-permanete@doc.com</td>
-					<td>
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>Klein's Optometry</td>
-					<td>kleins-optometry@doc.com</td>
-					<td>		
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
-
-				<tr>
-					<td>Jones's Denistry</td>
-					<td>jones-dentistry@doc.com</td>
-					<td>		
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
-
-				<tr>
-					<td>Wiederrich Chiropractic Clinic </td>
-					<td>wchiro@doc.com</td>
-					<td>		
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
-
-				<tr>
-					<td>San Diego Marriage and Family Therapy</td>
-					<td>sdmft@gmail.com</td>
-					<td>		
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
-
-				<tr>
-					<td>Reinicke Counseling Associates</td>
-					<td>re-counsel@gmail.com</td>
-					<td>		
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
-
-				<tr>
-					<td>Nealan Consulting</td>
-					<td>n-consulting@doc.com</td>
-					<td>		
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
-
-				<tr>
-					<td>Tan's Acupuncture</td>
-					<td>t-acu@gmail.com</td>
-					<td>		
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
-
-				<tr>
-					<td>Mosher Optimal Health Center</td>
-					<td>mosherhc@doc.com</td>
-					<td>		
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
-
-				<tr>
-					<td>San Diego MRI</td>
-					<td>sdmri@doc.com</td>
-					<td>		
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
-
-				<tr>
-					<td>Pomerado Imaging</td>
-					<td>pomimage@doc.com</td>
-					<td>		
-						<a href="#" class="btn btn-danger btn-sm btnSuspend">
-							Suspend
-						</a>
-					</td>
-				</tr>
 			</tbody>
 		</table>
-		
+		<script type = "text/x-handlebars-template" id = "company-list-template">
+            {{#each []}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.email}}</td>
+                <td>{{this.phone_number}}</td>
+                <!-- Modal -->
+            </tr>
+            {{/each}}
+        </script>
 		<br />
-		
-		<!-- <a href="" class="btn btn-primary" data-toggle="modal" data-target="#employer-modal">
-			<i class="entypo-plus"></i>
-			Add Company
-		</a> -->
-
-		<!-- Modal -->
-		<!-- <div class="modal fade" id="employer-modal" tabindex="-1" role="dialog" 
-		     aria-labelledby="myModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
-		        <div class="modal-content"> -->
-		            <!-- Modal Header -->
-		            <!-- <div class="modal-header">
-		                <button type="button" class="close" 
-		                   data-dismiss="modal">
-		                       <span aria-hidden="true">&times;</span>
-		                       <span class="sr-only">Close</span>
-		                </button>
-		                <h4 class="modal-title" id="myModalLabel">
-		                    Add Company
-		                </h4>
-		            </div> -->
-		            
-		            <!-- Modal Body -->
-		      <!--       <div class="modal-body">
-		                
-		                <form id="inForm" class="form-horizontal" role="form">
-		                  <div class="form-group">
-		                    <label class="col-sm-2 control-label"
-		                              for="inputName">Full Name</label>
-		                    <div class="col-sm-10">
-		                        <input type="text" class="form-control" 
-		                        id="inputName" name="fullName" placeholder="Full Name"/>
-		                    </div>
-		                  </div>
-		                  <div class="form-group">
-		                    <label class="col-sm-2 control-label"
-		                          for="inputEmail" >Email</label>
-		                    <div class="col-sm-10">
-		                        <input type="email" class="form-control"
-		                            id="inputEmail" name="userEmail" placeholder="Email"/>
-		                    </div>
-		                  </div> -->
-		                  <!-- Modal Footer -->
-			            <!-- <div class="modal-footer">
-			                <button type="button" class="btn btn-default"
-			                        data-dismiss="modal">
-			                            Close
-			                </button>
-			                <button id="btnSubmit" type="submit" class="btn btn-primary">
-			                    Save changes
-			                </button>
-			            </div>
-		                </form>  
-		            </div>
-		        </div>
-		    </div>
-		</div> -->
-
-
-		
-		
-		
 		<br />
 		<br />
 		
