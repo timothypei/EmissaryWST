@@ -13,8 +13,8 @@
 
 **Step 2:** Run **npm install** in the directory of the project to install the dependency for the backend.
 
-**Step 3:** Run **gulp test:backend** to test the backend api, all the tests should pass.
+**Step 3:** Run **gulp test:server** to test the backend API.
 
-**Step 4:** Run **gulp test:frontend** to test the frontend dependecies, all the tests should pass.
+**Step 4:** Run **gulp test:client** to test the frontend dependecies.
 
 **Step 5:** Run **npm start** to start the application.
