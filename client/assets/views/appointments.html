@@ -245,6 +245,8 @@
 
 										</form>
 
+										<p class='message-api'> To connect your appointment information to our system, please refer to our appointments api, <a href= "/assets/images/appointments.pdf" target= "_blank"> here</a></p>
+
 									</div>
 
 									<!-- Modal Footer -->
@@ -271,8 +273,9 @@
 				<td class="appt-data">{{this.provider_name}}</td>
 				<td class="appt-data">{{this.phone_number}}</td>
 				<td class="appt-data">{{this.fullDate}}</td>
-				<td class="appt-data">{{this.appointmentTime}}</td>
-				<td><i class="fa fa-trash-o delete-appt"></i></td>
+				<td class="appt-data">{{this.appointmentTime}}
+					<i class="fa fa-trash-o delete-appt"></i>
+				</td>
 			</tr>
 			{{/each}}
 		</script>

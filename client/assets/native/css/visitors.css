@@ -109,3 +109,7 @@ table{
 hr{
    border-top: 3px solid #01b2bd !important;
 }
+
+.modal-dialog{
+   top: 150px !important;
+}

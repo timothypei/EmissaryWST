@@ -1,20 +1,17 @@
 #optional_label.form-control{
-
+	max-width: 70%;
 }
 
 .form-control{
 	display: inline;
 }
 
-#box0, #box1{
+#box1, #box2{
 	/*width: 80%;*/
-	outline: none !important;
-	border: none !important;
+	border: none;
 	padding: 6px;
 	color: black;
 	display: inline-block;
-	width: 60%;
-
 }
 
 .remove-box{
@@ -26,20 +23,10 @@ hr{
 }
 
 .form-builder{
-	width: 40%;
-	max-width: 480px;
-}
-
-.form-builder{
-	width: 60%;
-	max-width: 480px;
+	width: 90%;
+	max-width: 980px;
 	margin: 25px auto;
 }
-
-.remove-box{
-
-}
-/*
 .form-group{
 	width: 50%;
 	max-width: 400px;
@@ -67,25 +54,10 @@ hr{
 
 .save-form{
 	margin-top: 25px;
-}*/
-.form-group{
-	width: 100%;
-}
-#optional_label{
-	width: 100%;
 }
 
-.add-fields{
-	margin-top: 15px;
-}
-
-.save-form{
-	margin-left: 15px;
-}
-
-h1.page-title{
-	text-align: center;
+h1{
 	margin-top: 40px;
 	margin-bottom: 15px;
-
+	text-align: center;
 }
