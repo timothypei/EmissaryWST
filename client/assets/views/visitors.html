@@ -184,7 +184,7 @@
             <tr class="patient-check-out" data-toggle="modal" data-target="#myModal" value = "{{this._id}}">
                 <td class="patient-queue-text">{{this.first_name}}</td>
                 <td class="patient-queue-text">{{this.last_name}}</td>
-                <td class="patient-queue-text">{{this.appointmentTime}}</td>
+                <td class="patient-queue-text appt-id">{{this.appointmentTime}}</td>
                 <td class="patient-queue-text">
 					<span class="text-danger">
 						<i class="fa fa-warning"></i>
@@ -204,7 +204,7 @@
                     <h1 class="modal-title">Check in visitor</h1>
                 </div>
                 <div class="modal-body" value = "{{this._id}}">
-						 <div class="modal-left">
+						 <div class="modal-left" value = "{{this._apptId}}">
 							 <p><span>First:</span> {{this.first_name}}</p>
 							 <p><span>Last:</span> {{this.last_name}}</p>
 							 <p><span>Appointment Time:</span> {{this.appointmentTime}}</p>
