@@ -5,7 +5,7 @@ var controller = require('./employee.controller');
 
 var router = express.Router();
 
-router.get('/company/:id',    controller.getAllEmployees);
+router.get('/company/:id',  controller.getAllEmployees);
 router.get('/:id',          controller.getById);
 router.post('/',            controller.insert);
 router.put("/:id",          controller.update);

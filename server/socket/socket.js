@@ -29,9 +29,10 @@ exports.createServer = function(io_in) {
      * room and notified when changes are being made.
      */
     io.on(CONNECTION, function (socket) {
-
+        console.log("SOCKET CONNECTED");
         /* company_id is required to connect to join right socket to listen to*/
         socket.on(VALIDATE_COMPANY_ID, function(data){
+            console.log(data);
             var company_id = data.company_id;
             Company.findOne({_id: company_id}, function(err, c){
                 if(err || !c)
@@ -53,26 +54,31 @@ exports.createServer = function(io_in) {
         //requires the company_id to be sent
         socket.on(VISITOR_LIST_UPDATE, function(data) {
             var company_id = data.company_id;
+            console.log("Visitor List Update" + data);
             VisitorListCtr.getCompanyVisitorList(company_id, function(err_msg, result){
-                if(err_msg)
+                if(err_msg) {
                     exports.notifyError(company_id, {error: err_msg});
+                }
                 else
                     exports.notifyNewList(company_id, result);
             });
         });
 
         socket.on(DISCONNECT, function() {
-            console.log('user disconnected from ' + company_id);
+            // console.log('user disconnected from ' + company_id);
         });
 
         //requires the company_id and visitor_id to be sent
         socket.on(REMOVE_VISITOR, function(data) {
+            console.log(data.company_id);
             var company_id = data.company_id;
             var visitor_id = data.visitor_id;
             if(!company_id ||  !visitor_id) return;
             VisitorListCtr.deleteVisitor(company_id, visitor_id, function(err_msg, result){
-                if(err_msg)
+                if(err_msg){
+                    console.log("error");
                     exports.notifyError(company_id, {error: err_msg});
+                }
                 else
                     exports.notifyNewList(company_id, result);
 
@@ -81,9 +87,13 @@ exports.createServer = function(io_in) {
 
         //require the params to be set with info of the visitor
         socket.on(ADD_VISITOR, function(data) {
+            console.log("ADDING VISITOR");
+            console.log(data);
+            console.log(data.company_id);
             var company_id = data.company_id;
             VisitorListCtr.create(data, function(err_msg, result){
                 if(err_msg){
+                    console.log("error");
                     exports.notifyError(company_id, {error: err_msg});
                 }
                 else {

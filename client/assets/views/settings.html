@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <script src = "assets/native/js/shared.js"></script>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
    <meta charset="utf-8">
@@ -10,7 +11,7 @@
 
    <link rel="icon" href="assets/images/favicon.ico">
 
-   <title>Settings</title>
+   <title>Emissary | Settings</title>
 
    <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
    <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -21,8 +22,10 @@
    <link rel="stylesheet" href="assets/css/neon-forms.css">
    <link rel="stylesheet" href="assets/css/custom.css">
    <link rel="stylesheet" href="assets/css/patient-queue.css">
+   <link rel="stylesheet" href="assets/native/css/appointment.css">
 
    <script src="assets/js/jquery-1.11.3.min.js"></script>
+      <script src="assets/js/settings.js"></script>
 
    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -44,7 +47,7 @@
 
             <!-- logo -->
             <div class="logo">
-               <a href="index.html">
+               <a href="visitors.html">
                   <img src="assets/images/emissary.png" width="150" alt="" />
                </a>
             </div>
@@ -82,6 +85,12 @@
                </a>
             </li>
             <li>
+               <a href="/appointments.html">
+                  <i class="entypo-calendar"></i>
+                  <span class="title">Appointments</span>
+               </a>
+            </li>
+            <li>
                <a href="/form-builder.html">
                   <i class="entypo-clipboard"></i>
                   <span class="title">Forms</span>
@@ -111,10 +120,9 @@
                <!-- Profile Info -->
                <li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
-                  <a href="#" >
-                     <img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-                     Super Duper Cool HardCoded Company
-                  </a>
+                  <div id="company-name">
+                     <h1>Hello, <span id="user-name"> </span></h1>
+                  </div>
 
 
                </li>
@@ -131,11 +139,15 @@
 
 
 
-               <li>
-                  <a href="404.html">
-                     Log Out <i class="entypo-logout right"></i>
-                  </a>
-               </li>
+               <div class="dropdown">
+                   <input class="dropdown-toggle" type="image" src="assets/images/setting.png" data-toggle="dropdown">
+                   <ul class="dropdown-menu">
+                     <li><a href="/checkin.html">Check-In</a></li>
+                     <li><a id="logoutButton" href="/index.html">
+                        Log Out <i class="entypo-logout right"></i></a>
+                     </li>
+                   </ul>
+              </div>
             </ul>
 
          </div>
@@ -144,8 +156,21 @@
 
 
       <hr />
-      <h1>SETTINGS</h1>
-
+            <h1>SETTINGS</h1>
+<form action="/payment/subscription" method="POST">
+         <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="pk_test_uSawJia2zzBWj6zvXtgMcvg8"
+          data-name="Emissary"
+          data-description="Subscription for 1 month of service"
+          data-amount="2000"
+          data-label="Sign Me Up!" >
+         </script>
+      </form>
+      
+      <h2>Get Check-In Notifications Via Slack</h2>
+      <a href="https://slack.com/oauth/authorize?scope=incoming-webhook,bot,chat:write:bot&client_id=11293703667.22923580850"><img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" /></a>
+      
       <!-- Imported styles on this page -->
       <link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
       <link rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
@@ -181,7 +206,8 @@
       <script src="assets/js/socket.io.js"></script>
 
       <script type = "text/javascript" src= assets/"js/handlebars-v4.0.5.js"></script>
-      <script type ="text/javascript" src = "assets/js/dashboard.js"> </script>
+      <script type ="text/javascript" src="assets/native/js/login.js"></script>
+      <script type ="text/javascript" src = "assets/native/js/appointments.js"> </script>
 
 </body>
 </html>

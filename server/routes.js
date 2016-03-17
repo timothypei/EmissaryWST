@@ -13,4 +13,5 @@ module.exports = function(app) {
     app.use('/api/visitorLists' , r('./routes/visitorList'));
     app.use('/api/companies'    , r('./routes/company'));
     app.use('/api/appointments' , r('./routes/appointment'));
+    app.use('/payment'          , r('./routes/payment'));
 };

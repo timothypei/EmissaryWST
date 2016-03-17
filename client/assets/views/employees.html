@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script src = "assets/native/js/shared.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<meta charset="utf-8">
@@ -10,8 +11,8 @@
 
 	<link rel="icon" href="images/favicon.ico">
 
-	<title>Visitors</title>
-
+	<title>Emissary | Employees</title>
+	<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.css">
 	<link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 	<link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
 	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
@@ -22,9 +23,11 @@
 	<link rel="stylesheet" href="assets/css/custom.css">
 	<link rel="stylesheet" href="assets/css/patient-queue.css"> <!--FOR HOVER-->
 	<link rel="stylesheet" href="assets/native/css/employees.css">
+	<link rel="stylesheet" href="assets/native/css/shared-dashboard.css">
+
 
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
-
+	
 	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -45,7 +48,7 @@
 
 				<!-- logo -->
 				<div class="logo">
-					<a href="index.html">
+					<a href="visitors.html">
 						<img src="images/emissary.png" width="150" alt="" />
 					</a>
 				</div>
@@ -83,6 +86,12 @@
 					</a>
 				</li>
 				<li>
+					<a href="/appointments.html">
+						<i class="entypo-calendar"></i>
+						<span class="title">Appointments</span>
+					</a>
+				</li>
+				<li>
 					<a href="/form-builder.html">
 						<i class="entypo-clipboard"></i>
 						<span class="title">Forms</span>
@@ -107,31 +116,28 @@
 			<div class="col-md-6 col-sm-8 clearfix">
 
 				<ul class="user-info pull-left pull-none-xsm">
-
 					<!-- Profile Info -->
 					<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
-
-						<a href="#" >
-							<img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-							Super Duper Cool HardCoded Company
-						</a>
-
+						<div id="company-name">
+							<h1>Hello, <span id="user-name"> </span></h1>
+						</div>
 					</li>
-
 				</ul>
-
 			</div>
 
 			<!-- Raw Links -->
 			<div class="col-md-6 col-sm-4 clearfix hidden-xs">
 
 				<ul class="list-inline links-list pull-right">
-
-					<li>
-						<a href="404.html">
-							Log Out <i class="entypo-logout right"></i>
-						</a>
-					</li>
+					<div class="dropdown">
+                        <i class="fa fa-3x fa-cog dropdown-toggle" data-toggle="dropdown"></i>
+                        <ul class="dropdown-menu">
+                            <li><a href="/checkin.html">Check-In</a></li>
+                            <li><a id="logoutButton" href="/index.html">
+                                Log Out <i class="entypo-logout right"></i></a>
+                            </li>
+                        </ul>
+                  </div>
 				</ul>
 
 			</div>
@@ -140,11 +146,13 @@
 
 		<hr />
 		<div class="employee-container">
-			<div id="employee-list">
-				<div class = "patient-table-header">
-					<!-- <h3>Click on a visitor for check-out</h3>-->
-					<input class="form-control" placeholder="Search ..." type="text"/>
-				</div>
+		<div id="visitor-queue">
+
+           <!-- <h3>Click on a visitor for check-out</h3>-->
+           <!-- <input class="form-control" placeholder="Search ..." type="text"/>-->
+           <h1 class="page-title">Employees</h1>
+
+
 
 				<table class="table">
 					<thead>
@@ -156,99 +164,120 @@
 					</tr>
 					</thead>
 
-					<tbody id= "visitor-list">
-					<tr class="employee-row">
-						<td class="employee-data">Daniel</td>
-						<td class="employe-data">Kong</td>
-						<td class="employe-data">(310) 985-1473</td>
-						<td class="employee-data">dakong94@gmail.com</td>
-					</tr>
-					<tr class="employee-row">
-						<td class="employee-data">Bob</td>
-						<td class="employe-data">Smith</td>
-						<td class="employe-data">(510) 123-1234</td>
-						<td class="employee-data">bob.smith@gmail.com</td>
-					</tr>
-					<tr class="employee-row">
-						<td class="employee-data">Adam</td>
-						<td class="employe-data">Chen</td>
-						<td class="employe-data">(310) 985-1473</td>
-						<td class="employee-data">achen@gmail.com</td>
-					</tr>
-					<tr class="employee-row">
-						<td class="employee-data">Donald</td>
-						<td class="employe-data">Trump</td>
-						<td class="employe-data">(310) 123-3431</td>
-						<td class="employee-data">trump@republican.com</td>
-					</tr>
-					<tr class="employee-row">
-						<td class="employee-data">Barrack</td>
-						<td class="employe-data">Obama</td>
-						<td class="employe-data">(123) 123-2234</td>
-						<td class="employee-data">barrack@usa.com</td>
-					</tr>
+					<tbody id= "employee-list">
+						<!-- HANDLE BAR TEMPLATES -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+							  aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
 
-					<div class="modal fade" id="myModal" role="dialog">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h1 class="modal-title">Add an Employee</h1>
-								</div>
-								<div class="modal-body">
-									<form id = "employee-form">
-										<div class = "field-wrapper">
-											<input class = "employee-fields" id="employee-first" type = "text" name = "first" placeholder = "First"> <br />
-											<input class = "employee-fields" id="employee-last" type = "text" name = "last" placeholder = "Last"> <br />
-											<input class = "employee-fields" id="employee-email" type = "text" name = "email" placeholder = "Email"> <br />
-											<input class = "employee-fields" id="employee-number" type = "text" name = "phoneNumber" placeholder = "Phone Number"> <br />
-											<input class = "employee-fields" id="employee-pw" type = "text" name ="password" placeholder = "Password"> <br />
-											<input class = "employee-fields" id="employee-confirm-pw" type = "text" name ="password" placeholder = "Confirm Password"> <br />
-										</div>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="check-in-btn btn btn-default" data-dismiss="modal">Add Employee</button>
-									<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							
+									<div class="modal-header">
+										<button type="button" class="close"
+												  data-dismiss="modal">
+											<span aria-hidden="true">&times;</span>
+											<span class="sr-only">Close</span>
+										</button>
+										<h4 class="modal-title" id="myModalLabel">
+											Add an Employee
+										</h4>
+									</div>
+
+									<div class="modal-body">
+
+										<form class="form-horizontal" role="form" id="employee-form">
+											<div class="form-group">
+												<label class="col-sm-2 control-label"
+														 for="first-name" >First Name</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+															 id="employee-first" placeholder="First Name"/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label"
+														 for="last-name" >Last Name</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+															 id="employee-last" placeholder="Last Name"/>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label  class="col-sm-2 control-label"
+														  for="inputEmail3">Email</label>
+												<div class="col-sm-10">
+													<input type="email" class="form-control"
+															 id="employee-email" placeholder="Email"/>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 control-label"
+														 for="phone-number" >Phone</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+															 id="employee-number" placeholder="Phone Number"/>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-2 control-label"
+														 for="inputPassword3" >Password</label>
+												<div class="col-sm-10">
+													<input type="password" class="form-control"
+															 id="employee-pw" placeholder="Password"/>
+												</div>
+											</div>
+
+											<div class="form-group">
+												<label class="col-sm-2 control-label"
+														 for="inputPassword3" >Confirm</label>
+												<div class="col-sm-10">
+													<input type="password" class="form-control"
+															 id="employee-confirm-pw" placeholder="Confirm Password"/>
+												</div>
+											</div>
+
+										</form>
+
+									</div>
+
+									<!-- Modal Footer -->
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+												  data-dismiss="modal">
+											Close
+										</button>
+										<button type="button" class="check-in-btn btn btn-default save-btn" data-dismiss="modal">Save</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
 					</tbody>
 				</table>
 				<div class = "add-button" data-toggle="modal" data-target="#myModal">Add Employee</div>
 			</div>
+			</div>
 		</div>
-		<!-- HANDLE BAR TEMPLATES -->
-		<!--<script type = "text/x-handlebars-template" id = "visitor-list-template">
+
+		<script type = "text/x-handlebars-template" id = "employee-list-template">
 			{{#each []}}
-			<tr class="patient-check-out" data-toggle="modal" data-target="#myModal">
-				<td class="patient-queue-text">{{this.first_name}}</td>
-				<td class="patient-queue-text">{{this.last_name}}</td>
-				<td class="patient-queue-text">{{this.appointment}}</td>
-
-				<td class="patient-queue-text">
-					<span class="text-danger">
-						<i class="fa fa-warning"></i>
-					</span>{{this.checkin_time}}
-				</td>
-
+			<tr class="employee-row">
+				<td class="employee-data">{{this.first_name}}</td>
+				<td class="employee-data">{{this.last_name}}</td>
+				<td class="employee-data">{{this.phone_number}}</td>
+				<td class="employee-data">{{this.email}}</td>
 			</tr>
 			{{/each}}
-		</script>-->
-
-		<script type = "text/x-handlebars-template" id="visitor-info-template">
-
 		</script>
-
 	</div>
 </div>
 
 
 <!-- Imported styles on this page -->
-<link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
-<link rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">
+<!--<link rel="stylesheet" href="assets/js/jvectormap/jquery-jvectormap-1.2.2.css">
+<link rel="stylesheet" href="assets/js/rickshaw/rickshaw.min.css">-->
 
 <!-- Bottom scripts (common) -->
 <script src="assets/js/gsap/TweenMax.min.js"></script>
@@ -257,11 +286,11 @@
 <script src="assets/js/joinable.js"></script>
 <script src="assets/js/resizeable.js"></script>
 <script src="assets/js/neon-api.js"></script>
-<script src="assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<!--<script src="assets/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>-->
 
 
 <!-- Imported scripts on this page -->
-<script src="assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
+<!--<script src="assets/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
 <script src="assets/js/jquery.sparkline.min.js"></script>
 <script src="assets/js/rickshaw/vendor/d3.v3.js"></script>
 <script src="assets/js/rickshaw/rickshaw.min.js"></script>
@@ -269,7 +298,12 @@
 <script src="assets/js/morris.min.js"></script>
 <script src="assets/js/toastr.js"></script>
 <script src="assets/js/fullcalendar/fullcalendar.min.js"></script>
-<script src="assets/js/neon-chat.js"></script>
+<script src="assets/js/neon-chat.js"></script>-->
+
+<script src="assets/native/js/shared.js"></script>
+<script type = "text/javascript" src= "assets/js/handlebars-v4.0.5.js"></script>
+<script type ="text/javascript" src = "assets/native/js/employees.js"> </script>
+<script type ="text/javascript" src="assets/native/js/login.js"></script>
 
 
 <!-- JavaScripts initializations and stuff -->

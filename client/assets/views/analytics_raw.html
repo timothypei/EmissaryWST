@@ -61,8 +61,17 @@
         // Handles the response from the accounts list method.
         if (response.result.items && response.result.items.length) {
             // Get the first Google Analytics account.
-            var firstAccountId = response.result.items[0].id;
-
+            var firstAccountId = response.result.items[1].id;
+            console.log(response.result.items);
+            var arrayLength = response.result.items.length;
+            for (var i = 0; i < arrayLength; i++) {
+                var name = response.result.items[i].name;
+                if(name == "emissary")
+                {
+                    firstAccountId = response.result.items[i].id;
+                    break;
+                }
+            }
             // Query for properties.
             queryProperties(firstAccountId);
         } else {
@@ -166,7 +175,7 @@
                     'start-date': '30daysAgo',
                     'end-date': 'today',
                     'dimensions': 'ga:eventLabel',
-                    'metrics': 'ga:eventValue'
+                    'metrics': 'ga:totalEvents'
                 })
                 .then(function(response) {
                     var formattedJson = JSON.stringify(response.result, null, 2);

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script src = "assets/native/js/shared.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<meta charset="utf-8">
@@ -10,7 +11,7 @@
 
 	<link rel="icon" href="images/favicon.ico">
 
-	<title>Settings</title>
+	<title>Emissary | Forms</title>
 
 	<link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 	<link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -19,8 +20,11 @@
 	<link rel="stylesheet" href="assets/css/neon-core.css">
 	<link rel="stylesheet" href="assets/css/neon-theme.css">
 	<link rel="stylesheet" href="assets/css/neon-forms.css">
+	<link rel="stylesheet" href="assets/css/form-builder.css">
 	<link rel="stylesheet" href="assets/css/custom.css">
 	<link rel="stylesheet" href="assets/css/patient-queue.css">
+	
+	<link rel="stylesheet" href="assets/native/css/appointment.css">
 
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
 
@@ -44,7 +48,7 @@
 
 				<!-- logo -->
 				<div class="logo">
-					<a href="index.html">
+					<a href="visitors.html">
 						<img src="images/emissary.png" width="150" alt="" />
 					</a>
 				</div>
@@ -82,6 +86,12 @@
 					</a>
 				</li>
 				<li>
+					<a href="/appointments.html">
+						<i class="entypo-calendar"></i>
+						<span class="title">Appointments</span>
+					</a>
+				</li>
+				<li>
 					<a href="#">
 						<i class="entypo-clipboard"></i>
 						<span class="title">Forms</span>
@@ -111,10 +121,9 @@
 					<!-- Profile Info -->
 					<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 
-						<a href="#" >
-							<img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
-							Super Duper Cool HardCoded Company
-						</a>
+						<div id="company-name">
+							<h1>Hello, <span id="user-name"> </span></h1>
+						</div>
 
 
 					</li>
@@ -128,14 +137,15 @@
 			<div class="col-md-6 col-sm-4 clearfix hidden-xs">
 
 				<ul class="list-inline links-list pull-right">
-
-
-
-					<li>
-						<a href="404.html">
-							Log Out <i class="entypo-logout right"></i>
-						</a>
-					</li>
+					<div class="dropdown">
+					    <input class="dropdown-toggle" type="image" src="assets/images/setting.png" data-toggle="dropdown">
+					    <ul class="dropdown-menu">
+					    	<li><a href="/checkin.html">Check-In</a></li>
+					    	<li><a id="logoutButton" href="/index.html">
+								Log Out <i class="entypo-logout right"></i></a>
+							</li>
+					    </ul>
+				  </div>
 				</ul>
 
 			</div>
@@ -144,7 +154,38 @@
 
 
 		<hr />
-		<h1>FORM BUILDER</h1>
+		<h1>Build your form</h1>
+		<!--<center><h3>Preview</h3></center>-->
+<form class = "form-builder" role = "form">
+   <div class = "form-group">
+      <label for = "f_name">First Name</label>
+      <input type = "text" class = "form-control" id = "f_name" placeholder = "Enter your First Name" required>
+   </div>
+   <div class = "form-group">
+      <label for = "l_name">Last Name</label>
+      <input type = "text" class = "form-control" id = "l_name" placeholder = "Enter your Last Name" required>
+   </div>
+   <div class = "form-group">
+      <label for = "phone">Phone Number (###)###-####</label>
+      <input type = "tel" class = "form-control" pattern='[\(]\d{3}[\)]\d{3}[\-]\d{4}' id = "phone" placeholder = "Enter your Phone Number" required>
+   </div>
+    <div class = "form-group">
+		<div class="my-form">
+   			<div class="addField">
+   			</div>
+   		</div>
+   </div>
+
+   <h3 class = "add-form-text">Add up to two fields</h3>
+   <div class="add-fields my-form">
+        <p class="text-box">
+        	<input type = "text" class = "form-control" id = "optional_label" placeholder = "Enter label for field" maxlength="30">
+        	<button type="button" class="btn btn-success add-box">Add</button>            
+        </p>
+		<button type = "submit" class = "save-form btn btn-primary">Submit</button>
+	</div>
+
+</form>
 
 
 		<!-- Imported styles on this page -->
@@ -171,6 +212,7 @@
 		<script src="assets/js/toastr.js"></script>
 		<script src="assets/js/fullcalendar/fullcalendar.min.js"></script>
 		<script src="assets/js/neon-chat.js"></script>
+		<script src="assets/js/form-builder.js"></script>
 
 
 		<!-- JavaScripts initializations and stuff -->
@@ -182,7 +224,8 @@
 
 		<script src="assets/js/socket.io.js"></script>
 		<script type = "text/javascript" src= "js/handlebars-v4.0.5.js"></script>
-		<script type ="text/javascript" src = "js/dashboard.js"> </script>
+		<script type ="text/javascript" src="assets/native/js/login.js"></script>
+		<script type ="text/javascript" src = "assets/native/js/appointments.js"> </script>
 
 </body>
 </html>
