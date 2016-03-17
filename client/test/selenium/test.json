@@ -5,7 +5,7 @@
   "steps": [
     {
       "type": "get",
-      "url": "localhost"
+      "url": "http://webstormtroopers.herokuapp.com/index.html"
     },
     {
       "type": "clickElement",
