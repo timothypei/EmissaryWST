@@ -8,7 +8,7 @@
 4. **jQuery** (https://jquery.com/)
 
 ###1.2 Instructions
-**Step 1:** Clone our project on **Github** (https://github.com/thiefjack/WebStormTroopers)(https://github.com/thiefjack/WebStormTroopers).
+**Step 1:** Clone our project on **Github** (https://github.com/thiefjack/WebStormTroopers/).
 
 **Step 2:** Run **npm install** in the directory of the project to install the dependency for the backend.
 
