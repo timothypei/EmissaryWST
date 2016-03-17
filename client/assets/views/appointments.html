@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script src = "assets/native/js/shared.js"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<meta charset="utf-8">
@@ -11,7 +10,7 @@
 
 	<link rel="icon" href="images/favicon.ico">
 
-	<title>Emissary | Employees</title>
+	<title>Emissary | Appointments</title>
 
 	<link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
 	<link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
@@ -22,11 +21,12 @@
 	<link rel="stylesheet" href="assets/css/neon-forms.css">
 	<link rel="stylesheet" href="assets/css/custom.css">
 	<link rel="stylesheet" href="assets/css/patient-queue.css"> <!--FOR HOVER-->
-	<link rel="stylesheet" href="assets/native/css/employees.css">
-	<link rel="stylesheet" href="assets/native/css/visitors.css">
+	<!-- <link rel="stylesheet" href="assets/native/css/employees.css"> -->
 
 	<script src="assets/js/jquery-1.11.3.min.js"></script>
-	
+	<script src="assets/js/js.cookie.js"></script>
+    <script src="assets/native/js/auth-cookies.js"></script>
+
 	<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -79,13 +79,13 @@
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="/employees.html">
 						<i class="entypo-user"></i>
 						<span class="title">Employees</span>
 					</a>
 				</li>
 				<li>
-					<a href="/appointments.html">
+					<a href="#">
 						<i class="entypo-calendar"></i>
 						<span class="title">Appointments</span>
 					</a>
@@ -115,13 +115,19 @@
 			<div class="col-md-6 col-sm-8 clearfix">
 
 				<ul class="user-info pull-left pull-none-xsm">
+
 					<!-- Profile Info -->
 					<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
-						<a href="#" id="company-name">
-							<h1>Hello, <span id="user-name"> </span></h1>
+
+						<a href="#" >
+							<img src="assets/images/thumb-1@2x.png" alt="" class="img-circle" width="44" />
+							Demo Company
 						</a>
+
 					</li>
+
 				</ul>
+
 			</div>
 
 			<!-- Raw Links -->
@@ -145,29 +151,31 @@
 		</div>
 
 		<hr />
-		<div class="employee-container">
-		<div id="visitor-queue">
-		<div class = "patient-table-header">
-           <!-- <h3>Click on a visitor for check-out</h3>-->
-           <!-- <input class="form-control" placeholder="Search ..." type="text"/>-->
-           <h3>Employees</h3>
-        </div>
+		<div class="appt-container">
+			<div>
+				<div class = "patient-table-header">
+					<!-- <h3>Click on a visitor for check-out</h3>-->
+					<input class="form-control" placeholder="Search ..." type="text"/>
+				</div>
 
 				<table class="table">
 					<thead>
 					<tr>
-						<th>First</th>
-						<th>Last</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Provider Name</th>
 						<th>Phone Number</th>
-						<th>Email</th>
+						<th>Date</th>
 					</tr>
 					</thead>
 
-					<tbody id= "employee-list">
+					<tbody id= "appt-list">
 						<!-- HANDLE BAR TEMPLATES -->
-					
 
-						<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+					</tbody>
+				</table>
+
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 							  aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -179,20 +187,20 @@
 											<span class="sr-only">Close</span>
 										</button>
 										<h4 class="modal-title" id="myModalLabel">
-											Add an Employee
+											Add an Appointment
 										</h4>
 									</div>
 
 									<!-- Modal Body -->
 									<div class="modal-body">
 
-										<form class="form-horizontal" role="form" id="employee-form">
+										<form class="form-horizontal" role="form" id="appt-form">
 											<div class="form-group">
 												<label class="col-sm-2 control-label"
 														 for="first-name" >First Name</label>
 												<div class="col-sm-10">
 													<input type="text" class="form-control"
-															 id="employee-first" placeholder="First Name"/>
+															 id="appt-first" placeholder="First Name"/>
 												</div>
 											</div>
 											<div class="form-group">
@@ -200,42 +208,34 @@
 														 for="last-name" >Last Name</label>
 												<div class="col-sm-10">
 													<input type="text" class="form-control"
-															 id="employee-last" placeholder="Last Name"/>
+															 id="appt-last" placeholder="Last Name"/>
 												</div>
 											</div>
 
-											<div class="form-group">
-												<label  class="col-sm-2 control-label"
-														  for="inputEmail3">Email</label>
-												<div class="col-sm-10">
-													<input type="email" class="form-control"
-															 id="employee-email" placeholder="Email"/>
-												</div>
-											</div>
 											<div class="form-group">
 												<label class="col-sm-2 control-label"
 														 for="phone-number" >Phone</label>
 												<div class="col-sm-10">
 													<input type="text" class="form-control"
-															 id="employee-number" placeholder="Phone Number"/>
+															 id="appt-number" placeholder="Phone Number"/>
 												</div>
 											</div>
 
 											<div class="form-group">
 												<label class="col-sm-2 control-label"
-														 for="inputPassword3" >Password</label>
+														 for="inputPassword3" >Provider Name</label>
 												<div class="col-sm-10">
-													<input type="password" class="form-control"
-															 id="employee-pw" placeholder="Password"/>
+													<input type="text" class="form-control"
+															 id="appt-provider" placeholder="Provider Name"/>
 												</div>
 											</div>
 
 											<div class="form-group">
 												<label class="col-sm-2 control-label"
-														 for="inputPassword3" >Confirm</label>
+														 for="inputPassword3" >Date</label>
 												<div class="col-sm-10">
-													<input type="password" class="form-control"
-															 id="employee-confirm-pw" placeholder="Confirm Password"/>
+													<input type="text" class="form-control"
+															 id="appt-date" placeholder="Appointment Date"/>
 												</div>
 											</div>
 
@@ -254,21 +254,18 @@
 								</div>
 							</div>
 						</div>
-
-					</tbody>
-				</table>
-				<div class = "add-button" data-toggle="modal" data-target="#myModal">Add Employee</div>
-			</div>
+				<div class = "add-button btn btn-primary" data-toggle="modal" data-target="#myModal">Add Appointments</div>
 			</div>
 		</div>
 
-		<script type = "text/x-handlebars-template" id = "employee-list-template">
+		<script type = "text/x-handlebars-template" id = "appt-list-template">
 			{{#each []}}
-			<tr class="employee-row" data-toggle="modal" data-target="#myModal">
-				<td class="employee-data">{{this.first_name}}</td>
-				<td class="employee-data">{{this.last_name}}</td>
-				<td class="employee-data">{{this.phone_number}}</td>
-				<td class="employee-data">{{this.email}}</td>
+			<tr class="appt-row" data-toggle="modal" data-target="#myModal">
+				<td class="appt-data">{{this.first_name}}</td>
+				<td class="appt-data">{{this.last_name}}</td>
+				<td class="appt-data">{{this.provider_name}}</td>
+				<td class="appt-data">{{this.phone_number}}</td>
+				<td class="appt-data">{{this.date}}</td>
 			</tr>
 			{{/each}}
 		</script>
@@ -300,11 +297,9 @@
 <script src="assets/js/toastr.js"></script>
 <script src="assets/js/fullcalendar/fullcalendar.min.js"></script>
 <script src="assets/js/neon-chat.js"></script>
-<script src="assets/native/js/shared.js"></script>
 
 <script type = "text/javascript" src= "assets/js/handlebars-v4.0.5.js"></script>
-<script type ="text/javascript" src = "assets/native/js/employees.js"> </script>
-<script type ="text/javascript" src="assets/native/js/login.js"></script>
+<script type ="text/javascript" src = "assets/native/js/appointments.js"> </script>
 
 
 <!-- JavaScripts initializations and stuff -->

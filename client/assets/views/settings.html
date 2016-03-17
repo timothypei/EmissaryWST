@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <script src = "assets/native/js/shared.js"></script>
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
    <meta charset="utf-8">
@@ -83,6 +84,12 @@
                </a>
             </li>
             <li>
+               <a href="/appointments.html">
+                  <i class="entypo-calendar"></i>
+                  <span class="title">Appointments</span>
+               </a>
+            </li>
+            <li>
                <a href="/form-builder.html">
                   <i class="entypo-clipboard"></i>
                   <span class="title">Forms</span>
@@ -132,11 +139,15 @@
 
 
 
-               <li>
-                  <a href="404.html">
-                     Log Out <i class="entypo-logout right"></i>
-                  </a>
-               </li>
+               <div class="dropdown">
+                   <input class="dropdown-toggle" type="image" src="assets/images/setting.png" data-toggle="dropdown">
+                   <ul class="dropdown-menu">
+                     <li><a href="/checkin.html">Check-In</a></li>
+                     <li><a id="logoutButton" href="/index.html">
+                        Log Out <i class="entypo-logout right"></i></a>
+                     </li>
+                   </ul>
+              </div>
             </ul>
 
          </div>
@@ -220,6 +231,7 @@
 
       <script type = "text/javascript" src= assets/"js/handlebars-v4.0.5.js"></script>
       <script type ="text/javascript" src = "assets/js/dashboard.js"> </script>
+      <script type ="text/javascript" src="assets/native/js/login.js"></script>
 
 </body>
 </html>

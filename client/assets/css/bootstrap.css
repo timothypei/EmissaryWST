@@ -1405,7 +1405,7 @@ a.bg-danger:focus {
 ul,
 ol {
   margin-top: 0;
-  margin-bottom: 8.5px;
+  margin-bottom: 0px;
 }
 ul ul,
 ol ul,
@@ -3499,6 +3499,7 @@ tbody.collapse.in {
 .dropup,
 .dropdown {
   position: relative;
+  float: right;
 }
 .dropdown-toggle:focus {
   outline: 0;
@@ -3506,7 +3507,8 @@ tbody.collapse.in {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  right: 4px;
+    left: auto;
   z-index: 1000;
   display: none;
   float: left;

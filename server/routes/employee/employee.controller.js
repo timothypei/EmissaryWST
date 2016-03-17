@@ -78,6 +78,7 @@ exports.update = function(req, res) {
 
         employee.save(function(err) {
             console.log(err);
+            console.log(employee);
             if(err)
                 return res.status(400).json({error: "Can not Save"});
             var employee_json=employee.toJSON();

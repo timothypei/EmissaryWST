@@ -1,5 +1,10 @@
+var userState = JSON.parse(localStorage.getItem("userState"));
+  if(!userState){
+    location.href= "login.html";
+}
 
 $(document).ready(function(){
+
 
     var socket = io(); //Initialize Socket
 
@@ -49,24 +54,26 @@ $(document).ready(function(){
     //SOCKET LISTEN FOR VISITOR QUEUE
     socket.on(VISITOR_LIST_UPDATE, function (data) {
         if(DEBUG)console.log("VISITOR_LIST_UPDATE");
-
         visitorList = data.visitors;
-
         //Parse Visitor List to format Date
         for(var i = 0, len = visitorList.length; i< len; i++){
             visitorList[i].checkin_time = formatTime(visitorList[i].checkin_time);
         }
+        for(i = 0; i < len; i++){
+          var appList = visitorList[i].appointments;
+          for(var j = 0, appLen = appList.length; j < appLen; j++){
+            if(appList[j]._id == visitorList[i]._id){
+              visitorList[i].appointmentTime = formatTime(appList[j].data);
+            }
+          }
+        }
+        
         visitorList.checkin_time = visitorList;
-
         //localStorage.setItem("VISITOR_QUEUE", data);
         var compiledHtml = template(visitorList);
         $('#visitor-list').html(compiledHtml);
     });
 
-
-    /***
-     * Key listener for search
-     */
 
 
     /***
@@ -139,6 +146,10 @@ $(document).ready(function(){
         return currentTime;
 
     }
+
+    $('#logoutButton').on('click',function(){
+      localStorage.setItem('userState',0);
+    });
 
 
     /***
