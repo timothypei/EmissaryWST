@@ -1,4 +1,5 @@
 #WebstormTroopers
+[ ![Codeship Status for thiefjack/WebStormTroopers](https://codeship.com/projects/e58e08b0-ce3e-0133-961f-32b8bfabf829/status?branch=master)](https://codeship.com/projects/140852)
 ##1. Getting Started
 
 ###1.1 List of Requirements
