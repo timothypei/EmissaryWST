@@ -27,7 +27,7 @@ $(document).ready(function(){
     var companyData = JSON.parse(localStorage.getItem("currentCompany"));
     var visitorList;
     companyData.company_id = companyData._id;
-    console.log(companyData);
+
 
     //var curCompany = JSON.parse(localStorage.getItem('currentCompany'));
     var curUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -62,16 +62,18 @@ $(document).ready(function(){
         //Parse Visitors appoitments
         for(i = 0; i < len; i++){
           var appList = visitorList[i].appointments;
-          if(appList){
+          if(appList[0]){
             for(var j = 0, appLen = appList.length; j < appLen; j++){
-              console.log(appList[j].date.toString());
               if(compareDate(appList[j].date)){
                 visitorList[i].appointmentTime = formatTime(appList[j].date);
                 visitorList[i]._apptId = appList[j]._id;
-                console.log(visitorList[i].appointmentTime);
                 break;
               }
             }
+          }
+          else{
+      
+            visitorList[i].appointmentTime = "None";
           }
         }
 
@@ -99,8 +101,7 @@ $(document).ready(function(){
         var apptId = $(this).closest('.modal-content').find('.modal-left').attr('value');
 
         var removeVisitor = findVisitor(id);
-        console.log("removing visitor");
-        console.log(removeVisitor);
+   
         removeVisitor.visitor_id = removeVisitor._id;
 
         $.ajax({
@@ -108,7 +109,6 @@ $(document).ready(function(){
           type: 'DELETE',
           url:'/api/appointments/' + apptId,
           success:function(response){
-            console.log("SUCCESS!!!!");
           }
         });
         
