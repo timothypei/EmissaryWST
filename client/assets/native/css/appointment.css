@@ -1,0 +1,13 @@
+#company-name > h1 {
+    font-size: 18px;
+}
+
+hr{
+   border-top: 3px solid #01b2bd !important;
+}
+
+.delete-appt:hover{
+	color: red;
+	cursor:pointer;
+}
+

@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="assets/css/neon-theme.css">
 	<link rel="stylesheet" href="assets/css/neon-forms.css">
 	<link rel="stylesheet" href="assets/css/custom.css">
-	<link rel="stylesheet" href="assets/css/patient-queue.css"> <!--FOR HOVER-->
+	<!--<link rel="stylesheet" href="assets/css/patient-queue.css"> FOR HOVER-->
 	<link rel="stylesheet" href="assets/native/css/visitors.css">
 	
 
@@ -46,7 +46,7 @@
 
 				<!-- logo -->
 				<div class="logo">
-					<a href="index.html">
+					<a href="#">
 						<img src="images/emissary.png" width="150" alt="" />
 					</a>
 				</div>
@@ -116,9 +116,9 @@
 				<ul class="user-info pull-left pull-none-xsm">
 					<!-- Profile Info -->
 					<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
-						<a href="#" id="company-name">
+						<div id="company-name">
 							<h1>Hello, <span id="user-name"> </span></h1>
-						</a>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -184,13 +184,14 @@
             <tr class="patient-check-out" data-toggle="modal" data-target="#myModal" value = "{{this._id}}">
                 <td class="patient-queue-text">{{this.first_name}}</td>
                 <td class="patient-queue-text">{{this.last_name}}</td>
-                <td class="patient-queue-text">{{this.appointment}}</td>
-
+                <td class="patient-queue-text appt-id">{{this.appointmentTime}}</td>
                 <td class="patient-queue-text">
-						 <span class="text-danger">
-							 <i class="fa fa-warning"></i>
-						 </span>{{this.checkin_time}}
+					<span class="text-danger">
+						<i class="fa fa-warning"></i>
+					</span>{{this.checkin_time}}
                 </td>
+          
+
                 <!-- Modal -->
             </tr>
             {{/each}}
@@ -203,15 +204,14 @@
                     <h1 class="modal-title">Check in visitor</h1>
                 </div>
                 <div class="modal-body" value = "{{this._id}}">
-						 <div class="modal-left">
+						 <div class="modal-left" value = "{{this._apptId}}">
 							 <p><span>First:</span> {{this.first_name}}</p>
 							 <p><span>Last:</span> {{this.last_name}}</p>
 							 <p><span>Appointment Time:</span> {{this.appointmentTime}}</p>
 						 </div>
 						 <div class="modal-right">
-                    	<p><span>Check-In Time:</span> {{this.checkin_time}}</p>
-                    	<p><span>Phone Number:</span> {{this.phone_number}}</p>
-                    	<p><span>E-Mail:</span> {{this.email}}</p>
+                    		<p><span>Check-In Time:</span> {{this.checkin_time}}</p>
+                    		<p><span>Phone Number:</span> {{this.phone_number}}</p>
 						 </div>
                 </div>
                 <div class="modal-footer">
