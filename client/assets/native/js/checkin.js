@@ -33,7 +33,18 @@ $(document).ready(function(){
     function submitForm(){
         //event.preventDefault();
         var data = grabFormElements();
-        console.log(data.company_id);
+        //console.log(data.company_id);
+        if(localStorage.getItem("slackToken")&&localStorage.getItem("slackChannel"))
+        {
+             $.post("https://slack.com/api/chat.postMessage",
+             {
+                'token': localStorage.getItem("slackToken"),
+                'channel': localStorage.getItem("slackChannel"), 
+                'text': "Name: " + data['first_name'] + " " + data['last_name'] + " Phone Number: " + data['phone_number']
+             },
+             function(data, status){
+              });
+        }
         socket.emit(ADD_VISITOR, data);
 
         $(this).animate({
