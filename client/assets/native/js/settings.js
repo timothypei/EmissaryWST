@@ -16,10 +16,10 @@ $(document).ready(function(){
 
 
    // Pre-fill in current user information
-   document.getElementsByTagName("input")[1].setAttribute("value", curUser.first_name);
-   document.getElementsByTagName("input")[2].setAttribute("value", curUser.last_name);
-   document.getElementsByTagName("input")[3].setAttribute("value", curUser.phone_number);
-   document.getElementsByTagName("input")[4].setAttribute("value", curUser.email);
+   document.getElementsByTagName("input")[0].setAttribute("value", curUser.first_name);
+   document.getElementsByTagName("input")[1].setAttribute("value", curUser.last_name);
+   document.getElementsByTagName("input")[2].setAttribute("value", curUser.phone_number);
+   document.getElementsByTagName("input")[3].setAttribute("value", curUser.email);
 
    // Pulls up form to change employee info
    $('.update-btn').click(updateEmployeeInfo);
