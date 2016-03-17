@@ -42,6 +42,7 @@ $(document).ready(function(){
         employee.company_id = companyId;
         return employee;
     }
+
     //Ajax function to create a POST request to server
     function ajaxPost(url, data){
         $.ajax({
@@ -50,7 +51,7 @@ $(document).ready(function(){
             data: data,
             dataType: 'json',
             success: function(response){
-                console.log(response);
+                //console.log(response);
                 if(url == '/api/employees') {
                     localStorage.setItem('userState', 1);
                     localStorage.setItem('currentUser', JSON.stringify(response));
