@@ -32,7 +32,15 @@ var winstonConfig = require("./config/winston");
  * Create Express server.
  */
 var app = express();
-
+app.use(function(req, res, next) {
+    if (req.path.substr(-5) == '.html' && req.path.length > 1) {
+        var query = req.url.slice(req.path.length);
+        res.redirect(301, req.path.slice(0, -5) + query);
+        //res.sendFile(path.join(__dirname,'../dist/assets/views/checkin.html'))
+    } else {
+        next();
+    }
+});
 app.use(morgan('dev', {"stream": winstonConfig.stream}));
 
 /*
@@ -80,18 +88,51 @@ require('./routes')(app);
 if(app.get('env') !== 'development') {
   app.use('/api/*', validate);
 }
+
+app.get('/settings', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/settings.html'))
+});
+app.get('/admin-companies', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/admin-companies.html'))
+});
+app.get('/admin-dashboard', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/admin-dashboard.html'))
+});
+app.get('/analytics_raw', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/analytics_raw.html'))
+});
+app.get('/appointments', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/appointments.html'))
+});
 app.get('/checkin', function(req,res){
-  console.log("checkin");
-	var message = "Name: " + req.param("first") + " " + req.param("last") + " || Phone Number: "+ req.param("phoneNumber");
-		if(req.param("first") !== undefined)
-		{
-			slack.send({
- 				channel: '#checkin',
-  				text: message,
-  				username: 'CheckInBot'
-			});
-		}
-	res.sendFile(path.join(__dirname,'../dist/assets/views/checkin.html'))
+  res.sendFile(path.join(__dirname,'../dist/assets/views/checkin.html'))
+});
+app.get('/employees', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/employees.html'))
+});
+app.get('/forgot-password', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/forgot-password.html'))
+});
+app.get('/form-builder', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/form-builder.html'))
+});
+app.get('/login', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/login.html'))
+});
+app.get('/signup', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/signup.html'))
+});
+app.get('/visitors', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/visitors.html'))
+});
+app.get('/404', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/404.html'))
+});
+app.get('/admin-settings', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/admin-settings.html'))
+});
+app.get('/index', function(req,res){
+  res.sendFile(path.join(__dirname,'../dist/assets/views/index.html'))
 });
 /*
  * Error Handler.
@@ -99,6 +140,7 @@ app.get('/checkin', function(req,res){
 app.use(errorHandler());
 
 var server = require('http').createServer(app);
+
 var io = require('socket.io')(server)
 server.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode',
