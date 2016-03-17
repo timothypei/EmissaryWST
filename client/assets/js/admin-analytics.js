@@ -122,6 +122,8 @@
             queryCoreReportingApi(firstProfileId);
             // Query the Event Tacker API
             queryEventReportingApi(firstProfileId);
+            queryConversionRate(firstProfileId);
+
             queryChart(firstProfileId);
         } else {
             console.log('No views (profiles) found for this user.');
@@ -134,7 +136,7 @@
         // the past seven days.
         gapi.client.analytics.data.ga.get({
                     'ids': 'ga:' + profileId,
-                    'start-date': '30daysAgo',
+                    'start-date': '7daysAgo',
                     'end-date': 'today',
                     'metrics': 'ga:sessions,ga:pageviews,ga:totalEvents'
                 })
@@ -157,12 +159,41 @@
                     console.log(err);
                 });
     }
+    function queryConversionRate(profileId) {
+        // Query the Core Reporting API for the number sessions for
+        // the past seven days.
+        gapi.client.analytics.data.ga.get({
+                    'ids': 'ga:' + profileId,
+                    'start-date': '2016-01-01',
+                    'end-date': 'today',
+                    'metrics': 'ga:pageviews',
+                    'dimensions': 'ga:pagePath',
+                    'filter': 'ga:pagePath==/'
+                })
+                .then(function(response) {
+                    var formattedJson = JSON.stringify(response.result, null, 2);
+                    // get the number of login counts
+                    var view = parseInt(response.result.rows[0][1]);
+                    console.log("Page Views:" + view);
+                    var companies = getCompanies();
+                    var num = companies.length;
+                    var convRate = (num/view * 100);
+                    var rate = convRate.toFixed(2);
+                    console.log("Conversion Rate" + rate);
+                    document.getElementById('convRate').innerHTML = rate + "%";
+
+                })
+                .then(null, function(err) {
+                    // Log any errors.
+                    console.log(err);
+                });
+    }
     function queryChart(profileId) {
         // Query the Core Reporting API for the number sessions for
         // the past seven days.
         gapi.client.analytics.data.ga.get({
                     'ids': 'ga:' + profileId,
-                    'start-date': '7daysAgo',
+                    'start-date': '59daysAgo',
                     'end-date': 'today',
                     'metrics': 'ga:newUsers',
                     'dimensions': 'ga:date'
@@ -183,11 +214,12 @@
                         arr.push(val);
                     }
                     console.log(arr);
+                    $(".mask-loading2").hide();
                     $(".monthly-sales").sparkline(arr, {
                         type: 'bar',
-                        barColor: '#485671',
+                        barColor: '#00a65a',
                         height: '80px',
-                        barWidth: 30,
+                        barWidth: 10,
                         barSpacing: 2
                     });
 
@@ -201,7 +233,7 @@
         // Query the Core Reporting API for the events
         gapi.client.analytics.data.ga.get({
                     'ids': 'ga:' + profileId,
-                    'start-date': '30daysAgo',
+                    'start-date': '6daysAgo',
                     'end-date': 'today',
                     'dimensions': 'ga:eventLabel',
                     'metrics': 'ga:totalEvents'

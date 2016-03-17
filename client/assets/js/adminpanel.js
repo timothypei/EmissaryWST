@@ -22,5 +22,6 @@ $(document).ready(function(){
 
 
     var compiledHtml = template(companies);
+    
     $('#company-list').html(compiledHtml);
 });
