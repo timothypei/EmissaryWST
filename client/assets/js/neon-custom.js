@@ -39,6 +39,16 @@ var public_vars = public_vars || {};
 		}
 
 
+		// Slides
+		var $sliders = $(".slides");
+		
+		if($sliders.length && $.isFunction($.fn.neonSlider))
+		{
+			$sliders.neonSlider({
+				itemSelector: '.slide',
+				autoSwitch: 5
+			});
+		}
 
 
 		// Sidebar Menu Setup
