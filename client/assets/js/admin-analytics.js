@@ -48,7 +48,7 @@
         // Handles the response from the accounts list method.
         if (response.result.items && response.result.items.length) {
             // Get the first Google Analytics account.
-            var firstAccountId = response.result.items[1].id;
+            var firstAccountId = response.result.items[0].id;
             console.log(response.result.items);
             var arrayLength = response.result.items.length;
             for (var i = 0; i < arrayLength; i++) {
