@@ -117,9 +117,9 @@
 				<ul class="user-info pull-left pull-none-xsm">
 					<!-- Profile Info -->
 					<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
-						<a href="#" id="company-name">
+						<div id="company-name">
 							<h1>Hello, <span id="user-name"> </span></h1>
-						</a>
+						</div>
 					</li>
 				</ul>
 
@@ -128,11 +128,15 @@
 			<!-- Raw Links -->
 			<div class="col-md-6 col-sm-4 clearfix hidden-xs">
 				<ul class="list-inline links-list pull-right">
-					<li>
-						<a href="404.html">
-							Log Out <i class="entypo-logout right"></i>
-						</a>
-					</li>
+					<div class="dropdown">
+                        <input class="dropdown-toggle" type="image" src="assets/images/setting.png" data-toggle="dropdown">
+                        <ul class="dropdown-menu">
+                            <li><a href="/checkin.html">Check-In</a></li>
+                            <li><a id="logoutButton" href="/index.html">
+                                Log Out <i class="entypo-logout right"></i></a>
+                            </li>
+                        </ul>
+                  </div>
 				</ul>
 
 			</div>
