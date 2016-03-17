@@ -6,12 +6,21 @@
    text-align: center;
 
 }
+.page-title{
+   margin: 35px auto;
+
+}
+
+.table > thead > tr > th {
+   border-bottom: none !important;
+}
+
 
 .add-button{
+   float: left;
    border-radius: 2px;
    padding: 7px;
    margin-top: 15px;
-   float: right;
    background-color: #01b2bd;
    color: white;
 }
@@ -33,10 +42,7 @@
 }
 
 .employee-container{
-   width: 80%;
-   margin-left: auto;
-   margin-right: auto;
-   max-width: 960px;
+   max-width: 980px;
 }
 
 
@@ -62,7 +68,7 @@ table{
 
 }
 
-#visitor-list tr:nth-last-child(1){
+tr:nth-last-child(1){
    border-bottom: 1px solid rgb(215,215,215) !important;
 }
 
