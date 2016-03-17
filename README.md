@@ -2,13 +2,13 @@
 ##1. Getting Started
 
 ###1.1 List of Requirements
-1. [Node.js](http://nodejs.org) (http://nodejs.org/)
-2. [MongoDB](https://www.mongodb.org) (https://www.mongodb.org/)
-3. [HandleBars](http://handlebarsjs.com) (http://handlebarsjs.com/)
-4. [jQuery](https://jquery.com/)(https://jquery.com/)
+1. **Node.js** (http://nodejs.org/)
+2. **MongoDB** (https://www.mongodb.org/)
+3. **HandleBars** (http://handlebarsjs.com/)
+4. **jQuery** (https://jquery.com/)
 
 ###1.2 Instructions
-**Step 1:** Clone our project on [Github](https://github.com/thiefjack/WebStormTroopers)(https://github.com/thiefjack/WebStormTroopers).
+**Step 1:** Clone our project on **Github** (https://github.com/thiefjack/WebStormTroopers)(https://github.com/thiefjack/WebStormTroopers).
 
 **Step 2:** Run **npm install** in the directory of the project to install the dependency for the backend.
 
