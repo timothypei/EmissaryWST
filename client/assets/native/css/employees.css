@@ -21,6 +21,22 @@
    cursor: pointer;
 }
 
+.update-button{
+   /*border-radius: 2px;
+   padding: 7px;
+   margin-top: 15px; */
+   float: left;
+   margin-left: 90px;
+   background-color: #ec971f;
+   color: white;
+}
+
+.update-button:hover{
+   background-color: #ec971f;
+   color: white;
+   cursor: pointer;
+}
+
 .patient-table-header > .form-control{
    width: 150px;
    margin-bottom: 15px;
