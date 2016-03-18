@@ -106,14 +106,6 @@
       "type": "verifyElementValue",
       "locator": {
         "type": "id",
-        "value": "form-employee-role"
-      },
-      "value": ""
-    },
-    {
-      "type": "verifyElementValue",
-      "locator": {
-        "type": "id",
         "value": "form-employee-email"
       },
       "value": ""
@@ -159,14 +151,6 @@
       "locator": {
         "type": "id",
         "value": "form-employee-last"
-      },
-      "text": "Meep"
-    },
-    {
-      "type": "setElementText",
-      "locator": {
-        "type": "id",
-        "value": "form-employee-role"
       },
       "text": "Meep"
     },
