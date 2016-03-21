@@ -61,6 +61,13 @@ $(document).ready(function(){
                     localStorage.setItem('currentCompany', JSON.stringify(response));
                     companyId = response._id;
                 }
+            },
+            error: function(response){
+                console.log(response);
+                var resJSON = JSON.stringify(response);
+                alert(jQuery.parseJSON(resJSON).responseText);
+                event.preventDefault();
+                location.href = '/signup.html';
             }
         });
     }
