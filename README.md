@@ -1,9 +1,9 @@
-#WebstormTroopers
+# WebstormTroopers
 [ ![Codeship Status for thiefjack/WebStormTroopers](https://codeship.com/projects/e58e08b0-ce3e-0133-961f-32b8bfabf829/status?branch=master)](https://codeship.com/projects/140852) 
 
-##0. Currently deployed on: 
+## 0. Currently deployed on: 
 http://webstormtroopers.herokuapp.com
-##1. Getting Started
+## 1. Getting Started
 **Emissary is a visitor check-in SaaS application targetted for small businesses.**
 - Sign up your company and your own personal account for your company. 
 - Thereafter, add employees to your company through the "Employees" section of the application to provide them access to the application. 
@@ -14,13 +14,13 @@ http://webstormtroopers.herokuapp.com
 
   
 
-###1.1 List of Requirements
+### 1.1 List of Requirements
 1. **Node.js** (http://nodejs.org/)
 2. **MongoDB** (https://www.mongodb.org/)
 3. **HandleBars** (http://handlebarsjs.com/)
 4. **jQuery** (https://jquery.com/)
 
-###1.2 Instructions
+### 1.2 Instructions
 **Step 1:** Do a `git clone` on our project on **Github** (https://github.com/thiefjack/WebStormTroopers/).
 
 **Step 2:** Run `npm install` in the directory of the project to install the dependency for the backend.
