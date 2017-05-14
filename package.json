@@ -12,11 +12,13 @@
     "start": "node server/app.js",
     "test": "gulp test:server",
     "jshint": "jshint",
-    "htmlhint": "htmlhint client/assets/native client/assets/views"
+    "htmlhint": "htmlhint client/assets/native client/assets/views",
+    "csslint": "csslint"
   },
   "pre-commit": [
     "jshint",
-    "htmlhint"
+    "htmlhint",
+    "csslint"
   ],
   "dependencies": {
     "async": "2.4.0",
@@ -71,6 +73,7 @@
     "gulp-angular-htmlify": "2.3.0",
     "gulp-jsdoc3": "^1.0.1",
     "gulp-angular-htmlify": "2.3.0",
+    "gulp-csslint": "^1.0.0",
     "gulp-util": "3.0.8",
     "karma-mocha": "1.3.0",
     "karma-phantomjs-launcher": "1.0.4",
