@@ -160,8 +160,8 @@ describe('Appointment Test', function() {
             .expect(200)
             .end(function(err,res){
                 res.body.should.have.property('_id');
-                Appointment.find({_id:currAppointment._id}, function(err, _){
-                    should.not.exist(err);
+                Appointment.find({_id:currAppointment._id}, function(n_err, _){
+                    should.exist(n_err);
                     done();
                 });
             });
