@@ -1,8 +1,8 @@
 # Travis CI Build Script
 language: node
 before_script:
-  - npm i -g npm-check-updates
-  - npm-check-updates -u
+  #- npm i -g npm-check-updates
+  #- npm-check-updates -u
   - npm install
 script:
   - gulp test:server
