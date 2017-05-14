@@ -1,12 +1,12 @@
 # Travis CI Build Script
+notifications:
+  slack: kissmyapp:ODLqzPLHklVTMNDvIF9VUSke
 language: node_js
 node_js:
   - "node"
 before_script:
-  #- npm i -g npm-check-updates
-  #- npm-check-updates -u
   - npm install
-script:
-  - gulp test:server
-  - gulp test:client
+#script:
+  #- gulp test:server
+  #- gulp test:client
 
