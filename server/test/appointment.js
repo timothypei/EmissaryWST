@@ -2,6 +2,7 @@
  * Created by kevingu on 2/21/16.
  */
 var request = require('supertest');
+var should = require('chai').should();
 var config = require('../config/config');
 var Appointment = require('../models/Appointment');
 var Company = require('../models/Company');
