@@ -161,7 +161,7 @@ describe('Appointment Test', function() {
             .end(function(err,res){
                 res.body.should.have.property('_id');
                 Appointment.find({_id:currAppointment._id}, function(err, _){
-                    should.exist(err);
+                    should.not.exist(err);
                     done();
                 });
             });
