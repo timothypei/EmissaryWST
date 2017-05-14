@@ -1,5 +1,7 @@
 # WebstormTroopers
+
 [ ![Codeship Status for thiefjack/WebStormTroopers](https://codeship.com/projects/e58e08b0-ce3e-0133-961f-32b8bfabf829/status?branch=master)](https://codeship.com/projects/140852) 
+[![Build Status](https://travis-ci.org/cse112-kissmyapp/EmissaryWST.svg?branch=master)](https://travis-ci.org/cse112-kissmyapp/EmissaryWST)
 
 ## 0. Currently deployed on: 
 http://webstormtroopers.herokuapp.com
