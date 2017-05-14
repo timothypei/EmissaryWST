@@ -1,7 +1,5 @@
 ---
 engines:
-  htmllint:
-    enabled: true
   csslint:
     enabled: true
   coffeelint:
