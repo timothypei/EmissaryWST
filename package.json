@@ -67,13 +67,10 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
-<<<<<<< HEAD
     "gulp": "^3.9.1",
     "gulp-angular-htmlify": "2.3.0",
     "gulp-jsdoc3": "^1.0.1",
-=======
     "gulp-angular-htmlify": "2.3.0",
->>>>>>> origin/develop
     "gulp-util": "3.0.8",
     "karma-mocha": "1.3.0",
     "karma-phantomjs-launcher": "1.0.4",
