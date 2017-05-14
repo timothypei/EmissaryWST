@@ -6,12 +6,8 @@ node_js:
   - "node"
 services:
   - mongodb
-before_script:
+script:
   - npm install
-#script:
-  #- gulp test:server
-  #- gulp test:client
-
 deploy:
   provider: gae
   keyfile: kiss-my-app-29c0b19a8d6d.json
