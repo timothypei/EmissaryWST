@@ -40,3 +40,4 @@ exclude_paths:
 - "client/fontAwesome/"
 - "client/neon/"
 - "client/vendor/"
+- "docs/"
