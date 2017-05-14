@@ -73,6 +73,7 @@
     "gulp-angular-htmlify": "2.3.0"
   },
   "engines": {
-    "node": "7.x"
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
   }
 }
