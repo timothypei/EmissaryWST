@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cerulean.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#ajaxPostUser">ajaxPostUser</a></li><li><a href="global.html#findEmployee">findEmployee</a></li><li><a href="global.html#findvistor">findvistor</a></li><li><a href="global.html#getApps">getApps</a></li><li><a href="global.html#getEmployee">getEmployee</a></li><li><a href="global.html#getEmployees">getEmployees</a></li><li><a href="global.html#grabFormElements">grabFormElements</a></li><li><a href="global.html#grabFormElementsUpdate">grabFormElementsUpdate</a></li><li><a href="global.html#grabUserData">grabUserData</a></li><li><a href="global.html#initializeAppts">initializeAppts</a></li><li><a href="global.html#io">io</a></li><li><a href="global.html#mongoose">mongoose</a></li><li><a href="global.html#request">request</a></li><li><a href="global.html#startCheckIn">startCheckIn</a></li><li><a href="global.html#submitForm">submitForm</a></li><li><a href="global.html#updateApptList">updateApptList</a></li><li><a href="global.html#updateEmployee">updateEmployee</a></li><li><a href="global.html#updateEmployeeInfo">updateEmployeeInfo</a></li><li><a href="global.html#updateEmployeeList">updateEmployeeList</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>WebstormTroopers</h1><p><a href="https://travis-ci.org/cse112-kissmyapp/EmissaryWST"><img src="https://travis-ci.org/cse112-kissmyapp/EmissaryWST.svg?branch=master" alt="Build Status"></a>
+<a href="https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST"><img src="https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST/badges/gpa.svg" alt="Code Climate"></a>
+<a href="https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST"><img src="https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST/badges/issue_count.svg" alt="Issue Count"></a>
+<a href="https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST/coverage"><img src="https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST/badges/coverage.svg" alt="Test Coverage"></a></p>
+<h2>0. Currently deployed on:</h2><p>http://webstormtroopers.herokuapp.com</p>
+<h2>1. Getting Started</h2><p><strong>Emissary is a visitor check-in SaaS application targetted for small businesses.</strong></p>
+<ul>
+<li>Sign up your company and your own personal account for your company. </li>
+<li>Thereafter, add employees to your company through the &quot;Employees&quot; section of the application to provide them access to the application. </li>
+<li>Create appointments through the &quot;Appointments&quot; page. Open up the Check-in mode by clicking on the gear in the upper right-hand corner.</li>
+<li>As visitors check-in, they will show up in the queue on the &quot;Visitors&quot; page. </li>
+<li>If there is an appointment that matches their information, their appointment time will automatically be populated.</li>
+<li>Click on a visitor to check him/her out. If he/she had an appointment, their appointment will automatically be removed from the &quot;Appointments&quot; section.</li>
+</ul>
+<h3>1.1 List of Requirements</h3><ol>
+<li><strong>Node.js</strong> (http://nodejs.org/)</li>
+<li><strong>MongoDB</strong> (https://www.mongodb.org/)</li>
+<li><strong>HandleBars</strong> (http://handlebarsjs.com/)</li>
+<li><strong>jQuery</strong> (https://jquery.com/)</li>
+</ol>
+<h3>1.2 Instructions</h3><p><strong>Step 1:</strong> Do a <code>git clone</code> on our project on <strong>Github</strong> (https://github.com/thiefjack/WebStormTroopers/).</p>
+<p><strong>Step 2:</strong> Run <code>npm install</code> in the directory of the project to install the dependency for the backend.</p>
+<p><strong>Step 3:</strong> Run <code>gulp test:server</code> to test the backend API.</p>
+<p><strong>Step 4:</strong> Run <code>gulp test:client</code> to test the frontend dependecies.</p>
+<p><strong>Step 5:</strong> Run <code>npm start</code> to start the application.</p></article>
+    </section>
+
+
+
+
+
+
+
+	<h1 class="page-title">Index</h1>
+<section>
+
+<header>
+    
+        <h2>
+        client/assets/native/js/appointments.js
+        </h2>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Manages appointments</p></div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+	<h1 class="page-title">Index</h1>
+<section>
+
+<header>
+    
+        <h2>
+        client/assets/native/js/checkin.js
+        </h2>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Manages checkins.</p></div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+	<h1 class="page-title">Index</h1>
+<section>
+
+<header>
+    
+        <h2>
+        client/assets/native/js/dashboard.js
+        </h2>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Manages the dashboard</p></div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+	<h1 class="page-title">Index</h1>
+<section>
+
+<header>
+    
+        <h2>
+        client/assets/native/js/employees.js
+        </h2>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Manages the employees.</p></div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a>
+	
+		on May 14th 2017, 4:13:43 pm
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
