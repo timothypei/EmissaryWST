@@ -12,3 +12,7 @@ before_script:
   #- gulp test:server
   #- gulp test:client
 
+deploy:
+  provider: gae
+  keyfile: kiss-my-app-29c0b19a8d6d.json
+  project: kiss-my-app
