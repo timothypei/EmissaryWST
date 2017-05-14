@@ -1,4 +1,5 @@
 var request = require('supertest');
+var should = require('chai').should();
 var config = require('../config/config');
 var Company = require('../models/Company');
 
