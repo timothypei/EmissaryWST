@@ -161,7 +161,7 @@ describe("Employee", function() {
                             //console.log("RESPONSE", res)
                             res.body.should.be.instanceof(Object);
                             //res.body.should.not.be.empty;
-                            should.not.be.empty(res.body);
+                            res.body.should.not.be.empty;
                             //res.body.should.exist;
                             should.exist(res.body);
                             res.body.should.have.length.of(1);
