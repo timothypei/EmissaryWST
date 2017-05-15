@@ -4,6 +4,7 @@
 [![Code Climate](https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST/badges/gpa.svg)](https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST)
 [![Issue Count](https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST/badges/issue_count.svg)](https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST)
 [![Test Coverage](https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST/badges/coverage.svg)](https://codeclimate.com/github/cse112-kissmyapp/EmissaryWST/coverage)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## 0. Currently deployed on: 
 http://webstormtroopers.herokuapp.com

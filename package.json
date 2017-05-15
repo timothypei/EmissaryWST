@@ -10,10 +10,12 @@
   "scripts": {
     "postinstall": "bower install && gulp build:prod",
     "start": "node server/app.js",
-    "test": "gulp test:server",
+    "pretest": "npm run jshint && npm run htmlhint && npm run csslint && npm run standard",
+    "test": "gulp test:server && gulp test:client",
     "jshint": "jshint",
     "htmlhint": "htmlhint client/assets/native client/assets/views",
-    "csslint": "csslint"
+    "csslint": "csslint",
+    "standard": "standard"
   },
   "pre-commit": [
     "jshint",
@@ -86,10 +88,25 @@
     "sinon": "2.2.0",
     "sinon-chai": "2.10.0",
     "socket.io-client": "2.0.1",
+    "standard": "^10.0.2",
     "supertest": "3.0.0"
   },
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
+  },
+  "standard": {
+    "ignore": [
+      "client/assets/css/",
+      "client/assets/font-awesome/",
+      "client/assets/images/",
+      "client/assets/js/",
+      "client/assets/less/",
+      "client/data/",
+      "client/fontAwesome/",
+      "client/neon/",
+      "client/vendor/",
+      "docs/"
+    ]
   }
 }
