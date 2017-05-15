@@ -1,6 +1,7 @@
 node_modules/
 bower_components
 dist/
+docs/gen/
 log/
 npm-debug.log
 .env

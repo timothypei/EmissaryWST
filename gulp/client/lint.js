@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
-    htmlhint = require('gulp-htmlhint');
+    htmlhint = require('gulp-htmlhint'),
+    csslint  = require('gulp-csslint');
 
 gulp.task('lint:client', function() {
   return gulp.src(['./client/app/**/*.js'])
@@ -16,4 +17,12 @@ gulp.task('lint:html', ['htmlify'],function(){
   return gulp.src('./dist/**/*.html')
     .pipe(htmlhint())
     .pipe(htmlhint.reporter())
+});
+
+/* This will validate the css files
+ */
+gulp.task('lint:css', function() {
+  gulp.src('client/assets/native/css/*.css')
+    .pipe(csslint())
+    .pipe(csslint.formatter());
 });

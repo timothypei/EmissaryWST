@@ -1,3 +1,6 @@
+/**
+ * @file Manages checkins.
+ */
 $(document).ready(function(){
 
     var socket = io();
@@ -19,6 +22,10 @@ $(document).ready(function(){
     $('.check-in').on('submit', submitForm);
 
     //When a user starts their check in
+    /**
+     * @function startCheckIn
+     * @desc Starts the check in process
+     */
     function startCheckIn(){
         $('.check-in').addClass('show');
         $('.check-in').animate({
@@ -39,7 +46,7 @@ $(document).ready(function(){
              $.post("https://slack.com/api/chat.postMessage",
              {
                 'token': localStorage.getItem("slackToken"),
-                'channel': localStorage.getItem("slackChannel"), 
+                'channel': localStorage.getItem("slackChannel"),
                 'text': "Name: " + data['first_name'] + " " + data['last_name'] + " Phone Number: " + data['phone_number']
              },
              function(data, status){

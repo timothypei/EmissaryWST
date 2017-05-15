@@ -1,3 +1,6 @@
+/**
+ * @file Manages the employees.
+ */
 $(document).ready(function(){
     var companyData = JSON.parse(localStorage.getItem("currentCompany"));
     var myCompanyId = companyData._id;
@@ -17,9 +20,9 @@ $(document).ready(function(){
     $('.save-btn').click(submitForm);
 
     
-   /***
-     * Makes a get request to display list of employees 
-     * @param none
+   /**
+     * @function getEmployees
+     * @desc Makes a get request to display list of employees
      * @returns displays the employee list
      */
     function getEmployees() {
@@ -38,9 +41,10 @@ $(document).ready(function(){
        return json;
    }
 
-   /***
-     * Makes a post request to update list of employees when adding a new employee
-     * @param none
+   /**
+     * @function updateEmployeeList
+     * @desc Makes a post request to update list of employees when adding a new employee
+     * @param {employee} obj employee
      * @returns updates the employee list
      */
    function updateEmployeeList(obj) {
@@ -88,10 +92,11 @@ $(document).ready(function(){
         return newEmployee;
     }
 
-     /***
-     * Find Specific Employee Given Employee ID within the Employee Array
-     * @param id
-     * @returns {string}
+     /**
+     * @function findEmployee
+     * @desc Find Specific Employee Given Employee ID within the Employee Array
+     * @param {string} id id of employee.
+     * @returns {string} Employee name
      */
     function findEmployee(id){
 
