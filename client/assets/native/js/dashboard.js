@@ -1,3 +1,6 @@
+/**
+ * @file Manages the dashboard
+ */
 var userState = JSON.parse(localStorage.getItem("userState"));
   if(!userState){
     location.href= "login.html";
@@ -128,10 +131,11 @@ $(document).ready(function(){
       return (appointmentDate == todayDate);
     }
 
-    /***
-     * Find Specific Visitor Given Visitor ID within the Visitor Array
-     * @param id
-     * @returns {string}
+    /**
+     * @function findvistor
+     * @desc Find Specific Visitor Given Visitor ID within the Visitor Array
+     * @param {string} Name of visitor.
+     * @returns {string} Visitor
      */
     function findVisitor(id){
 

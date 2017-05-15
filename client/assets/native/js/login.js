@@ -19,7 +19,12 @@ $(function() {
    });
 });
 
-//Ajax function to create a POST request to server
+/**
+ * @func ajaxPostUser
+ * @desc Ajax function to create a POST request to server.
+ * @param {url} url
+ * @param {data} data
+ */
 function ajaxPostUser(url, data){
    $.ajax({
        type: "POST",
@@ -64,7 +69,11 @@ function ajaxGetCompanyInfo(url){
    });
 }
 
-//Grab user data from form
+
+/**
+ * @func grabUserData
+ * @returns user
+ */
 function grabUserData(){
    var user = {};
    user.email = $('#username').val();
