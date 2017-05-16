@@ -11,15 +11,18 @@ $(document).ready(function(){
     $('#user-name').text(curUser.first_name + ' ' +  curUser.last_name);
 
     var employees = getEmployees();
-    
+
     var source = $("#employee-list-template").html();
     var template = Handlebars.compile(source);
     var compiledHtml = template(employees);
 
     $("#employee-list").html(compiledHtml);
-    $('.save-btn').click(submitForm);
+    $('#employee-form').submit(function (event) {
+       submitForm();
+       return false;
+    });
 
-    
+
    /**
      * @function getEmployees
      * @desc Makes a get request to display list of employees
@@ -72,6 +75,7 @@ $(document).ready(function(){
         updateEmployeeList(d);
         $("#employee-list").html(template(employees));
         document.getElementById("employee-form").reset();
+        $("#myModal").modal("toggle");
     }
 
     /***
