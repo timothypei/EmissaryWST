@@ -4,21 +4,32 @@
 $(document).ready(function(){
 
     var companyId;
+    var buttonClicked;
 
     //Listener for Initial Sign up of an Employee
     $('#submit-btn').on('click', function(){
-        var employeeData = grabEmployeeData();
-        console.log(employeeData);
-        ajaxPost('/api/employees',employeeData);
-
+        buttonClicked = 'employee';
     });
 
     //Listener for creating a company
     $('#submit-company-btn').on('click',function(){
+        buttonClicked = 'company';
+    });
+
+    $('#company-reg-form').on('submit', function(event) {
         var companyData = grabCompanyData();
         console.log(companyData);
         ajaxPost('/api/companies',companyData);
-    })
+        transitionToNextStep();
+        return false;
+    });
+
+    $('#employee-reg-form').on('submit', function(event) {
+        var employeeData = grabEmployeeData();
+        console.log(employeeData);
+        ajaxPost('/api/employees',employeeData);
+        return false;
+    });
 
     //Grab Company Data from form
     function grabCompanyData(){
@@ -27,7 +38,6 @@ $(document).ready(function(){
         company.email = $('#form-email').val();
         company.phone_number = $('#form-phone').val();
         return company;
-
     }
 
     //Grab employee data from form
@@ -63,8 +73,7 @@ $(document).ready(function(){
                 }
             },
             error: function(response){
-                console.log(response);
-                var resJSON = JSON.stringify(response);
+                //console.log(response);
                 alert(jQuery.parseJSON(resJSON).responseText);
                 event.preventDefault();
                 location.href = '/signup.html';
@@ -72,81 +81,13 @@ $(document).ready(function(){
         });
     }
 
-    function validateCompany(){
-        var companyName = $('#form-company-name').val();
-        var companyEmail = $('#form-email').val();
-        var companyNumber = $('#form-phone').val();
+    function transitionToNextStep () {
+        var next_step = true;
 
-        if(companyName == ""){
-            console.log("username cannot be blank");
+        if( next_step ) {
+            $('#company-reg-form').fadeOut(400, function() {
+                $('#employee-reg-form').find('fieldset:first-child').fadeIn();
+            });
         }
-
-        if(validateEmail(companyEmail)){
-            console.log("please enter a valid email");
-        }
-
-
-    
-
     }
-
-
-
-    function validateEmail(email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-    }
-
-    function checkPassword(form){
-
-        if(form.first.value == "") {
-          alert("Error: Username cannot be blank!");
-          form.username.focus();
-          return false;
-        }
-        var password = $('#form-password');
-        var confirmPassword = $('#form-repeat-password');
-
-        if(password.value != "" && password.value == confirmPassword.value) {
-          if(form.password.value.length < 6) {
-            console.log("Password must contain at least six characters!");
-            password.focus();
-            return false;
-          }
-         if(password.value == password.value) {
-            console.log("Error: Password must be different from Username!");
-            password.focus();
-            return false;
-          }
-          re = /[0-9]/;
-          if(!re.test(password.value)) {
-            console.log("Error: password must contain at least one number (0-9)!");
-            password.focus();
-            return false;
-          }
-          re = /[a-z]/;
-          if(!re.test(password.value)) {
-            console.log("Error: password must contain at least one lowercase letter (a-z)!");
-            password.focus();
-            return false;
-          }
-          re = /[A-Z]/;
-          if(!re.test(form.pwd1.value)) {
-            console.log("Error: password must contain at least one uppercase letter (A-Z)!");
-            password.focus();
-            return false;
-          }
-        } else {
-          console.log("Error: Please check that you've entered and confirmed your password!");
-          password.focus();
-          return false;
-        }
-        console.log("You entered a valid password: " + password.value);
-        return true;
-    }
-    function validateForm(){
-
-    }
-
-
 });
