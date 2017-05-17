@@ -15,7 +15,8 @@
     "jshint": "jshint",
     "htmlhint": "htmlhint client/assets/native client/assets/views",
     "csslint": "csslint",
-    "standard": "standard"
+    "standard": "standard",
+    "cover": "istanbul cover _mocha \"server/test/*.js\""
   },
   "pre-commit": [
     "jshint",
