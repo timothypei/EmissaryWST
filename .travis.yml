@@ -13,8 +13,10 @@ script:
   - npm install
 after_success:
   - npm install -g codeclimate-test-reporter
+  - npm install -g codecov
   - npm run cover
-  - codeclimate-test-reporter < lcov.info
+  - codeclimate-test-reporter < coverage/lcov.info
+  - codecov
 deploy:
   provider: gae
   keyfile: kiss-my-app-29c0b19a8d6d.json
