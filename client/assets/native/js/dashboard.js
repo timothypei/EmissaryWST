@@ -128,7 +128,7 @@ $(document).ready(function(){
       var appointmentDate = appointment.getFullYear() + ' ' + appointment.getDate() + ' ' + appointment.getMonth();
       var todayDate = today.getFullYear() + ' ' + today.getDate() + ' ' + today.getMonth();
 
-      return (appointmentDate == todayDate);
+      return (appointmentDate === todayDate);
     }
 
     /**

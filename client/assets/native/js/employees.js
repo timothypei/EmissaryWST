@@ -86,7 +86,7 @@ $(document).ready(function(){
     function grabFormElements(){
         var newEmployee = {};
         newEmployee.company_id = myCompanyId;
-        newEmployee.role = "c_employee",
+        newEmployee.role = "c_employee";
         newEmployee.first_name= $('#employee-first').val();
         newEmployee.last_name = $('#employee-last').val();
         newEmployee.phone_number = $('#employee-number').val();
