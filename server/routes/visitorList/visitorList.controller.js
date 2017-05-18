@@ -25,7 +25,7 @@ exports.getCompanyVisitorListReq = function(req, res){
             return res.status(200).json(result);
         }
     });
-}
+};
 
 
 /* logic for getting the Company's visitor list */
@@ -44,7 +44,7 @@ exports.getCompanyVisitorList = function(company_id, callback){
             return callback(null, list);
         });
     });
-}
+};
 
 /* handles route to delete visitor in the list*/
 exports.deleteVisitorReq = function(req, res){
@@ -54,7 +54,7 @@ exports.deleteVisitorReq = function(req, res){
         if(err_msg)  return res.status(400).json(err_msg);
         return res.status(200).json(result);
     });
-}
+};
 
 /* logic for deleting the visitor in the list */
 exports.deleteVisitor = function(company_id, visitor_id, callback){
@@ -69,7 +69,7 @@ exports.deleteVisitor = function(company_id, visitor_id, callback){
             if(err) return callback({error: "Can't update list"}, null);
             return callback(null, data);
         });
-}
+};
 
 /* clear the list */
 exports.deleteReq = function(req, res){
@@ -78,7 +78,7 @@ exports.deleteReq = function(req, res){
         if(err_msg)  return res.status(400).json(err_msg);
         return res.status(200).json(result);
     });
-}
+};
 
 exports.delete = function(list_id, callback){
     if(!list_id)
@@ -91,14 +91,14 @@ exports.delete = function(list_id, callback){
             return callback(null, list);
         });
     });
-}
+};
 // This route will be called when a visitor checks in
 exports.createReq = function(req, res) {
     exports.create(req.body, function(err_msg, result){
         if(err_msg)  return res.status(400).json(err_msg);
         return res.status(200).json(result);
     });
-}
+};
 
 exports.create = function(param, callback){
     //required fields
@@ -170,5 +170,5 @@ exports.create = function(param, callback){
             }
         );
     });
-}
+};
 
