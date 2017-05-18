@@ -32,7 +32,6 @@ describe('Appointment Test', function() {
     var credit_card_number="1231231241251";
     var name = "test";
     var expiration_date="6/17";
-    var phone_number="1234567890";
 
     var userID = null;
 

@@ -33,7 +33,7 @@ var winstonConfig = require("./config/winston");
  */
 var app = express();
 app.use(function(req, res, next) {
-    if (req.path.substr(-5) == '.html' && req.path.length > 1) {
+    if (req.path.substr(-5) === '.html' && req.path.length > 1) {
         var query = req.url.slice(req.path.length);
         res.redirect(301, req.path.slice(0, -5) + query);
         //res.sendFile(path.join(__dirname,'../dist/assets/views/checkin.html'))
