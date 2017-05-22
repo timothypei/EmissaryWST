@@ -62,19 +62,19 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(response){
                 //console.log(response);
-                if(url == '/api/employees') {
+                if(url === '/api/employees') {
                     localStorage.setItem('userState', 1);
                     localStorage.setItem('currentUser', JSON.stringify(response));
                     location.href = '/visitors.html';
                 }
-                else if (url == '/api/companies') {
+                else if (url === '/api/companies') {
                     localStorage.setItem('currentCompany', JSON.stringify(response));
                     companyId = response._id;
                 }
             },
             error: function(response){
                 //console.log(response);
-                alert(jQuery.parseJSON(resJSON).responseText);
+                //alert(jQuery.parseJSON(resJSON).responseText);
                 event.preventDefault();
                 location.href = '/signup.html';
             }

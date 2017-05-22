@@ -85,7 +85,7 @@ $(document).ready(function(){
         currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
 
         // Convert an hours component of "0" to "12"
-        currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+        currentHours = ( currentHours === 0 ) ? 12 : currentHours;
 
         // Compose the string for display
         var currentTimeString = currentHours + ":" + currentMinutes;
@@ -106,9 +106,9 @@ $(document).ready(function(){
 
         for (var i = 0, len = cookieArray.length; i < len; i++) {
             var cookie = cookieArray[i];
-            while (cookie.charAt(0) == ' ')
+            while (cookie.charAt(0) === ' ')
                 cookie.substring(1);
-            if (cookie.indexOf(name) == 0)
+            if (cookie.indexOf(name) === 0)
                 return cookie.substring(name.length, cookie.length);
         }
 
